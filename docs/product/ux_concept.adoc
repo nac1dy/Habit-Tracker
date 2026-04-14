@@ -25,22 +25,22 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Studierende im 3. Semester, Informatik]
+| [z. B. Andreas Alki, süchtig nach Alkohol, Student]
 
 | *Alter*
 | [z. B. 22 Jahre]
 
 | *Zitat*
-| _„[Ein prägnanter Satz, der ihre Haltung oder ihr Problem auf den Punkt bringt.]"_
+| _„[Ich bin Andreas und süchtig nach Alkohol.]"_
 
 | *Ziele*
-| [Was will diese Person erreichen? Was motiviert sie?]
+| [Ich möchte mit Alkohol aufhören, weil meine Leber das nichtmehr mitmacht und damit erreichen das ich wieder 10km Joggen kann.]
 
 | *Frustrationen*
-| [Was hindert sie heute daran, ihre Ziele zu erreichen?]
+| [Effekt, Soziales Umfeld und Geschmack]
 
 | *Verhalten & Kontext*
-| [Wie und wann nutzt sie digitale Produkte? Welche Geräte? Welche Erfahrung?]
+| [Handy]
 
 | *Bezug zum Produkt*
 | [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
