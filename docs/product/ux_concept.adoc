@@ -20,56 +20,56 @@ auf Annahmen allein._
 
 _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
 
-=== Persona 1: [Name]
+=== Persona 1: Andreas Alkoholiker
 
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Andreas Alki, süchtig nach Alkohol, Student]
+| süchtig nach Alkohol, Student
 
 | *Alter*
-| [z. B. 22 Jahre]
+| z. B. 22 Jahre
 
 | *Zitat*
-| _„[Ich bin Andreas und süchtig nach Alkohol.]"_
+| _„Ich bin Andreas und süchtig nach Alkohol."_
 
 | *Ziele*
-| [Ich möchte mit Alkohol aufhören, weil meine Leber das nichtmehr mitmacht und damit erreichen das ich wieder 10km Joggen kann.]
+| Ich möchte mit Alkohol aufhören, weil meine Leber das nicht mehr mitmacht und damit erreichen, dass ich wieder 10km joggen kann.
 
 | *Frustrationen*
-| [Effekt, Soziales Umfeld und Geschmack]
+| Effekt, Soziales Umfeld und Geschmack
 
 | *Verhalten & Kontext*
-| [Handy]
+| ist eher kontaktscheu und verbringt viel Zeit am Handy
 
 | *Bezug zum Produkt*
-| [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
+| Sozialer Bezug (jemand, der ihm beim Aufhören hilft/ihn ermutigt), tägliche Erinnerung -> "bewusstes Aufhören"
 |===
 
-=== Persona 2: [Name]
+=== Persona 2: Sandro Selbstoptimierer
 
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Verwaltungsangestellte, zuständig für Raumvergabe]
+| Start-Up-Gründer, Gym-Ratte, Influencer
 
 | *Alter*
-| [z. B. 45 Jahre]
+| 26 Jahre
 
 | *Zitat*
-| _„[Prägnantes Zitat]"_
+| _„Erfolg ist die Fähigkeit, sich den Gegebenheiten anzupassen und diese zu seinem Vorteil zu nutzen."_
 
 | *Ziele*
-| [Ziele]
+| seinen Alltag und seine Fitness/Ernährung optimieren, "to be the most interesting person in the room"
 
 | *Frustrationen*
-| [Frustrationen]
+| Ziele aus den Augen verlieren
 
 | *Verhalten & Kontext*
-| [Verhalten & Kontext]
+| extrovertiert, selbstkritisch, hat sehr viel David Goggins geschaut
 
 | *Bezug zum Produkt*
-| [Bezug zum Produkt]
+| möchte einen Habit-Tracker nutzen, um seine Ziele im Blick zu behalten
 |===
 
 NOTE: Für jedes Projekt sind 2–4 Personas ausreichend. Mehr Personas verwässern
