@@ -1,0 +1,95 @@
+// --- 1. Projektthema -------------------------
+= SE I - Projektdokumentation: {project-name}
+// --- 2. Teammitglieder -----------------------
+Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>
+// --- 3. Abgabedatum --------------------------
+01. Januar 2025
+// ---------------------------------------------
+:docs: ../docs
+include::{docs}/_includes/default-attributes.inc.adoc[]
+// ---
+:doctype: book
+:toc:
+:toclevels: 2
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+:icons: font
+//:source-highlighter: highlightjs
+:source-highlighter: rouge
+:rouge-style: github
+:xrefstyle: full
+:experimental:
+:chapter-signifier:
+:figure-caption: Abbildung
+:table-caption: Tabelle
+:listing-caption: Listing
+:!example-caption:
+:experimental:
+// Folders
+:imagesdir-reset: {imagesdir}
+:docs-team: {docs}/team
+:docs-product: {docs}/product
+:docs-technical: {docs}/technical
+
+<<<
+
+// --- 4. include Pfade anpassen ---------------
+
+// --- Projektdokumentation ---
+= Teamspezifikation
+* Teamcharta
+
+:imagesdir: {docs-team}/images
+
+// Teamcharta
+include::{docs-team}/teamcharter.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// ---------------------------------------------
+
+= Produktspezifikation
+* Produktkonzept
+* Domänenmodell und Glossar
+* UX-Konzept
+
+:imagesdir: {docs-technical}/images
+
+// Produktkonzept
+include::{docs-product}/product_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Domänenmodell und Glossar
+[#glossary]
+include::{docs-product}/domain_glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// UX-Konzept
+include::{docs-product}/ux_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// ---------------------------------------------
+
+= Technische Spezifikation
+* Architekturdokument
+* Softwaredesign
+* Testkonzept
+* Deployment & Betrieb
+
+// Architekturdokument
+:imagesdir: {docs-product}/images
+include::{docs-technical}/architecture.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Softwaredesign
+:imagesdir: {docs-test}/images
+include::{docs-technical}/design.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Testkonzept
+:imagesdir: {docs-test}/images
+include::{docs-technical}/test_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Deployment & Betrieb
+:imagesdir: {docs-test}/images
+include::{docs-technical}/deployment.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+
+// ---------------------------------------------
+
+:imagesdir: {imagesdir-reset}/images

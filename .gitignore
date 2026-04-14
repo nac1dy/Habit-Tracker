@@ -1,0 +1,6 @@
+# Syntax: https://git-scm.com/docs/gitignore
+
+# General
+.DS_Store
+*~
+.vscode
