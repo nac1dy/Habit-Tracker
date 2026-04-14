@@ -11,7 +11,7 @@ _Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibun
 
 *Was bauen wir, und warum?*
 
-_Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
+Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreich genug für Fortschritt 
 
 == Rollen
 
@@ -20,19 +20,19 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | Rolle | Person
 
 | Product Owner
-| [Name]
+| Nico Herwaagen
 
 | Scrum Master
-| [Name]
+| Maximilian Voigt
 
 | Tech Lead footnote:[optionale Rolle, aber empfohlen, um technische Entscheidungen zu koordinieren]
-| [Name]
+| Noel Miersch
 
 | Entwickler:innen
-| [Namen]
+| Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov
 
 | Stakeholder (Hauptansprechpartner)
-| [Name]
+| Christoph Zirkelbach (christoph.zirkelbach@htw-dresden.de)
 |===
 
 
@@ -42,31 +42,16 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 |===
 | Ereignis | Wann | Dauer | Moderation
 
-| Standup (Daily / Weekly)
-| [z. B. täglich 09:30]
-| [z. B. 15 min]
-| [Rolle / Person]
+| Before & After
+| Dienstag nach SE1
+| 2h
+| Scrum Master / Prod Owner / Tech Lead
 
-| Sprint Planning
-| [z. B. montags, Sprintstart]
-| [z. B. 2 h]
-| [Rolle / Person]
+| Weekly Check-In
+| Dienstag nach SE1
+| 30min
+| Scrum Master
 
-| Sprint Review
-| [z. B. freitags, Sprintende]
-| [z. B. 1 h]
-| [Rolle / Person]
-
-| Retrospektive
-| [z. B. freitags, nach Review]
-| [z. B. 1 h]
-| [Rolle / Person]
-
-| Backlog Refinement
-| [z. B. mittwochs, wöchentlich]
-| [z. B. 1 h]
-| [Rolle / Person]
-|===
 
 == Kommunikation
 
@@ -75,22 +60,22 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | Thema | Vereinbarung
 
 | Primärer Kanal
-| [z. B. Discord – #projektname]
+| Discord
 
 | Entscheidungsprotokoll
-| [z. B. Wiki oder per Asciidoc in Ordner <Ordnername>]
+|  https://www.google.com/search?q=google+coin+flip&rlz=1C5CHFA_enDE1027DE1027&oq=google+coinfl&gs_lcrp=EgZjaHJvbWUqCwgBEAAYChgLGIAEMgYIABBFGDkyCwgBEAAYChgLGIAEMgsIAhAAGAoYCxiABDILCAMQABgKGAsYgAQyCwgEEAAYChgLGIAEMgsIBRAAGAoYCxiABDILCAYQABgKGAsYgAQyCwgHEAAYChgLGIAEMgsICBAAGAoYCxiABDILCAkQABgKGAsYgATSAQgyMjg0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8[Coin Flip]
 
 | Erwartete Reaktionszeit
-| [z. B. innerhalb von 4 Stunden während Kernzeit]
+| 24h
 
 | Kernarbeitszeit
-| [z. B. 09:00 – 16:00 Uhr]
+| Casino Öffnungszeiten
 
 | Videokonferenz-Tool
-| [z. B. Teams / Discord / Google Meet]
+| Discord
 
 | Asynchrone Abstimmung
-| [z. B. kurze Statusupdates im Issue-Diskussion]
+| Discord und Github Issues
 |===
 
 == Arbeitsweise
@@ -140,11 +125,9 @@ _Eine User Story gilt als fertig, wenn:_
 
 _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
-. [z. B. Wir gehen respektvoll und offen miteinander um.]
-. [z. B. Wir sprechen Probleme frühzeitig an, anstatt sie zu ignorieren.]
-. [z. B. Fehler sind Lernchancen – wir suchen keine Schuldigen.]
-. [z. B. Meetings beginnen pünktlich; wer verhindert ist, gibt rechtzeitig Bescheid.]
-. [z. B. Entscheidungen werden dort dokumentiert, wo alle sie finden können.]
+. Jeder ist eingeladen ehrlich miteinander zu kommunizieren
+. Größere Entscheidungen werden gemeinsam getroffen, jeder Meinung und Idee zählt auch einzeln
+. keiner ist ein Schuldiger
 
 
 _Nächste Überprüfung: [Datum / Sprint] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
