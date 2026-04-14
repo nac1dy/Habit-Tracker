@@ -97,6 +97,8 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | *Bezug zum Produkt*
 | Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Struktur und Gemeinsame Erfolge
 
+|===
+
 NOTE: Für jedes Projekt sind 2–4 Personas ausreichend. Mehr Personas verwässern
 den Fokus. Wenn eine Persona in keiner User Story vorkommt, wird sie gestrichen.
 
