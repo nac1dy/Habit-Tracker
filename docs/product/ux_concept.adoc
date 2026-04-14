@@ -20,12 +20,12 @@ auf Annahmen allein._
 
 _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
 
-=== Persona 1: [Name]
+=== Persona 1: [Andreas Alki]
 
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Andreas Alki, süchtig nach Alkohol, Student]
+| [z. B. süchtig nach Alkohol, Student]
 
 | *Alter*
 | [z. B. 22 Jahre]
@@ -37,40 +37,65 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | [Ich möchte mit Alkohol aufhören, weil meine Leber das nichtmehr mitmacht und damit erreichen das ich wieder 10km Joggen kann.]
 
 | *Frustrationen*
-| [Effekt, Soziales Umfeld und Geschmack]
+| [Ungesunde Lebensweise, schlechte Gesundheit, soziale Isolation, finanzielle Belastung, negative Auswirkungen auf Studium und Karriere]
 
 | *Verhalten & Kontext*
-| [Handy]
+| [Handy, nicht technisch versiert, immer unterwegs, will nicht zu viel Zeit mit der App verbringen]
 
 | *Bezug zum Produkt*
-| [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
+| [Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen]
 |===
 
-=== Persona 2: [Name]
+=== Persona 2: [Hannes Handy]
 
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Verwaltungsangestellte, zuständig für Raumvergabe]
+| [Professional Doom-Scroller, Student, Social-Media-Süchtiger, Unproduktiver Mensch]
 
 | *Alter*
-| [z. B. 45 Jahre]
+| [20 Jahre]
 
 | *Zitat*
-| _„[Prägnantes Zitat]"_
+| _„[67]"_
 
 | *Ziele*
-| [Ziele]
+| [Ich möchte weniger Zeit mit meinem Handy verbringen, damit ich mehr Zeit für meine Hobbys und Freunde habe.]
 
 | *Frustrationen*
-| [Frustrationen]
+| [Unproduktives Verhalten, Zeitverschwendung, schlechtes Gewissen, Ablenkung von wichtigen Aufgaben, Schlafmangel]
 
 | *Verhalten & Kontext*
-| [Verhalten & Kontext]
+| [Handy, Computer, technisch versiert, immer zuhause, will nicht zu viel Zeit mit der App verbringen]
 
 | *Bezug zum Produkt*
-| [Bezug zum Produkt]
+| [Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen]
 |===
+
+=== Persona 2: [Petra Productiv]
+
+[cols="1,3"]
+|===
+| *Rolle*
+| [Produktiv, Student, Workaholic, interessiert an Selbstoptimierung]
+
+| *Alter*
+| [21 Jahre]
+
+| *Zitat*
+| _„[Über mich hinaus]"_
+
+| *Ziele*
+| [Struktur in meinen Alltag bringen, damit ich meine Ziele erreiche und mich weiterentwickle. Mehr mit Freunden zusammenarbeiten]
+
+| *Frustrationen*
+| [Unstrukturierter Alltag, Prokrastination, Schwierigkeiten bei der Zielverfolgung, fehlende Motivation, mangelnde soziale Unterstützung]
+
+| *Verhalten & Kontext*
+| [Handy, Laptop, technisch versiert, immer unterwegs, will nicht zu viel Zeit mit der App verbringen]
+
+| *Bezug zum Produkt*
+| [Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Struktur und Gemeinsame Erfolge]
 
 NOTE: Für jedes Projekt sind 2–4 Personas ausreichend. Mehr Personas verwässern
 den Fokus. Wenn eine Persona in keiner User Story vorkommt, wird sie gestrichen.
