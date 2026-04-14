@@ -29,7 +29,7 @@ Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreic
 | Noel Miersch
 
 | Entwickler:innen
-| Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov
+| Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov, Paul Dietrich
 
 | Stakeholder (Hauptansprechpartner)
 | Christoph Zirkelbach (christoph.zirkelbach@htw-dresden.de)
