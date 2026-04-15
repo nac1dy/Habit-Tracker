@@ -72,7 +72,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen
 |===
 
-=== Persona 2: Petra Produktiv
+=== Persona 3: Petra Produktiv
 
 [cols="1,3"]
 |===
