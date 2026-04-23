@@ -51,7 +51,7 @@ Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreic
 | Dienstag nach SE1
 | 30min
 | Scrum Master
-
+|===
 
 == Kommunikation
 
@@ -109,16 +109,16 @@ _Eine User Story gilt als fertig, wenn:_
 | Thema | Vereinbarung
 
 | Branching-Strategie
-| [z. B. Feature Branches, Trunk-Based Development]
+| Feature Branches
 
 | PR-Review-Regeln
-| [z. B. mind. 1 Approval, kein Merge ohne grüne Pipeline]
+| kein Merge ohne grüne Pipeline
 
 | Merge-Berechtigung
-| [z. B. jedes Teammitglied nach Approval]
+| jedes Teammitglied nach Approval
 
 | Commit-Konventionen
-| [z. B. Conventional Commits]
+| Conventional Commits
 |===
 
 == Teamvereinbarungen
@@ -126,8 +126,8 @@ _Eine User Story gilt als fertig, wenn:_
 _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
 . Jeder ist eingeladen ehrlich miteinander zu kommunizieren
-. Größere Entscheidungen werden gemeinsam getroffen, jeder Meinung und Idee zählt auch einzeln
+. Größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt auch einzeln
 . keiner ist ein Schuldiger
 
 
-_Nächste Überprüfung: [Datum / Sprint] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
+_Nächste Überprüfung: [28.04.2026 / Sprint 1] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
