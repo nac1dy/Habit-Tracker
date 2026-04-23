@@ -19,6 +19,9 @@
 ifndef::imagesdir[:imagesdir: images]
 ifndef::diagramsdir[:diagramsdir: diagrams]
 ifndef::plantumlsdir[:plantumlsdir: plantuml]
+ifdef::env-github[]
+:project-name: Habit-Tracker (C2)
+endif::[]
 // Hyphenation for PDF dokumente
 :lang: DE
 :hyphens:
