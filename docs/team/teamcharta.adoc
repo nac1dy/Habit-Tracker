@@ -71,6 +71,9 @@ Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreic
 | Kernarbeitszeit
 | Casino Öffnungszeiten
 
+| Abgabefrist von Aufgaben
+| Sonntag 23:59 Uhr, Absprachen möglich
+
 | Videokonferenz-Tool
 | Discord
 
