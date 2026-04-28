@@ -7,6 +7,7 @@
 
 * Das System muss beim initialen Laden in unter *2 Sekunden* vollständig dargestellt werden, damit Nutzer ohne Wartezeit starten können.
 * Das System muss bei bis zu *50 gleichzeitigen Nutzern* stabil und ohne Leistungseinbußen funktionieren.
+* Das Onboarding muss innerhalb von *2 Miuten* abgeschlossen sein, damit Nutzer schnell loslegen können. (Anmeldung, Onboarding-Fragen, erstes Habit anlegen)
 
 == Kompatibilität
 
