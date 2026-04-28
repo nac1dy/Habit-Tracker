@@ -5,7 +5,7 @@ include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt, wer das Produkt nutzt und wie — aus der Perspektive der Nutzenden. Es ergänzt das Produktkonzept um Personas, Nutzungskontext und
-systemweite Interaktionsflüsse und dient als gemeinsame Referenz für Design- und Entwicklungsentscheidungen._
+systemweite Interaktionsflüsse und dient als gemeinsame Referenz für Design- und Entwicklungsentscheidungen.
 
 _Individuelle Wireframes einzelner Features werden direkt in den zugehörigen User Stories im Product Backlog gepflegt (verlinkt oder kopiert aus Miro oder anderem Tool). Dieses Dokument enthält nur Artefakte, die mehrere Stories oder das gesamte Produkt betreffen._
 
@@ -31,7 +31,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | 22 Jahre
 
 | *Zitat*
-| _„Ich bin Andreas und süchtig nach Alkohol"_
+| _„Und ich bin Andreas und ich bin auch dabei"_
 
 | *Ziele*
 | Ich möchte mit Alkohol aufhören, weil meine Leber das nichtmehr mitmacht und damit erreichen das ich wieder 10km Joggen kann.
@@ -72,7 +72,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen
 |===
 
-=== Persona 2: Petra Produktiv
+=== Persona 3: Petra Produktiv
 
 [cols="1,3"]
 |===
