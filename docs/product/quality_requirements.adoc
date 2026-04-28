@@ -33,37 +33,3 @@
 
 * Das System muss eine *Verfügbarkeit von 99%* gewährleisten, was einem maximalen Ausfall von ~3,6 Tagen pro Jahr entspricht.
 * Das System muss täglich ein automatisches *Backup der Datenbank* erstellen, damit bei einem Serverausfall kein Datenverlust entsteht.= Nicht-funktionale Anforderungen – Habittracker
-:toc:
-:toc-title: Inhaltsverzeichnis
-:sectnums:
-
-== Performance
-
-* Das System muss beim initialen Laden in unter *2 Sekunden* vollständig dargestellt werden, damit Nutzer ohne Wartezeit starten können.
-* Das System muss bei bis zu *50 gleichzeitigen Nutzern* stabil und ohne Leistungseinbußen funktionieren.
-
-== Kompatibilität
-
-* Das System muss als *Web-App* bereitgestellt werden und darf nicht als native App im App Store verfügbar sein.
-* Das System muss auf *Desktop, Tablet und mobilem Browser* vollständig nutzbar sein.
-* Das System muss auf allen *modernen Browsern* (Chrome, Firefox, Safari, Edge) in der jeweils aktuellen Version funktionieren.
-
-== Sprache
-
-* Das System muss in *Deutsch und Englisch* verfügbar sein, damit Nutzer die Sprache nach Bedarf wählen können.
-
-== Sicherheit & Authentifizierung
-
-* Das System muss eine Anmeldung per *E-Mail und Passwort* ermöglichen.
-* Das System muss alle Passwörter *gehasht* speichern, damit Nutzerdaten bei einem Datenbankzugriff geschützt sind.
-* Das System muss alle Verbindungen ausschließlich über *HTTPS* übertragen.
-
-== Datenschutz
-
-* Das System muss alle Nutzerdaten *DSGVO-konform* speichern und verarbeiten, da es sich um eine App für Nutzer in der EU handelt.
-* Das System muss Nutzern ermöglichen, ihre Daten *einzusehen und zu löschen*.
-
-== Zuverlässigkeit
-
-* Das System muss eine *Verfügbarkeit von 99%* gewährleisten, was einem maximalen Ausfall von ~3,6 Tagen pro Jahr entspricht.
-* Das System muss täglich ein automatisches *Backup der Datenbank* erstellen, damit bei einem Serverausfall kein Datenverlust entsteht.
