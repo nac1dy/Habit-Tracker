@@ -1,5 +1,5 @@
 // Meta
-:project-name: Habit-Tracker (C2)
+:project-name: Habit-Tracker
 :project-system-name: Software-Name
 // Settings:
 :toc:
@@ -19,9 +19,6 @@
 ifndef::imagesdir[:imagesdir: images]
 ifndef::diagramsdir[:diagramsdir: diagrams]
 ifndef::plantumlsdir[:plantumlsdir: plantuml]
-ifdef::env-github[]
-:project-name: Habit-Tracker (C2)
-endif::[]
 // Hyphenation for PDF dokumente
 :lang: DE
 :hyphens:
