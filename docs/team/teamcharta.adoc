@@ -125,7 +125,8 @@ _Eine User Story gilt als fertig, wenn:_
 | jedes Teammitglied nach Approval
 
 | Commit-Konventionen
-| Conventional Commits
+| (ALWAYS PULL FIRST, THEN PUSH)Conventional Commits
+
 |===
 
 == Teamvereinbarungen
@@ -135,6 +136,6 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 . Jeder ist eingeladen ehrlich miteinander zu kommunizieren
 . Größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt auch einzeln
 . keiner ist ein Schuldiger
-
+. Bis zwei Tage vor dem nächsten Meeting sind alle Aufgaben egal in welchem Status hochzuladen damit sich die Teamkollegen damit befassen können.
 
 _Nächste Überprüfung: [28.04.2026 / Sprint 1] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
