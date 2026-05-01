@@ -103,25 +103,35 @@ erklärt, warum bestimmte Entscheidungen getroffen wurden.
 |===
 | Stakeholder | Rolle / Interesse | Erwartungen an das Produkt | Einfluss
 
-| [z. B. Hochschulverwaltung]
-| [Betreiber der Infrastruktur; will Raumauslastung optimieren]
-| [Auslastungsberichte, DSGVO-Konformität]
+| Studenten
+| Hauptnutzergruppe, wollen ihr Leben verbessern
+| Zuverlässige unterstützung im Aufbau und Abbau von Habits
 | Hoch
 
-| [z. B. Studierende]
-| [Hauptnutzer:innen; wollen schnell freie Plätze finden]
-| [Einfache Bedienung, mobiler Zugang]
+| Notion
+| Hauptkonkurrenz und Interesse am "Downfall" unseres Produktes
+| Neue Ideen die sie von uns übernehmen können, hoffen auf wenig Nutzermigration von Notion zu uns
 | Mittel
 
-| [z. B. Lehrende]
-| [Nutzen Räume für Lehrveranstaltungen; wollen Konflikte vermeiden]
-| [Sichtbarkeit ihrer Buchungen]
+| Gesetzgeber
+| Setzt rechtliche Rahmenbedingungen, Schutz von Nutzerdaten und Verbraucherrechten
+| Einhaltung von Datenschutzgesetzen, transparente Datenverarbeitung, sichere Speicherung von Daten
+| Hoch
+
+| Entwicklungsteam
+| Internes Team, das das Produkt plant, entwickelt und wartet
+| Klare Anforderungen, wartbarer Code, realistischer Scope
+| Hoch
+
+| Browser-Hersteller
+| Plattformanbieter für Progressive Web Apps; implementieren Web-Standards wie Push-Benachrichtigungen, Offline-Support und Installierbarkeit
+| Einhaltung von Web-Standards (PWA-Manifest, Service Worker, HTTPS); kein missbräuchliches Verhalten (z. B. Spam-Benachrichtigungen)
 | Mittel
 
-| [Weiterer Stakeholder]
-| [Beschreibung]
-| [Erwartungen]
-| [Hoch / Mittel / Niedrig]
+| Hochschule / Betreuer
+| Bewerter des Projekts, der die Einhaltung akademischer Standards und die erfolgreiche Umsetzung des Projekts sicherstellt
+| Saubere und nachvollziehbare Dokumentation, funktionsfähige Umsetzung der geplanten Features, Einhaltung von Abgabefristen sowie professionelle Präsentation des Ergebnisses
+| Mittel
 |===
 
 == Hauptfunktionen
