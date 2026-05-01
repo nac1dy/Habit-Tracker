@@ -1,0 +1,85 @@
+= Rechtliche Anforderungen – Habittracker
+:toc:
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+
+== Grundlage DSGVO
+
+== Datenschutz (DSGVO)
+
+=== Datenschutzerklärung
+- Muss vorhanden und leicht zugänglich sein
+- Muss enthalten:
+  * Welche Daten gesammelt werden
+  * Zweck der Datenerhebung
+  * Speicherdauer
+  * Weitergabe von Daten
+
+=== Einwilligung
+- Aktive Einwilligung erforderlich bei:
+  * Cookies
+  * Tracking
+
+=== Sensible Daten
+- Tracking von:
+  * Alkoholverhalten
+  * Suchtverhalten
+- → gilt als sensible Daten → strengere Regeln
+
+=== Notizen (kritischer Bereich)
+- Können sensible Daten enthalten
+- Empfehlungen:
+  * Nur lokal speichern
+  * Hinweis anzeigen:
+    - Keine sensiblen/gesundheitlichen Daten eingeben
+  * Transparenz:
+    - Klar kommunizieren, wo Daten gespeichert werden
+  * Datenlöschung muss möglich sein
+
+=== Datensparsamkeit
+- Nur Daten speichern, die wirklich notwendig sind
+
+=== Sicherheit
+- HTTPS verpflichtend
+- Daten müssen geschützt sein:
+  * Login / Accounts
+
+=== Hosting
+- Bevorzugt EU-Server
+- Falls nicht:
+  * Hinweis in Datenschutzerklärung erforderlich
+
+
+== Nutzerrechte (DSGVO)
+
+Nutzer müssen:
+
+- Daten einsehen können
+- Daten ändern können
+- Daten löschen können
+
+Zusätzlich:
+- Account-Löschung oder Anfrage per E-Mail ermöglichen
+- Offenlegen:
+  * Welche Daten lokal gespeichert werden
+- Keine versteckte Datensammlung
+
+== Impressumspflicht
+Falls öffentlich zugänglich:
+
+- Name
+- Adresse
+- Kontakt
+
+== Urheberrecht
+
+- Icons, Bilder, Fonts nur nutzen wenn:
+  * Lizenz vorhanden
+  * oder Open Source
+
+== Wichtigste Punkte
+
+- DSGVO einhalten
+- Datenschutzerklärung + Impressum bereitstellen
+- Datensparsamkeit beachten
+- Transparenz gegenüber Nutzern gewährleisten
