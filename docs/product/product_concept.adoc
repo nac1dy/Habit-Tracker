@@ -1,6 +1,16 @@
 = Produktkonzept: {project-name}
-Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de> ; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de> ; Rico Mauksch <rico.mauksch@stud.htw-dresden.de> ; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de> ; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de> ; Paul Dietrich <paul.dietrich@stud.htw-dresden.de> 
+
+Noel Miersch <noel.miersch@stud.htw-dresden.de>;
+Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; 
+Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; 
+Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; 
+Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; 
+Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; 
+Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; 
+Paul Dietrich <paul.dietrich@stud.htw-dresden.de>;
+
 {localdatetime}
+
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
@@ -15,14 +25,7 @@ Interaktionsflüsse und Design-Entscheidungen sind im UX-Konzept beschrieben._
 
 == Motivation
 
-_Warum wird dieses Produkt gebaut? Welches Problem existiert heute, und warum ist es relevant?
-Dieser Abschnitt beschreibt den Ausgangszustand und den Handlungsbedarf — ohne bereits eine
-Lösung zu nennen. 3–5 Sätze genügen._
-
-[Hier die Ausgangssituation und den Handlungsbedarf beschreiben. Beispiel:
-„Studierende an der Hochschule haben heute keinen zentralen Überblick über verfügbare
-Lernräume. Die Suche nach freien Plätzen kostet täglich wertvolle Zeit und führt zu Frust.
-Eine einfache, mobil nutzbare Lösung fehlt bisher."]
+Es ist aktuell so leicht wie noch nie sich von Dingen abzulenken, nicht das zu machen was man machen möchte/sollte/muss und genau da Komfort zu finden. Und sobald man es bemerkt ist es zu spät, um dem entgegen zu wirken oder um es zu verhindern, braucht es manchmal Unterstützung von Außen und genau da kommt ein Habit Tracker gerade richtig.
 
 == Produktvision
 
@@ -30,26 +33,24 @@ _Die Produktvision beschreibt in einem oder wenigen Sätzen den angestrebten Zie
 Sie ist inspirierend, prägnant und stabil — sie sollte sich über die gesamte Projektlaufzeit
 nicht wesentlich verändern._
 
+Habito ist der Helfer wenn es um Aufbau und Abbau von Habits geht. Er unterstützt dich ohne es Anstrengend zu machen und reicht dir da die Hand wo du sie brauchst.
+
 === Visions-Statement
 
 ____
-Für [Zielgruppe],
-die [Problem oder Bedarf],
-ist [Produktname]
-ein [Produktkategorie],
-das [zentraler Nutzen].
-Im Gegensatz zu [Alternative]
-bietet unser Produkt [entscheidender Unterschied].
+Für Studenten,
+die die ihre Gewohnheiten verbessern wollen, ohne dafür viel Zeit oder Energie aufzuwenden,
+ist Habito
+ein Habit Tracker,
+der Studenten dabei Unterstützt Habits auf- und abzubauen und damit alltägliche Reibungen beseitigt.
+Im Gegensatz zu Notion
+bietet unser Produkt Übersichtlichkeit, einen leichteres Onboarding und weniger Schnick Schnack.
 ____
 
 //Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
 
 NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
 
-=== Zielbild
-
-_Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-//[Hier das Zielbild beschreiben]
 
 
 == Produktpositionierung
@@ -61,14 +62,9 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 |===
 | Zielgruppe | Beschreibung
 
-| [z. B. Studierende]
-| [Kurzbeschreibung: Wer sind sie? Was ist ihre Motivation?]
+| Studenten
+| Personen im Alter von 18-30 welche gute Habits aufbauen und schlechte Abbauen wollen
 
-| [z. B. Lehrende]
-| [Kurzbeschreibung]
-
-| [Weitere Zielgruppe]
-| [Kurzbeschreibung]
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -80,17 +76,10 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 |===
 | Alternative | Beschreibung | Warum unser Produkt besser passt
 
-| [z. B. E-Mail-Anfrage an Sekretariat]
-| [Wie lösen Nutzer:innen das Problem heute?]
-| [Worin liegt unser Vorteil?]
+| Notion
+| Software welche viele Features bietet um ein Strukturiertes Leben zu führen
+| Wir sind selbst Studenten und sehen viele Dinge anders
 
-| [z. B. Aushang an schwarzem Brett]
-| [Beschreibung]
-| [Unterschied]
-
-| [Weitere Alternative]
-| [Beschreibung]
-| [Unterschied]
 |===
 
 
@@ -238,7 +227,7 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | Version | Datum | Änderung
 
 | 1.0
-| [Datum]
+| 01.05.2026
 | Initiale Version nach Kick-off-Workshop
 
 |===

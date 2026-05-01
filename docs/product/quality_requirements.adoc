@@ -1,4 +1,4 @@
-= Nicht-funktionale Anforderungen – Habittracker
+= Nicht-funktionale Anforderungen – Habit Tracker
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:

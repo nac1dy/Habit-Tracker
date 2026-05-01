@@ -128,19 +128,15 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| [z. B. React 18]
-| [z. B. Teamkenntnisse; große Community; Komponentenmodell]
-| [z. B. ADR-002]
+| Next.js
+| React
+| Tailwind CSS
 
 | Backend
-| [z. B. Spring Boot 3]
-| [z. B. Vorgabe im Studiengang; gute Dokumentation]
-| [z. B. ADR-001]
+| Supabase
 
 | Datenbank
-| [z. B. PostgreSQL 15]
-| [z. B. Relationales Modell passend; auf Hochschulinfrastruktur verfügbar]
-| [z. B. ADR-003]
+| PostgreSQL
 
 | Authentifizierung
 | [z. B. OAuth2 / Hochschul-SSO]

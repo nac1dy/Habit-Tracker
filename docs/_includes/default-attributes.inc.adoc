@@ -1,6 +1,6 @@
 // Meta
 :project-name: Habit-Tracker
-:project-system-name: Software-Name
+:project-system-name: Habito
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis

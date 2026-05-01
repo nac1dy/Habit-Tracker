@@ -42,7 +42,7 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :imagesdir: {docs-team}/images
 
 // Teamcharta
-include::{docs-team}/teamcharter.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-team}/teamcharta.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
 // ---------------------------------------------
