@@ -1,13 +1,6 @@
 = Produktkonzept: {project-name}
 
-Noel Miersch <noel.miersch@stud.htw-dresden.de>;
-Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; 
-Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; 
-Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; 
-Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; 
-Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; 
-Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; 
-Paul Dietrich <paul.dietrich@stud.htw-dresden.de>;
+include::../_includes/team-names.inc.adoc[]
 
 {localdatetime}
 
@@ -25,7 +18,7 @@ Interaktionsflüsse und Design-Entscheidungen sind im UX-Konzept beschrieben._
 
 == Motivation
 
-Es ist aktuell so leicht wie noch nie sich von Dingen abzulenken, nicht das zu machen was man machen möchte/sollte/muss und genau da Komfort zu finden. Und sobald man es bemerkt ist es zu spät, um dem entgegen zu wirken oder um es zu verhindern, braucht es manchmal Unterstützung von Außen und genau da kommt ein Habit Tracker gerade richtig.
+Es ist aktuell so leicht wie noch nie, sich von Dingen abzulenken, nicht das zu machen, was man machen möchte/sollte/muss und genau da Komfort zu finden. Und sobald man es bemerkt ist es zu spät, um dem entgegen zu wirken oder um es zu verhindern, braucht es manchmal Unterstützung von außen und genau da kommt unser Habit-Tracker gerade richtig.
 
 == Produktvision
 
@@ -33,7 +26,7 @@ _Die Produktvision beschreibt in einem oder wenigen Sätzen den angestrebten Zie
 Sie ist inspirierend, prägnant und stabil — sie sollte sich über die gesamte Projektlaufzeit
 nicht wesentlich verändern._
 
-Habito ist der Helfer wenn es um Aufbau und Abbau von Habits geht. Er unterstützt dich ohne es Anstrengend zu machen und reicht dir da die Hand wo du sie brauchst.
+Habito ist der Helfer, wenn es um Aufbau und Abbau von Habits geht. Er unterstützt dich, ohne es anstrengend zu machen und reicht dir genau da die Hand, wo du sie brauchst.
 
 === Visions-Statement
 
@@ -47,11 +40,6 @@ Im Gegensatz zu Notion
 bietet unser Produkt Übersichtlichkeit, einen leichteres Onboarding und weniger Schnick Schnack.
 ____
 
-//Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
-
-NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
-
-
 
 == Produktpositionierung
 _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu bestehenden Alternativen?_
@@ -63,7 +51,7 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 | Zielgruppe | Beschreibung
 
 | Studenten
-| Personen im Alter von 18-30 welche gute Habits aufbauen und schlechte Abbauen wollen
+| Personen im Alter von 18-30, die gute Habits aufbauen und schlechte abbauen wollen
 
 |===
 
@@ -77,7 +65,7 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 | Alternative | Beschreibung | Warum unser Produkt besser passt
 
 | Notion
-| Software welche viele Features bietet um ein Strukturiertes Leben zu führen
+| Software, welche viele Features bietet um ein Strukturiertes Leben zu führen
 | Wir sind selbst Studenten und sehen viele Dinge anders
 
 |===

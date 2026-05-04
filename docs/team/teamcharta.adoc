@@ -9,13 +9,13 @@ include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
 
 == Über uns
-_Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibung hinzufügen, um die Identität Ihres Teams zu stärken._
+_to be added_
 
 == Zweck
 
 *Was bauen wir, und warum?*
 
-Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreich genug für Fortschritt 
+Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zugänglich und bedienbar sein, damit man sie möglichst einfach in den Alltag integrieren kann. Auf der anderen Seite soll sie aber auch genug Möglichkeiten bieten, um die eigenen Gewohnheiten zu tracken und zu verbessern. Wir wollen damit Menschen dabei unterstützen, ihre Ziele zu erreichen und ihr Leben zu verbessern.
 
 == Rollen
 
@@ -73,7 +73,7 @@ Habit-Tracker, simple genug um es beim Toilettengang zu erledigen und umfangreic
 | 24h
 
 | Kernarbeitszeit
-| Casino Öffnungszeiten
+| Allgemeine Uni-Arbeitszeiten
 
 | Abgabefrist von Aufgaben
 | Sonntag 23:59 Uhr, Absprachen möglich
@@ -95,7 +95,6 @@ _Eine User Story ist bereit für die Entwicklung, wenn:_
 * [ ] Der Aufwand wurde vom Team geschätzt
 * [ ] Abhängigkeiten sind identifiziert und geklärt
 * [ ] Designs / Mockups sind vorhanden (falls relevant)
-* [ ] [Weitere Kriterien ergänzen]
 
 === Definition of Done (DoD)
 _Eine User Story gilt als fertig, wenn:_
@@ -107,7 +106,6 @@ _Eine User Story gilt als fertig, wenn:_
 * [ ] Die Funktionalität wurde im Staging-System getestet
 * [ ] Dokumentation wurde aktualisiert (falls erforderlich)
 * [ ] Der Product Owner hat die Story abgenommen
-* [ ] [Weitere Kriterien ergänzen]
 
 === Code & Versionierung
 
@@ -133,9 +131,9 @@ _Eine User Story gilt als fertig, wenn:_
 
 _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
-. Jeder ist eingeladen ehrlich miteinander zu kommunizieren
+. Jeder ist eingeladen (und gebeten), ehrlich miteinander zu kommunizieren
 . Größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt auch einzeln
-. keiner ist ein Schuldiger
-. Bis zwei Tage vor dem nächsten Meeting sind alle Aufgaben egal in welchem Status hochzuladen damit sich die Teamkollegen damit befassen können.
+. Keiner ist ein Schuldiger
+. Bis zwei Tage vor dem nächsten Meeting sind alle Aufgaben - egal in welchem Status - hochzuladen damit sich die Teamkollegen damit befassen können.
 
 _Nächste Überprüfung: [28.04.2026 / Sprint 1] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
