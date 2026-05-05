@@ -121,26 +121,47 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 |===
 | Nutzerbedarf | Hauptfunktion | Priorität
 
-| Studierende wollen schnell sehen, welche Räume gerade frei sind.
-| Echtzeit-Übersicht freier Lernräume
+| Studierende wollen neue Gewohnheiten aufbauen und schlechte abbauen.
+| Habit-Verwaltung (Erstellen, Bearbeiten, Löschen von Habits)
 | Hoch
 
-| Nutzer:innen wollen einen Raum für einen bestimmten Zeitraum reservieren.
-| Raumbuchung mit Zeitfenster
+| Nutzer:innen wollen täglich ihren Fortschritt festhalten.
+| Tägliches Habit-Tracking mit Streak-Anzeige
 | Hoch
 
-| Nutzer:innen wollen ihre aktiven Buchungen verwalten.
-| Buchungsübersicht & Stornierung
+| Nutzer:innen wollen flexible Ziele setzen, die zum Studentenalltag passen.
+| Flexible Häufigkeitsziele (täglich / x-mal pro Woche)
+| Hoch
+
+| Nutzer:innen wollen nicht vergessen, ihre Habits zu erledigen.
+| Erinnerungsfunktion mit konfigurierbarer Uhrzeit
+| Hoch
+
+| Nutzer:innen wollen ihren Fortschritt über Zeit verstehen.
+| Statistiken & Fortschrittsvisualisierung
 | Mittel
 
-| Verwaltung will die Auslastung der Räume analysieren.
-| Auslastungsberichte für Administratoren
+| Nutzer:innen wollen auch an schlechten Tagen einen kleinen Beitrag leisten.
+| Mini-Habit als Fallback pro Habit
+| Mittel
+
+| Nutzer:innen wollen verstehen, welche Habits ihre Stimmung beeinflussen.
+| Mood-Tracking & Korrelationsanalyse
+| Mittel
+
+| Nutzer:innen wollen die App ohne Einarbeitung sofort nutzen.
+| Onboarding mit Habit-Vorlagen
 | Niedrig
+
+| Nutzer:innen wollen ihren Fortschritt auch offline festhalten.
+| Offline-Fähigkeit als Progressive Web App (PWA)
+| Niedrig
+
+|===
 
 | [Nutzerbedarf]
 | [Hauptfunktion]
 | [Hoch / Mittel / Niedrig]
-|===
 
 NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen
 der Backlog-Priorisierung verfeinert.
