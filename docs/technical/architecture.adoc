@@ -131,15 +131,20 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| Next.js
-| React
-| Tailwind CSS
+| Next.js, React, Tailwind CSS
+| Modern und was neues, kostenlos
+| 
 
 | Backend
 | Supabase
+| Modern, einfach zu benutzen, stellt viele Funktionen zur verfügung, kostenlos
+|
+
 
 | Datenbank
 | PostgreSQL
+| Starke kompatibilität zu supabase, kostenlos
+|
 
 | Authentifizierung
 | [z. B. OAuth2 / Hochschul-SSO]
