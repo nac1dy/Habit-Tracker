@@ -27,7 +27,7 @@ Formulieren Sie Ihr Sprintziel in 1–2 Sätzen. Leitfragen:
 | Kriterium | Ihre Antwort
 
 | Sprintziel
-| Grundstruktur für den weiteren Verlauf aufbauen
+| Grundstruktur für den weiteren Verlauf aufbauen, Produktkonzept fundamentalisieren
 
 | Zentrale Unsicherheit / Annahme
 | Wie stellt sich das gesamte Team das Produkt vor/Was stellt sich jeder unter einem Habit-Tracker vor?
@@ -101,14 +101,17 @@ Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 1. Leitfragen:
 |===
 | Kriterium | Ihre Antwort
 
-| Erkenntnis 1
+| Organisation | Aufgaben müssen entsprechend dem Umfang und Kompetenzen auf Mitglieder aufgteilt werden
 | 
 
-| Erkenntnis 2
+| Planung | Aufgaben brauchen vorab einen zeitlichen Rahmen um sich besser auf zentrale Themen beschränken zu können
 | 
 
-| Erkenntnis 3
+| Vorgehensweise | Aufgaben müssen frühzeitig definiert werden um später eine klare Vorstellung zu besitzen
 | 
+
+| Kommunikation | Frühzeitige klare Kommunikation verhindert spätere Komplikationen
+|
 |===
  
 == 4. Änderungen am Produktkonzept
@@ -172,12 +175,12 @@ Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezi
 |===
 | Kriterium | Ihre Antwort
 
-| Beibehalten
-| 
+| Beibehalten | Aufgabenverteilung hat gut funktioniert, gute Zusammenarbeit - alle haben sich eingebracht, faire Diskussionen
 
-| Ändern / verbessern
-| 
+
+| Ändern / verbessern 
+| näher am Thema bleiben und weniger abschweifen, Abwesend früher melden
 
 | Offene Frage für Sprint 2
-| 
+| Architektur teilweise vage
 |===
