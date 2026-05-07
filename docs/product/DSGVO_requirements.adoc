@@ -1,4 +1,5 @@
-= Rechtliche Anforderungen – Habittracker
+include::../config.adoc[]
+= Rechtliche Anforderungen – {project-name}
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:

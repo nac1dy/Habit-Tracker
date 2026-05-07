@@ -1,9 +1,8 @@
+include::../config.adoc[]
 = Domänenmodell und Glossar: {project-name}
 
-include::../_includes/team-names.inc.adoc[]
 
 {localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt die wesentlichen fachlichen Begriffe und ihre  Beziehungen untereinander. Es bildet die gemeinsame Sprache des Teams und aller Stakeholder — unabhängig von technischen Umsetzungsentscheidungen.

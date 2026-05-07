@@ -1,4 +1,5 @@
-= Nicht-funktionale Anforderungen – Habit Tracker
+include::../config.adoc[]
+= Nicht-funktionale Anforderungen – {project-name}
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:

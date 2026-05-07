@@ -1,9 +1,7 @@
+include::../config.adoc[]
 = Deployment & Betrieb: {project-name}
 
-include::../_includes/team-names.inc.adoc[]
-
 {localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 = 

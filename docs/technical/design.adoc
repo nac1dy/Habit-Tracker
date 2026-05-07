@@ -1,9 +1,7 @@
+include::../config.adoc[]
 = Softwaredesign: {project-name}
 
-include::../_includes/team-names.inc.adoc[]
-
 {localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt die interne Struktur des Systems, wie der Code organisiert ist,

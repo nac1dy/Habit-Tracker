@@ -1,10 +1,9 @@
-= UX-Konzept: {project-name}
+include::../config.adoc[]
 
-include::../_includes/team-names.inc.adoc[]
+= UX-Konzept: {project-name}
 
 {localdatetime}
 
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt, wer das Produkt nutzt und wie — aus der Perspektive der Nutzenden. Es ergänzt das Produktkonzept um Personas, Nutzungskontext und
