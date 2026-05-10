@@ -27,7 +27,7 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 | Nutzer
 | Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
-  sein, um Bestellungen aufzugeben.
+  sein, um Bestellungen aufzugeben. Die Nutzerschaft besteht hauptsächlich aus Studenten.
 | Anwender, Benutzer; abzugrenzen von „Administrator"
 
 | Produkt
@@ -35,13 +35,19 @@ Technische Implementierungsdetails gehören nicht hierher!
   Bezeichnung, einen Preis und eine Verfügbarkeit.
 | Artikel, Ware
 
-| [Begriff]
-| [Präzise, fachliche Definition in 1–3 Sätzen]
-| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+| Habit-Stacking
+| Eine verhaltenspsychologische Methode, bei der eine neue Gewohnheit mit einer bereits bestehenden, etablierten Routine verbunden wird. Dies nutzt den Gewohnheitszustand der alten Gewohnheit als Anker für die neue.
+| Gewohnheits-Stapeln
 
+| Streak
+| Eine kontinuierliche Serie von Tagen, an denen eine Gewohnheit erfolgreich durchgeführt wurde. Sie kann kurzzeitig unterbrochen werden, ohne die gesamte Serie zu verlieren, wenn die Unterbrechung innerhalb eines definierten Zeitfensters liegt (z. B. 1 Tag).
+| Erfolgsserie
+
+////
 | [Begriff]
 | [Präzise, fachliche Definition in 1–3 Sätzen]
 | [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+////
 |===
 
 
