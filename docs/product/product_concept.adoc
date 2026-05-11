@@ -57,6 +57,7 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 
 === Wettbewerb & Alternativen
 
+TODO: Wettbewerber wie "Loop Habit Tracker", "HabitNow", "HabitKit", "TheFor"... ergänzen, Notion als zu allgemeine Alternative streichen oder besser begründen.
 [cols="1,3,2", options="header"]
 |===
 | Alternative | Beschreibung | Warum unser Produkt besser passt
