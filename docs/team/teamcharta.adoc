@@ -34,7 +34,7 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 | Entwickler:innen
 | Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov, Paul Dietrich
 
-| Stakeholder (Hauptansprechpartner)
+| Hauptansprechpartner
 | Christoph Zirkelbach (christoph.zirkelbach@htw-dresden.de)
 |===
 
@@ -134,6 +134,8 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 . größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt
 . jeder hilft so weit er kann
 . alle Aufgaben - egal in welchem Status - müssen bis zwei Tage vor dem nächsten Meeting hochgeladen werden, damit sich die Teamkollegen damit befassen können
+. Abmeldungen bis 3h vor dem Meeting
+. Issues nichtmehr in Kommentaren von Issues bearbeiten sondern direkt in die Docs schreiben damit keine doppel Issues entstehen 
 
 
 _Nächste Überprüfung: [26.05.2026 / Sprint 2] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._

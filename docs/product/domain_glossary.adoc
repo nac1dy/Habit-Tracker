@@ -20,20 +20,10 @@ Technische Implementierungsdetails gehören nicht hierher!
 |===
 | Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
 
-| Bestellung
-| Eine vom Nutzer ausgelöste Anforderung, ein oder mehrere Produkte zu erwerben.
-  Eine Bestellung durchläuft verschiedene Status (offen, bezahlt, versendet, abgeschlossen).
-| Auftrag; nicht zu verwechseln mit „Warenkorb" (noch nicht abgeschlossen)
-
 | Nutzer
 | Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
   sein, um Bestellungen aufzugeben. Die Nutzerschaft besteht hauptsächlich aus Studenten.
 | Anwender, Benutzer; abzugrenzen von „Administrator"
-
-| Produkt
-| Ein im System angebotener Artikel, der bestellt werden kann. Ein Produkt hat eine
-  Bezeichnung, einen Preis und eine Verfügbarkeit.
-| Artikel, Ware
 
 | Habit-Stacking
 | Eine verhaltenspsychologische Methode, bei der eine neue Gewohnheit mit einer bereits bestehenden, etablierten Routine verbunden wird. Dies nutzt den Gewohnheitszustand der alten Gewohnheit als Anker für die neue.
@@ -42,6 +32,21 @@ Technische Implementierungsdetails gehören nicht hierher!
 | Streak
 | Eine kontinuierliche Serie von Tagen, an denen eine Gewohnheit erfolgreich durchgeführt wurde. Sie kann kurzzeitig unterbrochen werden, ohne die gesamte Serie zu verlieren, wenn die Unterbrechung innerhalb eines definierten Zeitfensters liegt (z. B. 1 Tag).
 | Erfolgsserie
+
+| Habit
+| Positive Angewohnheit die man in der App angelegt hat und regelmäßig ausführt, um ein Ziel zu erreichen.
+| Routine, Angewohnheit
+
+| Habit-Kategorie
+| Begriff der mehrere Habits zusammenfasst und somit gruppiert
+| Tags, Eigenschaft, Gruppe
+ 
+| Momentum
+| Metrik/Indikator, der die Motivation des Nutzers widerspiegelt.
+| ///
+
+
+
 
 ////
 | [Begriff]
