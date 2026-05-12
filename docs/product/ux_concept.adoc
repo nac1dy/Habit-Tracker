@@ -1,6 +1,5 @@
 include::../config.adoc[]
-
-= UX-Konzept: {project-name}
+= UX-Konzept - {project-name}
 
 {localdatetime}
 

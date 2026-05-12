@@ -129,12 +129,12 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 
 | Frontend
 | Next.js, React, Tailwind CSS
-| Modern und was neues, kostenlos
+| Modern und neu, kostenlos
 | 
 
 | Backend
 | Supabase
-| Modern, einfach zu benutzen, stellt viele Funktionen zur verfügung, kostenlos
+| Modern, einfach zu benutzen, stellt viele Funktionen zur Verfügung, kostenlos
 |
 
 

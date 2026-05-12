@@ -1,0 +1,38 @@
+include::../config.adoc[]
+= Architekturtreiber: {project-name}
+
+{localdatetime}
+
+_Dieses Dokument beschreibt die wichtigsten Architekturtreiber für unser Produkt, die für die Entwicklung relevant sind._
+
+---
+
+== DSGVO-konforme Datenverarbeitung
+Das System verarbeitet personenbezogene Daten und potenziell sensible Inhalte wie Gewohnheiten oder Notizen. Die Architektur muss Datensparsamkeit, transparente Speicherung, Löschung und sichere Übertragung unterstützen.
+
+== Web-App statt native App
+Laut Anforderungen soll das Produkt als Web-App laufen und auf modernen Browsern funktionieren. Die Architektur muss daher browserbasiert, plattformunabhängig und ohne App-Store-Abhängigkeit gedacht werden.
+
+== Responsive Nutzung auf Desktop, Tablet und Smartphone
+Die Zielgruppe nutzt die App in unterschiedlichen Kontexten, oft unterwegs und auf mobilen Geräten. Das UI und die technische Struktur müssen deshalb responsiv und auf kleine Bildschirme optimiert sein.
+
+== Sehr schneller Einstieg und kurze Ladezeiten
+In den Qualitätssstandards haben wir uns auf unter 2s Ladezeit und unter 2 min Onboarding-Dauer festgeleg. Die Architektur muss also auf schlanke Initialisierung, geringe Komplexität im Startpfad und performante Datenzugriffe ausgelegt werden.
+
+== Authentifizierung mit E-Mail und Passwort
+Wir haben eine Anmeldung per E-Mail und Passwort vorgesehen. Die Architektur braucht daher einen klaren Authentifizierungs- und Sitzungsmechanismus sowie sichere Passwortspeicherung.
+
+== Unterstützung von Habit-Logik mit Streaks, Frequenzen und Mini-Habits
+Das Produkt soll mehrere fachliche Konzepte abbilden, darunter tägliches Tracking, flexible Häufigkeitsziele, Streaks und Fallback-Mini-Habits. Die Architektur muss dafür ein flexibles Domänenmodell haben.
+
+== Erinnerungen und konfigurierbare Benachrichtigungen
+Erinnerungsfunktionen mit Uhrzeit sind als Hauptfunktion geplant. Die Architektur muss dafür ein zuverlässiges Notification- oder Reminder-Konzept vorsehen, inklusive Nutzerzustimmung und Plattformgrenzen.
+
+== Offline-Fähigkeit als PWA
+Die Architektur muss mit lokalem Zwischenspeicher, Synchronisation und einem robusten Umgang mit Verbindungsabbrüchen planen, um auch offline funktionieren zu können.
+
+== Zweisprachigkeit Deutsch und Englisch
+Die App soll in Deutsch und Englisch verfügbar sein. Das betrifft UI-Texte, Fehlermeldungen, Onboarding, Validierung und möglicherweise Inhalte der Statistiken.
+
+== Verfügbarkeit und Sicherung unter Hochschulinfrastruktur
+Das System soll, wenn möglich, auf Hochschulservern betrieben werden und eine Verfügbarkeit von 99 Prozent sowie tägliche Backups erreichen. Die Architektur muss also auf den vorgesehenen Betrieb, Ausfallsicherheit und Wiederherstellbarkeit ausgelegt sein.
