@@ -2,6 +2,8 @@ include::../config.adoc[]
 = Softwaredesign: {project-name}
 
 {localdatetime}
+
+include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt die interne Struktur des Systems, wie der Code organisiert ist,
@@ -104,35 +106,28 @@ LAYOUT_WITH_LEGEND()
 title Component Diagram – [Systemname]
 
 Container_Boundary(frontend, "Frontend") {
-  Component(booking_ui, "Buchungskomponente", "z. B. React / Angular", "Ermöglicht Nutzern das Erstellen und Verwalten von Buchungen")
-  Component(auth_ui, "Authentifizierungskomponente", "z. B. React / Angular", "Handhabt Login, Logout und Session-Management")
-  Component(shared_ui, "Gemeinsame UI-Komponenten", "z. B. Design System", "Wiederverwendbare UI-Elemente wie Buttons, Formulare, Navigation")
+  Component(habit_ui, "Habitkomponente", "React ", "Ermöglicht Nutzern das Erstellen und Verwalten von Habits")
+  Component(auth_ui, "Authentifizierungskomponente", "React", "Handhabt Login, Logout und Session-Management")
+  Component(shared_ui, "Gemeinsame UI-Komponenten", "Next.js, TailwindCSS", "Wiederverwendbare UI-Elemente wie Buttons, Formulare, Navigation")
 }
 
 Container_Boundary(backend, "Backend") {
-  Component(booking_ctrl, "Buchungs-Controller", "z. B. REST Controller", "Nimmt eingehende Buchungsanfragen entgegen und delegiert an den Service")
-  Component(booking_svc, "Buchungs-Service", "z. B. Spring Service", "Enthält die Buchungslogik und orchestriert Repository und Benachrichtigung")
-  Component(user_svc, "Nutzer-Service", "z. B. Spring Service", "Verwaltung von Nutzerdaten und Authentifizierungslogik")
-  Component(notification_svc, "Benachrichtigungs-Service", "z. B. Spring Service", "Erstellt und versendet Benachrichtigungen an Nutzer:innen")
+  Component(habit_ctrl, "Habit-Controller", "Supabase", "Nimmt eingehende, neue Habits entgegen und delegiert an den Service")
+  Component(habit_svc, "Habit-Service", "Supabase", "Verarbeitet die eingehenden Habits und gibt weiter an Persistenzschicht")
+  Component(user_svc, "Nutzer-Service", "Supabase", "Verwaltung von Nutzerdaten und Authentifizierungslogik")
+  Component(notification_svc, "Benachrichtigungs-Service", "Notification API, Push API", "Erstellt und versendet Benachrichtigungen an Nutzer:innen")
 }
 
 Container_Boundary(persistence, "Persistenz") {
-  Component(booking_repo, "Buchungs-Repository", "z. B. JPA Repository", "Datenzugriff für Buchungsentitäten")
-  Component(user_repo, "Nutzer-Repository", "z. B. JPA Repository", "Datenzugriff für Nutzerentitäten")
-  ContainerDb(db, "Datenbank", "z. B. PostgreSQL", "Persistente Datenhaltung für alle Entitäten")
+  ContainerDb(db, "Datenbank", "PostgreSQL", "Persistente Datenhaltung für alle Entitäten")
 }
 
-System_Ext(ext, "Externer E-Mail-Dienst", "Zustellung von E-Mail-Benachrichtigungen, z. B. via SMTP")
-
-Rel(booking_ui, booking_ctrl, "sendet Buchungsanfragen", "REST / HTTPS")
+Rel(habit_ui, habit_ctrl, "sendet Buchungsanfragen", "REST / HTTPS")
 Rel(auth_ui, user_svc, "authentifiziert Nutzer:in", "REST / HTTPS")
-Rel(booking_ctrl, booking_svc, "delegiert an", "Java API")
-Rel(booking_svc, booking_repo, "liest / schreibt Buchungen", "JPA")
-Rel(booking_svc, notification_svc, "löst Benachrichtigung aus", "Java API")
-Rel(user_svc, user_repo, "liest / schreibt Nutzerdaten", "JPA")
-Rel(booking_repo, db, "persistiert Daten", "SQL")
-Rel(user_repo, db, "persistiert Daten", "SQL")
-Rel(notification_svc, ext, "sendet E-Mails über", "SMTP")
+Rel(habit_ctrl, habit_svc, "delegiert an", "Java API")
+Rel(habit_svc, notification_svc, "löst Benachrichtigung aus", "Java API")
+Rel(user_svc, db, "persistiert Daten", "SQL")
+Rel(habit_svc, db, "persistiert Daten", "SQL")
 
 @enduml
 ....
@@ -143,25 +138,18 @@ Rel(notification_svc, ext, "sendet E-Mails über", "SMTP")
 |===
 | Komponente | Verantwortung | Schnittstellen
 
-| [z. B. Buchungs-Controller]
-| HTTP-Anfragen für Buchungsvorgänge entgegennehmen;
-  Eingaben validieren; Antworten zurückgeben
-| REST-API (eingehend); Buchungs-Service (ausgehend)
+| Habit-Manager
+| Datenmanagement, Authentifizierung, Funktionlitäts-handler
+| Supabase
 
-| [z. B. Buchungs-Service]
-| Buchungslogik koordinieren; Verfügbarkeit prüfen;
-  Transaktionen verwalten; Benachrichtigungen auslösen
-| Buchungs-Repository; Benachrichtigungs-Service
+| Visualizer
+| Darstellung von Habits, Statistics und anderen Features
+| Next.js, TailwindCSS
 
-| [z. B. Buchungs-Repository]
+| Datenbank
 | Buchungsdaten lesen und schreiben;
   Datenbankabfragen kapseln
-| Datenbank (JPA / SQL)
-
-| [z. B. Benachrichtigungs-Service]
-| E-Mail-Benachrichtigungen versenden;
-  Vorlagen verwalten
-| Externer SMTP-Dienst
+| PostgreSQL (SQL)
 
 | [Weitere Komponente]
 | [Verantwortung]
@@ -176,7 +164,7 @@ Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeite
 Dokumentiert werden hier nur die wichtigsten und komplexesten Flüsse —
 nicht jede einfache CRUD-Operation.
 
-=== [Flussname, z. B. Raum buchen]
+=== [Flussname, z. B. Habit erstellen]
 
 _Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
 
@@ -190,22 +178,22 @@ skinparam monochrome true
 skinparam defaultFontSize 12
 
 actor "Nutzer:in" as user
-participant "Buchungs-\nController" as ctrl
-participant "Buchungs-\nService" as svc
-participant "Buchungs-\nRepository" as repo
+participant "Visualizer" as ctrl
+participant "Habit-Manager" as svc
+participant "Datenbank" as repo
 participant "Benachrichtigungs-\nService" as notify
 
-user -> ctrl : POST /buchungen\n{raumId, zeitraum}
+user -> ctrl : Post /habit{name, category, intervall}
 ctrl -> ctrl : Eingabe validieren
-ctrl -> svc : buchungErstellen(raumId, zeitraum, nutzerId)
-svc -> repo : istVerfuegbar(raumId, zeitraum)
-repo --> svc : true
-svc -> repo : buchungSpeichern(buchung)
-repo --> svc : gespeicherteBuchung
-svc -> notify : bestaetigungSenden(buchung)
+ctrl -> svc : createHabit(name, category, intervall, habitid)
+svc -> svc : checkforproblems(habitid)
+svc --> svc : true
+svc -> repo : saveHabit()
+repo --> svc : safedHabit
+svc -> notify : confirmcreation()
 notify --> svc : OK
-svc --> ctrl : buchung
-ctrl --> user : 201 Created\n{buchungsId, details}
+svc --> ctrl : Habit
+ctrl --> user : 201 Created\n{habitid, details}
 
 @enduml
 ....
@@ -221,15 +209,14 @@ skinparam monochrome true
 skinparam defaultFontSize 12
 
 actor "Nutzer:in" as user
-participant "Buchungs-\nController" as ctrl
-participant "Buchungs-\nService" as svc
-participant "Buchungs-\nRepository" as repo
+participant "Habit-Manager" as ctrl
+participant "Datenbank" as repo
 
-user -> ctrl : POST /buchungen\n{raumId, zeitraum}
-ctrl -> svc : buchungErstellen(raumId, zeitraum, nutzerId)
-svc -> repo : istVerfuegbar(raumId, zeitraum)
-repo --> svc : false
-svc --> ctrl : RaumNichtVerfuegbarException
+user -> ctrl : Post /habit{name, category, intervall}
+ctrl -> ctrl : createHabit(name, category, intervall, habitid)
+ctrl -> repo : checkforproblems(habitid)
+repo --> ctrl : false
+ctrl --> ctrl : HabitexistsalreadyException
 ctrl --> user : 409 Conflict\n{message, alternativen}
 
 @enduml
@@ -260,34 +247,37 @@ skinparam monochrome true
 skinparam defaultFontSize 12
 
 entity "nutzer" as user {
-  * id : UUID <<PK>>
+  * userid : UUID <<PK>>
   --
   * email : VARCHAR(255) <<UNIQUE>>
   * name : VARCHAR(100)
-  * erstellt_am : TIMESTAMP
+  * age : INTEGER
 }
 
-entity "raum" as room {
-  * id : UUID <<PK>>
+entity "habit" as habit {
+  * habitid : HUID <<PK>>
   --
-  * bezeichnung : VARCHAR(100)
-  * kapazitaet : INTEGER
-  * standort : VARCHAR(100)
+  * name : VARCHAR(100)
+  * Intervall : INTEGER
+  * Category : VARCHAR(100)
 }
 
-entity "buchung" as booking {
-  * id : UUID <<PK>>
+entity "statistics" as stats {
+  * statid : SUID <<PK>>
+  * habitid : VARCHAR(100) <<FK>>
   --
-  * nutzer_id : UUID <<FK>>
-  * raum_id : UUID <<FK>>
-  * beginn : TIMESTAMP
-  * ende : TIMESTAMP
-  * status : VARCHAR(20)
-  * erstellt_am : TIMESTAMP
+  * Name : INTEGER
+  * Counter : INTEGER
+  * Category : VARCHAR(100)
+  * Intervall : INTEGER
+  * momentum : INTEGER
 }
 
-user ||--o{ booking : "gibt auf"
-room ||--o{ booking : "ist Gegenstand von"
+
+user ||--o{ habit : "erstellt"
+habit ||--o{ stats : "wird getracked durch"
+user ||--o{ stats : "sieht"
+
 
 @enduml
 ....
@@ -299,20 +289,25 @@ room ||--o{ booking : "ist Gegenstand von"
 | Tabelle | Spalte | Beschreibung & Besonderheiten
 
 .4+| nutzer
-| id | UUID als Primärschlüssel; wird vom System generiert
+| userid | UUID als Primärschlüssel; wird vom System generiert
 | email | Eindeutig; wird für Login und Benachrichtigungen verwendet
 | name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
-| erstellt_am | Automatisch gesetzt; nicht änderbar
+| age | Alter der Person
 
-.4+| buchung
-| id | UUID als Primärschlüssel
-| status | Enum-Werte: `AKTIV`, `STORNIERT`, `ABGELAUFEN`
-| beginn / ende | Beide Zeitpunkte inklusive; keine Überschneidung per DB-Constraint
-| nutzer_id / raum_id | Fremdschlüssel; kein Cascade Delete — Buchungen bleiben erhalten
+.3+| habit
+| habitid | HUID als Primärschlüssel
+| category | Kategorie unter die das Habit fällt
+| intervall | Intervall in welchem das Habit erledigt werden soll
 
-| [Weitere Tabelle]
-| [Spalte]
-| [Beschreibung]
+
+.7+| statistics
+| userid | SUID als Primärschlüssel; wird vom System generiert
+| habitid | HUID als Fremdschlüssel; wird vom System generiert
+| name | Name des Habits zu dem die Stats gehören
+| counter | Streak Counter
+| category | kategorie unter die das Habit fällt
+| intervall |  Intervall in welchem das Habit erledigt werden soll
+| momentum | momentum die der User zu diesem Habit gesammelt hat
 |===
 
 === Datenbankmigrationen
