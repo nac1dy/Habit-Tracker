@@ -133,23 +133,22 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Frontend
 | Next.js, React, Tailwind CSS
 | Modern und was neues, kostenlos
-| 
+| ADR-001
 
 | Backend
 | Supabase
 | Modern, einfach zu benutzen, stellt viele Funktionen zur verfügung, kostenlos
-|
-
+| ADR-002
 
 | Datenbank
 | PostgreSQL
 | Starke kompatibilität zu supabase, kostenlos
-|
+| ADR-002
 
 | Authentifizierung
-| [z. B. OAuth2 / Hochschul-SSO]
-| [z. B. Pflichtintegration; kein eigenes Nutzermanagement nötig]
-| [z. B. ADR-004]
+| Supabase Auth
+| In Supabase integriert; unterstützt E-Mail/Passwort und OAuth; kein eigener Auth-Server nötig
+| ADR-002
 
 | Containerisierung
 | [z. B. Docker / Docker Compose]
@@ -217,56 +216,111 @@ gehören nicht hierher._
 NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
 „ersetzt durch ADR-XXX" markiert. So bleibt die Entscheidungshistorie nachvollziehbar.
 
-=== ADR-001: [Titel der Entscheidung]
+=== ADR-001: Next.js und Tailwind CSS als Frontend-Stack
 
 [cols="1,3"]
 |===
 | *Status*
-| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
+| Akzeptiert
 
 | *Datum*
-| [Datum]
+| 2026-05-17
 
 | *Kontext*
-| [Warum musste diese Entscheidung getroffen werden?
-  Welches Problem oder welche Anforderung hat sie ausgelöst?
-  Verweise auf Qualitätsziele oder Einschränkungen aus dem Produktkonzept falls relevant.]
+| Die HabitTracker-App benötigt ein Frontend-Framework für UI-Rendering, Routing,
+Anwendungslogik und Web-Performance-Optimierungen. Das Team ist klein und sucht
+eine bewährte, gut dokumentierte Lösung ohne hohen Konfigurationsaufwand.
 
 | *Entscheidung*
-| [Was wurde entschieden? Formuliere die Entscheidung als aktiven Satz:
-  „Wir verwenden X, weil..."]
+| Wir verwenden Next.js als Frontend-Framework und Tailwind CSS als Styling-Lösung.
+Next.js übernimmt Routing, SSR und Performance-Optimierungen.
+Tailwind CSS ermöglicht konsistentes Styling direkt im Markup.
 
 | *Alternativen*
-| [Welche Alternativen wurden in Betracht gezogen und warum verworfen?]
+| *Create React App (CRA):* Kein eingebautes SSR/SSG, schlechtere Performance out-of-the-box, weniger aktiv gewartet. +
+*Vite + React:* Keine integrierten Routing- oder SSR-Funktionen ohne zusätzliche Pakete. +
+*Vue.js / Nuxt:* Geringere Verbreitung im Team; kleineres Ökosystem. +
+*CSS Modules / Styled Components:* Mehr Boilerplate; schwieriger konsistent zu halten als Tailwind.
 
 | *Konsequenzen*
-| [Was wird durch diese Entscheidung einfacher? Was wird schwieriger oder teurer?
-  Welche neuen Risiken entstehen?]
+| (+) Integriertes Routing, SSR und Performance-Features ohne Zusatzkonfiguration. +
+(+) Tailwind ermöglicht schnelles, konsistentes Styling. +
+(+) Große Community; umfangreiche Dokumentation. +
+(+) Kostenlos (Open Source). +
+(-) Steilere Lernkurve als einfaches React (App Router, Server Components). +
+(-) Tailwind-Klassen können bei komplexen Komponenten unübersichtlich werden.
 |===
 
-=== ADR-002: [Titel der Entscheidung]
+=== ADR-002: Supabase als Backend-Plattform (inkl. PostgreSQL)
 
 [cols="1,3"]
 |===
 | *Status*
-| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
+| Akzeptiert
 
 | *Datum*
-| [Datum]
+| 2026-05-17
 
 | *Kontext*
-| [Kontext]
+| Die App benötigt eine Datenbank, ein Authentifizierungssystem und REST-APIs.
+Das Team hat keine Kapazitäten, ein vollständiges Backend selbst zu entwickeln und zu betreiben.
 
 | *Entscheidung*
-| [Entscheidung]
+| Wir verwenden Supabase als Backend-as-a-Service. Supabase stellt automatisch
+PostgreSQL (Datenbank), Authentifizierung (E-Mail/Passwort, OAuth),
+auto-generierte REST-APIs und Row-Level Security bereit.
 
 | *Alternativen*
-| [Alternativen]
+| *Firebase (Google):* NoSQL-Datenbank (Firestore) – weniger geeignet für relationale Habit-Daten; Vendor Lock-in bei Google. +
+*Eigenes Backend (Node.js + Express):* Zu hoher Entwicklungsaufwand; Auth, API und DB müssten komplett selbst gebaut werden. +
+*PocketBase:* Weniger verbreitet; kleinere Community; weniger Integrationen. +
+*AWS Amplify:* Komplex in der Konfiguration; Kosten schwer kalkulierbar.
 
 | *Konsequenzen*
-| [Konsequenzen]
+| (+) Drastische Reduzierung des Backend-Entwicklungsaufwands. +
+(+) PostgreSQL ist ideal für strukturierte, relationale Habit-Daten. +
+(+) Authentifizierung sofort einsatzbereit. +
+(+) Open Source; kann bei Bedarf selbst gehostet werden. +
+(+) Free Tier für den aktuellen Projektumfang ausreichend. +
+(-) Kostenrisiko bei Wachstum (Free Tier: 500 MB DB, 50.000 MAU). +
+(-) Abhängigkeit von einem externen Anbieter (Vendor Lock-in). +
+(-) Supabase ist jünger als Firebase; Langzeitstabilität noch nicht vollständig bewiesen.
 |===
 
+=== ADR-003: React Built-in State Management statt Zustand
+
+[cols="1,3"]
+|===
+| *Status*
+| Akzeptiert
+
+| *Datum*
+| 2026-05-17
+
+| *Kontext*
+| Die App benötigt State Management für temporäre, seitenspezifische Daten
+(Formularinhalte, Toggle-Zustände, Filterwerte). Persistente Daten werden
+über Supabase verwaltet (→ ADR-002). Es stand zur Frage, ob Zustand als
+externe State-Bibliothek eingesetzt werden soll.
+
+| *Entscheidung*
+| Wir verwenden Reacts eingebaute Mechanismen (`useState`, `useReducer`, `useContext`)
+für temporären State. Zustand und andere externe Bibliotheken werden nicht eingesetzt.
+
+| *Alternativen*
+| *Zustand:* Zusätzliche Abhängigkeit; für seitenspezifische, temporäre Zustände überdimensioniert. +
+*Redux Toolkit:* Sehr mächtig, aber erheblicher Boilerplate-Overhead für den Projektumfang. +
+*Jotai:* Ähnliche Stärken wie Zustand; gleiche Argumentation gegen externe Abhängigkeit. +
+*Recoil:* Weniger aktiv gepflegt; unnötige Komplexität.
+
+| *Konsequenzen*
+| (+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
+(+) Standard-React – kein Einarbeitungsaufwand. +
+(+) Einfacheres Debugging. +
+(-) Bei stark wachsender Komplexität kann `useContext` zu unnötigen Re-Renders führen. +
+(-) Tief verschachtelte Hierarchien können zu Prop Drilling führen. +
+(-) Migration zu einer externen Lösung wäre bei starkem Wachstum notwendig.
+|===
 
 NOTE: Weitere ADRs nach demselben Schema hinzufügen. Die Nummerierung ist
 fortlaufend und wird nie wiederverwendet.
@@ -317,3 +371,5 @@ Punkte in Vergessenheit geraten._
 | [Begründung]
 | [Ticket-Referenz oder "-"]
 |===
+
+_Dieses Dokument ist ein lebendes Dokument. Änderungen an der Architektur, den eingesetzten Technologien oder den getroffenen Entscheidungen sind hier im selben Pull Request zu dokumentieren, in dem die technische Änderung vorgenommen wird._
