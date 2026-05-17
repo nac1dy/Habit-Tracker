@@ -1,10 +1,7 @@
+include::../config.adoc[]
 = Architekturdokument: {project-name}
 
-include::../_includes/team-names.inc.adoc[]
-
 {localdatetime}
-
-include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
@@ -47,19 +44,20 @@ title System Context Diagram – [Systemname]
 Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
 Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
 
-System(system, "[Systemname]", "Kernfunktionalität des Systems")
+System(system, "Habito", "Kernfunktionalität des Systems")
 
-SystemDb(db, "Datenbank", "Persistente Datenhaltung des Systems")
+SystemDb(db, "PostgreSQL", "Persistente Datenhaltung des Systems")
 
-System_Ext(ext1, "Externer Dienst\n[z. B. LDAP / SSO]", "Authentifizierung und Identitätsverwaltung")
-System_Ext(ext2, "Externer Dienst\n[z. B. E-Mail-Server]", "Versand von Benachrichtigungen")
+System_Ext(ext0, "Next.js", "Visualisierung und Darstellung der Progressive Web App")
+System_Ext(ext1, "Supabase", "Authentifizierung und Identitätsverwaltung")
+System_Ext(ext2, "Notifications", "Sende Notifications an den Nutzer")
 
 Rel(user, system, "nutzt", "Web / Mobile")
 Rel(admin, system, "verwaltet")
-Rel(system, db, "liest / schreibt", "JDBC / SQL")
-Rel(system, ext1, "authentifiziert über", "LDAP / OAuth2")
-Rel(system, ext2, "sendet Benachrichtigungen über", "SMTP")
-
+Rel(system, db, "liest / schreibt", "SQL")
+Rel(system, ext1, "authentifiziert über", "Supabase Auth")
+Rel(system, ext0, "wird dargestellt durch", "TypeScript, React, TailwindCSS")
+Rel(system, ext2, "sendet Benachrichtungen", "Push API, Notifications")
 @enduml
 ....
 
@@ -72,25 +70,26 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 |===
 | Schnittstelle | Typ | Beschreibung | Protokoll / Format
 
-| [z. B. Hochschul-LDAP]
+| Supabase
 | Externes System
-| Authentifizierung und Nutzerverwaltung über bestehende Hochschulinfrastruktur
-| LDAP / TLS
+| Authentifizierung und Back-End Management über die Supabase 
+| Supabase Auth
 
-| [z. B. SMTP-Server]
-| Externes System
-| Versand von Benachrichtigungs-E-Mails an Nutzende
-| SMTP / TLS
-
-| [z. B. Nutzer:in via Browser]
+| Nutzer:in via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
 
-| [Weitere Schnittstelle]
-| [Typ]
-| [Beschreibung]
-| [Protokoll]
+| PostgreSQL 
+| Externes System
+| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet 
+| SQL
+
+| Notifications
+| Externes System
+| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden 
+| Push API, Notification API der Betriebssysteme
+
 |===
 
 === Laufzeitumgebungen (Container Diagramm)
@@ -104,12 +103,12 @@ Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, 
 ' C4 Model
 !include <c4/C4_Container.puml>
 
-Person(personAlias, "Label", "Optional Description")
+Person(personAlias, "Nutzer", "Nutzer über Web-Oberfläche")
 
-System_Boundary(c1, "Sample System") {
-    Container(containerAlias, "Container Name", "Technology", "Optional Description")
+System_Boundary(c1, "Website") {
+    Container(containerAlias, "Node.js", "TypeScript?")
 }
-Rel(personAlias, containerAlias, "Label", "Optional Technology")
+Rel(personAlias, containerAlias, "Nutzt Website mit Lautfzeitumgebung")
 
 @enduml
 ....
@@ -131,39 +130,40 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| Next.js, React, Tailwind CSS
-| Modern und was neues, kostenlos
-| ADR-001
+| Next.js, TailwindCSS, 
+| Modern & performant, viele Funktionen schon vorhanden, gut dokumentiert, große Community
+| [z. B. ADR-001]
 
 | Backend
 | Supabase
-| Modern, einfach zu benutzen, stellt viele Funktionen zur verfügung, kostenlos
-| ADR-002
+| Supabase ist kompatibel mit PostgreSQL, somit können die Management-Daten über Supabase laufen 
+| [z. B. ADR-002]
 
 | Datenbank
 | PostgreSQL
-| Starke kompatibilität zu supabase, kostenlos
-| ADR-002
+| Gut kompatibel mit Supabase, modern und gut gepflegt
+| [z. B. ADR-003]
 
 | Authentifizierung
 | Supabase Auth
-| In Supabase integriert; unterstützt E-Mail/Passwort und OAuth; kein eigener Auth-Server nötig
-| ADR-002
+| Supabase ist kompatibel mit PostgreSQL, somit können die Daten von Management und Authentifizierung über Supabase laufen 
+| [z. B. ADR-004]
+
+| Benachrichtungen
+| Push API, Notifications API 
+| Ermöglicht das Senden von Notifications an den Nutzer (auch bei Umsetzung als PWA)
+| [z. B. ADR-005]
+
+| Deployment
+| Vercel
+| Deployment über Vercel, da es schnell, modern und gut kompatibel für unser Produkt ist
+| [z. B. ADR-006]
 
 | Containerisierung
 | [z. B. Docker / Docker Compose]
 | [z. B. Reproduzierbare Umgebung für alle Teammitglieder]
-| [z. B. ADR-005]
+| [z. B. ADR-007]
 
-| CI/CD
-| [z. B. GitHub Actions]
-| [z. B. Direkte Integration mit Repository; kostenlos für Studierende]
-| [z. B. ADR-006]
-
-| [Weiterer Bereich]
-| [Technologie]
-| [Begründung]
-| [ADR-Referenz oder —]
 |===
 
 == Architekturrelevante Anforderungen

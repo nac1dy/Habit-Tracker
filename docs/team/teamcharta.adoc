@@ -1,15 +1,14 @@
+include::../config.adoc[]
 = Teamcharta: {project-name}
 
-Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de> ; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de> ; Rico Mauksch <rico.mauksch@stud.htw-dresden.de> ; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de> ; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de> ; Paul Dietrich <paul.dietrich@stud.htw-dresden.de> 
+{team-members-long}
 
 {localdatetime}
-
-include::../_includes/default-attributes.inc.adoc[]
 
 :version: 1.0
 
 == Über uns
-_to be added_
+NOTE: TODO
 
 == Zweck
 
@@ -24,18 +23,18 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 | Rolle | Person
 
 | Product Owner
-| Nico Heerwagen (AP)
+| Nico Heerwagen
 
 | Scrum Master
 | Maximilian Voigt
 
-| Tech Lead footnote:[optionale Rolle, aber empfohlen, um technische Entscheidungen zu koordinieren]
+| Tech Lead
 | Noel Miersch
 
 | Entwickler:innen
 | Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov, Paul Dietrich
 
-| Stakeholder (Hauptansprechpartner)
+| Hauptansprechpartner
 | Christoph Zirkelbach (christoph.zirkelbach@htw-dresden.de)
 |===
 
@@ -67,13 +66,13 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 | Discord
 
 | Entscheidungsprotokoll
-|  https://www.google.com/search?q=google+coin+flip&rlz=1C5CHFA_enDE1027DE1027&oq=google+coinfl&gs_lcrp=EgZjaHJvbWUqCwgBEAAYChgLGIAEMgYIABBFGDkyCwgBEAAYChgLGIAEMgsIAhAAGAoYCxiABDILCAMQABgKGAsYgAQyCwgEEAAYChgLGIAEMgsIBRAAGAoYCxiABDILCAYQABgKGAsYgAQyCwgHEAAYChgLGIAEMgsICBAAGAoYCxiABDILCAkQABgKGAsYgATSAQgyMjg0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8[Coin Flip]
+| Abstimmungen mit allen Teammitgliedern
 
 | Erwartete Reaktionszeit
-| 24h
+| 24 Stunden
 
 | Kernarbeitszeit
-| Allgemeine Uni-Arbeitszeiten
+| allgemeine Uni-Arbeitszeiten
 
 | Abgabefrist von Aufgaben
 | Sonntag 23:59 Uhr, Absprachen möglich
@@ -131,9 +130,12 @@ _Eine User Story gilt als fertig, wenn:_
 
 _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
-. Jeder ist eingeladen (und gebeten), ehrlich miteinander zu kommunizieren
-. Größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt auch einzeln
-. Keiner ist ein Schuldiger
-. Bis zwei Tage vor dem nächsten Meeting sind alle Aufgaben - egal in welchem Status - hochzuladen damit sich die Teamkollegen damit befassen können.
+. jeder ist eingeladen (und gebeten), ehrlich miteinander zu kommunizieren
+. größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt
+. jeder hilft so weit er kann
+. alle Aufgaben - egal in welchem Status - müssen bis zwei Tage vor dem nächsten Meeting hochgeladen werden, damit sich die Teamkollegen damit befassen können
+. Abmeldungen bis 3h vor dem Meeting
+. Issues nichtmehr in Kommentaren von Issues bearbeiten sondern direkt in die Docs schreiben damit keine doppel Issues entstehen 
 
-_Nächste Überprüfung: [28.04.2026 / Sprint 1] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
+
+_Nächste Überprüfung: [26.05.2026 / Sprint 2] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._

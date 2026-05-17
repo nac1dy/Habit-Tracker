@@ -1,0 +1,138 @@
+= Sprint-1-Report: Produktkonzept und agile Arbeitsweise
+// Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
+
+:repo-url: https://github.com/nac1dy/Habit-Tracker
+:docs: /blob/main/docs/
+:project-url: https://github.com/users/nac1dy/projects/3
+
+Team:: C2
+Projektname:: Habit-Tracker
+Datum:: 07.05.2026
+Repository-Link:: {repo-url}
+
+== 1. Sprintziel und zentrale Fragestellung
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Sprintziel
+| Unser Sprintziel war das Prüfen der Kernbedürfnisse unserer Zielgruppe und die Schaffung eines gemeinsamen Verständnisses der Produktvision im Team. Das Konzept ist nun besser begründet, da wir subjektive Annahmen durch abgestimmte Personas und erste Wireframes dokumentiert haben.
+
+| Zentrale Unsicherheit / Annahme
+| Gibt es unbekannte Unterschiede in den Vorstellungen der Teammitglieder bezüglich der Produktidee, der Zielgruppe oder der Arbeitsweise?
+|===
+
+
+== 2. Erwartete Praktiken in Sprint 1
+=== Folgende Praktiken waren für unseren 1. Sprint besonders relevant:
+* Produktvision formulieren
+* Personas und Nutzergruppen beschreiben
+* Product Backlog initial strukturieren und priorisieren
+* User Stories zerlegen und verfeinern
+* Wireframes oder Low-Fidelity-Prototypen erstellen
+
+[cols="1,2,2,2", options="header"]
+|===
+| Praktik
+| Konkrete Anwendung in unserem Sprint
+| Nachweis / Artefakt (Link einfügen)
+| Nutzen, Erkenntnis oder Anpassung
+
+| Produktvision formulieren
+| Um eine strukturierte Arbeitsweise zu gewährleisten, war es für uns unverzichtbar von Anfang an eine klare Produktivision zu dokumentieren. Wir haben mit jedem Meeting die Dokumentation näher angepasst und bereits geplante Features neu eingeordnet.
+| {repo-url}{docs}product/product_concept.adoc[product_concept.adoc]
+| Die genaue Dokumentation hat bereits mehrmals gezeigt, dass einige Teammitglieder unterschiedliche Vorstellungen von dem Produkt hatten. Daher dokumentieren wir so präzise wie möglich um weitere Missverständnisse zu vermeiden.
+
+| Personas und Nutzergruppen beschreiben
+| Wir haben drei Personas erstellt, um die Bedürfnisse und Anforderungen möglichst präzise zu identifizieren.
+| {repo-url}{docs}product/ux_concept.adoc[ux_concept.adoc]
+| Mit Hilfe der Personas konnten wir die Features priorisieren, die am besten zu unserer Zielgruppe passen.
+
+| Product Backlog initial strukturieren und priorisieren
+| Aus der Vision haben wir die wichtigsten Features abgeleitet und nach dem MoSCoW Prinzip priorisiert.
+| {project-url}/views/1[GitHub Project: Product Backlog] 
+| Die Priorisierung hat uns geholfen die wichtigsten Features zu identifizieren und weniger wichtige Features vorab zu pausieren. Das hat dabei geholfen den Fokus der Teammitglieder zu bündeln und die Produktvision zu konkretisieren.
+
+| User Stories zerlegen und verfeinern
+| Über den gesamten 1. Sprint hinweg haben wir die User Stories ergänzt und verfeinert. Zum Schluss haben wir die Stories priorisiert und thematisch in Epics gruppiert.
+| {repo-url}/issues?q=is%3Aissue%20state%3Aopen%20label%3Auser-story[GitHub Issues: User Stories]
+| Die User Stories geben eine klare Vorstellung von den Anforderungen an das Produkt und helfen uns dabei die nächsten Schritte zu planen.
+
+| Wireframes oder Low-Fidelity-Prototypen erstellen
+| Im Brainstorming haben wir grobe Skizzen und Wireframes auf unserem Miro-Board erstellt. Über mehrere Meetings haben wir diese besprochen optimiert.
+| https://miro.com/app/board/uXjVHdvmzfM=/?share_link_id=731152617344[Miro Board]
+| Gelungene Wireframes beschleunigen die Planung der nächsten Schritte, da sie eine eindeutige Struktur des Produkts vermitteln und offene Fragen zum Design vermeiden. Zudem deckten sie einige logische Fehler in der Navigation auf.
+|===
+
+
+== 3. Wichtigste Lernergebnisse aus Sprint 1
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Nutzerverhalten
+| Wir haben gelernt, dass Habit-Tracking ein "In-the-moment"-Bedürfnis ist. Die Barriere für den Eintrag muss minimal sein, was die Hardware-Wahl direkt beeinflusst.
+
+| Feature-Priorisierung
+| Die Annahme, dass Gamification-Elemente der wichtigste Motivator sind, wurde widerlegt. Stattdessen zeigte sich, dass für unsere Zielgruppe Elemente zur Reflexion des eigenen Fortschritts bedeutender sind.
+
+| Problemverständnis
+| Die Rückmeldung, dass Nutzer oft den Überblick über ihre Fortschritte verlieren, führte zur Erkenntnis, dass eine klare Visualisierung der Daten essentiell ist, um die Motivation aufrechtzuerhalten. Sie scheiterten häufiger an einem Gefühl der Stagnation als an der eigentlichen Umsetzung der Gewohnheiten.
+|===
+ 
+== 4. Änderungen am Produktkonzept
+[cols="2,2,2", options="header"]
+|===
+| Ursprüngliche Annahme / Idee
+| Neue Erkenntnis
+| Anpassung am Produktkonzept oder Backlog
+
+| Der Habit Tracker soll auch auf dem Desktop verfügbar sein.
+| Benutzer ziehen es vor, ihre Gewohnheiten auf dem Smartphone zu verfolgen, da sie es häufiger dabei haben.
+| Der Desktop-Ansicht wird vorerst auf unbestimmt pausiert, da die Zielgruppe hauptsächlich mobile Geräte verwendet.
+
+| Die Tagebuch-Funktion ist ein zusätzliches Feature, für die meisten Nutzer aber irrelevant.
+| Benutzer schätzen die Tagebuch-Funktion, da sie ihnen hilft, ihre Fortschritte zu reflektieren und motiviert zu bleiben.
+| Die Tagebuch-Funktion wurde als zentrales Feature in der Dokumentation ergänzt.
+
+| Ein Pet-System könnte Nutzer motivieren, ihre Gewohnheiten aktiver zu verfolgen.
+| Ein Pet-System zählt nicht zu den wichtigsten Funktionen, da es nicht direkt zur Erreichung der Ziele beiträgt.
+| Das Pet-System wird vorerst pausiert und optional in einer späteren Iteration ergänzt.
+|===
+
+
+== 5. Qualität, Randbedingungen und Verantwortung
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Qualitätsanforderungen
+| *Benutzerfreundlichkeit:* Da Gewohnheiten "on the go" getrackt werden, muss die App extrem schnell starten und eine intuitive Bedienung ermöglichen.
+*Zuverlässigkeit:* Erinnerungen müssen präzise und offline funktionieren, um die Kontinuität der Routinen nicht zu gefährden.
+
+| Randbedingungen
+| *Technisch:* Fokus auf Mobile-First.
+*Rechtlich:* Strikte Einhaltung der DSGVO, da hochsensible Verhaltensdaten und Reflexionen gespeichert werden.
+*Wissenschaftlich:* Integration verhaltenspsychologischer Methoden.
+
+| Ethische Aspekte / Risiken
+| *Manipulative Patterns:* Vermeidung von "Dark Patterns" bei Gamification, die zu zwanghaftem Verhalten führen könnten.
+*Ausschlussrisiko:* Sicherstellung, dass der Recovery-Mode bei Misserfolgen motiviert, statt durch "gebrochene Streaks" den Selbstwert der Nutzer zu mindern.
+|===
+
+
+== 6. Anpassung der Arbeitsweise für Sprint 2
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Beibehalten 
+| Die dynamische Aufgabenverteilung und aktive Zusammenarbeit aller Teammitglieder haben sich als sehr effektiv erwiesen. Besonders hervorzuheben ist die offene Kommunikation, die es allen erlaubt hat ihre Gedanken einzubringen und gemeinsam Kompromisse zu finden.
+
+| Ändern / verbessern 
+| **Fokus & Zeitmanagement:** Um effizienter zu arbeiten, werden wir Meetings straffer moderieren und Aufgaben vorab einen klaren zeitlichen Rahmen geben. 
+**Präzision in der Planung:** Wir werden Ziele zeitnah definieren, um logische Fehler frühzeitig zu erkennen. Zudem verbessern wir die Rückmeldung bezüglich individueller Verfügbarkeiten, um die Auslastung gerechter zu planen.
+
+| Offene Frage für Sprint 2
+| Welche Softwarearchitektur eignet sich am besten für die Umsetzung unserer Produktidee und wie können wir diese effizient implementieren?
+|===
