@@ -48,7 +48,7 @@ System(system, "Habito", "Kernfunktionalität des Systems")
 
 SystemDb(db, "PostgreSQL", "Persistente Datenhaltung des Systems")
 
-System_Ext(ext0, "Next.js", "Visualisierung und Darstellung der Pogressive Web App")
+System_Ext(ext0, "Next.js", "Visualisierung und Darstellung der Progressive Web App")
 System_Ext(ext1, "Supabase", "Authentifizierung und Identitätsverwaltung")
 System_Ext(ext2, "Notifications", "Sende Notifications an den Nutzer")
 
@@ -57,7 +57,7 @@ Rel(admin, system, "verwaltet")
 Rel(system, db, "liest / schreibt", "SQL")
 Rel(system, ext1, "authentifiziert über", "Supabase Auth")
 Rel(system, ext0, "wird dargestellt durch", "TypeScript, React, TailwindCSS")
-Rel(system, ext2, "sendet benachrichtungen", "Push API, Notifications")
+Rel(system, ext2, "sendet Benachrichtungen", "Push API, Notifications")
 @enduml
 ....
 
@@ -75,20 +75,20 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Authentifizierung und Back-End Management über die Supabase 
 | Supabase Auth
 
-| Nutzer:in via Browser
+| Nutzer:in via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
 
 | PostgreSQL 
 | Externes System
-| Daten von Nutzern werden in PostgreSQL Datenbanken gespeichert und verwaltet 
+| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet 
 | SQL
 
 | Notifications
 | Externes System
 | Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden 
-| Push API, Notification API
+| Push API, Notification API der Betriebssysteme
 
 |===
 
@@ -131,12 +131,12 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 
 | Frontend
 | Next.js, TailwindCSS, 
-| Modern, viele Funktionen schon vorhanden
+| Modern & performant, viele Funktionen schon vorhanden, gut dokumentiert, große Community
 | [z. B. ADR-001]
 
 | Backend
 | Supabase
-| Supabase ist kompatibel mit PostgreSQL somit können die Daten Management über Supabase laufen 
+| Supabase ist kompatibel mit PostgreSQL, somit können die Management-Daten über Supabase laufen 
 | [z. B. ADR-002]
 
 | Datenbank
@@ -146,17 +146,17 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 
 | Authentifizierung
 | Supabase Auth
-| Supabase ist kompatibel mit PostgreSQL somit können die Daten Management und Auth über Supabase laufen 
+| Supabase ist kompatibel mit PostgreSQL, somit können die Daten von Management und Authentifizierung über Supabase laufen 
 | [z. B. ADR-004]
 
 | Benachrichtungen
 | Push API, Notifications API 
-| Ermöglicht das senden von Notifications an den Nutzer auch als PWA
+| Ermöglicht das Senden von Notifications an den Nutzer (auch bei Umsetzung als PWA)
 | [z. B. ADR-005]
 
 | Deployment
 | Vercel
-| Deployment über Vercel da es schnell, modern und gut Kompatibel für unser Produkt ist
+| Deployment über Vercel, da es schnell, modern und gut kompatibel für unser Produkt ist
 | [z. B. ADR-006]
 
 | Containerisierung

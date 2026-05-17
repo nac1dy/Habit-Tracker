@@ -139,7 +139,7 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 | Komponente | Verantwortung | Schnittstellen
 
 | Habit-Manager
-| Datenmanagement, Authentifizierung, Funktionlitäts-handler
+| Datenmanagement, Authentifizierung, Funktionalitäts-Handler
 | Supabase
 
 | Visualizer
@@ -164,7 +164,7 @@ Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeite
 Dokumentiert werden hier nur die wichtigsten und komplexesten Flüsse —
 nicht jede einfache CRUD-Operation.
 
-=== [Flussname, z. B. Habit erstellen]
+=== Habit erstellen
 
 _Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
 
@@ -200,7 +200,7 @@ ctrl --> user : 201 Created\n{habitid, details}
 
 ---
 
-=== [Weiterer Fluss, z. B. Fehlerfall: Raum nicht verfügbar]
+=== Fehlerfluss-Szenario: Habit existiert bereits
 
 [plantuml, sequence-conflict, svg]
 ....
