@@ -40,20 +40,66 @@ Technische Implementierungsdetails gehören nicht hierher!
 | Habit-Kategorie
 | Begriff der mehrere Habits zusammenfasst und somit gruppiert
 | Tags, Eigenschaft, Gruppe
- 
+
 | Momentum
 | Metrik/Indikator, der die Motivation des Nutzers widerspiegelt.
-| ///
+|
 
+| Eintrag
+| Erfassen eines Fortschritts, in dem man das Habit trackt
+| Log, Tracking, Check-In
 
+| Pause
+| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreist, wenn man keine Einträge zum Habit macht
+|
 
+| Frequenz
+| Legt fest, in welchem Rhythmus ein Habit fällig wird (z. B. "3x pro Woche" oder "Jeden Tag")
+|
+
+| Quick-Note
+| Eine kurze, optionale Freitextnotiz, die ein Nutzer beim Erfassen eines Eintrags
+  hinterlegen kann. Sie dient der persönlichen Reflexion und hat keinen Einfluss
+  auf Streak oder Gamification.
+| Notiz, Kommentar
+
+| Gamification
+| Sammelbegriff für motivationsfördernde Spielelemente innerhalb der App.
+|
+
+| Erinnerung
+| Eine konfigurierbare Benachrichtigung, die einem Habit zugeordnet ist und den Nutzer
+  zu einer festgelegten Uhrzeit daran erinnert, das Habit durchzuführen. Eine Erinnerung
+  kann aktiviert oder deaktiviert werden.
+| Reminder, Benachrichtigung, Notification
+
+| Pet
+| Ein optionaler digitaler Begleiter als Teil des Gamification-Systems. Sein Zustand
+  (z. B. Stimmung oder Aussehen) wird durch den Momentum-Score des Nutzers bestimmt.
+  Das Pet ist ein ergänzendes Motivationsfeature und kein Kernbestandteil des
+  Habit-Trackings. Ein Nutzer kann, muss aber kein Pet besitzen.
+| Digitales Haustier, Companion
+
+| Vorlage
+| Ein vordefinierter Habit-Vorschlag, der Nutzern beim Onboarding oder beim Erstellen
+  eines neuen Habits als Ausgangspunkt dient. Vorlagen enthalten typische Werte für
+  Titel, Kategorie, Frequenz und Tracking-Typ.
+| Template, Habit-Vorlage
+
+| Ziel-Wert
+| Der numerische Zielwert, den ein Nutzer mit einem Eintrag erreichen möchte, wenn
+  der Tracking-Typ „numerisch" gewählt wurde, z. B. „10.000 Schritte" oder
+  „30 Minuten lesen". Bei binären Habits entfällt der Ziel-Wert.
+|
+
+|===
 
 ////
 | [Begriff]
 | [Präzise, fachliche Definition in 1–3 Sätzen]
 | [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
 ////
-|===
+
 
 
 == Domänenmodell
@@ -68,26 +114,71 @@ Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 [plantuml, domain-model, svg]
 ....
 @startuml
-' Beispiel — bitte durch das echte Domänenmodell ersetzen
+hide circle
+skinparam linetype ortho
+
 
 entity Nutzer {
+   Benutzername
+   Email
+}
+
+entity Pet {
   Name
-  E-Mail
+  Zustand
 }
 
-entity Bestellung {
-  Bestellnummer
-  Datum
-  Status
+entity Belohnungssystem {
+  Gesamt-EXP
+  Level
+  Momentum-Score
 }
 
-entity Produkt {
-  Bezeichnung
-  Preis
+entity Kategorie {
+  Name
+  Voreinstellungen
 }
 
-Nutzer "1" --> "0..*" Bestellung : gibt auf
-Bestellung "1" --> "1..*" Produkt : enthält
+entity Habit {
+  Titel
+  Frequenz
+  Tracking-Typ
+  Ziel-Wert
+}
+
+entity Eintrag {
+  Zeitstempel
+  Messwert
+  Quick-Note
+}
+
+entity Erinnerung {
+  Uhrzeit
+  Aktiv
+}
+
+entity Pause {
+  startdatum
+  enddatum
+}
+
+
+' Beziehungen mit Multiplizitäten
+
+' Kern-Bezehungen
+
+Nutzer "1" -- "0..*" Habit : verwaltet >
+Habit "0..*" -- "0..1" Kategorie : ist zugeordnet >
+Habit "1" *-- "0..*" Eintrag : dokumentiert durch >
+Habit "1" *-- "0..*" Erinnerung : erinnert durch >
+Habit "1" *-- "0..*" Pause : pausiert durch >
+
+' Gamification-Beziehungen
+
+Nutzer "1" *-- "1" Gamification : nimmt teil an >
+Eintrag "0..*" -- "1" Gamification : beeinflusst >
+Nutzer "1" *-- "0..1" Pet : begleitet durch >
+Gamification "1" -- "0..1" Pet : steuert Zustand >
 
 @enduml
 ....
@@ -104,16 +195,31 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Entität | Beschreibung
 
 | Nutzer
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Die zentrale Person, die das System nutzt. Der Nutzer besitzt ein Profil, verwaltet seine persönlichen Habits und ist der "Besitzer" des Belohnungssystems sowie des Pets.
 
-| Bestellung
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Habit
+| Die Definition einer regelmäßig auszuführenden Tätigkeit. Sie enthält fachliche Vorgaben wie die Frequenz und die Art und Weise, wie der Fortschritt gemessen wird (Tracking-Typ).
 
-| Produkt
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Kategorie
+| Ein organisatorisches Element zur Gruppierung von Habits (z. B. „Sport“, „Mental Health“). Sie dient der Übersichtlichkeit und fachlichen Strukturierung.
 
-| [Weitere Entität]
-| [Beschreibung]
+| Eintrag
+| Die Dokumentation einer tatsächlichen Durchführung eines Habits. Ein Eintrag validiert, dass der Nutzer aktiv war, und liefert die Basisdaten für Scores und Notizen.
+
+| Erinnerung
+| Eine konfigurierbare Benachrichtigung, die einen Nutzer zur festgelegten Uhrzeit an
+  einen Habit erinnert. Existenzabhängig vom zugehörigen Habit.
+
+| Pause
+| Ein zeitlich begrenzter Aussetzer eines Habits ohne Streak-Verlust. Existenzabhängig
+  vom zugehörigen Habit.
+
+| Belohnungssystem
+| Die Logik-Einheit für Gamification. Sie verwaltet die langfristige Erfahrung (EXP/Level) sowie die kurzfristige Motivations-Metrik (Momentum-Score).
+
+| Pet
+| Ein digitaler Begleiter, der als emotionaler Motivator dient. Sein Zustand (z. B. Aussehen oder Stimmung) spiegelt den aktuellen Erfolg des Nutzers wider.
+
 |===
 
 === Beschreibung der Beziehungen
@@ -125,19 +231,52 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | Von | Zu | Kardinalität | Bedeutung
 
 | Nutzer
-| Bestellung
+| Habit
 | 1 zu 0..*
-| Ein Nutzer kann keine oder mehrere Bestellungen aufgeben.
+| Ein Nutzer kann eine beliebige Anzahl an Habits verfolgen. Ohne Habits findet kein aktives Tracking statt.
 
-| Bestellung
-| Produkt
-| 1 zu 1..*
-| Eine Bestellung enthält mindestens ein Produkt.
+| Nutzer
+| Belohnungssystem
+| 1 zu 1
+| Jeder Nutzer hat ein persönliches Punktekonto. Hier werden alle Erfolge zentral gesammelt.
 
-| [Entität]
-| [Entität]
-| [z. B. 0..* zu 1]
-| [Beschreibung der Beziehung in natürlicher Sprache]
+| Nutzer
+| Pet
+| 1 zu 1
+| Jeder Nutzer kümmert sich um genau ein Pet. Das Pet ist untrennbar mit dem Fortschritt dieses Nutzers verbunden.
+
+| Habit
+| Kategorie
+| 0..* zu 0..1
+| Ein Habit kann optional einer Kategorie zugeordnet werden, um die fachliche Einordnung zu erleichtern.
+
+| Habit
+| Eintrag
+ 1 zu 0..*
+| Über die Lebensdauer eines Habits entstehen viele Einträge. Jeder Eintrag ist jedoch immer genau einem spezifischen Habit zugeordnet.
+
+| Habit
+| Erinnerung
+| 1 zu 0..* (Komposition)
+| Ein Habit kann durch eine oder mehrere Erinnerungen unterstützt werden.
+  Erinnerungen werden bei Habit-Löschung entfernt.
+
+| Habit
+| Pause
+| 1 zu 0..* (Komposition)
+| Ein Habit kann im Laufe der Zeit mehrfach pausiert werden.
+  Pausen werden bei Habit-Löschung entfernt.
+
+| Eintrag
+| Belohnungssystem
+| 0..* zu 1
+| Jeder neue Eintrag triggert eine Aktualisierung im Belohnungssystem (EXP-Gewinn und Momentum-Anpassung).
+
+| Belohnungssystem
+| Pet
+| 1 zu 1
+| Das Belohnungssystem gibt den Status an das Pet weiter. Sinkt das Momentum im System, verschlechtert sich der Zustand des Pets.
+
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
