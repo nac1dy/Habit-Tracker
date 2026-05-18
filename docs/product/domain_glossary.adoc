@@ -40,32 +40,25 @@ Technische Implementierungsdetails gehören nicht hierher!
 | Habit-Kategorie
 | Begriff der mehrere Habits zusammenfasst und somit gruppiert
 | Tags, Eigenschaft, Gruppe
- 
+
 | Momentum
 | Metrik/Indikator, der die Motivation des Nutzers widerspiegelt.
-| ///
+|
 
-| Eintrag
-| Erfassen eines Fortschritts, in dem man das Habit trackt
-| Log, Tracking, Check-In 
+| Quick-Note
+| Eine kurze, optionale Freitextnotiz, die ein Nutzer beim Erfassen eines Eintrags
+  hinterlegen kann. Sie dient der persönlichen Reflexion und hat keinen Einfluss
+  auf Streak oder Gamification.
+| Notiz, Kommentar
 
-| Pause
-| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreist, wenn man keine Einträge zum Habit macht
-| 
-
-| Frequenz 
-| Legt fest, in welchem Rhythmus ein Habit fällig wird (z. B. "3x pro Woche" oder "Jeden Tag")
-| 
-
-
-
+|===
 
 ////
 | [Begriff]
 | [Präzise, fachliche Definition in 1–3 Sätzen]
 | [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
 ////
-|===
+
 
 
 == Domänenmodell
@@ -80,52 +73,26 @@ Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 [plantuml, domain-model, svg]
 ....
 @startuml
-hide circle
-skinparam linetype ortho
+' Beispiel — bitte durch das echte Domänenmodell ersetzen
 
 entity Nutzer {
-  Benutzername
-}
-
-entity Pet {
   Name
-  Zustand
+  E-Mail
 }
 
-entity Belohnungssystem {
-  Gesamt-EXP
-  Level
-  Momentum-Score
+entity Bestellung {
+  Bestellnummer
+  Datum
+  Status
 }
 
-entity Kategorie {
-  Name
-  Voreinstellungen 
+entity Produkt {
+  Bezeichnung
+  Preis
 }
 
-entity Habit {
-  Titel
-  Frequenz
-  Tracking-Typ
-  Ziel-Wert
-}
-
-entity Eintrag {
-  Zeitstempel
-  Messwert
-  Quick-Note
-}
-
-' Beziehungen mit Multiplizitäten
-Nutzer "1" -- "1" Pet : besitzt >
-Nutzer "1" -- "1" Belohnungssystem : verfügt über >
-Nutzer "1" -- "0..*" Habit : verwaltet >
-
-Habit "0..*" -- "0..1" Kategorie : ist zugeordnet >
-Habit "1" -- "0..*" Eintrag : dokumentiert durch >
-
-Eintrag "0..*" -- "1" Belohnungssystem : triggert EXP-Update >
-Belohnungssystem "1" -- "1" Pet : steuert Zustand >
+Nutzer "1" --> "0..*" Bestellung : gibt auf
+Bestellung "1" --> "1..*" Produkt : enthält
 
 @enduml
 ....
@@ -142,22 +109,16 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Entität | Beschreibung
 
 | Nutzer
-| Die zentrale Person, die das System nutzt. Der Nutzer besitzt ein Profil, verwaltet seine persönlichen Habits und ist der "Besitzer" des Belohnungssystems sowie des Pets.
+| [Beschreibung der Entität und ihrer Rolle im System]
 
-| Pet
-| Ein digitaler Begleiter, der als emotionaler Motivator dient. Sein Zustand (z. B. Aussehen oder Stimmung) spiegelt den aktuellen Erfolg des Nutzers wider.
+| Bestellung
+| [Beschreibung der Entität und ihrer Rolle im System]
 
-| Belohnungssystem
-| Die Logik-Einheit für Gamification. Sie verwaltet die langfristige Erfahrung (EXP/Level) sowie die kurzfristige Motivations-Metrik (Momentum-Score).
+| Produkt
+| [Beschreibung der Entität und ihrer Rolle im System]
 
-| Habit
-| Die Definition einer regelmäßig auszuführenden Tätigkeit. Sie enthält fachliche Vorgaben wie die Frequenz und die Art und Weise, wie der Fortschritt gemessen wird (Tracking-Typ).
-
-| Kategorie
-| Ein organisatorisches Element zur Gruppierung von Habits (z. B. „Sport“, „Mental Health“). Sie dient der Übersichtlichkeit und fachlichen Strukturierung.
-
-| Eintrag
-| Die Dokumentation einer tatsächlichen Durchführung eines Habits. Ein Eintrag validiert, dass der Nutzer aktiv war, und liefert die Basisdaten für Scores und Notizen.
+| [Weitere Entität]
+| [Beschreibung]
 |===
 
 === Beschreibung der Beziehungen
@@ -169,39 +130,19 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | Von | Zu | Kardinalität | Bedeutung
 
 | Nutzer
-| Pet
-| 1 zu 1
-| Jeder Nutzer kümmert sich um genau ein Pet. Das Pet ist untrennbar mit dem Fortschritt dieses Nutzers verbunden.
-
-| Nutzer
-| Belohnungssystem
-| 1 zu 1
-| Jeder Nutzer hat ein persönliches Punktekonto. Hier werden alle Erfolge zentral gesammelt.
-
-| Nutzer
-| Habit
+| Bestellung
 | 1 zu 0..*
-| Ein Nutzer kann eine beliebige Anzahl an Habits verfolgen. Ohne Habits findet kein aktives Tracking statt.
+| Ein Nutzer kann keine oder mehrere Bestellungen aufgeben.
 
-| Habit
-| Kategorie
-| 0..* zu 0..1
-| Ein Habit kann optional einer Kategorie zugeordnet werden, um die fachliche Einordnung zu erleichtern.
+| Bestellung
+| Produkt
+| 1 zu 1..*
+| Eine Bestellung enthält mindestens ein Produkt.
 
-| Habit
-| Eintrag
-| 1 zu 0..*
-| Über die Lebensdauer eines Habits entstehen viele Einträge. Jeder Eintrag ist jedoch immer genau einem spezifischen Habit zugeordnet.
-
-| Eintrag
-| Belohnungssystem
-| 0..* zu 1
-| Jeder neue Eintrag triggert eine Aktualisierung im Belohnungssystem (EXP-Gewinn und Momentum-Anpassung).
-
-| Belohnungssystem
-| Pet
-| 1 zu 1
-| Das Belohnungssystem gibt den Status an das Pet weiter. Sinkt das Momentum im System, verschlechtert sich der Zustand des Pets.
+| [Entität]
+| [Entität]
+| [z. B. 0..* zu 1]
+| [Beschreibung der Beziehung in natürlicher Sprache]
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
