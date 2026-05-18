@@ -166,10 +166,9 @@ nicht jede einfache CRUD-Operation.
 
 === Habit erstellen
 
-_Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
+_Der folgende Ablauf zeigt den zentralen Use Case "Habit erstellen". Dadurch, dass der Habit-Manager als Web-Service implementiert wird, laufen die meisten Interaktionen über HTTP-Requests ab._
 
-//Beispielhaftes Sequenzdiagramm für den Buchungsprozess
-//Die tatsächlichen Flüsse müssen auf das konkrete Projekt zugeschnitten sein
+_Dieser Interaktionsfluss ist sehr relevant, da er die zentrale Funktionalität des Systems darstellt._
 
 [plantuml, sequence-booking, svg]
 ....
@@ -186,11 +185,11 @@ participant "Benachrichtigungs-\nService" as notify
 user -> ctrl : Post /habit{name, category, intervall}
 ctrl -> ctrl : Eingabe validieren
 ctrl -> svc : createHabit(name, category, intervall, habitid)
-svc -> svc : checkforproblems(habitid)
+svc -> svc : checkForProblems(habitid)
 svc --> svc : true
 svc -> repo : saveHabit()
-repo --> svc : safedHabit
-svc -> notify : confirmcreation()
+repo --> svc : savedHabit
+svc -> notify : confirmCreation()
 notify --> svc : OK
 svc --> ctrl : Habit
 ctrl --> user : 201 Created\n{habitid, details}
@@ -201,6 +200,8 @@ ctrl --> user : 201 Created\n{habitid, details}
 ---
 
 === Fehlerfluss-Szenario: Habit existiert bereits
+
+_Falls ein Nutzer versucht, einen bereits existierenden Habit zu erstellen, soll eine Fehlermeldung angezeigt werden und der Erstellungsprozess abgebrochen werden._
 
 [plantuml, sequence-conflict, svg]
 ....
@@ -214,9 +215,9 @@ participant "Datenbank" as repo
 
 user -> ctrl : Post /habit{name, category, intervall}
 ctrl -> ctrl : createHabit(name, category, intervall, habitid)
-ctrl -> repo : checkforproblems(habitid)
+ctrl -> repo : checkForProblems(habitid)
 repo --> ctrl : false
-ctrl --> ctrl : HabitexistsalreadyException
+ctrl --> ctrl : HabitAlreadyExistsException
 ctrl --> user : 409 Conflict\n{message, alternativen}
 
 @enduml
@@ -247,7 +248,7 @@ skinparam monochrome true
 skinparam defaultFontSize 12
 
 entity "nutzer" as user {
-  * userid : UUID <<PK>>
+  * userID : UUID <<PK>>
   --
   * email : VARCHAR(255) <<UNIQUE>>
   * name : VARCHAR(100)
@@ -255,7 +256,7 @@ entity "nutzer" as user {
 }
 
 entity "habit" as habit {
-  * habitid : HUID <<PK>>
+  * habitID : HUID <<PK>>
   --
   * name : VARCHAR(100)
   * Intervall : INTEGER
@@ -263,13 +264,13 @@ entity "habit" as habit {
 }
 
 entity "statistics" as stats {
-  * statid : SUID <<PK>>
-  * habitid : VARCHAR(100) <<FK>>
+  * statID : SUID <<PK>>
+  * habitID : HUID <<FK>>
   --
-  * Name : INTEGER
-  * Counter : INTEGER
-  * Category : VARCHAR(100)
-  * Intervall : INTEGER
+  * name : VARCHAR(100)
+  * counter : INTEGER
+  * category : VARCHAR(100)
+  * intervall : INTEGER
   * momentum : INTEGER
 }
 
@@ -289,25 +290,25 @@ user ||--o{ stats : "sieht"
 | Tabelle | Spalte | Beschreibung & Besonderheiten
 
 .4+| nutzer
-| userid | UUID als Primärschlüssel; wird vom System generiert
+| userID | UUID als Primärschlüssel; wird vom System generiert
 | email | Eindeutig; wird für Login und Benachrichtigungen verwendet
 | name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
 | age | Alter der Person
 
 .3+| habit
-| habitid | HUID als Primärschlüssel
-| category | Kategorie unter die das Habit fällt
-| intervall | Intervall in welchem das Habit erledigt werden soll
+| habitID | HUID als Primärschlüssel
+| category | Kategorie, unter die das Habit fällt
+| intervall | Intervall, in welchem das Habit erledigt werden soll
 
 
 .7+| statistics
-| userid | SUID als Primärschlüssel; wird vom System generiert
-| habitid | HUID als Fremdschlüssel; wird vom System generiert
-| name | Name des Habits zu dem die Stats gehören
+| userID | UUID als Primärschlüssel; wird vom System generiert
+| habitID | HUID als Fremdschlüssel; wird vom System generiert
+| name | Name des Habits, zu dem die Stats gehören
 | counter | Streak Counter
-| category | kategorie unter die das Habit fällt
-| intervall |  Intervall in welchem das Habit erledigt werden soll
-| momentum | momentum die der User zu diesem Habit gesammelt hat
+| category | Kategorie, unter die das Habit fällt
+| intervall |  Intervall, in welchem das Habit erledigt werden soll
+| momentum | Momentum-Score, den der Nutzer zum spezifischen Habit hat
 |===
 
 === Datenbankmigrationen

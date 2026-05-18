@@ -161,9 +161,9 @@ _Dieser Abschnitt beschreibt Abläufe, die mehrere Features oder Bereiche des Pr
 umfassen. Einzelne Feature-Wireframes werden in den jeweiligen User Stories gepflegt.
 Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiagrammen._
 
-=== [Flussname, z. B. Onboarding-Flow]
+=== Onboarding-Flow
 
-_Beschreibe kurz, was dieser Fluss abdeckt und welche Personas er betrifft._
+_Dies ist der Onboarding-Flow von {project-system-name}. Wenn ein (uneingeloggter) Nutzer die App öffnet, wird er durch diesen Prozess geleitet, um sich einzuloggen oder zu registrieren._
 
 [plantuml, onboarding-flow, svg]
 ....
@@ -179,6 +179,7 @@ else (nein)
   :Registrierung;
   :Bestätigungs-E-Mail;
   :E-Mail bestätigen;
+  :Kurze Einführung;
 endif
 :Startseite;
 stop
@@ -191,8 +192,8 @@ stop
 | Schritt | Beteiligte Persona | Anmerkung
 
 | App öffnen
-| Maria (Studierende)
-| Erster Einstiegspunkt; muss sofort orientieren
+| Maria (Studentin)
+| Erster Einstiegspunkt; muss sich sofort orientieren können
 
 | Login / Registrierung
 | Alle Personas
@@ -205,9 +206,9 @@ stop
 
 ---
 
-=== [Weiterer Fluss, z. B. Buchungsabbruch & Fehlerbehandlung]
+=== Anlegen eines Habits
 
-_Beschreibe den Fluss und ergänze ein Diagramm nach demselben Muster._
+_Das Anlegen eines neuen Habits ist der zentrale Punkt/Flow der Software. Hier kann der Nutzer entweder im Schnelldurchlauf, also nur durch die Festlegung eines Namens, oder mit erweiterten Optionen, ein Habit erstellen._
 
 [plantuml, error-flow, svg]
 ....
@@ -215,18 +216,34 @@ _Beschreibe den Fluss und ergänze ein Diagramm nach demselben Muster._
 skinparam monochrome true
 
 start
-:Buchung starten;
-if (Raum noch verfügbar?) then (ja)
-  :Buchung bestätigen;
-  :Bestätigung anzeigen;
+:Habit anlegen;
+:Namen des Habits eingeben;
+if (Erweiterte Optionen?) then (ja)
+  :Auswahl der Streak-Art;
+  :Festlegen einer Kategorie;
 else (nein)
-  :Fehlermeldung anzeigen;
-  :Alternative Räume vorschlagen;
+:Übernehmen der Grundeinstellungen;
 endif
+:Habit speichern;
+:Bestätigung anzeigen;
 stop
 
 @enduml
 ....
+
+[cols="1,1,2", options="header"]
+|===
+| Schritt | Beteiligte Persona | Anmerkung
+
+| "_Habit anlegen_"-Button
+| Alle Personas
+| Primäre Aktion; muss auf dem Startbildschirm leicht auffindbar sein
+
+| Habit-Einstellungen
+| Alle Personas
+| Es muss mindestens ein Habit-Name festgelegt werden (es muss aber nicht mehr sein); Erweiterte Optionen sollten optional und nicht aufdringlich sein; Standardwerte müssen sinnvoll sein
+
+|===
 
 == Designsystem & Interaktionsprinzipien
 
