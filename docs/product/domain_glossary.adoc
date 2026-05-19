@@ -130,7 +130,6 @@ entity Pet {
 
 entity Belohnungssystem {
   Gesamt-EXP
-  Level
   Momentum-Score
 }
 
@@ -153,6 +152,7 @@ entity Eintrag {
 }
 
 entity Erinnerung {
+  Inhalt
   Uhrzeit
   Aktiv
 }
@@ -165,8 +165,7 @@ entity Pause {
 
 ' Beziehungen mit Multiplizitäten
 
-' Kern-Bezehungen
-
+' Kern-Beziehungen
 Nutzer "1" -- "0..*" Habit : verwaltet >
 Habit "0..*" -- "0..1" Kategorie : ist zugeordnet >
 Habit "1" *-- "0..*" Eintrag : dokumentiert durch >
@@ -174,11 +173,10 @@ Habit "1" *-- "0..*" Erinnerung : erinnert durch >
 Habit "1" *-- "0..*" Pause : pausiert durch >
 
 ' Gamification-Beziehungen
-
-Nutzer "1" *-- "1" Gamification : nimmt teil an >
-Eintrag "0..*" -- "1" Gamification : beeinflusst >
-Nutzer "1" *-- "0..1" Pet : begleitet durch >
-Gamification "1" -- "0..1" Pet : steuert Zustand >
+Nutzer "1" *-- "1" Belohnungssystem : nimmt teil an >
+Eintrag "0..*" -- "1" Belohnungssystem : beeinflusst >
+Nutzer "1" -- "0..1" Pet : begleitet durch >
+Belohnungssystem "1" -- "0..1" Pet : steuert Zustand >
 
 @enduml
 ....
@@ -242,7 +240,7 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 
 | Nutzer
 | Pet
-| 1 zu 1
+| 1 zu 0..1
 | Jeder Nutzer kümmert sich um genau ein Pet. Das Pet ist untrennbar mit dem Fortschritt dieses Nutzers verbunden.
 
 | Habit
@@ -252,7 +250,7 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 
 | Habit
 | Eintrag
- 1 zu 0..*
+| 1 zu 0..*
 | Über die Lebensdauer eines Habits entstehen viele Einträge. Jeder Eintrag ist jedoch immer genau einem spezifischen Habit zugeordnet.
 
 | Habit
@@ -266,6 +264,11 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | 1 zu 0..* (Komposition)
 | Ein Habit kann im Laufe der Zeit mehrfach pausiert werden.
   Pausen werden bei Habit-Löschung entfernt.
+
+| Habit
+| Frequenz
+| 1 zu 1
+| Ein Habit hat genau eine Frequenz, die bestimmt wie oft das Habit erfüllt werden muss.
 
 | Eintrag
 | Belohnungssystem
