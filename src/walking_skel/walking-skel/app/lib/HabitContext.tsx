@@ -27,11 +27,11 @@ export function HabitProvider({ children }: {children: ReactNode}){
     };
 
     const deleteHabit = (id: string) => {
-        setHabits((prev) => prev.filter((habit) => habit.id !== id));
+        setHabits((prev) => prev.filter((habit) => habit.habitid !== id));
     };
 
     const getHabitById = (id: string ) => {
-        return habits.find((habit) => habit.id === id);
+        return habits.find((habit) => habit.habitid === id);
     };
 
     return (
