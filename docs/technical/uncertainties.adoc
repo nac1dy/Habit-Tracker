@@ -14,7 +14,7 @@ Wir haben festgestellt, dass z.B. Alkohol- und i.A. Suchtverhalten als kritische
 Extern: Supabase PostgreSQL, intern: In-Memory-Cache mit Sync-Mechanismus. Es muss sichergestellt werden, dass die Daten konsistent bleiben und Datenschutzanforderungen erfüllt werden.
 
 == Wie sollen Erinnerungen technisch ausgeliefert werden?
-Browser-Push, In-App-Benachrichtigungen(Push API und Notification API), E-Mail(nur für login)?
+Browser-Push, In-App-Benachrichtigungen (Push API und Notification API), E-Mail (nur für login)?
 
 == Muss die App für den ersten Gebrauch ohne Registrierung funktionieren?
 Nein, Registrierung ist Pflicht

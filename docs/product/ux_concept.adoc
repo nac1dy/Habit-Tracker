@@ -317,7 +317,7 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 | Alle interaktiven Elemente haben sinnvolle ARIA-Labels
 
 | Schriftgröße
-| Keine Schrift unter 14px; Nutzer:innen können Systemschriftgröße nutzen
+| Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen
 
 | [Weiterer Aspekt]
 | [Anforderung]

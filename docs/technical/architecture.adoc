@@ -41,8 +41,8 @@ LAYOUT_WITH_LEGEND()
 
 title System Context Diagram – [Systemname]
 
-Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
-Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
+Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
+Person(admin, "Administrator", "Verwaltet und konfiguriert das System")
 
 System(system, "Habito", "Kernfunktionalität des Systems")
 
@@ -75,7 +75,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Authentifizierung und Back-End Management über die Supabase 
 | Supabase Auth
 
-| Nutzer:in via Browser (als PWA oder "klassisch" über Browser-Aufruf)
+| Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
@@ -316,7 +316,7 @@ für temporären State. Zustand und andere externe Bibliotheken werden nicht ein
 *Recoil:* Weniger aktiv gepflegt; unnötige Komplexität.
 
 | *Konsequenzen*
-| (+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
+(+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
 (+) Standard-React – kein Einarbeitungsaufwand. +
 (+) Einfacheres Debugging. +
 (-) Bei stark wachsender Komplexität kann `useContext` zu unnötigen Re-Renders führen. +
@@ -344,7 +344,7 @@ Punkte in Vergessenheit geraten._
 | Mittel
 | [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
 
-| [z. B. Performance bei > 200 gleichzeitigen Nutzenden unbekannt]
+| [z. B. Performance bei > 200 gleichzeitigen Nutzern unbekannt]
 | Mittel
 | Niedrig
 | [z. B. Lasttest ab Sprint 4 eingeplant]

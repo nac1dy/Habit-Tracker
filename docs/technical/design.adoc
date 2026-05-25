@@ -209,7 +209,7 @@ _Falls ein Nutzer versucht, einen bereits existierenden Habit zu erstellen, soll
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-actor "Nutzer:in" as user
+actor "Nutzer" as user
 participant "Habit-Manager" as ctrl
 participant "Datenbank" as repo
 
