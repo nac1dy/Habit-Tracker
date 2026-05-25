@@ -1,17 +1,37 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useHabits } from './lib/HabitContext';
+import { Habit } from './lib/types';
 
 // Header only renders on client to avoid SSR issues with Theme Context
 const Header = dynamic(() => import('./components/Header').then(mod => ({ default: mod.Header })), {
   ssr: false
 });
 
-// Home page - displays all habits from context (will fetch from Supabase backend)
+// Home page - displays all habits from Supabase backend
 export default function Home() {
-  const { habits } = useHabits(); // TODO: Replace with Supabase query (getHabits)
+  const [habits, setHabits] = useState<Habit[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchHabits = async () => {
+      try {
+        const response = await fetch('/api/habits');
+        if (!response.ok) throw new Error('Failed to fetch habits');
+        const data = await response.json();
+        setHabits(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHabits();
+  }, []);
 
   return (
     <>
@@ -31,8 +51,16 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* habit list oder empty state */}
-        {habits.length === 0 ? (
+        {/* loading, error, oder habit list */}
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500 dark:text-gray-400">Loading habits...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-500">{error}</p>
+          </div>
+        ) : habits.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 dark:text-gray-400 text-lg mb-4">No habits yet.</p>
             <p className="text-gray-400 dark:text-gray-500">Click "Create Habit" to get started!</p>
@@ -42,14 +70,14 @@ export default function Home() {
             {/* map alle habits und zeige sie als clickable cards */}
             {habits.map((habit) => (
               <Link
-                key={habit.id}
-                href={`/habits/${habit.id}`}
+                key={habit.habitid}
+                href={`/habits/${habit.habitid}`}
                 className="block p-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg hover:shadow-md dark:hover:shadow-slate-800 transition"
               >
                 <div className="flex justify-between items-center">
                   <div>
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {habit.name}
+                      {habit.title}
                     </h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
                       {habit.category}

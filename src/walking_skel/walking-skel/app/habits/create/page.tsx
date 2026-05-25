@@ -3,18 +3,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SubmitEvent } from 'react';
-import { Habit, HabitCategory, DayOfWeek } from '@/app/lib/types';
-import { useHabits } from '@/app/lib/HabitContext';
+import { HabitCategory, DayOfWeek } from '@/app/lib/types';
 
-// Create Habit form - saves to context (will connect to Supabase backend)
+// Create Habit form - saves to Supabase backend
 export default function CreateHabit() {
   const router = useRouter();
-  const { addHabit } = useHabits(); // ← nutze den context
+  const [loading, setLoading] = useState(false);
 
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [category, setCategory] = useState<HabitCategory>('sport');
-  const [daysOfWeek, setDaysOfWeek] = useState<Record<DayOfWeek, boolean>>({
+  const [frequenz, setFrequenz] = useState<Record<DayOfWeek, boolean>>({
     monday: false,
     tuesday: false,
     wednesday: false,
@@ -25,31 +23,39 @@ export default function CreateHabit() {
   });
 
   const toggleDay = (day: DayOfWeek) => {
-    setDaysOfWeek((prev) => ({
+    setFrequenz((prev) => ({
       ...prev,
       [day]: !prev[day],
     }));
   };
 
-  const handleSubmit = (e: SubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim() || !Object.values(daysOfWeek).some((day) => day)) {
+    if (!title.trim() || !Object.values(frequenz).some((day) => day)) {
       alert('Please enter a habit name and select at least one day');
       return;
     }
 
-    // Create habit object (temporary ID, will be replaced by Supabase UUID)
-    const newHabit: Habit = {
-      id: Date.now().toString(), // TODO: Will be replaced with Supabase UUID
-      name,
-      category,
-      daysOfWeek,
-      createdAt: new Date(), // TODO: Will be server timestamp from Supabase
-    };
+    setLoading(true);
+    try {
+      const response = await fetch('/api/habits', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title,
+          category,
+          frequenz,
+        }),
+      });
 
-    addHabit(newHabit); // TODO: Replace with Supabase insert operation
-    router.push('/');
+      if (!response.ok) throw new Error('Failed to create habit');
+      router.push('/');
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const days: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -71,8 +77,8 @@ export default function CreateHabit() {
             </label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Morning jog"
               className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
             />
@@ -105,7 +111,7 @@ export default function CreateHabit() {
                   type="button"
                   onClick={() => toggleDay(day)}
                   className={`py-2 px-1 rounded-lg font-semibold transition text-sm capitalize ${
-                    daysOfWeek[day]
+                    frequenz[day]
                       ? 'bg-blue-600 text-white dark:bg-blue-700'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
                   }`}
@@ -118,9 +124,10 @@ export default function CreateHabit() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg transition"
           >
-            Create Habit
+            {loading ? 'Creating...' : 'Create Habit'}
           </button>
         </form>
       </div>
