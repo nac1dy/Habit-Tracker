@@ -41,8 +41,8 @@ LAYOUT_WITH_LEGEND()
 
 title System Context Diagram – [Systemname]
 
-Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
-Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
+Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
+Person(admin, "Administrator", "Verwaltet und konfiguriert das System")
 
 System(system, "Habito", "Kernfunktionalität des Systems")
 
@@ -75,7 +75,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Authentifizierung und Back-End Management über die Supabase 
 | Supabase Auth
 
-| Nutzer:in via Browser (als PWA oder "klassisch" über Browser-Aufruf)
+| Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
@@ -176,6 +176,8 @@ sie sind im link:../product/product_concept.adoc[Produktkonzept] als einziger Qu
 Dieser Abschnitt zeigt ausschließlich die technischen Konsequenzen, die sich aus
 diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 
+_Im Wesentlichen resultieren die architekturrelevanten Anforderungen aus den im dedizierten link:architecture_drivers.adoc[Dokument] festgelegten Architekturtreibern._
+
 [cols="2,3,2", options="header"]
 |===
 | Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
@@ -187,7 +189,7 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 
 | DSGVO-Konformität
 | Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
-  Recht auf Löschung muss implementierbar sein
+  Recht auf Löschung muss implementierbar sein; Nutzer-Einträge mit sensiblen Daten sollen nur lokal auf dem Gerät des Nutzers gespeichert werden
 | ADR-003, ADR-004
 
 | Betrieb auf Hochschulinfrastruktur
@@ -198,9 +200,9 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 | Statusüberwachung und automatischer Neustart über Container-Orchestrierung
 | ADR-005
 
-| [Anforderung]
-| [Technische Konsequenz]
-| [ADR-Referenz oder —]
+| Responsive Nutzung auf Desktop, Tablet und Smartphone
+| Nutzung eines modernen Frontend-Stacks, der ggf. Erzeugung nativer UIs oder andernfalls die Erstellung responsiver, für alle Viewports optimierter Oberflächen ermöglicht
+| ADR-001
 |===
 
 == Architekturentscheidungen
@@ -314,7 +316,7 @@ für temporären State. Zustand und andere externe Bibliotheken werden nicht ein
 *Recoil:* Weniger aktiv gepflegt; unnötige Komplexität.
 
 | *Konsequenzen*
-| (+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
+(+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
 (+) Standard-React – kein Einarbeitungsaufwand. +
 (+) Einfacheres Debugging. +
 (-) Bei stark wachsender Komplexität kann `useContext` zu unnötigen Re-Renders führen. +
@@ -342,7 +344,7 @@ Punkte in Vergessenheit geraten._
 | Mittel
 | [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
 
-| [z. B. Performance bei > 200 gleichzeitigen Nutzenden unbekannt]
+| [z. B. Performance bei > 200 gleichzeitigen Nutzern unbekannt]
 | Mittel
 | Niedrig
 | [z. B. Lasttest ab Sprint 4 eingeplant]
