@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
+/* Habito palette tokens (from preview.html) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page-bg: #dff7f4;
+  --app-bg: #f7fbfa;
+  --glass: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.90);
+  --border: rgba(18, 33, 31, 0.08);
+  --border-mid: rgba(18, 33, 31, 0.14);
+
+  --text: #12211f;
+  --text-2: #5f6f6c;
+  --text-3: #91a09d;
+
+  --radius: 18px;
+  --radius-lg: 24px;
+
+  --teal-900: #35b8aa;
+  --teal-700: #35b8aa;
+  --teal-500: #35b8aa;
+  --teal-300: #dff7f4;
+  --teal-100: #dff7f4;
+
+  --orange-700: #b85d1f;
+  --orange-500: #f59f5b;
+  --orange-300: #ffd0a3;
+  --orange-100: #fff0df;
+
+  --success: #45c487;
+  --warning: #f4b860;
+  --danger: #f17777;
+  --focus: #7dc8ff;
+
+  --shadow: 0 18px 45px rgba(30, 90, 84, 0.10);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--page-bg);
+  --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--page-bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, var(--teal-100), transparent 32%),
+    radial-gradient(circle at 88% 10%, var(--orange-100), transparent 30%),
+    radial-gradient(rgba(18, 33, 31, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 24px 24px;
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

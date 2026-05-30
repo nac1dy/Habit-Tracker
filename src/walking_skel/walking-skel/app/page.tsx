@@ -3,26 +3,33 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Habit } from './lib/types';
+
+// API response shape from /api/habits
+type HabitApi = {
+  habitid: string;
+  title: string;
+  category: string;
+};
 
 // Header only renders on client to avoid SSR issues with Theme Context
 const Header = dynamic(() => import('./components/Header').then(mod => ({ default: mod.Header })), {
-  ssr: false
+  ssr: false,
 });
 
-// Home page - displays all habits from Supabase backend
 export default function Home() {
-  const [habits, setHabits] = useState<Habit[]>([]);
+  // Functional habit list uses the backend API
+  const [habits, setHabits] = useState<HabitApi[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Load habits once on page load
   useEffect(() => {
     const fetchHabits = async () => {
       try {
         const response = await fetch('/api/habits');
         if (!response.ok) throw new Error('Failed to fetch habits');
         const data = await response.json();
-        setHabits(data);
+        setHabits(data as HabitApi[]);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -33,64 +40,168 @@ export default function Home() {
     fetchHabits();
   }, []);
 
+  // Dummy values for the preview-style overview cards
+  const completedToday = 2;
+  const streakDays = 7;
+  const totalHabits = habits.length;
+  const completionPct = totalHabits > 0 ? Math.round((completedToday / totalHabits) * 100) : 0;
+
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 dark:bg-slate-950 py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          {/* titel */}
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Habits</h1>
-          {/* link zu create seite */}
-          <Link
-            href="/habits/create"
-            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg transition"
-          >
-            + Create Habit
-          </Link>
-        </div>
 
-        {/* loading, error, oder habit list */}
-        {loading ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400">Loading habits...</p>
+      <main className="min-h-screen bg-[var(--page-bg)] py-8 px-4">
+        <div className="max-w-5xl mx-auto">
+
+          {/* Tab system (dummy pages) */}
+          <nav className="grid grid-cols-4 gap-2 mb-6">
+            <Link
+              href="/"
+              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--teal-500)] text-white border-transparent text-center"
+            >
+              Home
+            </Link>
+            <Link
+              href="/habits"
+              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
+            >
+              Habits
+            </Link>
+            <Link
+              href="/stats"
+              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
+            >
+              Stats
+            </Link>
+            <Link
+              href="/settings"
+              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
+            >
+              Settings
+            </Link>
+          </nav>
+
+          {/* Home title block in preview style */}
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+            <div>
+              <p className="text-xs font-extrabold tracking-[0.18em] text-[var(--teal-700)] uppercase">
+                Habit Tracker
+              </p>
+              <h1 className="text-3xl font-bold text-[var(--teal-900)] mt-1">Today</h1>
+              <p className="text-[var(--text-2)]">Your daily overview and active habits.</p>
+            </div>
+
+            {/* Functional CTA (create habit) */}
+            <Link
+              href="/habits/create"
+              className="rounded-full px-4 py-2 text-sm font-semibold bg-[var(--teal-500)] text-white hover:bg-[var(--teal-700)] transition"
+            >
+              + Create Habit
+            </Link>
           </div>
-        ) : error ? (
-          <div className="text-center py-12">
-            <p className="text-red-500">{error}</p>
+
+          {/* Today overview cards (dummy values) */}
+          <div className="grid gap-3 md:grid-cols-3 mb-6">
+            <div
+              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
+              style={{ boxShadow: 'var(--shadow)' }}
+            >
+              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Completed today</p>
+              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">
+                {completedToday}/{totalHabits}
+              </p>
+              <p className="text-sm text-[var(--text-2)]">{completionPct}% done</p>
+            </div>
+
+            <div
+              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
+              style={{ boxShadow: 'var(--shadow)' }}
+            >
+              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Current streak</p>
+              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">{streakDays} days</p>
+              <p className="text-sm text-[var(--text-2)]">Keep the momentum</p>
+            </div>
+
+            <div
+              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
+              style={{ boxShadow: 'var(--shadow)' }}
+            >
+              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Active habits</p>
+              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">{totalHabits}</p>
+              <p className="text-sm text-[var(--text-2)]">Across your schedule</p>
+            </div>
           </div>
-        ) : habits.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400 text-lg mb-4">No habits yet.</p>
-            <p className="text-gray-400 dark:text-gray-500">Click "Create Habit" to get started!</p>
+
+          {/* Preview-style momentum teaser (dummy block) */}
+          <div
+            className="rounded-3xl border border-[rgba(53,184,170,0.25)] p-5 mb-6"
+            style={{
+              background: 'linear-gradient(135deg, rgba(53,184,170,0.12), rgba(27,111,104,0.07))',
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase font-semibold text-[var(--teal-700)]">Momentum</p>
+                <p className="text-lg font-bold text-[var(--text)] mt-1">Stable today</p>
+              </div>
+              <div className="text-2xl font-extrabold text-[var(--text)]">72</div>
+            </div>
+
+            <div className="mt-4 h-2 rounded-full bg-black/10 overflow-hidden">
+              <div
+                className="h-full rounded-full"
+                style={{ width: '72%', background: 'linear-gradient(90deg, var(--teal-500), var(--teal-700))' }}
+              />
+            </div>
           </div>
-        ) : (
-          <div className="grid gap-4">
-            {/* map alle habits und zeige sie als clickable cards */}
-            {habits.map((habit) => (
-              <Link
-                key={habit.habitid}
-                href={`/habits/${habit.habitid}`}
-                className="block p-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg hover:shadow-md dark:hover:shadow-slate-800 transition"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {habit.title}
-                    </h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
-                      {habit.category}
-                    </p>
-                  </div>
-                  <span className="text-gray-400 dark:text-gray-500">→</span>
-                </div>
-              </Link>
-            ))}
+
+          {/* Habit list (functional, but styled like preview cards) */}
+          <div
+            className="rounded-3xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-5"
+            style={{ boxShadow: 'var(--shadow)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-[var(--text)]">Habits</h2>
+              <span className="text-sm text-[var(--text-3)]">Tap to view details</span>
+            </div>
+
+            {/* Loading and error states */}
+            {loading ? (
+              <div className="text-center py-6">
+                <p className="text-[var(--text-2)]">Loading habits...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-6">
+                <p className="text-[var(--danger)]">{error}</p>
+              </div>
+            ) : habits.length === 0 ? (
+              <div className="text-center py-6">
+                <p className="text-[var(--text-2)] text-lg mb-2">No habits yet.</p>
+                <p className="text-[var(--text-3)]">Create your first habit to get started.</p>
+              </div>
+            ) : (
+              <div className="grid gap-3">
+                {habits.map((habit) => (
+                  <Link
+                    key={habit.habitid}
+                    href={`/habits/${habit.habitid}`}
+                    className="block rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[12px] p-4 transition hover:-translate-y-0.5"
+                    style={{ boxShadow: '0 2px 12px rgba(30,90,84,0.06)' }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="text-lg font-semibold text-[var(--text)]">{habit.title}</h3>
+                        <p className="text-sm text-[var(--text-2)] capitalize">{habit.category}</p>
+                      </div>
+                      <span className="text-[var(--text-3)]">→</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      </main>
     </>
   );
 }

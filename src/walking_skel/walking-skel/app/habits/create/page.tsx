@@ -9,6 +9,7 @@ import { HabitCategory, DayOfWeek } from '@/app/lib/types';
 export default function CreateHabit() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState<{ title: string; message: string } | null>(null);
 
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState<HabitCategory>('sport');
@@ -33,7 +34,10 @@ export default function CreateHabit() {
     e.preventDefault();
 
     if (!title.trim() || !Object.values(frequenz).some((day) => day)) {
-      alert('Please enter a habit name and select at least one day');
+      setModal({
+        title: 'Missing info',
+        message: 'Please enter a habit name and select at least one day.',
+      });
       return;
     }
 
@@ -52,7 +56,10 @@ export default function CreateHabit() {
       if (!response.ok) throw new Error('Failed to create habit');
       router.push('/');
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Unknown error');
+      setModal({
+        title: 'Create failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      });
     } finally {
       setLoading(false);
     }
@@ -61,18 +68,22 @@ export default function CreateHabit() {
   const days: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 py-8 px-4">
+    <div className="min-h-screen bg-[var(--page-bg)] py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">
-          <Link href="/" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-4 inline-block">
+          <Link href="/" className="text-[var(--teal-700)] hover:text-[var(--teal-900)] mb-4 inline-block">
             ← Back
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create New Habit</h1>
+          <h1 className="text-3xl font-bold text-[var(--teal-900)]">Create New Habit</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 p-8 rounded-lg border border-gray-200 dark:border-slate-700">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-8 border border-[var(--text)]"
+          style={{ borderRadius: 'var(--radius-lg)' }}
+        >
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-[var(--text-2)] mb-2">
               Habit Name
             </label>
             <input
@@ -80,18 +91,18 @@ export default function CreateHabit() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Morning jog"
-              className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
+              className="w-full px-4 py-2 border border-[var(--text)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-white text-[var(--text)]"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-[var(--text-2)] mb-2">
               Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as HabitCategory)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
+              className="w-full px-4 py-2 border border-[var(--text)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-white text-[var(--text)]"
             >
               <option value="sport">Sport</option>
               <option value="health">Health</option>
@@ -101,19 +112,19 @@ export default function CreateHabit() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <label className="block text-sm font-medium text-[var(--text-2)] mb-3">
               Select Days
             </label>
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-4 text-center">
               {days.map((day) => (
                 <button
                   key={day}
                   type="button"
                   onClick={() => toggleDay(day)}
-                  className={`py-2 px-1 rounded-lg font-semibold transition text-sm capitalize ${
+                  className={`py-2 px-1 rounded-full font-semibold transition text-sm capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)] transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
                     frequenz[day]
-                      ? 'bg-blue-600 text-white dark:bg-blue-700'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
+                      ? 'text-[var(--teal-700)] underline decoration-2 underline-offset-4'
+                      : 'text-[var(--text)] hover:text-[var(--teal-700)]'
                   }`}
                 >
                   {day.slice(0, 3)}
@@ -125,11 +136,48 @@ export default function CreateHabit() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg transition"
+            className="w-full text-white font-semibold py-2 px-6 rounded-lg transition transition-transform hover:-translate-y-0.5 active:translate-y-0"
+            style={{
+              background: 'linear-gradient(135deg, var(--teal-500), var(--teal-700))',
+              opacity: loading ? 0.7 : 1,
+            }}
           >
             {loading ? 'Creating...' : 'Create Habit'}
           </button>
         </form>
+
+        {modal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+            <div
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              onClick={() => setModal(null)}
+            />
+            <div
+              className="relative w-full max-w-md bg-white border border-[var(--text)] p-6"
+              style={{ borderRadius: 'var(--radius-lg)' }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="create-modal-title"
+              aria-describedby="create-modal-message"
+            >
+              <h2 id="create-modal-title" className="text-lg font-bold text-[var(--text)]">
+                {modal.title}
+              </h2>
+              <p id="create-modal-message" className="mt-2 text-[var(--text-2)]">
+                {modal.message}
+              </p>
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setModal(null)}
+                  className="rounded-full px-4 py-2 text-sm font-semibold bg-[var(--teal-500)] text-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
