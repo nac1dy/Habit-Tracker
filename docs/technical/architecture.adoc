@@ -349,6 +349,46 @@ Punkte in Vergessenheit geraten._
 | Niedrig
 | [z. B. Lasttest ab Sprint 4 eingeplant]
 
+| Supabase Free Tier: Limits bei 500 MB Datenbank und 50.000 MAU können bei Wachstum überschritten werden
+| Hoch
+| Mittel
+| Kostenentwicklung monatlich monitoren; Migrationspfad zu Self-Hosted Supabase dokumentieren
+
+| Vendor Lock-in durch Supabase: Anbieterwechsel erfordert Umbau von Auth, API und Datenbankzugriff
+| Hoch
+| Niedrig
+| Abstraktionsschicht im Backend einführen, um Supabase-spezifische Aufrufe zu isolieren
+
+| DSGVO-Konformität der Supabase-Integration noch nicht formal geprüft; Datenspeicherort (EU) unbestätigt
+| Hoch
+| Mittel
+| AVV mit Supabase abschließen; EU-Rechenzentrum in Supabase-Einstellungen verifizieren
+
+| PWA-Offline-Daten (IndexedDB) liegen unverschlüsselt im Browser; Zugriff auf geteilten Geräten möglich
+| Hoch
+| Mittel
+| Lokale Daten verschlüsseln; Hinweis in Datenschutzerklärung aufnehmen
+
+| PWA-Funktionalität (Service Worker) ist auf iOS Safari eingeschränkt; Offline-Verhalten weicht von anderen Browsern ab
+| Mittel
+| Hoch
+| Kompatibilitätsmatrix für Zielbrowser definieren; iOS Safari in Testplan aufnehmen
+
+| Modularer Monolith erschwert spätere horizontale Skalierung bei stark steigender Last
+| Mittel
+| Niedrig
+| Lasttest ab frühen Releases durchführen; Skalierungsstrategie dokumentieren
+
+| ADR für Gamification ist noch offen; fehlende Entscheidung kann späte, teure Nacharbeiten verursachen
+| Mittel
+| Hoch
+| ADR für Gamification priorisiert vor Beginn der Feature-Entwicklung abschließen
+
+| Nicht alle Teammitglieder sind mit Next.js App Router und Server Components vertraut
+| Mittel
+| Hoch
+| Internes Onboarding einplanen; Code-Reviews als Pflichtprozess einführen
+
 | [Weiteres Risiko]
 | [Hoch / Mittel / Niedrig]
 | [Hoch / Mittel / Niedrig]
