@@ -121,7 +121,7 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 |===
 | Nutzerbedarf | Hauptfunktion | Priorität
 
-| Studierende wollen neue Gewohnheiten aufbauen und schlechte abbauen.
+| Studenten wollen neue Gewohnheiten aufbauen und schlechte abbauen.
 | Habit-Verwaltung (Erstellen, Bearbeiten, Löschen von Habits)
 | Hoch
 
@@ -150,10 +150,6 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 | Niedrig
 
 |===
-
-| [Nutzerbedarf]
-| [Hauptfunktion]
-| [Hoch / Mittel / Niedrig]
 
 NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen der Backlog-Priorisierung verfeinert.
 
