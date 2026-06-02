@@ -102,70 +102,69 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 
 == Nutzungskontext
 
-  _Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen
-  Bedingungen das Produkt genutzt wird._
+_Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen
+Bedingungen das Produkt genutzt wird._
 
-  [cols="1,3", options="header"]
-  |===
-  | Aspekt | Beschreibung
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
 
-  | Benutzer
-  | Studierende im Alter von 18–28 Jahren mit unterschiedlicher digitaler Affinität (von kaum technikversiert bis sehr versiert). Alle nutzen Smartphones täglich intensiv. Motivation ist
-  intrinsisch: eigene Gesundheit, Produktivität oder Wohlbefinden verbessern. Ausführliche Beschreibungen → siehe Personas.
+| Benutzer
+| Studierende im Alter von 18–28 Jahren mit unterschiedlicher digitaler Affinität (von kaum technikversiert bis sehr versiert). Alle nutzen Smartphones täglich intensiv. Motivation ist
+intrinsisch: eigene Gesundheit, Produktivität oder Wohlbefinden verbessern. Ausführliche Beschreibungen → siehe Personas.
 
-  | Ziele & Aufgaben
-  | Nutzende möchten schlechte Gewohnheiten abbauen oder neue aufbauen und ihren Fortschritt über Zeit sehen. Konkrete Aufgaben: Habits täglich abhaken, Streak aufrechterhalten, neues
-  Habit anlegen, Fortschritt im Wochenverlauf einsehen, ggf. Habits pausieren oder löschen.
+| Ziele & Aufgaben
+| Nutzende möchten schlechte Gewohnheiten abbauen oder neue aufbauen und ihren Fortschritt über Zeit sehen. Konkrete Aufgaben: Habits täglich abhaken, Streak aufrechterhalten, neues Habit anlegen, Fortschritt im Wochenverlauf einsehen, ggf. Habits pausieren oder löschen.
 
-  | Ressourcen
-  | Primär Smartphone (Webapp) und Desktop/Laptop (Browser). Stabile Internetverbindung meistens vorhanden; auf dem Campus oder in der Bahn gelegentlich eingeschränkt.
+| Ressourcen
+| Primär Smartphone (Webapp) und Desktop/Laptop (Browser). Stabile Internetverbindung meistens vorhanden; auf dem Campus oder in der Bahn gelegentlich eingeschränkt.
 
-  | Umgebung
-  a|
-  *Technisch:* Mobile-Web PWA; Betriebssystem unabhängig; gelegentlicher Offline-Betrieb muss bedacht werden.
+| Umgebung
+a|
+*Technisch:* Mobile-Web PWA; Betriebssystem unabhängig; gelegentlicher Offline-Betrieb muss bedacht werden.
 
-  *Physisch:* Nutzung unterwegs, zuhause oder an der Hochschule — meist in kurzen Momenten unter 2 Minuten. Wechselnde Lichtverhältnisse und Ablenkungen.
+*Physisch:* Nutzung unterwegs, zuhause oder an der Hochschule — meist in kurzen Momenten unter 2 Minuten. Wechselnde Lichtverhältnisse und Ablenkungen.
 
-  *Sozial & organisatorisch:* Eigenverantwortliche Nutzung ohne externe Verpflichtung. Keine regulatorischen Rahmenbedingungen außer DSGVO.
+*Sozial & organisatorisch:* Eigenverantwortliche Nutzung ohne externe Verpflichtung. Keine regulatorischen Rahmenbedingungen außer DSGVO.
 
-  |===
+|===
 
-  === Aktuelle Situation (ohne das Produkt)
+=== Aktuelle Situation (ohne das Produkt)
 
-  _Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt verbessern soll — und macht den Mehrwert explizit._
+_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt verbessern soll — und macht den Mehrwert explizit._
 
-  Heute verwenden Nutzende papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
-  aus den Augen. Hannes hat bereits zwei Habit-Apps ausprobiert und beide nach kurzer Zeit aufgegeben, weil sie zu komplex waren oder zu viel Zeit kosteten. Petra trackt Gewohnheiten in
-  Notion und ihrem Kalender, verliert aber den Überblick, sobald mehrere Habits gleichzeitig laufen. Allen gemeinsam fehlt ein konsistentes Feedback über längere Zeiträume — der
-  Motivationsverlust setzt typischerweise nach zwei bis drei Wochen ein.
+Heute verwenden Nutzende papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
+aus den Augen. Hannes hat bereits zwei Habit-Apps ausprobiert und beide nach kurzer Zeit aufgegeben, weil sie zu komplex waren oder zu viel Zeit kosteten. Petra trackt Gewohnheiten in
+Notion und ihrem Kalender, verliert aber den Überblick, sobald mehrere Habits gleichzeitig laufen. Allen gemeinsam fehlt ein konsistentes Feedback über längere Zeiträume — der
+Motivationsverlust setzt typischerweise nach zwei bis drei Wochen ein.
 
-  === Nutzungshürden & Risiken
+=== Nutzungshürden & Risiken
 
-  _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
+_Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 
-  [cols="2,2", options="header"]
-  |===
-  | Hürde / Risiko | Mögliche Reaktion im Design
+[cols="2,2", options="header"]
+|===
+| Hürde / Risiko | Mögliche Reaktion im Design
 
-  | Registrierungspflicht schreckt beim ersten Start ab
-  | Quick-Start-Option mit minimalen Angaben (z. B. nur E-Mail) und überspringbares Onboarding
+| Registrierungspflicht schreckt beim ersten Start ab
+| Quick-Start-Option mit minimalen Angaben (z. B. nur E-Mail) und überspringbares Onboarding
 
-  | App wird nach kurzer Zeit nicht mehr genutzt (Drop-off)
-  | Streak-Mechanismus und Momentum-Score als tägliches Retention-Signal; Push-Erinnerungen und Low Effort-Check-ins
+| App wird nach kurzer Zeit nicht mehr genutzt (Drop-off)
+| Streak-Mechanismus und Momentum-Score als tägliches Retention-Signal; Push-Erinnerungen und Low Effort-Check-ins
 
-  | Negativgefühl bei verpassten Habits
-  | Sanfte Formulierungen (Visualisierung) statt hartem Fehler-Feedback; Pause-Funktion für schwierige Phasen
+| Negativgefühl bei verpassten Habits
+| Sanfte Formulierungen (Visualisierung) statt hartem Fehler-Feedback; Pause-Funktion für schwierige Phasen
 
-  | Zu viele Habits auf einmal, Überforderung
-  | Übersichtliches Interface durch One-Click (sehr übersichtlich bis etwa 8 Habits)
+| Zu viele Habits auf einmal, Überforderung
+| Übersichtliches Interface durch One-Click (sehr übersichtlich bis etwa 8 Habits)
 
-  | Datenschutzbedenken bei sensiblen Habits (z. B. Sucht)
-  | Verschlüsselung sensibler Daten, transparente Datenschutzerklärung und keine Social-Features wie Freunde/Sharing
+| Datenschutzbedenken bei sensiblen Habits (z. B. Sucht)
+| Verschlüsselung sensibler Daten, transparente Datenschutzerklärung und keine Social-Features wie Freunde/Sharing
 
-   | [Weitere Hürde / Risiko]
-   | [Mögliche Reaktion im Design]
+  | [Weitere Hürde / Risiko]
+  | [Mögliche Reaktion im Design]
 
-  |===
+|===
 
 == Systemweite Interaktionsflüsse
 
@@ -186,12 +185,12 @@ skinparam defaultFontSize 13
 start
 :App öffnen;
 if (Bereits registriert?) then (ja)
-  :Login;
+:Login;
 else (nein)
-  :Registrierung;
-  :Bestätigungs-E-Mail;
-  :E-Mail bestätigen;
-  :Kurze Einführung;
+:Registrierung;
+:Bestätigungs-E-Mail;
+:E-Mail bestätigen;
+:Kurze Einführung;
 endif
 :Startseite;
 stop
@@ -231,8 +230,8 @@ start
 :Habit anlegen;
 :Namen des Habits eingeben;
 if (Erweiterte Optionen?) then (ja)
-  :Auswahl der Streak-Art;
-  :Festlegen einer Kategorie;
+:Auswahl der Streak-Art;
+:Festlegen einer Kategorie;
 else (nein)
 :Übernehmen der Grundeinstellungen;
 endif
@@ -265,78 +264,78 @@ Wireframes und UI-Implementierungen._
 
 === Visuelle Sprache
 
-  [cols="1,3", options="header"]
-  |===
-  | Aspekt | Entscheidung & Begründung
+[cols="1,3", options="header"]
+|===
+| Aspekt | Entscheidung & Begründung
 
-  | Farbpalette
-  | Primärfarbe Teal `#35B8AA` (Fortschritt, aktive Zustände, Score-Bar), Akzentfarbe Orange `#F59F5B` (Streaks, Belohnungen, sanfter Druck), Hintergrund `#F7FBFA` (warmes Off-White).
-  Teal und Orange sind komplementär und erzeugen positive Verstärkung ohne negativen Stress. Rot (`#F17777`) nur für Fehlerzustände, nie als Haupt-Akzent.
+| Farbpalette
+| Primärfarbe Teal `#35B8AA` (Fortschritt, aktive Zustände, Score-Bar), Akzentfarbe Orange `#F59F5B` (Streaks, Belohnungen, sanfter Druck), Hintergrund `#F7FBFA` (warmes Off-White).
+Teal und Orange sind komplementär und erzeugen positive Verstärkung ohne negativen Stress. Rot (`#F17777`) nur für Fehlerzustände, nie als Haupt-Akzent.
 
-  | Typografie
-  | Inter (Variable Font); Überschriften 24–48 px / weight 800–900 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
-  Keine Schrift unter 14 px. Begründung: Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
+| Typografie
+| Inter (Variable Font); Überschriften 24–48 px / weight 800–900 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
+Keine Schrift unter 14 px. Begründung: Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
 
-  | Ikonografie
-  | Outline-Icons im Lucide-Stil (stroke-width 1.7 px, stroke-linecap round); konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Begründung: Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
+| Ikonografie
+| Outline-Icons im Lucide-Stil (stroke-width 1.7 px, stroke-linecap round); konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Begründung: Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
 
-  | Bildsprache
-  | Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glassmorphism-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten) statt Bilder.
-  Begründung: Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
+| Bildsprache
+| Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glassmorphism-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten) statt Bilder.
+Begründung: Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
 
-  |===
+|===
 
 === Interaktionsprinzipien
 
-  _Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
+_Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 
-  [cols="2,3", options="header"]
-  |===
-  | Prinzip | Beschreibung & Begründung
+[cols="2,3", options="header"]
+|===
+| Prinzip | Beschreibung & Begründung
 
-  | Destruktive Aktionen werden immer bestätigt.
-  | Lösch- oder Stornieraktionen erfordern eine explizite Bestätigung durch die Nutzenden.
-    Verhindert unbeabsichtigte Datenverluste.
+| Destruktive Aktionen werden immer bestätigt.
+| Lösch- oder Stornieraktionen erfordern eine explizite Bestätigung durch die Nutzenden.
+  Verhindert unbeabsichtigte Datenverluste.
 
-  | Leerzustände erklären sich und schlagen eine Aktion vor.
-  | Wenn eine Liste leer ist, zeigen wir eine kurze Erklärung und einen Call-to-Action —
-    nicht nur eine leere Fläche. Reduziert Orientierungslosigkeit.
+| Leerzustände erklären sich und schlagen eine Aktion vor.
+| Wenn eine Liste leer ist, zeigen wir eine kurze Erklärung und einen Call-to-Action —
+  nicht nur eine leere Fläche. Reduziert Orientierungslosigkeit.
 
-  | Fehlermeldungen sind verständlich und handlungsorientiert.
-  | Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
-    nächsten Schritt vor. Kein technischer Jargon für Endnutzer.
+| Fehlermeldungen sind verständlich und handlungsorientiert.
+| Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
+  nächsten Schritt vor. Kein technischer Jargon für Endnutzer.
 
-  | Kernfunktionen sind mit einer Hand erreichbar.
-  | Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
-    Optimiert für einhändige Smartphone-Nutzung.
+| Kernfunktionen sind mit einer Hand erreichbar.
+| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
+  Optimiert für einhändige Smartphone-Nutzung.
 
-  | Feedback ist sofort und eindeutig.
-  | Jede Interaktion (Habit abhaken, Habit anlegen) gibt unmittelbares visuelles Feedback — Animation, Farbwechsel oder Bestätigungsmeldung. Keine stille Verarbeitung ohne Rückmeldung.
+| Feedback ist sofort und eindeutig.
+| Jede Interaktion (Habit abhaken, Habit anlegen) gibt unmittelbares visuelles Feedback — Animation, Farbwechsel oder Bestätigungsmeldung. Keine stille Verarbeitung ohne Rückmeldung.
 
-  |===
+|===
 
 === Barrierefreiheit
 
-  [cols="1,3", options="header"]
-  |===
-  | Aspekt | Anforderung
+[cols="1,3", options="header"]
+|===
+| Aspekt | Anforderung
 
-  | Kontrastverhältnis
-  | Mindestens WCAG 2.1 Level AA (Kontrast ≥ 4,5:1 für Fließtext)
+| Kontrastverhältnis
+| Mindestens WCAG 2.1 Level AA (Kontrast ≥ 4,5:1 für Fließtext)
 
-  | Tastaturnavigation
-  | Alle Kernfunktionen sind per Tastatur bedienbar
+| Tastaturnavigation
+| Alle Kernfunktionen sind per Tastatur bedienbar
 
-  | Screenreader
-  | Alle interaktiven Elemente haben sinnvolle ARIA-Labels
+| Screenreader
+| Alle interaktiven Elemente haben sinnvolle ARIA-Labels
 
-  | Schriftgröße
-  | Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen
+| Schriftgröße
+| Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen
 
-  | Touch-Zielgröße
-  | Mindestens 44×44 px für alle interaktiven Elemente gemäß Apple HIG / Material Design
+| Touch-Zielgröße
+| Mindestens 44×44 px für alle interaktiven Elemente gemäß Apple HIG / Material Design
 
-  |===
+|===
 
 
 _Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,
