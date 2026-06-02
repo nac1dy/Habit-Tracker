@@ -255,7 +255,7 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Die Dokumentation einer tatsächlichen Durchführung eines Habits. Ein Eintrag validiert, dass der Nutzer aktiv war, und liefert die Basisdaten für Scores und Notizen.
 
 | Erinnerung
-| Eine konfigurierbare Benachrichtigung, die einen Nutzer zur festgelegten Uhrzeit an einen Habit erinnert.
+| Eine konfigurierbare Benachrichtigung, die einen Nutzer zur festgelegten Uhrzeit an ein Habit erinnert.
  Existenzabhängig vom zugehörigen Habit.
 
 | Pause
