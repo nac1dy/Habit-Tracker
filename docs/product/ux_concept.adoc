@@ -180,18 +180,19 @@ _Dies ist der Onboarding-Flow von "Habito". Wenn ein uneingeloggter Nutzer die A
 ....
 @startuml
 skinparam monochrome true
+skinparam defaultFontSize 13
 
 start
-:Habit anlegen;
-:Namen des Habits eingeben;
-if (Erweiterte Optionen?) then (ja)
-  :Auswahl der Streak-Art;
-  :Festlegen einer Kategorie;
+:App öffnen;
+if (Bereits registriert?) then (ja)
+  :Login;
 else (nein)
-:Übernehmen der Grundeinstellungen;
+  :Registrierung;
+  :Bestätigungs-E-Mail;
+  :E-Mail bestätigen;
+  :Kurze Einführung;
 endif
-:Habit speichern;
-:Bestätigung anzeigen;
+:Startseite;
 stop
 
 @enduml
