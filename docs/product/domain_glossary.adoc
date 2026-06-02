@@ -20,18 +20,30 @@ Technische Implementierungsdetails gehören nicht hierher!
 |===
 | Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
 
-| Nutzer
-| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
-  sein, um Bestellungen aufzugeben. Die Nutzerschaft besteht hauptsächlich aus Studenten.
-| Anwender, Benutzer; abzugrenzen von „Administrator"
+| Administrator
+| Eine privilegierte Person, die das System verwaltet und konfiguriert.
+  Im Gegensatz zum regulären Nutzer hat der Administrator Zugriff auf
+  systemweite Einstellungen, z. B. Nutzerverwaltung oder Vorlagen-Pflege.
+  Abzugrenzen vom normalen Nutzer, der ausschließlich eigene Habits verwaltet.
+| Admin; abzugrenzen von „Nutzer"
 
-| Habit-Stacking
-| Eine verhaltenspsychologische Methode, bei der eine neue Gewohnheit mit einer bereits bestehenden, etablierten Routine verbunden wird. Dies nutzt den Gewohnheitszustand der alten Gewohnheit als Anker für die neue.
-| Gewohnheits-Stapeln
+| Eintrag
+| Erfassen eines Fortschritts, in dem man das Habit trackt
+| Log, Tracking, Check-In
 
-| Streak
-| Eine kontinuierliche Serie von Tagen, an denen eine Gewohnheit erfolgreich durchgeführt wurde. Sie kann kurzzeitig unterbrochen werden, ohne die gesamte Serie zu verlieren, wenn die Unterbrechung innerhalb eines definierten Zeitfensters liegt (z. B. 1 Tag).
-| Erfolgsserie
+| Erinnerung
+| Eine konfigurierbare Benachrichtigung, die einem Habit zugeordnet ist und den Nutzer
+  zu einer festgelegten Uhrzeit daran erinnert, das Habit durchzuführen. Eine Erinnerung
+  kann aktiviert oder deaktiviert werden.
+| Reminder, Benachrichtigung, Notification
+
+| Frequenz
+| Legt fest, in welchem Rhythmus ein Habit fällig wird (z. B. "3x pro Woche" oder "Jeden Tag")
+|
+
+| Gamification
+| Sammelbegriff für motivationsfördernde Spielelemente innerhalb der App.
+|
 
 | Habit
 | Positive Angewohnheit die man in der App angelegt hat und regelmäßig ausführt, um ein Ziel zu erreichen.
@@ -41,37 +53,34 @@ Technische Implementierungsdetails gehören nicht hierher!
 | Begriff der mehrere Habits zusammenfasst und somit gruppiert
 | Tags, Eigenschaft, Gruppe
 
+| Habit-Stacking
+| Eine verhaltenspsychologische Methode, bei der eine neue Gewohnheit mit einer bereits bestehenden, etablierten Routine verbunden wird. Dies nutzt den Gewohnheitszustand der alten Gewohnheit als Anker für die neue.
+| Gewohnheits-Stapeln
+
 | Momentum
 | Metrik/Indikator, der die Motivation des Nutzers widerspiegelt.
 |
 
-| Eintrag
-| Erfassen eines Fortschritts, in dem man das Habit trackt
-| Log, Tracking, Check-In
+| Meilenstein-Ziel
+| Ein optionales, persönliches Langzeitziel, das einem Habit zugeordnet werden kann
+  (z. B. „30 Tage kein Alkohol"). Es dient der zusätzlichen Motivation und hat keinen
+  direkten Einfluss auf Streak oder Momentum.
+| Milestone, Ziel
+
+| Nutzer
+| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
+  sein, um Habits anzulegen. Die Nutzerschaft besteht hauptsächlich aus Studenten.
+| Anwender, Benutzer; abzugrenzen von „Administrator"
+
+| Offline-Modus
+| Betriebszustand der App, in dem Habits und Einträge ohne aktive Internetverbindung
+  verwaltet werden können. Daten werden lokal zwischengespeichert und
+  bei der nächsten Verbindung mit dem Server synchronisiert.
+| Offline-Funktionalität, Offline-Betrieb
 
 | Pause
-| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreist, wenn man keine Einträge zum Habit macht
+| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreist, wenn man keine Einträge zum Habit macht. Die maximale Pausenzeit beträgt 4 Wochen.
 |
-
-| Frequenz
-| Legt fest, in welchem Rhythmus ein Habit fällig wird (z. B. "3x pro Woche" oder "Jeden Tag")
-|
-
-| Quick-Note
-| Eine kurze, optionale Freitextnotiz, die ein Nutzer beim Erfassen eines Eintrags
-  hinterlegen kann. Sie dient der persönlichen Reflexion und hat keinen Einfluss
-  auf Streak oder Gamification.
-| Notiz, Kommentar
-
-| Gamification
-| Sammelbegriff für motivationsfördernde Spielelemente innerhalb der App.
-|
-
-| Erinnerung
-| Eine konfigurierbare Benachrichtigung, die einem Habit zugeordnet ist und den Nutzer
-  zu einer festgelegten Uhrzeit daran erinnert, das Habit durchzuführen. Eine Erinnerung
-  kann aktiviert oder deaktiviert werden.
-| Reminder, Benachrichtigung, Notification
 
 | Pet
 | Ein optionaler digitaler Begleiter als Teil des Gamification-Systems. Sein Zustand
@@ -79,6 +88,37 @@ Technische Implementierungsdetails gehören nicht hierher!
   Das Pet ist ein ergänzendes Motivationsfeature und kein Kernbestandteil des
   Habit-Trackings. Ein Nutzer kann, muss aber kein Pet besitzen.
 | Digitales Haustier, Companion
+
+| Pet-Level
+| Ein ganzzahliger Wert (Integer), der den Entwicklungsstand des Pets angibt. Er steigt
+  durch das Sammeln von Punkten, die über Streaks und den Momentum-Score verdient werden.
+  Mit steigendem Level verändert sich die Erscheinung des Pets.
+|
+
+| PWA
+| Progressive Web App – eine Webanwendung, die im Browser läuft, aber wie eine
+  native App installiert und genutzt werden kann. Habito wird als PWA ausgeliefert,
+  um plattformunabhängig auf iOS, Android und Desktop zu funktionieren und
+  Offline-Funktionalität über Service Worker zu ermöglichen.
+| Progressive Web App
+
+| Quick-Note
+| Eine kurze, optionale Freitextnotiz, die ein Nutzer beim Erfassen eines Eintrags
+  hinterlegen kann. Sie dient der persönlichen Reflexion und hat keinen Einfluss
+  auf Streak oder Gamification.
+| Notiz, Kommentar
+
+| Streak
+| Eine kontinuierliche Serie von Tagen, an denen eine Gewohnheit erfolgreich
+  durchgeführt wurde. Die Streak-Regel gilt einheitlich für alle Habits und kann
+  durch eine bewusst gesetzte Pause unterbrochen werden, ohne die Serie zu verlieren.
+| Erfolgsserie
+
+| Tracking-Typ
+| Legt fest, wie der Fortschritt eines Habits gemessen wird. Mögliche Typen sind
+  „binär" (erledigt / nicht erledigt) und „numerisch" (ein messbarer Wert wie
+  Schritte, Minuten oder Seiten).
+| Messart, Erfassungsart
 
 | Vorlage
 | Ein vordefinierter Habit-Vorschlag, der Nutzern beim Onboarding oder beim Erstellen
@@ -88,9 +128,10 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 | Ziel-Wert
 | Der numerische Zielwert, den ein Nutzer mit einem Eintrag erreichen möchte, wenn
-  der Tracking-Typ „numerisch" gewählt wurde, z. B. „10.000 Schritte" oder
+  der Tracking-Typ „numerisch" gewählt wurde, z.B. „10.000 Schritte" oder
   „30 Minuten lesen". Bei binären Habits entfällt der Ziel-Wert.
 |
+
 
 |===
 
