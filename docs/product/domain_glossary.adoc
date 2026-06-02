@@ -167,16 +167,16 @@ entity Nutzer {
 entity Pet {
   Name
   Zustand
+  Pet-Level
 }
 
 entity Belohnungssystem {
-  Gesamt-EXP
+  Gesamt-Punkte
   Momentum-Score
 }
 
 entity Kategorie {
   Name
-  Voreinstellungen
 }
 
 entity Habit {
@@ -184,6 +184,7 @@ entity Habit {
   Frequenz
   Tracking-Typ
   Ziel-Wert
+  Meilenstein-Ziel
 }
 
 entity Eintrag {
@@ -203,15 +204,23 @@ entity Pause {
   enddatum
 }
 
+entity Vorlage {
+  Titel
+  Frequenz
+  Tracking-Typ
+}
+
+
 
 ' Beziehungen mit Multiplizitäten
 
 ' Kern-Beziehungen
-Nutzer "1" -- "0..*" Habit : verwaltet >
+Nutzer "1" *-- "0..*" Habit : verwaltet >
 Habit "0..*" -- "0..1" Kategorie : ist zugeordnet >
 Habit "1" *-- "0..*" Eintrag : dokumentiert durch >
 Habit "1" *-- "0..*" Erinnerung : erinnert durch >
 Habit "1" *-- "0..*" Pause : pausiert durch >
+Vorlage "0..*" -- "0..1" Kategorie : ist zugeordnet >
 
 ' Gamification-Beziehungen
 Nutzer "1" *-- "1" Belohnungssystem : nimmt teil an >
@@ -246,15 +255,14 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Die Dokumentation einer tatsächlichen Durchführung eines Habits. Ein Eintrag validiert, dass der Nutzer aktiv war, und liefert die Basisdaten für Scores und Notizen.
 
 | Erinnerung
-| Eine konfigurierbare Benachrichtigung, die einen Nutzer zur festgelegten Uhrzeit an
-  einen Habit erinnert. Existenzabhängig vom zugehörigen Habit.
+| Eine konfigurierbare Benachrichtigung, die einen Nutzer zur festgelegten Uhrzeit an einen Habit erinnert.
+ Existenzabhängig vom zugehörigen Habit.
 
 | Pause
-| Ein zeitlich begrenzter Aussetzer eines Habits ohne Streak-Verlust. Existenzabhängig
-  vom zugehörigen Habit.
+| Ein zeitlich begrenzter Aussetzer eines Habits ohne Streak-Verlust. Existenzabhängig vom zugehörigen Habit.
 
 | Belohnungssystem
-| Die Logik-Einheit für Gamification. Sie verwaltet die langfristige Erfahrung (EXP/Level) sowie die kurzfristige Motivations-Metrik (Momentum-Score).
+| Die Logik-Einheit für Gamification. Sie verwaltet die langfristige Erfahrung (Punkte/Level) sowie die Motivations-Metrik (Momentum-Score).
 
 | Pet
 | Ein digitaler Begleiter, der als emotionaler Motivator dient. Sein Zustand (z. B. Aussehen oder Stimmung) spiegelt den aktuellen Erfolg des Nutzers wider.
@@ -306,20 +314,21 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | Ein Habit kann im Laufe der Zeit mehrfach pausiert werden.
   Pausen werden bei Habit-Löschung entfernt.
 
-| Habit
-| Frequenz
-| 1 zu 1
-| Ein Habit hat genau eine Frequenz, die bestimmt wie oft das Habit erfüllt werden muss.
-
 | Eintrag
 | Belohnungssystem
 | 0..* zu 1
-| Jeder neue Eintrag triggert eine Aktualisierung im Belohnungssystem (EXP-Gewinn und Momentum-Anpassung).
+| Jeder neue Eintrag triggert eine Aktualisierung im Belohnungssystem (Punkte-Gewinn und Momentum-Anpassung).
 
 | Belohnungssystem
 | Pet
-| 1 zu 1
-| Das Belohnungssystem gibt den Status an das Pet weiter. Sinkt das Momentum im System, verschlechtert sich der Zustand des Pets.
+| 1 zu 0..1
+| Der Punktestand des Belohnungssystems bestimmt das Pet-Level und damit die Erscheinung des Pets. Sinkt der Momentum-Score, verschlechtert sich zusätzlich der Zustand des Pets.
+
+| Vorlage
+| Kategorie
+| 0..* zu 0..1
+| Eine Vorlage kann optional einer Kategorie zugeordnet sein, um die thematische Einordnung beim Anlegen eines Habits zu erleichtern.
+
 
 |===
 
