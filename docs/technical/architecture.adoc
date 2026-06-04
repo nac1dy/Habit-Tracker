@@ -41,8 +41,8 @@ LAYOUT_WITH_LEGEND()
 
 title System Context Diagram – [Systemname]
 
-Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
-Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
+Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
+Person(admin, "Administrator", "Verwaltet und konfiguriert das System")
 
 System(system, "Habito", "Kernfunktionalität des Systems")
 
@@ -75,7 +75,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Authentifizierung und Back-End Management über die Supabase 
 | Supabase Auth
 
-| Nutzer:in via Browser (als PWA oder "klassisch" über Browser-Aufruf)
+| Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
@@ -176,6 +176,8 @@ sie sind im link:../product/product_concept.adoc[Produktkonzept] als einziger Qu
 Dieser Abschnitt zeigt ausschließlich die technischen Konsequenzen, die sich aus
 diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 
+_Im Wesentlichen resultieren die architekturrelevanten Anforderungen aus den im dedizierten link:architecture_drivers.adoc[Dokument] festgelegten Architekturtreibern._
+
 [cols="2,3,2", options="header"]
 |===
 | Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
@@ -187,7 +189,7 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 
 | DSGVO-Konformität
 | Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
-  Recht auf Löschung muss implementierbar sein
+  Recht auf Löschung muss implementierbar sein; Nutzer-Einträge mit sensiblen Daten sollen nur lokal auf dem Gerät des Nutzers gespeichert werden
 | ADR-003, ADR-004
 
 | Betrieb auf Hochschulinfrastruktur
@@ -198,132 +200,129 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 | Statusüberwachung und automatischer Neustart über Container-Orchestrierung
 | ADR-005
 
-| [Anforderung]
-| [Technische Konsequenz]
-| [ADR-Referenz oder —]
+| Responsive Nutzung auf Desktop, Tablet und Smartphone
+| Nutzung eines modernen Frontend-Stacks, der ggf. Erzeugung nativer UIs oder andernfalls die Erstellung responsiver, für alle Viewports optimierter Oberflächen ermöglicht
+| ADR-001
 |===
 
-== Architekturentscheidungen
-
-_Architekturentscheidungen (Architecture Decision Records, ADRs) dokumentieren
-wichtige technische Entscheidungen: Was wurde entschieden, warum, welche
-Alternativen wurden verworfen, und welche Konsequenzen hat die Entscheidung._
-
-_Jede Entscheidung, die schwer rückgängig zu machen ist oder das gesamte System
-betrifft, sollte hier festgehalten werden. Kleine, lokale Implementierungsdetails
-gehören nicht hierher._
-
-NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
-„ersetzt durch ADR-XXX" markiert. So bleibt die Entscheidungshistorie nachvollziehbar.
-
-=== ADR-001: Next.js und Tailwind CSS als Frontend-Stack
+=== ADR-004: WebApp als plattformungebundene Frontend-Technologie
 
 [cols="1,3"]
 |===
-| *Status*
+| Status
 | Akzeptiert
 
-| *Datum*
-| 2026-05-17
+| Datum
+| 26-05-2026
 
-| *Kontext*
-| Die HabitTracker-App benötigt ein Frontend-Framework für UI-Rendering, Routing,
-Anwendungslogik und Web-Performance-Optimierungen. Das Team ist klein und sucht
-eine bewährte, gut dokumentierte Lösung ohne hohen Konfigurationsaufwand.
+| Kontext
+| Zielgruppe erfordert mobile Nutzung unterwegs auf verschiedenen Betriebssystemen.
 
-| *Entscheidung*
-| Wir verwenden Next.js als Frontend-Framework und Tailwind CSS als Styling-Lösung.
-Next.js übernimmt Routing, SSR und Performance-Optimierungen.
-Tailwind CSS ermöglicht konsistentes Styling direkt im Markup.
+| Entscheidung
+| Wir erstellen eine reine plattformungebundene WebApp.
 
-| *Alternativen*
-| *Create React App (CRA):* Kein eingebautes SSR/SSG, schlechtere Performance out-of-the-box, weniger aktiv gewartet. +
-*Vite + React:* Keine integrierten Routing- oder SSR-Funktionen ohne zusätzliche Pakete. +
-*Vue.js / Nuxt:* Geringere Verbreitung im Team; kleineres Ökosystem. +
-*CSS Modules / Styled Components:* Mehr Boilerplate; schwieriger konsistent zu halten als Tailwind.
+| Alternativen
+| Plattformgebundene Codebasen: Mehrere separate Codebasen für unterschiedliche Betriebssysteme.
 
-| *Konsequenzen*
-| (+) Integriertes Routing, SSR und Performance-Features ohne Zusatzkonfiguration. +
-(+) Tailwind ermöglicht schnelles, konsistentes Styling. +
-(+) Große Community; umfangreiche Dokumentation. +
-(+) Kostenlos (Open Source). +
-(-) Steilere Lernkurve als einfaches React (App Router, Server Components). +
-(-) Tailwind-Klassen können bei komplexen Komponenten unübersichtlich werden.
+| Konsequenzen
+| (+) Nur eine Codebasis. +
+(-) Nicht alle im Team damit vertraut.
 |===
 
-=== ADR-002: Supabase als Backend-Plattform (inkl. PostgreSQL)
+=== ADR-005: Modular monolithische Backend-Architektur
 
 [cols="1,3"]
 |===
-| *Status*
+| Status
 | Akzeptiert
 
-| *Datum*
-| 2026-05-17
+| Datum
+| 26-05-2026
 
-| *Kontext*
-| Die App benötigt eine Datenbank, ein Authentifizierungssystem und REST-APIs.
-Das Team hat keine Kapazitäten, ein vollständiges Backend selbst zu entwickeln und zu betreiben.
+| Kontext
+| App wird in unterschiedliche Blöcke unterteilt.
 
-| *Entscheidung*
-| Wir verwenden Supabase als Backend-as-a-Service. Supabase stellt automatisch
-PostgreSQL (Datenbank), Authentifizierung (E-Mail/Passwort, OAuth),
-auto-generierte REST-APIs und Row-Level Security bereit.
+| Entscheidung
+| App wird modular monolithisch aufgebaut.
 
-| *Alternativen*
-| *Firebase (Google):* NoSQL-Datenbank (Firestore) – weniger geeignet für relationale Habit-Daten; Vendor Lock-in bei Google. +
-*Eigenes Backend (Node.js + Express):* Zu hoher Entwicklungsaufwand; Auth, API und DB müssten komplett selbst gebaut werden. +
-*PocketBase:* Weniger verbreitet; kleinere Community; weniger Integrationen. +
-*AWS Amplify:* Komplex in der Konfiguration; Kosten schwer kalkulierbar.
+| Alternativen
+| Nicht definiert: Keine Alternativen im alten Format angegeben.
 
-| *Konsequenzen*
-| (+) Drastische Reduzierung des Backend-Entwicklungsaufwands. +
-(+) PostgreSQL ist ideal für strukturierte, relationale Habit-Daten. +
-(+) Authentifizierung sofort einsatzbereit. +
-(+) Open Source; kann bei Bedarf selbst gehostet werden. +
-(+) Free Tier für den aktuellen Projektumfang ausreichend. +
-(-) Kostenrisiko bei Wachstum (Free Tier: 500 MB DB, 50.000 MAU). +
-(-) Abhängigkeit von einem externen Anbieter (Vendor Lock-in). +
-(-) Supabase ist jünger als Firebase; Langzeitstabilität noch nicht vollständig bewiesen.
+| Konsequenzen
+| (+) Saubere Trennung im Code. +
+(-) Erhöht Planungsaufwand.
 |===
 
-=== ADR-003: React Built-in State Management statt Zustand
+=== ADR-006: PWA für Offline-Erreichbarkeit
 
 [cols="1,3"]
 |===
-| *Status*
+| Status
 | Akzeptiert
 
-| *Datum*
-| 2026-05-17
+| Datum
+| 26-05-2026
 
-| *Kontext*
-| Die App benötigt State Management für temporäre, seitenspezifische Daten
-(Formularinhalte, Toggle-Zustände, Filterwerte). Persistente Daten werden
-über Supabase verwaltet (→ ADR-002). Es stand zur Frage, ob Zustand als
-externe State-Bibliothek eingesetzt werden soll.
+| Kontext
+| Habits müssen an Orten ohne Internetempfang verwaltet werden können.
 
-| *Entscheidung*
-| Wir verwenden Reacts eingebaute Mechanismen (`useState`, `useReducer`, `useContext`)
-für temporären State. Zustand und andere externe Bibliotheken werden nicht eingesetzt.
+| Entscheidung
+| Die WebApp wird als PWA installierbar und offline tauglich.
 
-| *Alternativen*
-| *Zustand:* Zusätzliche Abhängigkeit; für seitenspezifische, temporäre Zustände überdimensioniert. +
-*Redux Toolkit:* Sehr mächtig, aber erheblicher Boilerplate-Overhead für den Projektumfang. +
-*Jotai:* Ähnliche Stärken wie Zustand; gleiche Argumentation gegen externe Abhängigkeit. +
-*Recoil:* Weniger aktiv gepflegt; unnötige Komplexität.
+| Alternativen
+| Reine Cloud-Speicherung: Daten rein in der Cloud speichern ohne Offline-Verfügbarkeit.
 
-| *Konsequenzen*
-| (+) Keine zusätzliche Abhängigkeit; kleineres Bundle. +
-(+) Standard-React – kein Einarbeitungsaufwand. +
-(+) Einfacheres Debugging. +
-(-) Bei stark wachsender Komplexität kann `useContext` zu unnötigen Re-Renders führen. +
-(-) Tief verschachtelte Hierarchien können zu Prop Drilling führen. +
-(-) Migration zu einer externen Lösung wäre bei starkem Wachstum notwendig.
+| Konsequenzen
+| (+) Volle Offline-Funktionalität. +
+(-) Erhöhter Entwicklungsaufwand.
 |===
 
-NOTE: Weitere ADRs nach demselben Schema hinzufügen. Die Nummerierung ist
-fortlaufend und wird nie wiederverwendet.
+=== ADR-007: Externe Authentifizierung via Supabase
+
+[cols="1,3"]
+|===
+| Status
+| Akzeptiert
+
+| Datum
+| 26-05-2026
+
+| Kontext
+| Inhalte müssen sicher gespeichert werden.
+
+| Entscheidung
+| Wir nutzen externe Auth-Dienste (Supabase).
+
+| Alternativen
+| Eigene Authentifizierung: Erstellung einer komplett eigenen Authentifizierungslösung.
+
+| Konsequenzen
+| (+) Schnelle Verfügbarkeit. +
+(+) Login-Möglichkeit mit externen Konten.
+|===
+
+=== ADR-008: Gamification
+
+[cols="1,3"]
+|===
+| Status
+| Noch offen
+
+| Datum
+| 26-05-2026
+
+| Kontext
+| Noch offen / Nicht definiert
+
+| Entscheidung
+| Noch offen / Nicht definiert
+
+| Alternativen
+| Noch offen / Nicht definiert
+
+| Konsequenzen
+| Noch offen / Nicht definiert
+|===
 
 == Risiken & technische Schulden
 
@@ -342,10 +341,50 @@ Punkte in Vergessenheit geraten._
 | Mittel
 | [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
 
-| [z. B. Performance bei > 200 gleichzeitigen Nutzenden unbekannt]
+| [z. B. Performance bei > 200 gleichzeitigen Nutzern unbekannt]
 | Mittel
 | Niedrig
 | [z. B. Lasttest ab Sprint 4 eingeplant]
+
+| Supabase Free Tier: Limits bei 500 MB Datenbank und 50.000 MAU können bei Wachstum überschritten werden
+| Hoch
+| Mittel
+| Kostenentwicklung monatlich monitoren; Migrationspfad zu Self-Hosted Supabase dokumentieren
+
+| Vendor Lock-in durch Supabase: Anbieterwechsel erfordert Umbau von Auth, API und Datenbankzugriff
+| Hoch
+| Niedrig
+| Abstraktionsschicht im Backend einführen, um Supabase-spezifische Aufrufe zu isolieren
+
+| DSGVO-Konformität der Supabase-Integration noch nicht formal geprüft; Datenspeicherort (EU) unbestätigt
+| Hoch
+| Mittel
+| AVV mit Supabase abschließen; EU-Rechenzentrum in Supabase-Einstellungen verifizieren
+
+| PWA-Offline-Daten (IndexedDB) liegen unverschlüsselt im Browser; Zugriff auf geteilten Geräten möglich
+| Hoch
+| Mittel
+| Lokale Daten verschlüsseln; Hinweis in Datenschutzerklärung aufnehmen
+
+| PWA-Funktionalität (Service Worker) ist auf iOS Safari eingeschränkt; Offline-Verhalten weicht von anderen Browsern ab
+| Mittel
+| Hoch
+| Kompatibilitätsmatrix für Zielbrowser definieren; iOS Safari in Testplan aufnehmen
+
+| Modularer Monolith erschwert spätere horizontale Skalierung bei stark steigender Last
+| Mittel
+| Niedrig
+| Lasttest ab frühen Releases durchführen; Skalierungsstrategie dokumentieren
+
+| ADR für Gamification ist noch offen; fehlende Entscheidung kann späte, teure Nacharbeiten verursachen
+| Mittel
+| Hoch
+| ADR für Gamification priorisiert vor Beginn der Feature-Entwicklung abschließen
+
+| Nicht alle Teammitglieder sind mit Next.js App Router und Server Components vertraut
+| Mittel
+| Hoch
+| Internes Onboarding einplanen; Code-Reviews als Pflichtprozess einführen
 
 | [Weiteres Risiko]
 | [Hoch / Mittel / Niedrig]

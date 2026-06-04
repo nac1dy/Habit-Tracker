@@ -209,7 +209,7 @@ _Falls ein Nutzer versucht, einen bereits existierenden Habit zu erstellen, soll
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-actor "Nutzer:in" as user
+actor "Nutzer" as user
 participant "Habit-Manager" as ctrl
 participant "Datenbank" as repo
 
@@ -263,6 +263,20 @@ entity "habit" as habit {
   * Category : VARCHAR(100)
 }
 
+entity "habitEintrag" as entry {
+  * entryID : EUID <<PK>>
+  * habitID : HUID <<FK>>
+  --
+  * content : VARCHAR(500)
+}
+
+entity "pet" as pet {
+  * petID : PUID <<PK>>
+  --
+  * xp : INTEGER
+  * name : VARCHAR(100)
+}
+
 entity "statistics" as stats {
   * statID : SUID <<PK>>
   * habitID : HUID <<FK>>
@@ -278,7 +292,9 @@ entity "statistics" as stats {
 user ||--o{ habit : "erstellt"
 habit ||--o{ stats : "wird getracked durch"
 user ||--o{ stats : "sieht"
-
+habit ||--o{ entry : "enthält"
+habit ||--o{ pet : "beeinflusst"
+user ||--o{ pet : "kümmert sich um"
 
 @enduml
 ....

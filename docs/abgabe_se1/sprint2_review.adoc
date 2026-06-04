@@ -1,0 +1,57 @@
+include::../config.adoc[]
+= Sprint 2-Review: {project-name}
+
+{localdatetime}
+
+include::../_includes/default-attributes.inc.adoc[]
+
+_Dieses Dokument beinhaltet die wichtigsten zu besprechenden/zeigenden Punkte für das Review des zweiten Sprints mit den Feedback-Gebern._
+
+== Sprint-Ziele
+
+Folgende Punkte sollte unser Team laut Anforderungen zeigen können:
+
+=== Formulierung wichtiger Architekturtreiber und ADRs (5 min)
+
+Im Review sollten wir erklären, welche Qualitätsanforderungen, Unsicherheiten, technische Risiken, etc. wir als Team identifiziert haben und wie diese unsere Architekturentscheidungen beeinflussen.
+
+Außerdem sollten wir unsere dokumentierten ADRs vorstellen. Sie zeigen, dass wir zwischen verschiedenen Ansätzen, Tech-Stacks, etc. abgewogen und eine begründete Entscheidung getroffen haben (das kommt immer gut).
+
+In dem Zusammenhang wäre es sicherlich nicht schlecht, auch ein paar Worte über Spikes, technische Durchstiche und unseren Ansatz zum Walking Skeleton zu verlieren, um quasi die inhaltliche Grundlage für den nächsten Punkt der Vorstellung zu legen: die Vorstellung unseres Walking Skeletons.
+
+---
+
+=== Vorstellung des Walking Skeletons (10 min)
+
+Die Vorstellung des Walking Skeletons an sich ist relativ intuitiv. Am besten zeigen Noel und Finjas das Walking Skeleton und erklären den gewählten Tech-Stack (als Ergänzung/Vervollständigung zum vorherigen Punkt). 
+
+Sicherlich wäre es nicht schlecht, wenn hier auch (entweder vorher oder danach) ebenfalls kurz unseren interaktiven Wireflow zeigen, um unsere aktuelle UI/UX-Vision zu zeigen. Vermutlich ist es nicht schlecht, das danach zu machen, um quasi von "das haben wir bisher und das ist der technische Ansatz" zu "da wollen wir hin" zu kommen.
+
+Hier ist es sicherlich gut und sinnvoll, viel Zeit für Feedback und Anmerkungen einzuplanen.
+
+--- 
+
+Mögliche Fragen an das Feedback-Team:
+
+- Wie findet ihr unseren technischen Ansatz? 
+- Seht ihr hier Risiken, die wir übersehen haben?
+- Ist unser UI/UX-Ansatz attraktiv und intuitiv?
+
+--- 
+
+=== Planung einer ersten nützlichen Funktionalität für Sprint 3 (2-3 min)
+
+_tbd_
+
+---
+
+== Beantwortung der zentralen Review-Frage (2 min)
+
+Zentrale Frage: 
+*Ist der technische Ansatz für {project-system-name} plausibel, machbar und ausreichend begründet, um in Sprint 3 mit einer ersten nützlichen End-to-End-Funktionalität weiterzuarbeiten?*
+
+Die Beantwortung der Frage sollte zwei Seiten haben: zum einen ein implizites "Ja" unsererseits am Ende der Vorstellung und zum anderen auch als explizites "Ja" von den Feedback-Gebern.
+
+Argumente für unser implizites "Ja" ergeben sich aus den vorgestellten Aspekten der Präsentation. Man könnte quasi konkludierend am Ende der Vorstellung sagen: "Aufgrund der vorgestellten Architekturtreiber, ADRs, unseres Walking Skeletons und unserer UI/UX-Vision sind wir als Team überzeugt, dass unser technischer Ansatz plausibel, machbar und ausreichend begründet ist." 
+
+Entsprechend wäre es vermutlich gut, dann auch unser angestrebtes Produkt-/Feature-Inkrement für Sprint 3 mit "anzuteasern" bzw. als "sinnvollen nächsten Schritt" zu präsentieren.

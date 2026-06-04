@@ -1,0 +1,185 @@
+= Sprint-2-Report: Technischer Ansatz und agile Arbeitsweise
+
+// Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
+Team::
+Projektname::
+Datum::
+Repository-Link::
+
+====
+Dieser Report soll auf maximal einer Seite zeigen, wie Ihr Team in Sprint 2 gearbeitet hat,
+welche Praktiken Sie angewendet haben, welche technischen Artefakte entstanden sind und was Sie daraus gelernt haben.
+
+Der Report ist kein Tätigkeitsprotokoll und kein vollständiges Architekturdokument. Beschreiben Sie nicht nur, _was_ Sie gemacht haben,
+sondern vor allem, _warum_ Sie es gemacht haben, welche Evidenz dadurch entstanden ist und wie diese Evidenz Ihren technischen Ansatz begründet oder verändert hat.
+====
+
+== 1. Sprintziel und zentrale Fragestellung
+
+Formulieren Sie Ihr Sprintziel in 1–2 Sätzen. Leitfragen:
+
+* Welche technische Fragestellung oder Unsicherheit wollte Ihr Team in diesem Sprint klären?
+* Welche Annahme zum technischen Ansatz sollte Sprint 2 überprüfen?
+* Warum ist Ihr technischer Ansatz nach diesem Sprint besser begründet als vorher?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Sprintziel
+| 
+
+| Zentrale technische Unsicherheit / Annahme
+| 
+|===
+
+
+== 2. Erwartete Praktiken in Sprint 2
+
+Wählen Sie 3–5 Praktiken aus, die für Ihren Sprint besonders relevant waren.
+Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 beschrieben werden. Mögliche Praktiken:
+
+* Domänenmodell erstellen oder überarbeiten
+* Partielles logisches Datenmodell erarbeiten
+* Architekturtreiber aus Domäne, Qualitätsanforderungen, Randbedingungen, Nutzerflüssen und Teamfähigkeiten ableiten
+* Systemgrenzen und externe Systeme identifizieren sowie C4-Kontextdiagramm erstellen
+* Wesentliche Subsysteme identifizieren sowie C4-Containerdiagramm erstellen
+* technische Services identifizieren und mittels Attributen beschreiben
+* einfache Komponentensicht oder Projektstruktur skizzieren
+* minimale Architekturleitplanken für die Codebasis festlegen
+* Technologieoptionen vergleichen und auswählen
+* ADRs für wichtige technische Entscheidungen schreiben
+* technische Spikes oder Experimente durchführen
+* Walking Skeleton als lauffähigen Nachweis des technischen Konzepts aufbauen
+* technische Risiken identifizieren und dokumentieren
+* Kandidaten für einen ersten nützlichen MVP-Ausschnitt in Sprint 3 identifizieren
+
+[cols="1,2,2,2", options="header"]
+|===
+| Praktik
+| Konkrete Anwendung in unserem Sprint
+| Nachweis / Artefakt (Link einfügen)
+| Nutzen, Erkenntnis oder Anpassung
+
+| 
+| 
+| 
+| 
+
+| 
+| 
+| 
+| 
+
+| 
+| 
+| 
+| 
+
+| 
+| 
+| 
+| 
+
+| 
+| 
+| 
+| 
+|===
+
+
+== 3. Wichtigste technische Lernergebnisse aus Sprint 2
+
+Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 2. Leitfragen:
+
+* Was hat Ihr Team über die technische Machbarkeit des Produkts gelernt?
+* Welche Annahme zum Architekturansatz, Technologie-Stack oder Projektaufbau wurde bestätigt, widerlegt oder präzisiert?
+* Welche technische Evidenz hatte den größten Einfluss auf Ihre Entscheidungen?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Erkenntnis 1
+| 
+
+| Erkenntnis 2
+| 
+
+| Erkenntnis 3
+| 
+|===
+ 
+== 4. Änderungen am technischen Ansatz
+
+Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellierung, Entscheidungen, Spikes oder den Walking Skeleton verändert hat.
+
+[cols="2,2,2", options="header"]
+|===
+| Ursprüngliche Annahme / Option
+| Neue Erkenntnis oder Evidenz
+| Anpassung am technischen Ansatz, an der Architektur oder am Backlog
+
+| 
+| 
+| 
+
+| 
+| 
+| 
+
+| 
+| 
+| 
+|===
+
+
+== 5. Architekturtreiber, Entscheidungen und technische Evidenz
+
+Beschreiben Sie kurz, welche Treiber, Entscheidungen und Nachweise für Ihren technischen Ansatz besonders wichtig sind. Leitfragen:
+
+* Welche Qualitätsanforderungen, Randbedingungen oder Nutzerflüsse haben Ihre technischen Entscheidungen besonders geprägt?
+* Welche Architektur- oder Technologieentscheidungen sind für das weitere Projekt besonders wichtig?
+* Welche Evidenz zeigt, dass der gewählte technische Ansatz grundsätzlich tragfähig ist?
+* Welche technischen Risiken oder offenen Fragen bleiben bestehen?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Wichtigste Architekturtreiber
+| 
+
+| Wichtigste Entscheidungen / ADRs
+| 
+
+| Technische Evidenz
+| 
+
+| Verbleibende Risiken / offene Fragen
+| 
+|===
+
+
+== 6. Anpassung der Arbeitsweise für Sprint 3
+
+Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezielt verbessern will. Leitfragen:
+
+* Welche technische oder organisatorische Arbeitsweise hat gut funktioniert?
+* Was hat Ihre technische Zusammenarbeit, Entscheidungsfindung oder Umsetzung behindert?
+* Was wollen Sie in Sprint 3 konkret anders machen?
+* Welcher erste nützliche MVP-Ausschnitt soll in Sprint 3 umgesetzt oder weiter validiert werden?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Beibehalten
+| 
+
+| Ändern / verbessern
+| 
+
+| Kandidat für Sprint 3
+| 
+|===

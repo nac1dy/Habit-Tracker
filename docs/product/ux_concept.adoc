@@ -44,7 +44,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Handy, nicht technisch versiert, immer unterwegs, will nicht zu viel Zeit mit der App verbringen
 
 | *Bezug zum Produkt*
-| Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen
+| Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, Sucht mit anderem Habit ersetzen
 |===
 
 === Persona 2: Hannes Handy
@@ -70,7 +70,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Handy, Computer, technisch versiert, immer zuhause, will nicht zu viel Zeit mit der App verbringen
 
 | *Bezug zum Produkt*
-| Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Gamification, mit anderem Habit ersetzen
+| Ohne Hürde und mit minimal Zeit das Gefühl von Fortschritt und Kontrolle über das eigene Leben gewinnen
 |===
 
 === Persona 3: Petra Produktiv
@@ -87,7 +87,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | _„Über mich hinaus"_
 
 | *Ziele*
-| Struktur in meinen Alltag bringen, damit ich meine Ziele erreiche und mich weiterentwickle. Mehr mit Freunden zusammenarbeiten
+| Struktur in meinen Alltag bringen, damit ich meine Ziele erreiche und mich weiterentwickeln
 
 | *Frustrationen*
 | Unstrukturierter Alltag, Prokrastination, Schwierigkeiten bei der Zielverfolgung, fehlende Motivation, mangelnde soziale Unterstützung
@@ -96,46 +96,47 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Handy, Laptop, technisch versiert, immer unterwegs, will nicht zu viel Zeit mit der App verbringen
 
 | *Bezug zum Produkt*
-| Mit wenig aufwand schnell Fortschritte sehen, Motivation durch Struktur und Gemeinsame Erfolge
+| Mit wenig Aufwand Struktur und Übersicht über Ziele und Fortschritte gewinnen
 
 |===
 
-
 == Nutzungskontext
 
-_Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen Bedingungen das Produkt genutzt wird._
+_Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen
+Bedingungen das Produkt genutzt wird._
 
 [cols="1,3", options="header"]
 |===
 | Aspekt | Beschreibung
- 
+
 | Benutzer
-| [Eigenschaften, Kenntnisse, Erfahrung, Motivation der Nutzenden.
-(Verweis auf Personas für ausführliche Beschreibungen)]
- 
+| Studierende im Alter von 18–28 Jahren mit unterschiedlicher digitaler Affinität (von kaum technikversiert bis sehr versiert). Alle nutzen Smartphones täglich intensiv. Motivation ist
+intrinsisch: eigene Gesundheit, Produktivität oder Wohlbefinden verbessern. Ausführliche Beschreibungen → siehe Personas.
+
 | Ziele & Aufgaben
-| [Was wollen Nutzende erreichen?
-Welche konkreten Aufgaben führen sie dazu aus?]
- 
+| Nutzende möchten schlechte Gewohnheiten abbauen oder neue aufbauen und ihren Fortschritt über Zeit sehen. Konkrete Aufgaben: Habits täglich abhaken, Streak aufrechterhalten, neues Habit anlegen, Fortschritt im Wochenverlauf einsehen, ggf. Habits pausieren oder löschen.
+
 | Ressourcen
-| [Hardware, Software, Eingabegeräte, Hilfsmittel, die zur Nutzung des Produkts benötigt werden oder vorhanden sind.]
- 
+| Primär Smartphone (Webapp) und Desktop/Laptop (Browser). Stabile Internetverbindung meistens vorhanden; auf dem Campus oder in der Bahn gelegentlich eingeschränkt.
+
 | Umgebung
-| [Technische Umgebung: Netzwerk, Plattformen, Betriebssysteme, Interoperabilität.
+a|
+*Technisch:* Mobile-Web PWA; Betriebssystem unabhängig; gelegentlicher Offline-Betrieb muss bedacht werden.
 
- Physische Umgebung: Ort der Nutzung, Lichtverhältnisse, Lärm, Mobilität.
+*Physisch:* Nutzung unterwegs, zuhause oder an der Hochschule — meist in kurzen Momenten unter 2 Minuten. Wechselnde Lichtverhältnisse und Ablenkungen.
 
-Soziale & organisatorische Umgebung: Organisationsstruktur, Zusammenarbeit, Unterbrechungen, rechtliche oder regulatorische Rahmenbedingungen.]
- 
+*Sozial & organisatorisch:* Eigenverantwortliche Nutzung ohne externe Verpflichtung. Keine regulatorischen Rahmenbedingungen außer DSGVO.
+
 |===
 
 === Aktuelle Situation (ohne das Produkt)
 
-_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt
-verbessern soll — und macht den Mehrwert explizit._
+_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt verbessern soll — und macht den Mehrwert explizit._
 
-[Beschreibe den heutigen Ablauf in 3–5 Sätzen oder als kurze Schrittfolge. Beispiel: „Heute fragt Maria an der Infotheke nach freien Räumen, erhält eine Liste per E-Mail, und stellt beim Ankommen fest, dass der Raum bereits belegt ist.
-Der Prozess kostet sie im Schnitt 20 Minuten pro Tag."]
+Heute verwenden Nutzende papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
+aus den Augen. Hannes hat bereits zwei Habit-Apps ausprobiert und beide nach kurzer Zeit aufgegeben, weil sie zu komplex waren oder zu viel Zeit kosteten. Petra trackt Gewohnheiten in
+Notion und ihrem Kalender, verliert aber den Überblick, sobald mehrere Habits gleichzeitig laufen. Allen gemeinsam fehlt ein konsistentes Feedback über längere Zeiträume — der
+Motivationsverlust setzt typischerweise nach zwei bis drei Wochen ein.
 
 === Nutzungshürden & Risiken
 
@@ -145,14 +146,24 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 |===
 | Hürde / Risiko | Mögliche Reaktion im Design
 
-| [z. B. Datenschutzbedenken bei Registrierungspflicht]
-| [z. B. Gastzugang für erste Nutzung anbieten]
+| Registrierungspflicht schreckt beim ersten Start ab
+| Quick-Start-Option mit minimalen Angaben (z. B. nur E-Mail) und überspringbares Onboarding
 
-| [z. B. Schlechte WLAN-Verfügbarkeit in Gebäudeteilen]
-| [z. B. Offline-Ansicht für zuletzt geladene Daten]
+| App wird nach kurzer Zeit nicht mehr genutzt (Drop-off)
+| Streak-Mechanismus und Momentum-Score als tägliches Retention-Signal; Push-Erinnerungen und Low Effort-Check-ins
 
-| [Weitere Hürde]
-| [Reaktion]
+| Negativgefühl bei verpassten Habits
+| Sanfte Formulierungen (Visualisierung) statt hartem Fehler-Feedback; Pause-Funktion für schwierige Phasen
+
+| Zu viele Habits auf einmal, Überforderung
+| Übersichtliches Interface durch One-Click (sehr übersichtlich bis etwa 8 Habits)
+
+| Datenschutzbedenken bei sensiblen Habits (z. B. Sucht)
+| Verschlüsselung sensibler Daten, transparente Datenschutzerklärung und keine Social-Features wie Freunde/Sharing
+
+  | [Weitere Hürde / Risiko]
+  | [Mögliche Reaktion im Design]
+
 |===
 
 == Systemweite Interaktionsflüsse
@@ -163,7 +174,7 @@ Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiag
 
 === Onboarding-Flow
 
-_Dies ist der Onboarding-Flow von {project-system-name}. Wenn ein (uneingeloggter) Nutzer die App öffnet, wird er durch diesen Prozess geleitet, um sich einzuloggen oder zu registrieren._
+_Dies ist der Onboarding-Flow von "Habito". Wenn ein uneingeloggter Nutzer die App öffnet, wird er durch diesen Prozess geleitet, um sich einzuloggen oder zu registrieren._
 
 [plantuml, onboarding-flow, svg]
 ....
@@ -201,7 +212,7 @@ stop
 
 | Startseite
 | Alle Personas
-| Zeigt direkt die wichtigste Funktion — keine unnötige Zwischenseite
+| Zeigt direkt die wichtigste Funktion und Habits — keine unnötige Zwischenseite
 |===
 
 ---
@@ -258,24 +269,25 @@ Wireframes und UI-Implementierungen._
 | Aspekt | Entscheidung & Begründung
 
 | Farbpalette
-| [z. B. Primärfarbe: Hochschulblau #003D6E; Akzent: #E87722;
-  Begründung: Corporate Identity der Hochschule]
+| Primärfarbe Teal `#35B8AA` (Fortschritt, aktive Zustände, Score-Bar), Akzentfarbe Orange `#F59F5B` (Streaks, Belohnungen, sanfter Druck), Hintergrund `#F7FBFA` (warmes Off-White).
+Teal und Orange sind komplementär und erzeugen positive Verstärkung ohne negativen Stress. Rot (`#F17777`) nur für Fehlerzustände, nie als Haupt-Akzent.
 
 | Typografie
-| [z. B. Fließtext: Inter 16px; Überschriften: Inter Bold;
-  Begründung: Hohe Lesbarkeit auf kleinen Bildschirmen]
+| Inter (Variable Font); Überschriften 24–48 px / weight 800–900 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
+Keine Schrift unter 14 px. Begründung: Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
 
 | Ikonografie
-| [z. B. Material Icons; konsistentes Icon-Set im gesamten Produkt]
+| Outline-Icons im Lucide-Stil (stroke-width 1.7 px, stroke-linecap round); konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Begründung: Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
 
 | Bildsprache
-| [z. B. Keine Stock-Fotos; Illustrationen im Flat-Design-Stil]
+| Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glassmorphism-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten) statt Bilder.
+Begründung: Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
+
 |===
 
 === Interaktionsprinzipien
 
-_Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung
-wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
+_Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 
 [cols="2,3", options="header"]
 |===
@@ -287,18 +299,19 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 
 | Leerzustände erklären sich und schlagen eine Aktion vor.
 | Wenn eine Liste leer ist, zeigen wir eine kurze Erklärung und einen Call-to-Action —
-  niemals nur eine leere Fläche. Reduziert Orientierungslosigkeit.
+  nicht nur eine leere Fläche. Reduziert Orientierungslosigkeit.
 
 | Fehlermeldungen sind verständlich und handlungsorientiert.
 | Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
-  nächsten Schritt vor. Kein technischer Jargon für Endnutzer:innen.
+  nächsten Schritt vor. Kein technischer Jargon für Endnutzer.
 
 | Kernfunktionen sind mit einer Hand erreichbar.
 | Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
   Optimiert für einhändige Smartphone-Nutzung.
 
-| [Weiteres Prinzip]
-| [Beschreibung & Begründung]
+| Feedback ist sofort und eindeutig.
+| Jede Interaktion (Habit abhaken, Habit anlegen) gibt unmittelbares visuelles Feedback — Animation, Farbwechsel oder Bestätigungsmeldung. Keine stille Verarbeitung ohne Rückmeldung.
+
 |===
 
 === Barrierefreiheit
@@ -317,10 +330,11 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 | Alle interaktiven Elemente haben sinnvolle ARIA-Labels
 
 | Schriftgröße
-| Keine Schrift unter 14px; Nutzer:innen können Systemschriftgröße nutzen
+| Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen
 
-| [Weiterer Aspekt]
-| [Anforderung]
+| Touch-Zielgröße
+| Mindestens 44×44 px für alle interaktiven Elemente gemäß Apple HIG / Material Design
+
 |===
 
 

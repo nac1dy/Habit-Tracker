@@ -8,22 +8,19 @@ _Dieses Dokument beschreibt die wichtigsten Unsicherheiten, die für die Entwick
 ---
 
 == Welche Daten gelten im Detail als sensibel?
-Wir haben zwar festgestellt, dass z.B. Alkohol- und i.A. Suchtverhalten als kritische, sensible Daten gelten, aber die konkrete Grenze für "Was ist senibel und was nicht?" steht noch nicht fest. Das sollten wir noch festlegen.
+Wir haben festgestellt, dass z.B. Alkohol- und i.A. Suchtverhalten als kritische, sensible Daten gelten, dazu kommen noch die Quicknotes.
 
 == Wie wird mit Notizen technisch umgegangen?
-Es steht im Raum, Notizen nur lokal zu speichern oder sensiblen Inhalt aktiv zu warnen. Dabei haben wir noch nicht geklärt, ob Notizen komplett lokal bleiben, synchronisiert werden oder serverseitig verarbeitet werden dürfen.
+Extern: Supabase PostgreSQL, intern: In-Memory-Cache mit Sync-Mechanismus. Es muss sichergestellt werden, dass die Daten konsistent bleiben und Datenschutzanforderungen erfüllt werden.
 
 == Wie sollen Erinnerungen technisch ausgeliefert werden?
-Es ist offen, ob Browser-Push, E-Mail, lokale Benachrichtigungen oder nur In-App-Hinweise vorgesehen sind. Davon hängen Browser-Support, Einwilligung und technische Komplexität ab.
-
-== Wie weit soll Mood-Tracking gehen?
-Mood-Tracking und Korrelationsanalyse sind vorgesehen, aber die fachliche Tiefe ist offen. Unklar ist, welche Daten erhoben werden, wie aussagekräftig die Analyse sein muss und ob das datenschutzrechtlich unkritisch bleibt.
+Browser-Push, In-App-Benachrichtigungen (Push API und Notification API), E-Mail (nur für login)?
 
 == Muss die App für den ersten Gebrauch ohne Registrierung funktionieren?
-Das UX-Konzept nennt Datenschutzbedenken bei Registrierungspflicht als mögliche Hürde. Es ist noch offen, ob ein Gastmodus oder ein anderer Einstieg sinnvoll oder nötig ist.
+Nein, Registrierung ist Pflicht
 
-== Wie werden Löschung, Export und Datenrechte konkret umgesetzt?
-Die Nutzerrechte sind beschrieben, aber der technische Mechanismus für Datenexport, Account-Löschung und eventuelle E-Mail-Anfragen haben wir noch nicht festgelegt.
+== Wie werden Löschung und Datenrechte konkret umgesetzt?
+Löschung in App mit Email Bestätigung. Datenrechte: Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht. Umsetzung: In-App Funktionen für Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit. Widerspruchsrecht: Möglichkeit zum Widerspruch gegen Verarbeitung in App oder über Support.
 
 == Wie realistisch sind die Performance-Ziele mit dem geplanten Scope?
 Unter 2 Sekunden Ladezeit und 2 Minuten Onboarding sind ambitioniert, während gleichzeitig mehrere Fachfunktionen, Sprache, Offline-Fähigkeit und Datenschutz berücksichtigt werden müssen. Die Umsetzbarkeit sollten wir früh technisch validieren.

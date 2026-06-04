@@ -14,10 +14,10 @@ Das System verarbeitet personenbezogene Daten und potenziell sensible Inhalte wi
 Laut Anforderungen soll das Produkt als Web-App laufen und auf modernen Browsern funktionieren. Die Architektur muss daher browserbasiert, plattformunabhängig und ohne App-Store-Abhängigkeit gedacht werden.
 
 == Responsive Nutzung auf Desktop, Tablet und Smartphone
-Die Zielgruppe nutzt die App in unterschiedlichen Kontexten, oft unterwegs und auf mobilen Geräten. Das UI und die technische Struktur müssen deshalb responsiv und auf kleine Bildschirme optimiert sein.
+Die Zielgruppe nutzt die App in unterschiedlichen Kontexten, oft unterwegs und auf mobilen Geräten. Das UI und die technische Struktur müssen deshalb responsiv und auf kleine Bildschirme optimiert sein. Jedoch soll die Software auch auf Laptop-/PC-Bildschirmen gut aussehen.
 
 == Sehr schneller Einstieg und kurze Ladezeiten
-In den Qualitätssstandards haben wir uns auf unter 2s Ladezeit und unter 2 min Onboarding-Dauer festgeleg. Die Architektur muss also auf schlanke Initialisierung, geringe Komplexität im Startpfad und performante Datenzugriffe ausgelegt werden.
+In den Qualitätssstandards haben wir uns auf unter 2s Ladezeit und unter 2 min Onboarding-Dauer festgelegt. Die Architektur muss also auf schlanke Initialisierung, geringe Komplexität im Startpfad und performante Datenzugriffe ausgelegt werden.
 
 == Authentifizierung mit E-Mail und Passwort
 Wir haben eine Anmeldung per E-Mail und Passwort vorgesehen. Die Architektur braucht daher einen klaren Authentifizierungs- und Sitzungsmechanismus sowie sichere Passwortspeicherung.
