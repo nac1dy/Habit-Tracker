@@ -1,58 +1,28 @@
 = Sprint-2-Report: Technischer Ansatz und agile Arbeitsweise
 
-// Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
-Team::
-Projektname::
-Datum::
-Repository-Link::
+:repo-url: https://github.com/nac1dy/Habit-Tracker
+:docs: /blob/main/docs
+:project-url: https://github.com/users/nac1dy/projects/3
 
-====
-Dieser Report soll auf maximal einer Seite zeigen, wie Ihr Team in Sprint 2 gearbeitet hat,
-welche Praktiken Sie angewendet haben, welche technischen Artefakte entstanden sind und was Sie daraus gelernt haben.
-
-Der Report ist kein Tätigkeitsprotokoll und kein vollständiges Architekturdokument. Beschreiben Sie nicht nur, _was_ Sie gemacht haben,
-sondern vor allem, _warum_ Sie es gemacht haben, welche Evidenz dadurch entstanden ist und wie diese Evidenz Ihren technischen Ansatz begründet oder verändert hat.
-====
+Team:: C2
+Projektname:: Habit-Tracker
+Datum:: 06.06.2026
+Repository-Link:: {repo-url}
 
 == 1. Sprintziel und zentrale Fragestellung
-
-Formulieren Sie Ihr Sprintziel in 1–2 Sätzen. Leitfragen:
-
-* Welche technische Fragestellung oder Unsicherheit wollte Ihr Team in diesem Sprint klären?
-* Welche Annahme zum technischen Ansatz sollte Sprint 2 überprüfen?
-* Warum ist Ihr technischer Ansatz nach diesem Sprint besser begründet als vorher?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Sprintziel
-| 
+| Unser Sprintziel war es, ein gemeinsames technisches Fundament zu legen und erste Ansätze in Code umzusetzen. Da unsere ersten Entwürfe aus dem letzten Sprint noch kleine Unterschiede aufwiesen, wollten wir in diesem Sprint eine einheitliche Struktur festlegen, auf der das gesamte Team aufbauen kann. Ein fundierter Konsens würde unsere Teamarbeit stark aufwerten.
 
 | Zentrale technische Unsicherheit / Annahme
-| 
+| Die relevanteste technische Fragen war, ob sich unser Konzept problemlos als Website umsetzen lässt. Wir wollten prüfen, ob die von uns getroffenen Architekturentscheidungen für unsere Vision funktionierten oder wir noch einmal umdenken müssen. 
 |===
 
-
 == 2. Erwartete Praktiken in Sprint 2
-
-Wählen Sie 3–5 Praktiken aus, die für Ihren Sprint besonders relevant waren.
-Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 beschrieben werden. Mögliche Praktiken:
-
-* Domänenmodell erstellen oder überarbeiten
-* Partielles logisches Datenmodell erarbeiten
-* Architekturtreiber aus Domäne, Qualitätsanforderungen, Randbedingungen, Nutzerflüssen und Teamfähigkeiten ableiten
-* Systemgrenzen und externe Systeme identifizieren sowie C4-Kontextdiagramm erstellen
-* Wesentliche Subsysteme identifizieren sowie C4-Containerdiagramm erstellen
-* technische Services identifizieren und mittels Attributen beschreiben
-* einfache Komponentensicht oder Projektstruktur skizzieren
-* minimale Architekturleitplanken für die Codebasis festlegen
-* Technologieoptionen vergleichen und auswählen
-* ADRs für wichtige technische Entscheidungen schreiben
-* technische Spikes oder Experimente durchführen
-* Walking Skeleton als lauffähigen Nachweis des technischen Konzepts aufbauen
-* technische Risiken identifizieren und dokumentieren
-* Kandidaten für einen ersten nützlichen MVP-Ausschnitt in Sprint 3 identifizieren
 
 [cols="1,2,2,2", options="header"]
 |===
@@ -61,58 +31,41 @@ Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 be
 | Nachweis / Artefakt (Link einfügen)
 | Nutzen, Erkenntnis oder Anpassung
 
-| 
-| 
-| 
-| 
+| ADRs für wichtige technische Entscheidungen schreiben
+| Wir haben wesentliche Features und Anforderungen diskutiert und unsere Architekturentscheidungen schriftlich festgehalten.
+| {repo-url}{docs}/technical/architecture.adoc[architecture.adoc]
+| Die ADRs strukturieren unsere Planung. Wir mussten feststellen, dass wir bisher Entscheidungen oftmals unzureichend dokumentiert haben. Die Erstellung von relevanten ADRs löst genau dieses Problem und unterstützt uns in der effizienten Entscheidungsfindung.
 
-| 
-| 
-| 
-| 
+| Walking Skeleton als lauffähigen Nachweis des technischen Konzepts aufbauen
+| Wir haben verschiedene Prototypen für unsere Website entwickelt und ausführlich getestet um grundlegende Funktionalitäten zu überprüfen.
+| https://github.com/nac1dy/Habit-Tracker/tree/features/src[Walking Skeleton Source Ordner]
+| Das Walking Skeleton half uns, geplante Funktionalitäten zu testen und unerwartete Probleme rechtzeitig zu identifizieren. Beispielsweise fehlten im ersten Entwurf beim Erstellen von Habits wichtige Einstellungsoptionen welche nachträglich Ergänzt werden konnten.
 
-| 
-| 
-| 
-| 
+| Kandidaten für einen ersten nützlichen MVP-Ausschnitt in Sprint 3 identifizieren
+| Wir haben die User Stories mit der höchsten Priorität analysiert und die wichtigsten diskutiert. Dies gab uns ein einheitliches Verständnis vom Umfang und der Umsetzung.
+| {project-url}/views/1?pane=issue&itemId=178380445&issue=nac1dy%7CHabit-Tracker%7C8[(Story) tägliches Abhaken] 
 
-| 
-| 
-| 
-| 
-
-| 
-| 
-| 
-| 
+{project-url}/views/1?pane=issue&itemId=178380447&issue=nac1dy%7CHabit-Tracker%7C9[(Story) schneller Zugriff]
+| Wir haben gelernt, dass eine frühzeitige und präzise Planung den Umsetzungsaufwand on späteren Sprints dramatisch reduzieren kann. Deshalb war es uns wichtig die nächsten Implementierungsschritte für das MVP bereits jetzt herauszusuchen und zu präzisieren.
 |===
 
-
 == 3. Wichtigste technische Lernergebnisse aus Sprint 2
-
-Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 2. Leitfragen:
-
-* Was hat Ihr Team über die technische Machbarkeit des Produkts gelernt?
-* Welche Annahme zum Architekturansatz, Technologie-Stack oder Projektaufbau wurde bestätigt, widerlegt oder präzisiert?
-* Welche technische Evidenz hatte den größten Einfluss auf Ihre Entscheidungen?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
-| Erkenntnis 1
-| 
+| Software Architektur
+| Die Entwicklung unseres Walking Skeletons hat ergeben, dass eine Progressive Web App unsere Anforderungen an das Produkt vollständig abdeckt. Unsere anfängliche Sorge, dass dies die Skalierung negativ beeinflussen und die Wartung erschweren würde, konnte durch horizontale und vertikale Durchstiche widerlegt werden.
 
-| Erkenntnis 2
-| 
+| Nutzerverhalten
+| Uns war bewusst, dass ausgereifte Userflows und Interaktionen unabdingbar sind um Nutzer optimal zu unterstützen. Wir haben jedoch unterschätzt, wie stark dies die technische Umsetzung beeinflusst. Es erfordert eine frühzeitige Planung und regelmäßige Kontrolle der meisten Features um Nutzer von negativen Verhaltensmustern abzuhalten und eine optimale Nutzererfahrung zu erzielen.
 
-| Erkenntnis 3
-| 
+| Projektaufbau & Entwicklungsprozess
+| Wir haben gelernt, dass technische Strukturen und Datenmodelle zu Beginn eines Sprints bewusst agil und flexibel gehalten werden müssen. Anstatt zu früh ein starres Gesamtsystem zu planen, bewies sich das schrittweise Validieren über kleine Prototypen als deutlich effizienter, um versteckte Probleme rechtzeitig aufzudecken.
 |===
  
 == 4. Änderungen am technischen Ansatz
-
-Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellierung, Entscheidungen, Spikes oder den Walking Skeleton verändert hat.
 
 [cols="2,2,2", options="header"]
 |===
@@ -120,66 +73,54 @@ Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellie
 | Neue Erkenntnis oder Evidenz
 | Anpassung am technischen Ansatz, an der Architektur oder am Backlog
 
-| 
-| 
-| 
+| Entwicklung eines eigenen Authentifizierungssystems
+| Verschiedene Teambesprechungen ergaben, dass die Eigenentwicklung eine sicheren Login-Systems ohne umfassende Kontrolle ein erhebliches Sicherheitsrisiko darstellen würde. Die Einbindung eines externen Dienstes bietet Nutzern den Komfort von automatisierten Anmeldungen und ermöglichet es uns mehr Fokus auf die wesentliche Inhalte des Projekts zu legen.
+| Wir haben uns für die Einbindung von Supabase Authentication entschieden. Unser Fokus konnte dadurch wieder auf Kernfunktionen der App gelenkt werden.
 
-| 
-| 
-| 
+| Entwurf einer starren Datenstruktur für die Erstellung von Habits
+| Das Walking Skeleton und vereinzelte Durchstiche zeigten, dass eine unflexible Struktur die Vielfalt der Gewohnheiten stark einschränkt. Primär fehlte die technische Struktur, um auch negative Angewohnheiten (Abgewöhnen) flexibel abbilden zu können.
+| Unsere Entscheidung war es die ursprüngliche Planung zu überdenken spezielle Eigenschaften neu zu bewerten.
 
-| 
-| 
-| 
+| Einplanung eines einzigen, strikten Streak-Algorithmus für alle Habits
+| Die Modellierung der User Stories und Feedbackgespräche machten deutlich, dass ein rein täglicher Streak-Reset bei flexiblen Gewohnheiten zu Demotivation führt.
+| Die Architektur wurde auf einen hybriden Ansatz umgestellt. Sie unterstützt nun sowohl kalenderbasierte (strikte) als auch frequenzbasierte (wöchentliche) Streak-Logiken.
 |===
 
 
 == 5. Architekturtreiber, Entscheidungen und technische Evidenz
-
-Beschreiben Sie kurz, welche Treiber, Entscheidungen und Nachweise für Ihren technischen Ansatz besonders wichtig sind. Leitfragen:
-
-* Welche Qualitätsanforderungen, Randbedingungen oder Nutzerflüsse haben Ihre technischen Entscheidungen besonders geprägt?
-* Welche Architektur- oder Technologieentscheidungen sind für das weitere Projekt besonders wichtig?
-* Welche Evidenz zeigt, dass der gewählte technische Ansatz grundsätzlich tragfähig ist?
-* Welche technischen Risiken oder offenen Fragen bleiben bestehen?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Wichtigste Architekturtreiber
-| 
+| Der primäre Treiber war die geforderte Offline-Verfügbarkeit. Direkt dahinter steht die Datensicherheit. Die von uns verarbeiteten Daten werden höchst sensibel sein und müssen sicher verwaltet werden um das Nutzervertrauen nicht zu verlieren. Als organisatorischer Treiber fungierten die technischen Kompetenzen des Teams. Das optimale Zusammenspiel dieser drei Komponenten war die Basis für alle unserer Entscheidungen.
 
 | Wichtigste Entscheidungen / ADRs
-| 
+| Frontend-Technologie: Entscheidung für eine plattformungebundene WebApp mit einer einzigen Codebasis, um Nutzer auf unterschiedlichen Betriebssystemen effizient und ohne plattformspezifischen Entwicklungsaufwand zu erreichen.
+Backend-Architektur: Wahl eines modularen Aufbaus statt eines Monolithen. Die App wird in unterschiedliche Blöcke unterteilt, was eine saubere Trennung im Code garantiert.
+Erreichbarkeit: Umsetzung als installierbare, offlinetaugliche Progressive Web App. Daten werden lokal verwaltet, um die volle Funktionalität auch ohne Internetempfang zu gewährleisten.
 
 | Technische Evidenz
-| 
+| Unser Walking Skeleton beweist, dass die von uns ausgewählten PWA-Komponenten und die lokale Datenspeicherung nahtlos ineinander greifen. Kleinere gezielte Testprogramme waren ebenfalls hilfreich um experimentelle Features auf Probleme zu prüfen.
 
 | Verbleibende Risiken / offene Fragen
-| 
+| Das größte technische Risiko liegt in der finalen Modellierung der API-Schnittstellen und den noch unvollständigen Datenstrukturen. Zudem bleibt offen, wie plattformspezifische Push-Benachrichtigungen auf Endgeräten zuverlässig im Hintergrund ausgeführt werden können.
 |===
 
 
 == 6. Anpassung der Arbeitsweise für Sprint 3
-
-Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezielt verbessern will. Leitfragen:
-
-* Welche technische oder organisatorische Arbeitsweise hat gut funktioniert?
-* Was hat Ihre technische Zusammenarbeit, Entscheidungsfindung oder Umsetzung behindert?
-* Was wollen Sie in Sprint 3 konkret anders machen?
-* Welcher erste nützliche MVP-Ausschnitt soll in Sprint 3 umgesetzt oder weiter validiert werden?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Beibehalten
-| 
+| Die positive Teamdynamik und die fließende Kommunikation haben sich als sehr effektiv erwiesen. Alle Teammitglieder bringen aktiv neue Ideen ein, und Probleme werden offen angesprochen, wodurch wir sie schnell lösen können. Unsere feste Regel, Aufgaben bis Sonntagabend hochzuladen, behalten wir ebenfalls bei. Sie garantiert, dass alle vorbereitet in die Meetings starten, ohne dass vermeidbarer Druck in der Freizeit entsteht.
 
 | Ändern / verbessern
-| 
+| Wir werden unsere Meetings straffer moderieren und präzisere Zeitlimits setzen, um den Fokus über die gesamte Dauer hochzuhalten. Da wir technische Entscheidungen bisher unzureichend dokumentiert haben und Themen deshalb mehrfach diskutieren mussten, werden wir die Erstellung von ADRs fest in unseren Ablauf integrieren, um getroffene Absprachen sofort schriftlich festzuhalten.
 
 | Kandidat für Sprint 3
-| 
+| Als erste nützliche MVP-Ausschnitte für den kommenden Sprint haben wir die User Stories für das tägliche Abhaken und den schnellen Zugriff auf dem Dashboard festgelegt. Diese bilden das technische Grundgerüst unserer Anwendung und müssen frühzeitig implementiert werden, um nachfolgende Features nicht zu verzögern.
 |===
