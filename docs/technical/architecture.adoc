@@ -346,7 +346,7 @@ Punkte in Vergessenheit geraten._
 | Niedrig
 | [z. B. Lasttest ab Sprint 4 eingeplant]
 
-| Supabase Free Tier: Limits bei 500 MB Datenbank und 50.000 MAU können bei Wachstum überschritten werden
+| Supabase Free Tier: Limits bei 500 MB Datenbank und 50.000 Monthly Active Users können bei Wachstum überschritten werden
 | Hoch
 | Mittel
 | Kostenentwicklung monatlich monitoren; Migrationspfad zu Self-Hosted Supabase dokumentieren
