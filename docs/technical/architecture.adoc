@@ -96,7 +96,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 //Level 2 im C4-Modell
 Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
 
-[plantuml, "{diagramsdir}/system-context", svg]
+[plantuml, "{diagramsdir}/container-context", svg]
 ....
 @startuml
 ' source: https://github.com/plantuml-stdlib/C4-PlantUML

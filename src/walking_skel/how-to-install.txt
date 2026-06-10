@@ -1,5 +1,6 @@
 1. git pull for newest state
 2. cd .\walking_skel\walking-skel (you need to be in the directory where package.json is)
 3. npm install (npm will read the requirements out of the package.json file)
+    3.1 make sure node version is ^20 (check with node --version and update with https://nodejs.org/en/download/current)
 4. npm run dev
 5. now you should see 2 links from which you can access the dev-Server
