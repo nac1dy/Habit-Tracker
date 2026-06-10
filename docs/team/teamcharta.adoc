@@ -124,6 +124,9 @@ _Eine User Story gilt als fertig, wenn:_
 | Commit-Konventionen
 | (ALWAYS PULL FIRST, THEN PUSH)Conventional Commits
 
+| Naming von Variablen
+| Klar und aussagekräftig, keine Abkürzungen, auf Englisch, ohne bindende Striche
+
 |===
 
 == Teamvereinbarungen
