@@ -262,8 +262,10 @@ pre{background:#0f172a;border-radius:16px;padding:22px 26px;font-family:'SF Mono
 │   ├── <span class="dir">create/</span>
 │   │   ├── <span class="hot">page.tsx</span>    <span class="ann">→ /habits/create (fallback)</span>
 │   │   └── <span class="hot">HabitForm.tsx</span><span class="ann"> geteiltes Formular</span>
-│   └── <span class="dir">@modal/(.)create/</span>
-│       └── <span class="hot">page.tsx</span>    <span class="ann">Sheet über Habits-Page</span>
+│   └── <span class="dir">@modal/</span>
+│       ├── <span class="file">default.tsx</span>  <span class="ann">rendert null wenn kein Sheet</span>
+│       └── <span class="dir">(.)create/</span>
+│           └── <span class="hot">page.tsx</span> <span class="ann">Sheet über Habits-Page</span>
 │
 ├── <span class="dir">stats/</span>
 │   └── <span class="hot">page.tsx</span>       <span class="ann">→ /stats</span>
@@ -274,6 +276,9 @@ pre{background:#0f172a;border-radius:16px;padding:22px 26px;font-family:'SF Mono
 ├── <span class="dir">api/habits/</span>
 │   └── <span class="file">route.ts</span>       <span class="ann">GET + POST → Supabase</span>
 │
+├── <span class="dir">backend/</span>
+│   └── <span class="file">supabase.ts</span>    <span class="ann">Supabase-Client (einmalig init)</span>
+│
 ├── <span class="dir">components/</span>
 │   ├── <span class="file">BottomNav.tsx</span>  <span class="ann">Navigation · alle Tabs</span>
 │   ├── <span class="file">SettingsMenu.tsx</span><span class="ann">Burger · alle Tabs</span>
@@ -281,7 +286,8 @@ pre{background:#0f172a;border-radius:16px;padding:22px 26px;font-family:'SF Mono
 │       ├── <span class="file">HomeHeader.tsx</span>
 │       ├── <span class="file">TodayStatsRow.tsx</span>
 │       ├── <span class="file">MomentumCard.tsx</span>
-│       └── <span class="file">TodayHabitList.tsx</span>
+│       ├── <span class="file">TodayHabitList.tsx</span>
+│       └── <span class="file">HabitListItem.tsx</span> <span class="ann">eine Zeile in der Liste</span>
 │
 └── <span class="dir">lib/</span>
     ├── <span class="file">types.ts</span>       <span class="ann">alle Interface-Definitionen</span>
@@ -617,7 +623,7 @@ setHabits(fetchedHabits); <span class="cm">// ← UI updatet sofort</span>
 <span class="kw">import</span> { TodayHabitList } <span class="kw">from</span> <span class="str">'./components/home/TodayHabitList'</span>;
 <span class="kw">import</span> { BottomNav }      <span class="kw">from</span> <span class="str">'./components/BottomNav'</span>;
 <span class="kw">import</span> { HabitForm }      <span class="kw">from</span> <span class="str">'./habits/create/HabitForm'</span>;
-<span class="kw">import</span> { MOCK_HABITS }    <span class="kw">from</span> <span class="str">'./lib/mockHome'</span>;
+<span class="kw">import</span> { MOCK_HABITS, MOCK_DEFAULT_STREAK } <span class="kw">from</span> <span class="str">'./lib/mockHome'</span>;
 
 <span class="kw">export default function</span> <span class="fn">Home</span>() {
   <span class="cm">// ── State: was diese Seite wissen muss ─────────────────────────────────</span>
@@ -966,24 +972,27 @@ setHabits(fetchedHabits); <span class="cm">// ← UI updatet sofort</span>
       <div class="filename">app/globals.css (Auszug)</div>
       <pre style="font-size:11.5px"><span class="cm">/* Light Mode (Standard) */</span>
 :root {
-  <span class="prop">--app-bg</span>:    <span class="str">#ffffff</span>;
-  <span class="prop">--text</span>:      <span class="str">#1a2e2b</span>;
-  <span class="prop">--text-2</span>:    <span class="str">#4a6e6a</span>;
-  <span class="prop">--glass</span>:     <span class="str">rgba(255,255,255,0.8)</span>;
-  <span class="prop">--border</span>:    <span class="str">rgba(53,184,170,0.15)</span>;
-  <span class="prop">--teal-900</span>:  <span class="str">#0d4f4a</span>;
-  <span class="prop">--teal-700</span>:  <span class="str">#1b6f68</span>;
-  <span class="prop">--radius</span>:    <span class="str">14px</span>;
+  <span class="prop">--page-bg</span>:   <span class="str">#dff7f4</span>;    <span class="cm">/* App-Hintergrund (Body) */</span>
+  <span class="prop">--app-bg</span>:    <span class="str">#f7fbfa</span>;    <span class="cm">/* Karten / sticky Header */</span>
+  <span class="prop">--text</span>:      <span class="str">#12211f</span>;
+  <span class="prop">--text-2</span>:    <span class="str">#5f6f6c</span>;    <span class="cm">/* Subtext */</span>
+  <span class="prop">--text-3</span>:    <span class="str">#91a09d</span>;    <span class="cm">/* Placeholder / Icons */</span>
+  <span class="prop">--glass</span>:     <span class="str">rgba(255,255,255,0.82)</span>;
+  <span class="prop">--border</span>:    <span class="str">rgba(18,33,31,0.08)</span>;
+  <span class="prop">--teal-900</span>:  <span class="str">#35b8aa</span>;    <span class="cm">/* alle teal-* gleich im Light */</span>
+  <span class="prop">--teal-700</span>:  <span class="str">#35b8aa</span>;
+  <span class="prop">--radius</span>:    <span class="str">18px</span>;
 }
 
 <span class="cm">/* Dark Mode — ThemeContext setzt .dark auf &lt;html&gt; */</span>
 <span class="tag">.dark</span> {
-  <span class="prop">--app-bg</span>:    <span class="str">#0a1a18</span>;
-  <span class="prop">--text</span>:      <span class="str">#e8f4f2</span>;
-  <span class="prop">--text-2</span>:    <span class="str">#8ab5b0</span>;
-  <span class="prop">--glass</span>:     <span class="str">rgba(13,47,46,0.85)</span>;
-  <span class="prop">--border</span>:    <span class="str">rgba(53,184,170,0.12)</span>;
-  <span class="prop">--teal-900</span>:  <span class="str">#5ecec5</span>; <span class="cm">/* hell auf dunkel */</span>
+  <span class="prop">--page-bg</span>:   <span class="str">#111111</span>;
+  <span class="prop">--app-bg</span>:    <span class="str">#1c1c1c</span>;
+  <span class="prop">--text</span>:      <span class="str">#e8e8e8</span>;
+  <span class="prop">--text-2</span>:    <span class="str">#909090</span>;
+  <span class="prop">--glass</span>:     <span class="str">rgba(255,255,255,0.07)</span>;
+  <span class="prop">--border</span>:    <span class="str">rgba(255,255,255,0.08)</span>;
+  <span class="prop">--teal-900</span>:  <span class="str">#dcf7f3</span>; <span class="cm">/* hell auf dunkel */</span>
 }
 
 <span class="cm">/* Nutzung in jeder Komponente: */</span>
@@ -1015,23 +1024,23 @@ setHabits(fetchedHabits); <span class="cm">// ← UI updatet sofort</span>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <div style="text-align:center">
             <div style="width:44px;height:44px;border-radius:10px;background:#35b8aa;margin-bottom:4px"></div>
-            <div style="font-size:9px;color:#64748b">teal-500</div>
+            <div style="font-size:9px;color:#64748b">teal-*</div>
           </div>
           <div style="text-align:center">
-            <div style="width:44px;height:44px;border-radius:10px;background:#1b6f68;margin-bottom:4px"></div>
-            <div style="font-size:9px;color:#64748b">teal-700</div>
+            <div style="width:44px;height:44px;border-radius:10px;background:#dcf7f3;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">teal dark</div>
           </div>
           <div style="text-align:center">
-            <div style="width:44px;height:44px;border-radius:10px;background:#0d4f4a;margin-bottom:4px"></div>
-            <div style="font-size:9px;color:#64748b">teal-900</div>
+            <div style="width:44px;height:44px;border-radius:10px;background:#dff7f4;border:1px solid #35b8aa22;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">page-bg</div>
           </div>
           <div style="text-align:center">
-            <div style="width:44px;height:44px;border-radius:10px;background:#0a1a18;border:1px solid #35b8aa22;margin-bottom:4px"></div>
+            <div style="width:44px;height:44px;border-radius:10px;background:#f7fbfa;border:1px solid #35b8aa22;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">app-bg</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#111111;border:1px solid #35b8aa22;margin-bottom:4px"></div>
             <div style="font-size:9px;color:#64748b">dark bg</div>
-          </div>
-          <div style="text-align:center">
-            <div style="width:44px;height:44px;border-radius:10px;background:#f0fdf9;border:1px solid #35b8aa22;margin-bottom:4px"></div>
-            <div style="font-size:9px;color:#64748b">light bg</div>
           </div>
         </div>
       </div>
@@ -1240,13 +1249,17 @@ app/meineseite/page.tsx
       <span class="prop">href</span>={tab.href}
     &gt;
       &lt;<span class="tag">span</span>
-        <span class="prop">style</span>={{ color: active
-          ? <span class="str">'var(--teal-700)'</span>
-          : <span class="str">'var(--text-3)'</span> }}
+        <span class="prop">className</span>={`h-[22px] w-[22px] ${active
+          ? <span class="str">'text-[var(--teal-700)]'</span>
+          : <span class="str">'text-[var(--text-3)]'</span>}`}
       &gt;
         {tab.icon}
       &lt;/<span class="tag">span</span>&gt;
-      &lt;<span class="tag">span</span>&gt;{tab.label}&lt;/<span class="tag">span</span>&gt;
+      &lt;<span class="tag">span</span>
+        <span class="prop">className</span>={`text-[10px] ${active
+          ? <span class="str">'font-bold text-[var(--teal-700)]'</span>
+          : <span class="str">'font-medium text-[var(--text-3)]'</span>}`}
+      &gt;{tab.label}&lt;/<span class="tag">span</span>&gt;
     &lt;/<span class="tag">Link</span>&gt;
   );
 })}</pre>
