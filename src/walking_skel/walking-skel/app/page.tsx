@@ -1,37 +1,68 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { HomeHabit, HabitCategory } from './lib/types';
+import { MOCK_HABITS, MOCK_DEFAULT_STREAK } from './lib/mockHome';
+import { HomeHeader } from './components/home/HomeHeader';
+import { TodayStatsRow } from './components/home/TodayStatsRow';
+import { MomentumCard } from './components/home/MomentumCard';
+import { TodayHabitList } from './components/home/TodayHabitList';
+import { BottomNav } from './components/BottomNav';
+import { HabitForm } from './habits/create/HabitForm';
 
-// API response shape from /api/habits
-type HabitApi = {
+/**
+ * Mainpage / Home.
+ *
+ * This file mainly COMPOSES and LAYOUTS the home screen. The actual UI blocks
+ * live in app/components/home/*. Data responsibilities kept here:
+ *  - load real habits from /api/habits (falls back to mock if unavailable)
+ *  - track which habits are checked today (local only for now)
+ *
+ * Mock vs. real: the habit list is real (Supabase via /api/habits). Streaks,
+ * stats and momentum are mock — see app/lib/mockHome.ts for the integration
+ * points where real backend values plug in later.
+ */
+
+// Shape returned by /api/habits (raw DB row). Mapped into HomeHabit for the UI.
+type HabitApiRow = {
   habitid: string;
   title: string;
-  category: string;
+  category: HabitCategory;
 };
 
-// Header only renders on client to avoid SSR issues with Theme Context
-const Header = dynamic(() => import('./components/Header').then(mod => ({ default: mod.Header })), {
-  ssr: false,
-});
-
 export default function Home() {
-  // Functional habit list uses the backend API
-  const [habits, setHabits] = useState<HabitApi[]>([]);
+  const [habits, setHabits] = useState<HomeHabit[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
 
-  // Load habits once on page load
+  // Load habits once on mount.
   useEffect(() => {
     const fetchHabits = async () => {
       try {
-        const response = await fetch('/api/habits');
-        if (!response.ok) throw new Error('Failed to fetch habits');
-        const data = await response.json();
-        setHabits(data as HabitApi[]);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        const res = await fetch('/api/habits');
+        if (!res.ok) throw new Error('Failed to fetch habits');
+        const rows = (await res.json()) as HabitApiRow[];
+
+        // Map DB rows to the home view model. streakDays/doneToday are not in
+        // the DB yet, so they start as placeholders.
+        // API INTEGRATION POINT: real streak/check-in status go here.
+        const mapped: HomeHabit[] = rows.map((row) => ({
+          habitid: row.habitid,
+          title: row.title,
+          category: row.category,
+          streakDays: MOCK_DEFAULT_STREAK,
+          doneToday: false,
+        }));
+
+        // If the backend has no habits yet, show the mock list so the page
+        // still demonstrates the layout.
+        setHabits(mapped.length > 0 ? mapped : MOCK_HABITS);
+      } catch {
+        // No backend / no .env.local: fall back to mock data so the demo works.
+        setHabits(MOCK_HABITS);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -40,168 +71,77 @@ export default function Home() {
     fetchHabits();
   }, []);
 
-  // Dummy values for the preview-style overview cards
-  const completedToday = 2;
-  const streakDays = 7;
-  const totalHabits = habits.length;
-  const completionPct = totalHabits > 0 ? Math.round((completedToday / totalHabits) * 100) : 0;
+  // Toggle a habit's "done today" state.
+  // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
+  const toggleHabit = (habitid: string) => {
+    setHabits((prev) =>
+      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !h.doneToday } : h)),
+    );
+  };
 
   return (
-    <>
-      <Header />
+    // Full-width column; the content is constrained to a phone width and
+    // centered, while the bottom nav background stretches edge to edge.
+    <div className="flex min-h-full flex-1 flex-col">
+      {/* Sticky header — stays visible while content scrolls */}
+      <div className="sticky top-0 z-30 w-full bg-[var(--app-bg)]" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="mx-auto w-full max-w-md px-4 py-2">
+          <HomeHeader />
+        </div>
+      </div>
 
-      <main className="min-h-screen bg-[var(--page-bg)] py-8 px-4">
-        <div className="max-w-5xl mx-auto">
+      {/* Scrollable content (phone-width, centered) */}
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-4 pt-4">
 
-          {/* Tab system (dummy pages) */}
-          <nav className="grid grid-cols-4 gap-2 mb-6">
-            <Link
-              href="/"
-              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--teal-500)] text-white border-transparent text-center"
-            >
-              Home
-            </Link>
-            <Link
-              href="/habits"
-              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
-            >
-              Habits
-            </Link>
-            <Link
-              href="/stats"
-              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
-            >
-              Stats
-            </Link>
-            <Link
-              href="/settings"
-              className="rounded-full px-3 py-2 text-sm font-semibold border transition bg-[var(--card)] text-[var(--text-2)] border-[var(--border)] text-center"
-            >
-              Settings
-            </Link>
-          </nav>
+        <TodayStatsRow />
 
-          {/* Home title block in preview style */}
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-            <div>
-              <p className="text-xs font-extrabold tracking-[0.18em] text-[var(--teal-700)] uppercase">
-                Habit Tracker
-              </p>
-              <h1 className="text-3xl font-bold text-[var(--teal-900)] mt-1">Today</h1>
-              <p className="text-[var(--text-2)]">Your daily overview and active habits.</p>
-            </div>
+        <MomentumCard />
 
-            {/* Functional CTA (create habit) */}
-            <Link
-              href="/habits/create"
-              className="rounded-full px-4 py-2 text-sm font-semibold bg-[var(--teal-500)] text-white hover:bg-[var(--teal-700)] transition"
-            >
-              + Create Habit
-            </Link>
-          </div>
+        <TodayHabitList
+          habits={habits}
+          loading={loading}
+          error={error}
+          onToggle={toggleHabit}
+        />
 
-          {/* Today overview cards (dummy values) */}
-          <div className="grid gap-3 md:grid-cols-3 mb-6">
-            <div
-              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
-              style={{ boxShadow: 'var(--shadow)' }}
-            >
-              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Completed today</p>
-              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">
-                {completedToday}/{totalHabits}
-              </p>
-              <p className="text-sm text-[var(--text-2)]">{completionPct}% done</p>
-            </div>
+        {/* Create habit CTA — opens bottom sheet overlay (home page stays visible) */}
+        <button
+          onClick={() => setShowCreate(true)}
+          className="mt-4 flex w-full items-center justify-center gap-1 rounded-[var(--radius)] px-4 py-3 text-sm font-bold text-white transition active:scale-[0.98]"
+          style={{ background: 'linear-gradient(135deg, #35b8aa, #1b6f68)' }}
+        >
+          + New Habit
+        </button>
 
-            <div
-              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
-              style={{ boxShadow: 'var(--shadow)' }}
-            >
-              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Current streak</p>
-              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">{streakDays} days</p>
-              <p className="text-sm text-[var(--text-2)]">Keep the momentum</p>
-            </div>
+        {/* Stats teaser -> existing /stats page */}
+        <Link
+          href="/stats"
+          className="mt-3.5 block rounded-[var(--radius-lg)] border border-[rgba(53,184,170,0.25)] p-4 text-center text-sm font-semibold text-[var(--teal-700)] transition active:scale-[0.985]"
+          style={{ background: 'linear-gradient(135deg, rgba(53,184,170,0.12), rgba(27,111,104,0.07))' }}
+        >
+          View full statistics →
+        </Link>
+      </main>
 
-            <div
-              className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-4"
-              style={{ boxShadow: 'var(--shadow)' }}
-            >
-              <p className="text-xs uppercase font-semibold text-[var(--text-3)]">Active habits</p>
-              <p className="text-2xl font-extrabold text-[var(--teal-900)] mt-2">{totalHabits}</p>
-              <p className="text-sm text-[var(--text-2)]">Across your schedule</p>
-            </div>
-          </div>
-
-          {/* Preview-style momentum teaser (dummy block) */}
+      {/* Create habit bottom sheet — same pattern as habits/@modal/(.)create */}
+      {showCreate && (
+        <div className="fixed inset-0 z-50 flex flex-col justify-end">
           <div
-            className="rounded-3xl border border-[rgba(53,184,170,0.25)] p-5 mb-6"
-            style={{
-              background: 'linear-gradient(135deg, rgba(53,184,170,0.12), rgba(27,111,104,0.07))',
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs uppercase font-semibold text-[var(--teal-700)]">Momentum</p>
-                <p className="text-lg font-bold text-[var(--text)] mt-1">Stable today</p>
-              </div>
-              <div className="text-2xl font-extrabold text-[var(--text)]">72</div>
-            </div>
-
-            <div className="mt-4 h-2 rounded-full bg-black/10 overflow-hidden">
-              <div
-                className="h-full rounded-full"
-                style={{ width: '72%', background: 'linear-gradient(90deg, var(--teal-500), var(--teal-700))' }}
-              />
-            </div>
-          </div>
-
-          {/* Habit list (functional, but styled like preview cards) */}
+            className="absolute inset-0"
+            style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
+            onClick={() => setShowCreate(false)}
+            aria-label="Close"
+          />
           <div
-            className="rounded-3xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[22px] p-5"
-            style={{ boxShadow: 'var(--shadow)' }}
+            className="relative z-10 mx-auto w-full max-w-md overflow-y-auto rounded-t-[28px] px-5 pb-10"
+            style={{ background: 'var(--app-bg)', maxHeight: '88svh', animation: 'sheet-up 0.34s cubic-bezier(0.32,0.72,0,1) both' }}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-[var(--text)]">Habits</h2>
-              <span className="text-sm text-[var(--text-3)]">Tap to view details</span>
-            </div>
-
-            {/* Loading and error states */}
-            {loading ? (
-              <div className="text-center py-6">
-                <p className="text-[var(--text-2)]">Loading habits...</p>
-              </div>
-            ) : error ? (
-              <div className="text-center py-6">
-                <p className="text-[var(--danger)]">{error}</p>
-              </div>
-            ) : habits.length === 0 ? (
-              <div className="text-center py-6">
-                <p className="text-[var(--text-2)] text-lg mb-2">No habits yet.</p>
-                <p className="text-[var(--text-3)]">Create your first habit to get started.</p>
-              </div>
-            ) : (
-              <div className="grid gap-3">
-                {habits.map((habit) => (
-                  <Link
-                    key={habit.habitid}
-                    href={`/habits/${habit.habitid}`}
-                    className="block rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[12px] p-4 transition hover:-translate-y-0.5"
-                    style={{ boxShadow: '0 2px 12px rgba(30,90,84,0.06)' }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <h3 className="text-lg font-semibold text-[var(--text)]">{habit.title}</h3>
-                        <p className="text-sm text-[var(--text-2)] capitalize">{habit.category}</p>
-                      </div>
-                      <span className="text-[var(--text-3)]">→</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <HabitForm onClose={() => setShowCreate(false)} />
           </div>
         </div>
-      </main>
-    </>
+      )}
+
+      <BottomNav />
+    </div>
   );
 }

@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habito · Developer Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#f0fdf9;color:#1a2e2b;line-height:1.6}
+
+/* ── Layout ── */
+.page{max-width:920px;margin:0 auto;padding:72px 48px}
+.page-sm{max-width:920px;margin:0 auto;padding:48px 48px}
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(53,184,170,.25),transparent);margin:52px 0}
+
+/* ── Cover ── */
+.cover{min-height:100vh;background:linear-gradient(145deg,#062a27 0%,#0d4f4a 35%,#1b6f68 70%,#35b8aa 100%);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 72px;position:relative;overflow:hidden;page-break-after:always}
+.cover h1{font-size:4rem;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:16px}
+.cover .sub{font-size:1.25rem;color:rgba(255,255,255,.65);font-weight:500;margin-bottom:48px;max-width:520px;line-height:1.55}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 18px;color:rgba(255,255,255,.8);font-size:13px;font-weight:600;backdrop-filter:blur(12px)}
+.cover-meta{margin-top:64px;display:flex;gap:32px}
+.cover-stat{display:flex;flex-direction:column;gap:4px}
+.cover-stat .n{font-size:2rem;font-weight:800;color:#35b8aa}
+.cover-stat .l{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── Section label ── */
+.label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#35b8aa;margin-bottom:10px}
+h2{font-size:2rem;font-weight:800;color:#0d2e2b;letter-spacing:-.02em;margin-bottom:12px}
+h3{font-size:1.05rem;font-weight:700;color:#1b6f68;margin-bottom:8px}
+p{color:#3a5a56;line-height:1.7;margin-bottom:12px}
+p:last-child{margin-bottom:0}
+
+/* ── Cards ── */
+.card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 2px 20px rgba(53,184,170,.08);border:1px solid rgba(53,184,170,.12)}
+.card-teal{background:linear-gradient(135deg,rgba(53,184,170,.07),rgba(27,111,104,.04));border:1.5px solid rgba(53,184,170,.2);border-radius:20px;padding:28px}
+.card-dark{background:#0f172a;border-radius:20px;padding:28px;border:1px solid rgba(53,184,170,.15)}
+
+/* ── Code ── */
+pre{background:#0f172a;border-radius:16px;padding:22px 26px;font-family:'SF Mono','Fira Code','Cascadia Code',monospace;font-size:12.5px;line-height:1.8;overflow-x:auto;color:#cbd5e1;border:1px solid rgba(53,184,170,.12)}
+.filename{font-family:'SF Mono',monospace;font-size:11px;font-weight:600;color:#35b8aa;background:rgba(53,184,170,.1);border-radius:6px;padding:3px 10px;display:inline-block;margin-bottom:10px}
+.kw{color:#c084fc}.ty{color:#60a5fa}.str{color:#86efac}.cm{color:#4b5563;font-style:italic}.fn{color:#fbbf24}.tag{color:#35b8aa}.prop{color:#fb923c}.num{color:#f9a8d4}.op{color:#94a3b8}
+
+/* ── Callouts ── */
+.callout{border-radius:14px;padding:16px 20px;margin:20px 0;font-size:13.5px;line-height:1.6}
+.callout-teal{background:rgba(53,184,170,.08);border-left:3px solid #35b8aa;color:#1b6f68}
+.callout-orange{background:rgba(251,146,60,.08);border-left:3px solid #fb923c;color:#92400e}
+.callout-purple{background:rgba(167,139,250,.1);border-left:3px solid #a78bfa;color:#4c1d95}
+.callout strong{font-weight:700}
+
+/* ── Badges ── */
+.badge{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.badge-teal{background:rgba(53,184,170,.12);color:#0d4f4a}
+.badge-orange{background:rgba(251,146,60,.12);color:#92400e}
+.badge-purple{background:rgba(167,139,250,.15);color:#4c1d95}
+.badge-green{background:rgba(74,222,128,.12);color:#14532d}
+.badge-red{background:rgba(248,113,113,.12);color:#7f1d1d}
+
+/* ── Flow / diagram boxes ── */
+.box{border-radius:14px;padding:14px 18px;font-size:13px;font-weight:600;text-align:center;border:2px solid}
+.box-teal{background:rgba(53,184,170,.1);border-color:#35b8aa;color:#0d4f4a}
+.box-white{background:#fff;border-color:rgba(53,184,170,.3);color:#1a2e2b}
+.box-dark{background:#0f172a;border-color:#35b8aa;color:#e2e8f0}
+.box-muted{background:rgba(148,163,184,.08);border-color:rgba(148,163,184,.25);color:#64748b}
+
+/* ── Tree ── */
+.tree{font-family:'SF Mono',monospace;font-size:13px;line-height:2;padding:24px 28px;background:#fff;border-radius:16px;border:1px solid rgba(53,184,170,.12);white-space:pre}
+.tree .dir{color:#35b8aa;font-weight:700}
+.tree .file{color:#4a6e6a}
+.tree .ann{color:#9ca3af;font-style:italic;margin-left:12px;font-size:11px}
+.tree .hot{color:#fb923c;font-weight:600}
+
+/* ── Number circles ── */
+.num-circle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#35b8aa;color:#fff;font-size:12px;font-weight:800;flex-shrink:0}
+
+/* ── Feature entry box ── */
+.entry{background:linear-gradient(135deg,rgba(53,184,170,.06),rgba(27,111,104,.04));border:1.5px dashed rgba(53,184,170,.4);border-radius:14px;padding:16px 20px;font-size:13px;color:#1b6f68}
+.entry .marker{font-family:'SF Mono',monospace;font-size:11px;font-weight:700;color:#35b8aa;display:block;margin-bottom:4px}
+
+/* ── Print ── */
+@media print{
+  body{background:#fff}
+  .cover{min-height:auto;padding:60px}
+  .cover h1{font-size:3rem}
+  .page,.page-sm{padding:40px}
+}
+
+/* ── Page break hints ── */
+.break{page-break-before:always}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════════════ -->
+<div class="cover">
+  <!-- decorative SVG blobs -->
+  <svg style="position:absolute;top:-80px;right:-80px;opacity:.12" width="520" height="520" viewBox="0 0 520 520">
+    <circle cx="260" cy="260" r="220" fill="#35b8aa"/>
+    <circle cx="360" cy="160" r="120" fill="#fff"/>
+  </svg>
+  <svg style="position:absolute;bottom:-60px;left:60px;opacity:.08" width="340" height="340" viewBox="0 0 340 340">
+    <polygon points="170,10 330,330 10,330" fill="#35b8aa"/>
+  </svg>
+
+  <div class="cover-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+    15-Minuten Developer Briefing
+  </div>
+
+  <div style="margin-top:40px">
+    <h1>Habito<br>Codebase<br>Guide</h1>
+    <p class="sub">Alles was du brauchst, um das Skelett zu verstehen — Architektur, TypeScript-Konzepte und wo dein Feature hinkommt. Kein Vorwissen nötig außer HTML.</p>
+  </div>
+
+  <div class="cover-meta">
+    <div class="cover-stat"><span class="n">4</span><span class="l">Screens</span></div>
+    <div class="cover-stat"><span class="n">~20</span><span class="l">Dateien</span></div>
+    <div class="cover-stat"><span class="n">Next.js</span><span class="l">Framework</span></div>
+    <div class="cover-stat"><span class="n">Supabase</span><span class="l">Backend</span></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     01 · DAS GROSSE BILD
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="label">01 · Architektur</div>
+  <h2>Das große Bild</h2>
+  <p>Habito besteht aus <strong>4 Screens</strong>, geteilten Komponenten, einer Datenschicht und einem API-Layer. Alles hängt zusammen — aber jedes Teil ist isoliert austauschbar.</p>
+
+  <!-- Architecture SVG diagram -->
+  <div style="margin:36px 0">
+  <svg viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:-apple-system,system-ui,sans-serif">
+    <defs>
+      <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#35b8aa"/>
+      </marker>
+      <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+      </marker>
+      <marker id="arr-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#fb923c"/>
+      </marker>
+      <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="rgba(53,184,170,0.15)"/>
+      </filter>
+    </defs>
+
+    <!-- ── API Layer (top) ── -->
+    <rect x="340" y="16" width="180" height="48" rx="12" fill="#0f172a" stroke="#35b8aa" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="430" y="36" text-anchor="middle" fill="#35b8aa" font-size="10" font-weight="700" font-family="monospace">/api/habits</text>
+    <text x="430" y="52" text-anchor="middle" fill="#64748b" font-size="10">Supabase · PostgreSQL</text>
+
+    <!-- ── Pages (middle row) ── -->
+    <!-- Home -->
+    <rect x="30" y="130" width="150" height="72" rx="14" fill="white" stroke="rgba(53,184,170,0.35)" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="105" y="158" text-anchor="middle" fill="#0d4f4a" font-size="13" font-weight="700">Home</text>
+    <text x="105" y="176" text-anchor="middle" fill="#64748b" font-size="10">app/page.tsx</text>
+    <text x="105" y="192" text-anchor="middle" fill="#35b8aa" font-size="9" font-weight="600">Today · Momentum</text>
+
+    <!-- Habits -->
+    <rect x="220" y="130" width="150" height="72" rx="14" fill="white" stroke="rgba(53,184,170,0.35)" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="295" y="158" text-anchor="middle" fill="#0d4f4a" font-size="13" font-weight="700">Habits</text>
+    <text x="295" y="176" text-anchor="middle" fill="#64748b" font-size="10">app/habits/page.tsx</text>
+    <text x="295" y="192" text-anchor="middle" fill="#35b8aa" font-size="9" font-weight="600">Placeholder · FEATURE ENTRY POINT</text>
+
+    <!-- Stats -->
+    <rect x="410" y="130" width="150" height="72" rx="14" fill="white" stroke="rgba(53,184,170,0.35)" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="485" y="158" text-anchor="middle" fill="#0d4f4a" font-size="13" font-weight="700">Stats</text>
+    <text x="485" y="176" text-anchor="middle" fill="#64748b" font-size="10">app/stats/page.tsx</text>
+    <text x="485" y="192" text-anchor="middle" fill="#35b8aa" font-size="9" font-weight="600">Placeholder · FEATURE ENTRY POINT</text>
+
+    <!-- Pet -->
+    <rect x="600" y="130" width="150" height="72" rx="14" fill="white" stroke="rgba(53,184,170,0.35)" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="675" y="158" text-anchor="middle" fill="#0d4f4a" font-size="13" font-weight="700">Pet</text>
+    <text x="675" y="176" text-anchor="middle" fill="#64748b" font-size="10">app/pet/page.tsx</text>
+    <text x="675" y="192" text-anchor="middle" fill="#35b8aa" font-size="9" font-weight="600">Placeholder</text>
+
+    <!-- ── Shared Components ── -->
+    <rect x="100" y="270" width="560" height="60" rx="14" fill="rgba(53,184,170,0.06)" stroke="rgba(53,184,170,0.3)" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="380" y="292" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700">Shared Components</text>
+    <text x="180" y="314" text-anchor="middle" fill="#1b6f68" font-size="10" font-weight="600">BottomNav</text>
+    <text x="290" y="314" text-anchor="middle" fill="#1b6f68" font-size="10" font-weight="600">SettingsMenu</text>
+    <text x="420" y="314" text-anchor="middle" fill="#1b6f68" font-size="10" font-weight="600">HomeHeader</text>
+    <text x="560" y="314" text-anchor="middle" fill="#1b6f68" font-size="10" font-weight="600">HabitForm</text>
+
+    <!-- ── Data Layer ── -->
+    <rect x="100" y="388" width="260" height="60" rx="14" fill="rgba(53,184,170,0.06)" stroke="rgba(53,184,170,0.2)" stroke-width="1.5"/>
+    <text x="230" y="412" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700">Datenschicht · app/lib/</text>
+    <text x="165" y="432" text-anchor="middle" fill="#64748b" font-size="10">types.ts</text>
+    <text x="260" y="432" text-anchor="middle" fill="#64748b" font-size="10">mockHome.ts</text>
+    <text x="355" y="432" text-anchor="middle" fill="#64748b" font-size="10">categoryColors.ts</text>
+
+    <!-- ── CSS / Design Tokens ── -->
+    <rect x="420" y="388" width="240" height="60" rx="14" fill="rgba(53,184,170,0.06)" stroke="rgba(53,184,170,0.2)" stroke-width="1.5"/>
+    <text x="540" y="412" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700">Design Tokens · globals.css</text>
+    <text x="480" y="432" text-anchor="middle" fill="#64748b" font-size="10">--teal-*</text>
+    <text x="540" y="432" text-anchor="middle" fill="#64748b" font-size="10">dark mode</text>
+    <text x="610" y="432" text-anchor="middle" fill="#64748b" font-size="10">--radius</text>
+
+    <!-- ── Arrows: API → Pages ── -->
+    <path d="M380 64 C280 90, 180 100, 140 130" fill="none" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+    <path d="M410 64 C380 90, 340 100, 310 130" fill="none" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+    <path d="M450 64 C460 90, 470 100, 480 130" fill="none" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+    <path d="M480 64 C560 90, 620 100, 650 130" fill="none" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+
+    <!-- ── Arrows: Pages → Shared Components ── -->
+    <path d="M105 202 L180 270" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr-gray)"/>
+    <path d="M295 202 L290 270" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr-gray)"/>
+    <path d="M485 202 L420 270" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr-gray)"/>
+    <path d="M675 202 L560 270" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr-gray)"/>
+
+    <!-- ── Arrows: Pages → Data Layer ── -->
+    <path d="M105 202 C90 300, 150 360, 190 388" fill="none" stroke="#fb923c" stroke-width="1.2" marker-end="url(#arr-orange)" stroke-dasharray="3,3"/>
+    <path d="M295 202 C280 300, 250 360, 240 388" fill="none" stroke="#fb923c" stroke-width="1.2" marker-end="url(#arr-orange)" stroke-dasharray="3,3"/>
+
+    <!-- ── Legend ── -->
+    <line x1="640" y1="410" x2="660" y2="410" stroke="#35b8aa" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="665" y="414" fill="#35b8aa" font-size="9" font-weight="600">Daten-Flow</text>
+    <line x1="640" y1="428" x2="660" y2="428" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="665" y="432" fill="#64748b" font-size="9">importiert</text>
+    <line x1="640" y1="446" x2="660" y2="446" stroke="#fb923c" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="665" y="450" fill="#fb923c" font-size="9">Mock-Fallback</text>
+  </svg>
+  </div>
+
+  <div class="col2">
+    <div class="callout callout-teal">
+      <strong>Warum so aufgeteilt?</strong><br>
+      Jeder Coder arbeitet in einer Datei / einem Ordner ohne die Arbeit anderer zu berühren. Die geteilten Komponenten (<code>BottomNav</code>, <code>SettingsMenu</code>) ändert niemand — die funktionieren bereits.
+    </div>
+    <div class="callout callout-orange">
+      <strong>Mock-Fallback:</strong> Kein Backend? Kein Problem. Jede Seite fällt auf statische Testdaten zurück (→ <code>app/lib/mockHome.ts</code>). Der localhost läuft immer — egal ob Supabase konfiguriert ist oder nicht.
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     02 · DATEISTRUKTUR
+════════════════════════════════════════════════════ -->
+<div class="page-sm break">
+  <div class="label">02 · Dateistruktur</div>
+  <h2>Wo liegt was?</h2>
+  <p>Next.js nutzt <strong>File-Based Routing</strong>: jede Datei namens <code>page.tsx</code> in einem Ordner wird automatisch eine URL. Kein manuelles Router-Setup nötig.</p>
+
+  <div class="col2" style="margin-top:28px;align-items:start">
+    <div class="tree">
+<span class="dir">app/</span>
+├── <span class="hot">page.tsx</span>          <span class="ann">→ localhost:3000/</span>
+├── <span class="file">layout.tsx</span>        <span class="ann">HTML-Shell + ThemeProvider</span>
+├── <span class="file">globals.css</span>       <span class="ann">Design-Tokens + Dark Mode</span>
+├── <span class="file">manifest.ts</span>       <span class="ann">PWA-Konfiguration</span>
+│
+├── <span class="dir">habits/</span>
+│   ├── <span class="hot">page.tsx</span>       <span class="ann">→ /habits</span>
+│   ├── <span class="file">layout.tsx</span>     <span class="ann">Parallel Routes Setup</span>
+│   ├── <span class="dir">create/</span>
+│   │   ├── <span class="hot">page.tsx</span>    <span class="ann">→ /habits/create (fallback)</span>
+│   │   └── <span class="hot">HabitForm.tsx</span><span class="ann"> geteiltes Formular</span>
+│   └── <span class="dir">@modal/(.)create/</span>
+│       └── <span class="hot">page.tsx</span>    <span class="ann">Sheet über Habits-Page</span>
+│
+├── <span class="dir">stats/</span>
+│   └── <span class="hot">page.tsx</span>       <span class="ann">→ /stats</span>
+│
+├── <span class="dir">pet/</span>
+│   └── <span class="hot">page.tsx</span>       <span class="ann">→ /pet</span>
+│
+├── <span class="dir">api/habits/</span>
+│   └── <span class="file">route.ts</span>       <span class="ann">GET + POST → Supabase</span>
+│
+├── <span class="dir">components/</span>
+│   ├── <span class="file">BottomNav.tsx</span>  <span class="ann">Navigation · alle Tabs</span>
+│   ├── <span class="file">SettingsMenu.tsx</span><span class="ann">Burger · alle Tabs</span>
+│   └── <span class="dir">home/</span>
+│       ├── <span class="file">HomeHeader.tsx</span>
+│       ├── <span class="file">TodayStatsRow.tsx</span>
+│       ├── <span class="file">MomentumCard.tsx</span>
+│       └── <span class="file">TodayHabitList.tsx</span>
+│
+└── <span class="dir">lib/</span>
+    ├── <span class="file">types.ts</span>       <span class="ann">alle Interface-Definitionen</span>
+    ├── <span class="file">mockHome.ts</span>    <span class="ann">Testdaten</span>
+    ├── <span class="file">categoryColors.ts</span>
+    └── <span class="file">ThemeContext.tsx</span><span class="ann">Dark Mode State</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <h3>File-Based Routing</h3>
+        <p style="font-size:13px">Ordnerstruktur = URL-Struktur. <code style="background:rgba(53,184,170,.1);padding:2px 6px;border-radius:4px;font-size:12px">app/habits/page.tsx</code> → <code style="background:rgba(53,184,170,.1);padding:2px 6px;border-radius:4px;font-size:12px">localhost/habits</code>. Keine Router-Konfiguration nötig.</p>
+      </div>
+      <div class="card">
+        <h3>Benennungskonvention</h3>
+        <p style="font-size:13px"><code>page.tsx</code> = eine Route<br><code>layout.tsx</code> = Shell um mehrere Routen<br><code>GROSSBUCHSTABEN.tsx</code> = Komponente (kein eigener URL)<br><code>route.ts</code> = API-Endpoint</p>
+      </div>
+      <div class="callout callout-purple" style="font-size:13px">
+        <strong>@modal/(.)create</strong> ist eine sogenannte "Intercepting Route" — die Habits-Page bleibt sichtbar während das Formular-Sheet darüber liegt. Mehr dazu in Abschnitt 08.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     03 · TYPESCRIPT KONZEPTE
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">03 · TypeScript-Konzepte</div>
+  <h2>Was ist anders als HTML?</h2>
+  <p>TypeScript ist JavaScript mit Typen. Wenn du HTML und eine andere Sprache kennst, brauchst du nur 4 neue Konzepte.</p>
+
+  <div style="margin-top:32px;display:flex;flex-direction:column;gap:28px">
+
+    <!-- CONCEPT 1: interface -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="num-circle">1</div>
+        <div>
+          <h3 style="margin:0">interface / type — Der Datenvertrag</h3>
+          <p style="margin:0;font-size:12px;color:#64748b">Aus <code>app/lib/types.ts</code></p>
+        </div>
+        <span class="badge badge-purple" style="margin-left:auto">Neu für HTML-Coder</span>
+      </div>
+      <div class="col2">
+        <div>
+          <p style="font-size:13px">Ein <code>interface</code> beschreibt die <strong>Form eines Objekts</strong>. Wie ein Formular-Template: es legt fest, welche Felder existieren müssen und welchen Typ sie haben.</p>
+          <p style="font-size:13px">TypeScript zeigt einen Fehler, wenn ein Objekt das Interface nicht erfüllt — <em>bevor</em> der Code läuft. Das verhindert Tippfehler und falsche Daten.</p>
+          <div class="callout callout-teal" style="font-size:12px;margin-top:12px">
+            <strong>Analogie:</strong> Ein Formular-Vordruck. Wer ihn ausfüllt, muss alle Pflichtfelder angeben — und in der richtigen Art (Text, Zahl, etc.)
+          </div>
+        </div>
+        <pre><span class="cm">// app/lib/types.ts</span>
+
+<span class="cm">// Erlaubte Kategorien — nur diese 4 Strings</span>
+<span class="kw">export type</span> <span class="ty">HabitCategory</span> =
+  <span class="str">'sport'</span> | <span class="str">'health'</span> |
+  <span class="str">'mental'</span> | <span class="str">'personal'</span>;
+
+<span class="cm">// Datenvertrag für einen Home-Tab Habit</span>
+<span class="kw">export interface</span> <span class="ty">HomeHabit</span> {
+  habitid: <span class="ty">string</span>;
+  title: <span class="ty">string</span>;
+  category: <span class="ty">HabitCategory</span>; <span class="cm">// nur die 4!</span>
+  streakDays: <span class="ty">number</span>;
+  doneToday: <span class="ty">boolean</span>;
+}</pre>
+      </div>
+    </div>
+
+    <!-- CONCEPT 2: useState -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="num-circle">2</div>
+        <div>
+          <h3 style="margin:0">useState — Die lebendige Variable</h3>
+          <p style="margin:0;font-size:12px;color:#64748b">React's reaktiver Zustand</p>
+        </div>
+        <span class="badge badge-orange" style="margin-left:auto">Wichtigstes Konzept</span>
+      </div>
+      <div class="col2">
+        <pre><span class="cm">// Normale JS-Variable: UI updatet sich NICHT</span>
+<span class="kw">let</span> habits = [];
+habits = fetchedHabits; <span class="cm">// ← Seite bleibt leer</span>
+
+<span class="cm">// useState: bei Änderung rendert React neu</span>
+<span class="kw">const</span> [habits, setHabits] =
+  <span class="fn">useState</span>&lt;<span class="ty">HomeHabit</span>[]&gt;([]);
+
+setHabits(fetchedHabits); <span class="cm">// ← UI updatet sofort</span>
+
+<span class="cm">// Boolean-State: Sheet auf/zu</span>
+<span class="kw">const</span> [showCreate, setShowCreate] =
+  <span class="fn">useState</span>(<span class="kw">false</span>);
+
+<span class="cm">// Loading-State: Spinner vs. Inhalt</span>
+<span class="kw">const</span> [loading, setLoading] =
+  <span class="fn">useState</span>(<span class="kw">true</span>);</pre>
+        <div>
+          <!-- useState diagram -->
+          <svg viewBox="0 0 260 200" style="width:100%;margin-top:8px">
+            <rect x="20" y="20" width="220" height="60" rx="12" fill="rgba(53,184,170,.08)" stroke="#35b8aa" stroke-width="1.5"/>
+            <text x="130" y="44" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700" font-family="monospace">useState(initialValue)</text>
+            <text x="80" y="64" text-anchor="middle" fill="#35b8aa" font-size="10" font-family="monospace">value</text>
+            <text x="180" y="64" text-anchor="middle" fill="#fb923c" font-size="10" font-family="monospace">setValue()</text>
+
+            <text x="65" y="112" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="600">Lesen</text>
+            <text x="195" y="112" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="600">Schreiben</text>
+
+            <path d="M80 80 L80 100" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#arr)"/>
+            <path d="M180 80 L180 100" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arr-orange)"/>
+
+            <rect x="20" y="130" width="220" height="54" rx="12" fill="rgba(53,184,170,.06)" stroke="rgba(53,184,170,.2)" stroke-width="1.5"/>
+            <text x="130" y="152" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">UI rendert automatisch neu</text>
+            <text x="130" y="168" text-anchor="middle" fill="#64748b" font-size="9">sobald setValue() aufgerufen wird</text>
+            <defs><marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#35b8aa"/></marker><marker id="arr-orange" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#fb923c"/></marker></defs>
+          </svg>
+          <p style="font-size:12px;color:#64748b;margin-top:8px;text-align:center">setValue() → React merkt die Änderung → Komponente rendert mit neuem Wert</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT 3: Props + Components -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="num-circle">3</div>
+        <div>
+          <h3 style="margin:0">Komponenten + Props — Wiederverwendbare Blöcke</h3>
+          <p style="margin:0;font-size:12px;color:#64748b">HTML-Include, aber mit Logik und Parametern</p>
+        </div>
+      </div>
+      <div class="col2">
+        <div>
+          <p style="font-size:13px">Eine Komponente ist eine <strong>Funktion, die HTML zurückgibt</strong>. Props sind ihre Parameter — wie beim Funktionsaufruf, nur für UI-Blöcke.</p>
+          <p style="font-size:13px"><code>BottomNav</code> ist ein Beispiel: einmal geschrieben, in allen 4 Seiten eingebunden. Ändert sich die Nav, ändert sich alles auf einmal.</p>
+        </div>
+        <pre><span class="cm">// app/components/home/HomeHeader.tsx (exakt)</span>
+<span class="kw">function</span> <span class="fn">getGreeting</span>(date: <span class="ty">Date</span>): <span class="ty">string</span> {
+  <span class="kw">const</span> h = date.<span class="fn">getHours</span>();
+  <span class="kw">if</span> (h &lt; <span class="num">5</span>)  <span class="kw">return</span> <span class="str">'Good night'</span>;
+  <span class="kw">if</span> (h &lt; <span class="num">12</span>) <span class="kw">return</span> <span class="str">'Good morning'</span>;
+  <span class="kw">if</span> (h &lt; <span class="num">17</span>) <span class="kw">return</span> <span class="str">'Good afternoon'</span>;
+  <span class="kw">if</span> (h &lt; <span class="num">21</span>) <span class="kw">return</span> <span class="str">'Good evening'</span>;
+  <span class="kw">return</span> <span class="str">'Good night'</span>;
+}
+
+<span class="kw">function</span> <span class="fn">formatDate</span>(date: <span class="ty">Date</span>): <span class="ty">string</span> {
+  <span class="kw">return</span> date.<span class="fn">toLocaleDateString</span>(<span class="str">'en-US'</span>, {
+    weekday: <span class="str">'long'</span>, month: <span class="str">'long'</span>, day: <span class="str">'numeric'</span>
+  });
+}
+
+<span class="kw">export function</span> <span class="fn">HomeHeader</span>() {
+  <span class="kw">const</span> now = <span class="kw">new</span> <span class="ty">Date</span>();
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"flex items-center justify-between"</span>&gt;
+      &lt;<span class="tag">div</span>&gt;
+        &lt;<span class="tag">h1</span>&gt;{<span class="fn">getGreeting</span>(now)}&lt;/<span class="tag">h1</span>&gt;
+        &lt;<span class="tag">p</span>&gt;{<span class="fn">formatDate</span>(now)}&lt;/<span class="tag">p</span>&gt;
+      &lt;/<span class="tag">div</span>&gt;
+      &lt;<span class="tag">SettingsMenu</span> /&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}
+
+<span class="cm">// Benutzen (page.tsx)</span>
+&lt;<span class="tag">HomeHeader</span> /&gt;</pre>
+      </div>
+    </div>
+
+    <!-- CONCEPT 4: useEffect / async -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="num-circle">4</div>
+        <div>
+          <h3 style="margin:0">useEffect + async/await — Daten laden</h3>
+          <p style="margin:0;font-size:12px;color:#64748b">Das Muster für API-Calls in React</p>
+        </div>
+      </div>
+      <pre><span class="cm">// Läuft einmal nach dem ersten Render (leeres [] am Ende = "nur einmal")</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="kw">const</span> <span class="fn">load</span> = <span class="kw">async</span> () => {
+    <span class="kw">try</span> {
+      <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/habits'</span>);     <span class="cm">// ← API-Call</span>
+      <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();              <span class="cm">// ← Antwort lesen</span>
+      <span class="fn">setHabits</span>(data);                            <span class="cm">// ← State updaten → UI neu</span>
+    } <span class="kw">catch</span> {
+      <span class="fn">setHabits</span>(MOCK_HABITS);                     <span class="cm">// ← Fallback bei Fehler</span>
+    } <span class="kw">finally</span> {
+      <span class="fn">setLoading</span>(<span class="kw">false</span>);                         <span class="cm">// ← Spinner weg</span>
+    }
+  };
+  <span class="fn">load</span>();
+}, []);</pre>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     04 · DIE DATENSCHICHT
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">04 · Datenschicht</div>
+  <h2>app/lib/ — Typen, Mocks, Farben</h2>
+  <p>Alle Daten-Definitionen und Testdaten leben in <code>app/lib/</code>. Diese Dateien importiert jede Seite — sie bilden das Fundament.</p>
+
+  <div class="col2" style="margin-top:28px">
+    <div>
+      <div class="filename">app/lib/types.ts</div>
+      <pre><span class="cm">// Typ-Union: nur diese 4 Strings erlaubt</span>
+<span class="kw">export type</span> <span class="ty">HabitCategory</span> =
+  <span class="str">'sport'</span> | <span class="str">'health'</span> | <span class="str">'mental'</span> | <span class="str">'personal'</span>;
+
+<span class="kw">export type</span> <span class="ty">DayOfWeek</span> =
+  <span class="str">'monday'</span> | <span class="str">'tuesday'</span> | <span class="str">'wednesday'</span> |
+  <span class="str">'thursday'</span> | <span class="str">'friday'</span> | <span class="str">'saturday'</span> | <span class="str">'sunday'</span>;
+
+<span class="cm">// HomeHabit = wie ein Habit auf der Home-Page aussieht</span>
+<span class="kw">export interface</span> <span class="ty">HomeHabit</span> {
+  habitid: <span class="ty">string</span>;        <span class="cm">// UUID aus Supabase</span>
+  title: <span class="ty">string</span>;
+  category: <span class="ty">HabitCategory</span>;
+  streakDays: <span class="ty">number</span>;    <span class="cm">// noch mock</span>
+  doneToday: <span class="ty">boolean</span>;
+}
+
+<span class="cm">// ManagedHabit = wie ein Habit auf /habits aussieht</span>
+<span class="kw">export interface</span> <span class="ty">ManagedHabit</span> {
+  habitid: <span class="ty">string</span>;
+  title: <span class="ty">string</span>;
+  category: <span class="ty">HabitCategory</span>;
+  freqLabel: <span class="ty">string</span>;     <span class="cm">// z.B. "Daily" oder "3× week"</span>
+}</pre>
+    </div>
+
+    <div>
+      <div class="filename">app/lib/mockHome.ts</div>
+      <pre><span class="cm">// Fallback-Habits — wenn API nicht erreichbar</span>
+<span class="kw">export const</span> MOCK_HABITS: <span class="ty">HomeHabit</span>[] = [
+  {
+    habitid: <span class="str">'mock-run'</span>,
+    title: <span class="str">'Morning Run'</span>,
+    category: <span class="str">'sport'</span>,
+    streakDays: <span class="num">8</span>,
+    doneToday: <span class="kw">false</span>,
+  },
+  {
+    habitid: <span class="str">'mock-read'</span>,
+    title: <span class="str">'Read 20 Pages'</span>,
+    category: <span class="str">'personal'</span>,
+    streakDays: <span class="num">15</span>,
+    doneToday: <span class="kw">false</span>,
+  },
+  <span class="cm">// ... 2 weitere</span>
+];</pre>
+
+      <div class="callout callout-orange" style="margin-top:16px;font-size:13px">
+        <strong>Warum Mocks?</strong><br>
+        Kein <code>.env.local</code> mit Supabase-Keys? Die App rendert trotzdem vollständig. Jeder kann auf localhost entwickeln ohne Backend-Zugang.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Data flow diagram -->
+  <h3 style="margin-bottom:20px">Wie Daten durch die App fließen</h3>
+  <svg viewBox="0 0 820 130" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+    <defs>
+      <marker id="a2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#35b8aa"/></marker>
+      <marker id="a2g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/></marker>
+      <marker id="a2r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#f87171"/></marker>
+    </defs>
+
+    <!-- fetch() -->
+    <rect x="10" y="40" width="120" height="50" rx="12" fill="#0f172a" stroke="#35b8aa" stroke-width="1.5"/>
+    <text x="70" y="62" text-anchor="middle" fill="#35b8aa" font-size="11" font-weight="700" font-family="monospace">fetch()</text>
+    <text x="70" y="78" text-anchor="middle" fill="#64748b" font-size="10">/api/habits</text>
+
+    <!-- arrow to diamond -->
+    <path d="M130 65 L180 65" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#a2)"/>
+
+    <!-- Diamond: ok? -->
+    <polygon points="210,40 260,65 210,90 160,65" fill="rgba(53,184,170,.1)" stroke="#35b8aa" stroke-width="1.5"/>
+    <text x="210" y="69" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700">ok?</text>
+
+    <!-- YES path -->
+    <path d="M260 65 L310 65" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#a2)"/>
+    <text x="283" y="58" text-anchor="middle" fill="#35b8aa" font-size="9" font-weight="600">ja</text>
+
+    <rect x="310" y="40" width="140" height="50" rx="12" fill="rgba(53,184,170,.08)" stroke="#35b8aa" stroke-width="1.5"/>
+    <text x="380" y="62" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">map() → HomeHabit[]</text>
+    <text x="380" y="78" text-anchor="middle" fill="#64748b" font-size="9">DB-Row → UI-Modell</text>
+
+    <!-- NO path (mock) -->
+    <path d="M210 90 C210 118, 480 118, 545 90" fill="none" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a2r)"/>
+    <text x="375" y="115" text-anchor="middle" fill="#f87171" font-size="9" font-weight="600">nein → MOCK_HABITS</text>
+
+    <!-- arrow to setHabits -->
+    <path d="M450 65 L500 65" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#a2)"/>
+
+    <rect x="500" y="40" width="130" height="50" rx="12" fill="rgba(53,184,170,.08)" stroke="rgba(53,184,170,.35)" stroke-width="1.5"/>
+    <text x="565" y="62" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700" font-family="monospace">setHabits(data)</text>
+    <text x="565" y="78" text-anchor="middle" fill="#64748b" font-size="9">State updaten</text>
+
+    <!-- arrow to render -->
+    <path d="M630 65 L680 65" stroke="#35b8aa" stroke-width="1.5" marker-end="url(#a2)"/>
+
+    <rect x="680" y="40" width="120" height="50" rx="12" fill="white" stroke="rgba(53,184,170,.35)" stroke-width="1.5"/>
+    <text x="740" y="62" text-anchor="middle" fill="#0d4f4a" font-size="11" font-weight="700">UI rendert</text>
+    <text x="740" y="78" text-anchor="middle" fill="#64748b" font-size="9">Liste sichtbar</text>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     05 · HOME PAGE ANATOMY
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">05 · Seitenaufbau</div>
+  <h2>app/page.tsx — Die Home-Page seziert</h2>
+  <p>Die Haupt-Page ist rein ein <strong>Kompositions-Layer</strong>: Sie lädt Daten und gibt sie an spezialisierte Komponenten weiter. Kein direkt geschriebenes HTML außer dem Container.</p>
+
+  <div style="margin-top:28px">
+    <div class="filename">app/page.tsx</div>
+    <pre><span class="str">'use client'</span>; <span class="cm">// ← sagt Next.js: JavaScript im Browser aktiv (kein Server-only)</span>
+
+<span class="kw">import</span> { useEffect, useState } <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> { HomeHeader }     <span class="kw">from</span> <span class="str">'./components/home/HomeHeader'</span>;
+<span class="kw">import</span> { TodayHabitList } <span class="kw">from</span> <span class="str">'./components/home/TodayHabitList'</span>;
+<span class="kw">import</span> { BottomNav }      <span class="kw">from</span> <span class="str">'./components/BottomNav'</span>;
+<span class="kw">import</span> { HabitForm }      <span class="kw">from</span> <span class="str">'./habits/create/HabitForm'</span>;
+<span class="kw">import</span> { MOCK_HABITS }    <span class="kw">from</span> <span class="str">'./lib/mockHome'</span>;
+
+<span class="kw">export default function</span> <span class="fn">Home</span>() {
+  <span class="cm">// ── State: was diese Seite wissen muss ─────────────────────────────────</span>
+  <span class="kw">const</span> [habits, setHabits]         = <span class="fn">useState</span>&lt;<span class="ty">HomeHabit</span>[]&gt;([]);
+  <span class="kw">const</span> [loading, setLoading]       = <span class="fn">useState</span>(<span class="kw">true</span>);
+  <span class="kw">const</span> [showCreate, setShowCreate] = <span class="fn">useState</span>(<span class="kw">false</span>); <span class="cm">// Sheet auf/zu</span>
+
+  <span class="cm">// ── Daten laden (einmalig beim ersten Render) ──────────────────────────</span>
+  <span class="fn">useEffect</span>(() => {
+    <span class="kw">const</span> <span class="fn">fetchHabits</span> = <span class="kw">async</span> () => {
+      <span class="kw">try</span> {
+        <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/habits'</span>);
+        <span class="kw">if</span> (!res.<span class="prop">ok</span>) <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">'Failed to fetch habits'</span>);
+        <span class="kw">const</span> rows = (<span class="kw">await</span> res.<span class="fn">json</span>()) <span class="kw">as</span> <span class="ty">HabitApiRow</span>[];
+        <span class="kw">const</span> mapped = rows.<span class="fn">map</span>((row) => ({
+          habitid: row.habitid, title: row.title,
+          category: row.category,
+          streakDays: MOCK_DEFAULT_STREAK, doneToday: <span class="kw">false</span>,
+        }));
+        <span class="fn">setHabits</span>(mapped.length &gt; <span class="num">0</span> ? mapped : MOCK_HABITS);
+      } <span class="kw">catch</span> {
+        <span class="fn">setHabits</span>(MOCK_HABITS); <span class="cm">// kein Backend → Mock</span>
+      } <span class="kw">finally</span> {
+        <span class="fn">setLoading</span>(<span class="kw">false</span>);
+      }
+    };
+    <span class="fn">fetchHabits</span>();
+  }, []);
+
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"flex min-h-full flex-col"</span>&gt;
+      &lt;<span class="tag">main</span> <span class="prop">className</span>=<span class="str">"mx-auto max-w-md px-4 pt-4"</span>&gt;
+
+        &lt;<span class="tag">HomeHeader</span> /&gt;                              <span class="cm">// Greeting + Datum + Settings</span>
+        &lt;<span class="tag">TodayStatsRow</span>  /&gt;                              <span class="cm">// 3 leere Placeholder-Boxen</span>
+        &lt;<span class="tag">MomentumCard</span>   /&gt;                              <span class="cm">// leere Placeholder-Box</span>
+        &lt;<span class="tag">TodayHabitList</span> <span class="prop">habits</span>={habits} <span class="prop">onToggle</span>={toggleHabit} /&gt;
+
+        &lt;<span class="tag">button</span> <span class="prop">onClick</span>={() =&gt; <span class="fn">setShowCreate</span>(<span class="kw">true</span>)}&gt;+ New Habit&lt;/<span class="tag">button</span>&gt;
+
+      &lt;/<span class="tag">main</span>&gt;
+
+      <span class="cm">/* Bottom Sheet (liegt über der ganzen Seite wenn open=true) */</span>
+      {showCreate &amp;&amp; (
+        &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"fixed inset-0 z-50"</span>&gt;
+          &lt;<span class="tag">div</span> <span class="prop">onClick</span>={() =&gt; <span class="fn">setShowCreate</span>(<span class="kw">false</span>)} /&gt; <span class="cm">// Backdrop tap → close</span>
+          &lt;<span class="tag">HabitForm</span> <span class="prop">onClose</span>={() =&gt; <span class="fn">setShowCreate</span>(<span class="kw">false</span>)} /&gt;
+        &lt;/<span class="tag">div</span>&gt;
+      )}
+
+      &lt;<span class="tag">BottomNav</span> /&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}</pre>
+  </div>
+
+  <!-- Component breakdown visual -->
+  <div style="margin-top:32px">
+    <h3 style="margin-bottom:16px">Komponentenbaum der Home-Page</h3>
+    <svg viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+      <defs><marker id="a3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#94a3b8"/></marker></defs>
+      <!-- Root -->
+      <rect x="330" y="10" width="160" height="44" rx="10" fill="#0f172a" stroke="#35b8aa" stroke-width="1.5"/>
+      <text x="410" y="28" text-anchor="middle" fill="#35b8aa" font-size="10" font-weight="700" font-family="monospace">page.tsx</text>
+      <text x="410" y="44" text-anchor="middle" fill="#64748b" font-size="9">Daten + Layout</text>
+
+      <!-- Children -->
+      <path d="M370 54 L130 110" stroke="#94a3b8" stroke-width="1" marker-end="url(#a3)"/>
+      <path d="M390 54 L285 110" stroke="#94a3b8" stroke-width="1" marker-end="url(#a3)"/>
+      <path d="M410 54 L440 110" stroke="#94a3b8" stroke-width="1" marker-end="url(#a3)"/>
+      <path d="M430 54 L590 110" stroke="#94a3b8" stroke-width="1" marker-end="url(#a3)"/>
+      <path d="M450 54 L720 110" stroke="#94a3b8" stroke-width="1" marker-end="url(#a3)"/>
+
+      <rect x="30" y="110" width="200" height="50" rx="10" fill="white" stroke="rgba(53,184,170,.3)" stroke-width="1.5"/>
+      <text x="130" y="131" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">HomeHeader</text>
+      <text x="130" y="147" text-anchor="middle" fill="#64748b" font-size="9">Greeting · SettingsMenu</text>
+
+      <rect x="240" y="110" width="150" height="50" rx="10" fill="white" stroke="rgba(53,184,170,.3)" stroke-width="1.5"/>
+      <text x="315" y="131" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">TodayStatsRow</text>
+      <text x="315" y="147" text-anchor="middle" fill="#64748b" font-size="9">3 Placeholder-Boxen</text>
+
+      <rect x="400" y="110" width="160" height="50" rx="10" fill="white" stroke="rgba(53,184,170,.3)" stroke-width="1.5"/>
+      <text x="480" y="131" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">MomentumCard</text>
+      <text x="480" y="147" text-anchor="middle" fill="#64748b" font-size="9">Placeholder-Box</text>
+
+      <rect x="565" y="110" width="160" height="50" rx="10" fill="white" stroke="rgba(53,184,170,.3)" stroke-width="1.5"/>
+      <text x="645" y="131" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">TodayHabitList</text>
+      <text x="645" y="147" text-anchor="middle" fill="#64748b" font-size="9">Habit Rows · Toggle</text>
+
+      <rect x="670" y="110" width="120" height="50" rx="10" fill="rgba(53,184,170,.08)" stroke="rgba(53,184,170,.3)" stroke-width="1.5"/>
+      <text x="730" y="131" text-anchor="middle" fill="#0d4f4a" font-size="10" font-weight="700">BottomNav</text>
+      <text x="730" y="147" text-anchor="middle" fill="#64748b" font-size="9">4 Tabs</text>
+    </svg>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     06 · SHARED COMPONENTS
+════════════════════════════════════════════════════ -->
+<div class="page-sm break">
+  <div class="label">06 · Shared Components</div>
+  <h2>Komponenten die alle Seiten teilen</h2>
+
+  <div class="col2" style="margin-top:24px">
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card">
+        <div class="filename" style="margin-bottom:12px">BottomNav.tsx</div>
+        <p style="font-size:13px;margin-bottom:12px"><code>usePathname()</code> liest die aktuelle URL und markiert den passenden Tab als aktiv. Jede Seite bindet <code>&lt;BottomNav /&gt;</code> am Ende ein.</p>
+        <pre style="font-size:11.5px"><span class="kw">const</span> pathname = <span class="fn">usePathname</span>();
+
+<span class="cm">// Home: exakter Match; Rest: Prefix-Match</span>
+<span class="kw">const</span> active =
+  tab.href === <span class="str">'/'</span>
+    ? pathname === <span class="str">'/'</span>
+    : pathname.<span class="fn">startsWith</span>(tab.href);</pre>
+      </div>
+
+      <div class="card">
+        <div class="filename" style="margin-bottom:12px">SettingsMenu.tsx</div>
+        <p style="font-size:13px;margin-bottom:12px">Burger → Dropdown. <strong>Dark Mode ist live</strong> (via ThemeContext). Alle anderen Items sind Platzhalter.</p>
+        <pre style="font-size:11.5px"><span class="kw">const</span> [open, setOpen] = <span class="fn">useState</span>(<span class="kw">false</span>);
+<span class="kw">const</span> { theme, toggleTheme } = <span class="fn">useTheme</span>();
+
+<span class="cm">// FEATURE ENTRY POINT: Pause Habits</span>
+<span class="cm">// FEATURE ENTRY POINT: Tutorial</span>
+<span class="cm">// FEATURE ENTRY POINT: Log out → /login</span>
+<span class="cm">// FEATURE ENTRY POINT: Delete Account</span></pre>
+      </div>
+    </div>
+
+    <div>
+      <h3>Beide Komponenten in jedem Tab</h3>
+      <svg viewBox="0 0 340 380" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <!-- Phone frame -->
+        <rect x="60" y="10" width="220" height="360" rx="28" fill="white" stroke="rgba(53,184,170,.25)" stroke-width="2"/>
+
+        <!-- SettingsMenu pill -->
+        <rect x="180" y="38" width="80" height="28" rx="10" fill="rgba(53,184,170,.12)" stroke="rgba(53,184,170,.3)" stroke-width="1"/>
+        <text x="220" y="57" text-anchor="middle" fill="#0d4f4a" font-size="9" font-weight="700">SettingsMenu ≡</text>
+
+        <!-- Page title -->
+        <text x="100" y="57" fill="#0d4f4a" font-size="12" font-weight="800">Habits</text>
+
+        <!-- Content placeholder rows -->
+        <rect x="80" y="86" width="180" height="12" rx="4" fill="rgba(53,184,170,.12)"/>
+        <rect x="80" y="106" width="140" height="12" rx="4" fill="rgba(148,163,184,.12)"/>
+        <rect x="80" y="126" width="160" height="12" rx="4" fill="rgba(148,163,184,.12)"/>
+        <rect x="80" y="146" width="120" height="12" rx="4" fill="rgba(148,163,184,.08)"/>
+        <rect x="80" y="166" width="170" height="12" rx="4" fill="rgba(148,163,184,.08)"/>
+
+        <!-- BottomNav -->
+        <rect x="62" y="310" width="216" height="58" rx="0" fill="rgba(53,184,170,.06)" stroke="rgba(53,184,170,.2)" stroke-width="1"/>
+        <rect x="62" y="308" width="216" height="2" rx="0" fill="rgba(53,184,170,.2)"/>
+
+        <!-- Nav icons -->
+        <text x="102" y="338" text-anchor="middle" fill="#94a3b8" font-size="16">⌂</text>
+        <text x="155" y="338" text-anchor="middle" fill="#35b8aa" font-size="14" font-weight="700">✓</text>
+        <text x="208" y="338" text-anchor="middle" fill="#94a3b8" font-size="14">▪</text>
+        <text x="262" y="338" text-anchor="middle" fill="#94a3b8" font-size="13">◉</text>
+
+        <text x="102" y="353" text-anchor="middle" fill="#94a3b8" font-size="7">Home</text>
+        <text x="155" y="353" text-anchor="middle" fill="#35b8aa" font-size="7" font-weight="700">Habits</text>
+        <text x="208" y="353" text-anchor="middle" fill="#94a3b8" font-size="7">Stats</text>
+        <text x="262" y="353" text-anchor="middle" fill="#94a3b8" font-size="7">Pet</text>
+
+        <!-- Labels -->
+        <text x="44" y="52" text-anchor="end" fill="#35b8aa" font-size="9" font-weight="600">alle Tabs</text>
+        <path d="M46 50 L60 50" stroke="#35b8aa" stroke-width="1" marker-end="url(#a3)"/>
+
+        <text x="44" y="340" text-anchor="end" fill="#35b8aa" font-size="9" font-weight="600">alle Tabs</text>
+        <path d="M46 336 L62 330" stroke="#35b8aa" stroke-width="1" marker-end="url(#a3)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     07 · HABITS PAGE + BOTTOM SHEET
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">07 · Navigation & Bottom Sheet</div>
+  <h2>Das Formular-Sheet über der Habits-Page</h2>
+  <p>Wenn der User auf "+ New" tippt, soll die <strong>Habits-Page sichtbar bleiben</strong> während das Formular hochkommt. Das löst Next.js mit "Intercepting Routes".</p>
+
+  <!-- Sheet diagram -->
+  <div style="margin:28px 0;display:flex;gap:32px;align-items:center">
+    <svg viewBox="0 0 280 420" xmlns="http://www.w3.org/2000/svg" style="width:260px;flex-shrink:0">
+      <!-- Phone frame -->
+      <rect x="10" y="10" width="260" height="400" rx="28" fill="#f8fafc" stroke="rgba(53,184,170,.2)" stroke-width="1.5"/>
+
+      <!-- Habits page (behind) — blurred/dimmed -->
+      <rect x="12" y="12" width="256" height="396" rx="26" fill="rgba(13,47,46,0.45)"/>
+
+      <!-- Habits content (dimmed) -->
+      <text x="50" y="55" fill="rgba(255,255,255,.4)" font-size="14" font-weight="800">My Habits</text>
+      <rect x="30" y="72" width="90" height="18" rx="8" fill="rgba(255,255,255,.1)"/>
+      <rect x="128" y="72" width="80" height="18" rx="8" fill="rgba(255,255,255,.08)"/>
+      <rect x="30" y="110" width="220" height="12" rx="4" fill="rgba(255,255,255,.08)"/>
+      <rect x="30" y="130" width="180" height="12" rx="4" fill="rgba(255,255,255,.06)"/>
+      <rect x="30" y="150" width="200" height="12" rx="4" fill="rgba(255,184,170,.06)"/>
+
+      <!-- Sheet -->
+      <rect x="10" y="200" width="260" height="218" rx="0" fill="white"/>
+      <rect x="10" y="200" width="260" height="218" rx="24" fill="white"/>
+
+      <!-- Handle -->
+      <rect x="120" y="214" width="40" height="5" rx="3" fill="rgba(53,184,170,.25)"/>
+
+      <!-- Sheet content -->
+      <text x="36" y="248" fill="#0d4f4a" font-size="12" font-weight="800">New Habit</text>
+      <text x="36" y="264" fill="#94a3b8" font-size="9">Pick a category to get started</text>
+
+      <rect x="36" y="278" width="52" height="48" rx="10" fill="rgba(53,184,170,.1)" stroke="rgba(53,184,170,.3)" stroke-width="1"/>
+      <rect x="96" y="278" width="52" height="48" rx="10" fill="rgba(220,38,38,.08)" stroke="rgba(220,38,38,.2)" stroke-width="1"/>
+      <rect x="156" y="278" width="52" height="48" rx="10" fill="rgba(148,163,184,.06)" stroke="rgba(148,163,184,.2)" stroke-width="1"/>
+      <rect x="216" y="278" width="48" height="48" rx="10" fill="rgba(148,163,184,.06)" stroke="rgba(148,163,184,.2)" stroke-width="1"/>
+      <text x="62" y="308" text-anchor="middle" fill="#0d4f4a" font-size="8" font-weight="600">Sport</text>
+      <text x="122" y="308" text-anchor="middle" fill="#94a3b8" font-size="8">Health</text>
+      <text x="182" y="308" text-anchor="middle" fill="#94a3b8" font-size="8">Mental</text>
+      <text x="240" y="308" text-anchor="middle" fill="#94a3b8" font-size="8">Personal</text>
+
+      <rect x="36" y="342" width="228" height="32" rx="8" fill="rgba(53,184,170,.06)" stroke="rgba(53,184,170,.2)" stroke-width="1"/>
+      <text x="150" y="363" text-anchor="middle" fill="#94a3b8" font-size="9">e.g. Morning Run</text>
+
+      <rect x="36" y="388" width="228" height="28" rx="8" fill="#35b8aa"/>
+      <text x="150" y="407" text-anchor="middle" fill="white" font-size="10" font-weight="700">Add Habit</text>
+
+      <!-- Animation arrow -->
+      <path d="M145 200 L145 190 L145 180" stroke="#35b8aa" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="150" y="178" fill="#35b8aa" font-size="8">sheet-up animation</text>
+    </svg>
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <h3>Wie funktioniert das technisch?</h3>
+        <p style="font-size:13px">Next.js "Intercepting Routes" fangen die URL <code>/habits/create</code> ab und rendern stattdessen den Sheet — <em>während die Habits-Page als Hintergrund montiert bleibt</em>.</p>
+        <pre style="font-size:11px;margin-top:10px"><span class="dir">app/habits/</span>
+├── <span class="file">layout.tsx</span>          <span class="cm">← beide Slots: {children} {modal}</span>
+├── <span class="file">page.tsx</span>            <span class="cm">← bleibt sichtbar (= {children})</span>
+└── @modal/
+    ├── default.tsx     <span class="cm">← rendert null wenn kein Sheet</span>
+    └── <span class="tag">(.)create/</span>
+        └── page.tsx   <span class="cm">← das Sheet (= {modal})</span></pre>
+      </div>
+      <div class="callout callout-teal" style="font-size:13px">
+        <strong>Home-Page</strong> nutzt denselben Sheet-Effekt, aber mit lokalem <code>useState(false)</code> statt Routing — da sie kein Layout mit Parallel Routes hat.
+      </div>
+      <div class="entry">
+        <span class="marker">// FEATURE ENTRY POINT</span>
+        <code>app/habits/@modal/(.)create/page.tsx</code> — hier lebt die Sheet-Logik für den Habits-Tab. Das Formular selbst ist in <code>HabitForm.tsx</code> ausgelagert und wird von beiden Stellen (Home + Habits) geteilt.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     08 · FEATURE ENTRY POINTS
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">08 · Feature Entry Points</div>
+  <h2>Wo du dein Feature einbaust</h2>
+  <p>Überall im Code wo ein echtes Feature noch fehlt steht ein Kommentar. Der Kommentar sagt <em>was</em> gebraucht wird, welche API-Endpoint vorgesehen ist und was der Placeholder macht.</p>
+
+  <div style="margin:28px 0;display:flex;flex-direction:column;gap:16px">
+
+    <div class="card">
+      <h3 style="color:#35b8aa">Muster: So sieht ein Entry Point aus</h3>
+      <pre><span class="cm">// FEATURE ENTRY POINT: hier klickt der User → POST /api/check-ins</span>
+<span class="cm">// Payload: { habitId: string, date: string, done: boolean }</span>
+<span class="cm">// Momentan: nur lokaler State (doneToday flip) — kein Server-Call.</span>
+<span class="kw">const</span> <span class="fn">toggleHabit</span> = (habitid: <span class="ty">string</span>) => {
+  <span class="fn">setHabits</span>((prev) =>
+    prev.<span class="fn">map</span>((h) =>
+      h.habitid === habitid
+        ? { ...h, doneToday: !h.doneToday }
+        : h
+    )
+  );
+};</pre>
+    </div>
+
+    <div class="col3">
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Check-in speichern</strong><br>
+        <code style="font-size:11px">app/components/home/TodayHabitList.tsx</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">Tap auf Habit → POST /api/check-ins · Supabase <code>check_in</code> Tabelle anlegen</span>
+      </div>
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Stats — kompletter Tab</strong><br>
+        <code style="font-size:11px">app/stats/page.tsx</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">Aktuell Placeholder. Build-Reihenfolge im JSDoc der Datei: Period Toggle → Momentum Score → Heatmap → Donut → Per-Habit Rows. API: GET /api/stats?period=...</span>
+      </div>
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Auth / Login</strong><br>
+        <code style="font-size:11px">app/components/SettingsMenu.tsx</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">"Log out" Button → Supabase signOut() + router.push('/login')</span>
+      </div>
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Habits — kompletter Tab</strong><br>
+        <code style="font-size:11px">app/habits/page.tsx</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">Aktuell Placeholder. Build-Reihenfolge im JSDoc der Datei: Habit-Liste → Kategorie-Filter → "+ New" Button → Swipe-Delete → Detail-Page. Intercepting Route für Sheet bereits in layout.tsx verdrahtet.</span>
+      </div>
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Streak-Berechnung</strong><br>
+        <code style="font-size:11px">app/lib/mockHome.ts → MOCK_DEFAULT_STREAK</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">Echte Streak → /api/habits/:id/streak oder als Feld auf dem Habit-Objekt</span>
+      </div>
+      <div class="entry">
+        <span class="marker">FEATURE ENTRY POINT</span>
+        <strong>Pet-Tab</strong><br>
+        <code style="font-size:11px">app/pet/page.tsx</code><br>
+        <span style="font-size:12px;color:#64748b;margin-top:6px;display:block">Komplett freie Fläche. Gamification-Feature, keine API-Vorgabe.</span>
+      </div>
+    </div>
+
+    <div class="callout callout-teal">
+      <strong>Workflow für neue Features:</strong>&nbsp;
+      1. <code>FEATURE ENTRY POINT</code> Kommentar finden &nbsp;→&nbsp;
+      2. Placeholder-Code durch echte Logik ersetzen &nbsp;→&nbsp;
+      3. Backend-Endpoint (Supabase RPC oder Next.js <code>route.ts</code>) anlegen &nbsp;→&nbsp;
+      4. Typ in <code>app/lib/types.ts</code> erweitern falls nötig
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     09 · DARK MODE + DESIGN TOKENS
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">09 · Design-System</div>
+  <h2>Dark Mode & CSS-Tokens</h2>
+  <p>Alle Farben sind als <strong>CSS Custom Properties</strong> (Variablen) definiert. Wenn ThemeContext <code>.dark</code> auf <code>&lt;html&gt;</code> setzt, wechseln alle Tokens automatisch — kein manuelles Dark-Mode-Styling pro Komponente.</p>
+
+  <div class="col2" style="margin-top:28px">
+    <div>
+      <div class="filename">app/globals.css (Auszug)</div>
+      <pre style="font-size:11.5px"><span class="cm">/* Light Mode (Standard) */</span>
+:root {
+  <span class="prop">--app-bg</span>:    <span class="str">#ffffff</span>;
+  <span class="prop">--text</span>:      <span class="str">#1a2e2b</span>;
+  <span class="prop">--text-2</span>:    <span class="str">#4a6e6a</span>;
+  <span class="prop">--glass</span>:     <span class="str">rgba(255,255,255,0.8)</span>;
+  <span class="prop">--border</span>:    <span class="str">rgba(53,184,170,0.15)</span>;
+  <span class="prop">--teal-900</span>:  <span class="str">#0d4f4a</span>;
+  <span class="prop">--teal-700</span>:  <span class="str">#1b6f68</span>;
+  <span class="prop">--radius</span>:    <span class="str">14px</span>;
+}
+
+<span class="cm">/* Dark Mode — ThemeContext setzt .dark auf &lt;html&gt; */</span>
+<span class="tag">.dark</span> {
+  <span class="prop">--app-bg</span>:    <span class="str">#0a1a18</span>;
+  <span class="prop">--text</span>:      <span class="str">#e8f4f2</span>;
+  <span class="prop">--text-2</span>:    <span class="str">#8ab5b0</span>;
+  <span class="prop">--glass</span>:     <span class="str">rgba(13,47,46,0.85)</span>;
+  <span class="prop">--border</span>:    <span class="str">rgba(53,184,170,0.12)</span>;
+  <span class="prop">--teal-900</span>:  <span class="str">#5ecec5</span>; <span class="cm">/* hell auf dunkel */</span>
+}
+
+<span class="cm">/* Nutzung in jeder Komponente: */</span>
+<span class="tag">color</span>: <span class="fn">var</span>(<span class="prop">--text</span>);       <span class="cm">/* immer richtig */</span>
+<span class="tag">background</span>: <span class="fn">var</span>(<span class="prop">--app-bg</span>); <span class="cm">/* wechselt auto */</span></pre>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <h3>Wie ThemeContext funktioniert</h3>
+        <pre style="font-size:11px"><span class="cm">// app/lib/ThemeContext.tsx</span>
+<span class="kw">const</span> { theme, toggleTheme } =
+  <span class="fn">useTheme</span>();
+
+<span class="cm">// SettingsMenu ruft das auf:</span>
+<span class="fn">toggleTheme</span>();
+<span class="cm">// → setzt document.documentElement</span>
+<span class="cm">//    .classList.toggle('dark')</span>
+<span class="cm">// → alle var(--*) wechseln sofort</span></pre>
+      </div>
+
+      <div class="callout callout-orange" style="font-size:13px">
+        <strong>Achtung:</strong> An 2-3 Stellen steht der literale Wert <code>#35b8aa</code> statt <code>var(--teal-500)</code> — bewusst, weil <code>--teal-500</code> im Dark Mode near-white wird (weißer Text auf tealem Hintergrund wäre unleserlich).
+      </div>
+
+      <!-- Color swatches -->
+      <div class="card" style="padding:20px">
+        <h3 style="margin-bottom:12px">Farbpalette</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#35b8aa;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">teal-500</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#1b6f68;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">teal-700</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#0d4f4a;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">teal-900</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#0a1a18;border:1px solid #35b8aa22;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">dark bg</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:44px;height:44px;border-radius:10px;background:#f0fdf9;border:1px solid #35b8aa22;margin-bottom:4px"></div>
+            <div style="font-size:9px;color:#64748b">light bg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     10 · CHEAT SHEET
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">10 · Quick Reference</div>
+  <h2>Cheat Sheet — alles auf einen Blick</h2>
+
+  <div class="col2" style="margin-top:28px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <div class="card">
+        <h3>Neue Seite hinzufügen</h3>
+        <pre style="font-size:12px"><span class="cm">// 1. Ordner + Datei anlegen:</span>
+app/meineseite/page.tsx
+
+<span class="cm">// 2. Minimaltemplate:</span>
+<span class="kw">import</span> { BottomNav } <span class="kw">from</span> <span class="str">'../components/BottomNav'</span>;
+<span class="kw">import</span> { SettingsMenu } <span class="kw">from</span> <span class="str">'../components/SettingsMenu'</span>;
+
+<span class="kw">export default function</span> <span class="fn">MeinePage</span>() {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"flex min-h-full flex-col"</span>&gt;
+      &lt;<span class="tag">main</span> <span class="prop">className</span>=<span class="str">"mx-auto w-full max-w-md
+        flex-1 px-4 pt-4"</span>&gt;
+        &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"flex items-center
+          justify-between pb-4"</span>&gt;
+          &lt;<span class="tag">h1</span>&gt;Titel&lt;/<span class="tag">h1</span>&gt;
+          &lt;<span class="tag">SettingsMenu</span> /&gt;
+        &lt;/<span class="tag">div</span>&gt;
+        {<span class="cm">/* Dein Content */</span>}
+      &lt;/<span class="tag">main</span>&gt;
+      &lt;<span class="tag">BottomNav</span> /&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}</pre>
+      </div>
+
+      <div class="card">
+        <h3>API-Call Muster</h3>
+        <pre style="font-size:12px"><span class="cm">// GET</span>
+<span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/habits'</span>);
+<span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+
+<span class="cm">// POST</span>
+<span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/habits'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: {
+    <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span>
+  },
+  body: <span class="ty">JSON</span>.<span class="fn">stringify</span>({ title, category }),
+});</pre>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <h3>Wichtige Dateien</h3>
+        <table style="width:100%;font-size:12px;border-collapse:collapse">
+          <tr style="border-bottom:1px solid rgba(53,184,170,.1)">
+            <td style="padding:7px 0;color:#35b8aa;font-family:monospace;font-size:11px">app/lib/types.ts</td>
+            <td style="padding:7px 0;padding-left:12px;color:#64748b">Alle Interfaces erweitern</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(53,184,170,.1)">
+            <td style="padding:7px 0;color:#35b8aa;font-family:monospace;font-size:11px">app/lib/mockHome.ts</td>
+            <td style="padding:7px 0;padding-left:12px;color:#64748b">Testdaten anpassen</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(53,184,170,.1)">
+            <td style="padding:7px 0;color:#35b8aa;font-family:monospace;font-size:11px">app/globals.css</td>
+            <td style="padding:7px 0;padding-left:12px;color:#64748b">Farben / Tokens</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(53,184,170,.1)">
+            <td style="padding:7px 0;color:#35b8aa;font-family:monospace;font-size:11px">app/api/habits/route.ts</td>
+            <td style="padding:7px 0;padding-left:12px;color:#64748b">Backend-Endpoints</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;color:#35b8aa;font-family:monospace;font-size:11px">app/habits/create/HabitForm.tsx</td>
+            <td style="padding:7px 0;padding-left:12px;color:#64748b">Formular-Logik</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>TypeScript in 30 Sekunden</h3>
+        <pre style="font-size:12px"><span class="cm">// Typ-Annotation (nach dem :)</span>
+<span class="kw">const</span> name: <span class="ty">string</span> = <span class="str">"Max"</span>;
+<span class="kw">const</span> count: <span class="ty">number</span> = <span class="num">42</span>;
+<span class="kw">const</span> done: <span class="ty">boolean</span> = <span class="kw">false</span>;
+<span class="kw">const</span> list: <span class="ty">string</span>[] = [<span class="str">"a"</span>, <span class="str">"b"</span>];
+
+<span class="cm">// Funktion mit Typen</span>
+<span class="kw">function</span> <span class="fn">greet</span>(name: <span class="ty">string</span>): <span class="ty">string</span> {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}`</span>;
+}
+
+<span class="cm">// Optional: Wert kann fehlen</span>
+<span class="kw">const</span> color: <span class="ty">string</span> | <span class="kw">null</span> = <span class="kw">null</span>;</pre>
+      </div>
+
+      <div class="callout callout-teal" style="font-size:13px">
+        <strong>Dev-Server starten:</strong><br>
+        <code>npm run dev</code> → <a href="http://localhost:3000" style="color:#35b8aa">localhost:3000</a><br><br>
+        Kein <code>.env.local</code>? Kein Problem — Mock-Daten greifen automatisch.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:64px;padding-top:28px;border-top:1px solid rgba(53,184,170,.15);display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:12px;color:#94a3b8">Habito Developer Guide · Walking Skeleton</div>
+    <div style="display:flex;gap:16px">
+      <span class="badge badge-teal">Next.js 16</span>
+      <span class="badge badge-teal">TypeScript</span>
+      <span class="badge badge-teal">Tailwind v4</span>
+      <span class="badge badge-teal">Supabase</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     11 · ELI15 CODE WALKTHROUGH — BottomNav.tsx
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">11 · Code Walkthrough I</div>
+  <h2>BottomNav.tsx — Zeile für Zeile</h2>
+  <p>Diese Datei ist perfekt zum Lernen: sie ist kurz, überschaubar und zeigt 4 der wichtigsten Konzepte auf einmal. Lies den Code von oben nach unten wie eine Geschichte.</p>
+
+  <div style="margin-top:32px;display:flex;flex-direction:column;gap:0">
+
+    <!-- Block 1: 'use client' -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:16px 16px 0 0;border-bottom:1px solid rgba(53,184,170,.08)"><span class="str">'use client'</span>;</pre>
+      <div style="padding:18px 24px;background:#fff;border-radius:0 16px 0 0;border:1px solid rgba(53,184,170,.12);border-left:none;border-bottom:1px solid rgba(53,184,170,.08)">
+        <span class="badge badge-purple" style="margin-bottom:8px">Pflicht für Interaktivität</span>
+        <p style="font-size:13px;margin:0">Diese erste Zeile sagt Next.js: <strong>"Diese Datei läuft im Browser"</strong> — nicht nur auf dem Server. Ohne sie kein JavaScript, kein Click-Handler, kein useState. Jede Datei die <code>useState</code>, <code>usePathname</code> oder Event-Handler benutzt braucht das.</p>
+      </div>
+    </div>
+
+    <!-- Block 2: imports -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:0;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)"><span class="kw">import</span> Link <span class="kw">from</span> <span class="str">'next/link'</span>;
+<span class="kw">import</span> { usePathname } <span class="kw">from</span> <span class="str">'next/navigation'</span>;</pre>
+      <div style="padding:18px 24px;background:#fff;border:1px solid rgba(53,184,170,.12);border-left:none;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)">
+        <span class="badge badge-teal" style="margin-bottom:8px">Imports = Werkzeuge holen</span>
+        <p style="font-size:13px;margin:0"><code>Link</code> ist wie ein <code>&lt;a href&gt;</code> — aber schlauer: er lädt nur was sich ändert, nicht die ganze Seite neu.<br><br><code>usePathname()</code> ist ein sogenannter <strong>Hook</strong> (Funktion von React/Next.js) der die aktuelle URL zurückgibt. Damit weiß die Nav welcher Tab gerade aktiv ist.</p>
+      </div>
+    </div>
+
+    <!-- Block 3: type + TABS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:0;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)"><span class="kw">type</span> <span class="ty">Tab</span> = {
+  href: <span class="ty">string</span>;
+  label: <span class="ty">string</span>;
+  icon: <span class="ty">React.ReactNode</span>;
+};
+
+<span class="kw">const</span> TABS: <span class="ty">Tab</span>[] = [
+  {
+    href: <span class="str">'/'</span>,
+    label: <span class="str">'Home'</span>,
+    icon: &lt;<span class="tag">svg</span> ...&gt;...&lt;/<span class="tag">svg</span>&gt;,
+  },
+  { href: <span class="str">'/habits'</span>, label: <span class="str">'Habits'</span>, icon: ... },
+  { href: <span class="str">'/stats'</span>,  label: <span class="str">'Stats'</span>,  icon: ... },
+  { href: <span class="str">'/pet'</span>,    label: <span class="str">'Pet'</span>,    icon: ... },
+];</pre>
+      <div style="padding:18px 24px;background:#fff;border:1px solid rgba(53,184,170,.12);border-left:none;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)">
+        <span class="badge badge-orange" style="margin-bottom:8px">Daten getrennt von Darstellung</span>
+        <p style="font-size:13px;margin:0"><code>type Tab</code> definiert wie ein Tab-Objekt aussehen muss: eine URL (<code>href</code>), ein Label-Text und ein Icon.<br><br><code>TABS</code> ist ein Array (Liste) von 4 solchen Objekten — eines pro Tab. <strong>Großbuchstaben = konstant, ändert sich nie.</strong><br><br>Der Trick: statt 4× denselben Button-Code zu schreiben, iteriert die Komponente über diese Liste. Neuen Tab hinzufügen = nur hier ein Objekt einfügen.</p>
+      </div>
+    </div>
+
+    <!-- Block 4: component + usePathname -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:0;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)"><span class="kw">export function</span> <span class="fn">BottomNav</span>() {
+  <span class="kw">const</span> pathname = <span class="fn">usePathname</span>();
+  <span class="cm">// pathname = "/habits" wenn man auf</span>
+  <span class="cm">// der Habits-Seite ist, "/" auf Home</span></pre>
+      <div style="padding:18px 24px;background:#fff;border:1px solid rgba(53,184,170,.12);border-left:none;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)">
+        <span class="badge badge-teal" style="margin-bottom:8px">export = von außen nutzbar</span>
+        <p style="font-size:13px;margin:0"><code>export function BottomNav()</code> — diese Funktion gibt HTML zurück und ist damit eine React-Komponente.<br><br><code>export</code> macht sie importierbar: <code>import { BottomNav } from './BottomNav'</code>.<br><br><code>usePathname()</code> liest die URL live aus dem Browser — wenn der User navigiert, weiß die NavBar sofort welche Route aktiv ist, ohne dass die Seite neu lädt.</p>
+      </div>
+    </div>
+
+    <!-- Block 5: TABS.map + active check -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:0;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)">{TABS.<span class="fn">map</span>((tab) => {
+  <span class="cm">// "/" nur exakt matchen</span>
+  <span class="cm">// "/habits" auch "/habits/create" etc.</span>
+  <span class="kw">const</span> active =
+    tab.href === <span class="str">'/'</span>
+      ? pathname === <span class="str">'/'</span>
+      : pathname.<span class="fn">startsWith</span>(tab.href);
+
+  <span class="kw">return</span> (
+    &lt;<span class="tag">Link</span>
+      <span class="prop">key</span>={tab.href}
+      <span class="prop">href</span>={tab.href}
+    &gt;
+      &lt;<span class="tag">span</span>
+        <span class="prop">style</span>={{ color: active
+          ? <span class="str">'var(--teal-700)'</span>
+          : <span class="str">'var(--text-3)'</span> }}
+      &gt;
+        {tab.icon}
+      &lt;/<span class="tag">span</span>&gt;
+      &lt;<span class="tag">span</span>&gt;{tab.label}&lt;/<span class="tag">span</span>&gt;
+    &lt;/<span class="tag">Link</span>&gt;
+  );
+})}</pre>
+      <div style="padding:18px 24px;background:#fff;border:1px solid rgba(53,184,170,.12);border-left:none;border-top:none;border-bottom:1px solid rgba(53,184,170,.08)">
+        <span class="badge badge-orange" style="margin-bottom:8px">.map() = für jeden Eintrag</span>
+        <p style="font-size:13px;margin:0"><code>TABS.map((tab) => ...)</code> iteriert über alle 4 Tabs und gibt für jeden ein <code>&lt;Link&gt;</code>-Element zurück. Stell dir vor, <code>map()</code> sagt: <em>"Für jeden Tab in der Liste, mach das hier draus."</em><br><br><strong>Active-Check:</strong> Home (<code>/</code>) muss exakt matchen — sonst wäre <code>/habits</code> auch Home. Alle anderen nutzen <code>startsWith</code>, damit auch Unterseiten wie <code>/habits/create</code> den Habits-Tab aktiv zeigen.<br><br><strong>Teal vs. grau:</strong> Das Ternär <code>active ? 'teal' : 'grau'</code> — wie ein Kurzform-If: wenn aktiv → teal-Farbe, sonst grau.</p>
+      </div>
+    </div>
+
+    <!-- Block 6: key prop -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch">
+      <pre style="border-radius:0 0 16px 16px;border-top:none">&lt;<span class="tag">Link</span> <span class="prop">key</span>={tab.href} ...&gt;</pre>
+      <div style="padding:18px 24px;background:#fff;border-radius:0 0 16px 0;border:1px solid rgba(53,184,170,.12);border-left:none;border-top:none">
+        <span class="badge badge-purple" style="margin-bottom:8px">key — Pflicht in Listen</span>
+        <p style="font-size:13px;margin:0">Wenn React eine Liste rendert, braucht jedes Element ein eindeutiges <code>key</code>-Attribut. Damit weiß React welches Element welches ist, wenn sich die Liste ändert. Ohne <code>key</code>: Warnung in der Konsole und mögliche Bugs beim Updaten. Als Key nimmt man immer was eindeutiges — hier die URL.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     12 · ELI15 CODE WALKTHROUGH — HabitForm (Auszug)
+════════════════════════════════════════════════════ -->
+<div class="page break">
+  <div class="label">12 · Code Walkthrough II</div>
+  <h2>HabitForm.tsx — State & Submit erklärt</h2>
+  <p>Das Formular zum Habit-Erstellen ist die komplexeste Komponente im Skelett. Hier passieren Multi-Select, Slider, Toggle und ein API-Call gleichzeitig. Kein Grund zur Panik — jeder Teil ist isoliert und erklärt.</p>
+
+  <div style="margin-top:28px;display:flex;flex-direction:column;gap:24px">
+
+    <!-- State block -->
+    <div class="card">
+      <h3 style="margin-bottom:16px">① Alle State-Variablen auf einen Blick</h3>
+      <div class="col2">
+        <pre><span class="cm">// app/habits/create/HabitForm.tsx (exakt)</span>
+
+<span class="kw">const</span> router = <span class="fn">useRouter</span>(); <span class="cm">// Navigation nach Submit</span>
+<span class="kw">const</span> [loading, setLoading] =
+  <span class="fn">useState</span>(<span class="kw">false</span>);
+<span class="kw">const</span> [modal, setModal] =
+  <span class="fn">useState</span>&lt;{ title: <span class="ty">string</span>; message: <span class="ty">string</span> } | <span class="kw">null</span>&gt;(<span class="kw">null</span>);
+<span class="kw">const</span> [expanded, setExpanded] =
+  <span class="fn">useState</span>(<span class="kw">false</span>);
+
+<span class="cm">// ── Echte Felder ──────────────────────────</span>
+<span class="kw">const</span> [title, setTitle] =
+  <span class="fn">useState</span>(<span class="str">''</span>);
+<span class="kw">const</span> [categories, setCategories] =
+  <span class="fn">useState</span>&lt;<span class="ty">HabitCategory</span>[]&gt;([]);
+<span class="kw">const</span> [timesPerWeek, setTimesPerWeek] =
+  <span class="fn">useState</span>(<span class="num">7</span>);
+<span class="kw">const</span> [frequenz, setFrequenz] =
+  <span class="fn">useState</span>(<span class="fn">freqFromCount</span>(<span class="num">7</span>));
+<span class="kw">const</span> [specificDays, setSpecificDays] =
+  <span class="fn">useState</span>(<span class="kw">false</span>);
+
+<span class="cm">// ── Platzhalter-Felder ─────────────────────</span>
+<span class="kw">const</span> [trackType, setTrackType] =
+  <span class="fn">useState</span>&lt;<span class="str">'yesno'</span>|<span class="str">'count'</span>|<span class="str">'duration'</span>&gt;(
+    <span class="str">'yesno'</span>
+  );</pre>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:rgba(53,184,170,.06);border-radius:10px;padding:12px 14px;font-size:12.5px">
+            <strong style="color:#0d4f4a;display:block;margin-bottom:4px">title</strong>
+            <span style="color:#64748b">Was der User in das Namens-Feld tippt. Startwert: leerer String <code>''</code></span>
+          </div>
+          <div style="background:rgba(53,184,170,.06);border-radius:10px;padding:12px 14px;font-size:12.5px">
+            <strong style="color:#0d4f4a;display:block;margin-bottom:4px">categories — Array, nicht einzeln</strong>
+            <span style="color:#64748b">Mehrfachauswahl: <code>['sport', 'health']</code> wenn beide aktiv. Leer = nichts ausgewählt. <code>HabitCategory[]</code> = Array aus erlaubten Kategorie-Strings.</span>
+          </div>
+          <div style="background:rgba(53,184,170,.06);border-radius:10px;padding:12px 14px;font-size:12.5px">
+            <strong style="color:#0d4f4a;display:block;margin-bottom:4px">specificDays — boolean Toggle</strong>
+            <span style="color:#64748b"><code>false</code> = Auto (Slider bestimmt). <code>true</code> = Custom Wochentag-Grid sichtbar.</span>
+          </div>
+          <div style="background:rgba(53,184,170,.06);border-radius:10px;padding:12px 14px;font-size:12.5px">
+            <strong style="color:#0d4f4a;display:block;margin-bottom:4px">loading + expanded</strong>
+            <span style="color:#64748b"><code>loading</code>: Button zeigt "Adding…" während API-Call läuft. <code>expanded</code>: "More options" Sektion auf/zu.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- toggleCategory -->
+    <div class="card">
+      <h3 style="margin-bottom:16px">② Multi-Select: Kategorie an/abwählen</h3>
+      <div class="col2">
+        <pre><span class="kw">const</span> <span class="fn">toggleCategory</span> = (cat: <span class="ty">HabitCategory</span>) =>
+  <span class="fn">setCategories</span>((prev) =>
+    prev.<span class="fn">includes</span>(cat)
+      ? prev.<span class="fn">filter</span>((c) => c !== cat) <span class="cm">// entfernen</span>
+      : [...prev, cat]                  <span class="cm">// hinzufügen</span>
+  );
+
+<span class="cm">// Beispiel-Ablauf:</span>
+<span class="cm">// categories = []</span>
+<span class="cm">// toggleCategory('sport')</span>
+<span class="cm">// → ['sport']</span>
+<span class="cm">// toggleCategory('health')</span>
+<span class="cm">// → ['sport', 'health']</span>
+<span class="cm">// toggleCategory('sport')</span>
+<span class="cm">// → ['health']</span></pre>
+        <div>
+          <p style="font-size:13px"><code>prev</code> ist der aktuelle Wert von <code>categories</code> — React gibt ihn automatisch an die Setter-Funktion.</p>
+          <p style="font-size:13px"><code>prev.includes(cat)</code> — prüft ob die Kategorie schon drin ist.</p>
+          <p style="font-size:13px"><code>prev.filter(c => c !== cat)</code> — gibt ein neues Array ohne diesen Eintrag zurück. <code>filter</code> behält nur Elemente bei denen die Bedingung <code>true</code> ist.</p>
+          <p style="font-size:13px"><code>[...prev, cat]</code> — der Spread-Operator <code>...</code> kopiert alle alten Einträge und fügt den neuen am Ende an. <em>Arrays nie direkt mutieren</em> — immer ein neues erstellen.</p>
+          <div class="callout callout-teal" style="font-size:12.5px;margin-top:8px">
+            <strong>Warum nicht <code>push()</code>?</strong> React erkennt nur dann eine Änderung wenn ein neues Array-Objekt entsteht. <code>push()</code> mutiert das bestehende → React sieht keine Änderung → UI updatet nicht.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- handleSubmit -->
+    <div class="card">
+      <h3 style="margin-bottom:16px">③ Submit: Validierung → API → Schließen</h3>
+      <pre><span class="cm">// app/habits/create/HabitForm.tsx (exakt)</span>
+<span class="kw">const</span> <span class="fn">handleSubmit</span> = <span class="kw">async</span> (e: <span class="ty">React.FormEvent</span>) => {
+  e.<span class="fn">preventDefault</span>(); <span class="cm">// ← verhindert Standard-Browser-Submit (würde Seite neu laden)</span>
+
+  <span class="cm">// ── 1. Validierung — Kein API-Call wenn Daten fehlen ──────────────────────</span>
+  <span class="kw">if</span> (!title.<span class="fn">trim</span>() || categories.length === <span class="num">0</span>) {
+    <span class="fn">setModal</span>({
+      title: <span class="str">'Missing info'</span>,
+      message: <span class="str">'Enter a habit name and pick at least one category.'</span>,
+    });
+    <span class="kw">return</span>; <span class="cm">// ← früh raus, nichts weiter passiert</span>
+  }
+  <span class="kw">if</span> (!<span class="ty">Object</span>.<span class="fn">values</span>(frequenz).<span class="fn">some</span>(<span class="ty">Boolean</span>)) {
+    <span class="fn">setModal</span>({
+      title: <span class="str">'Missing info'</span>,
+      message: <span class="str">'Select at least one day.'</span>,
+    });
+    <span class="kw">return</span>;
+  }
+
+  <span class="cm">// ── 2. Ladestate an ────────────────────────────────────────────────────────</span>
+  <span class="fn">setLoading</span>(<span class="kw">true</span>); <span class="cm">// → Button zeigt "Adding…", ist disabled</span>
+
+  <span class="kw">try</span> {
+    <span class="cm">// ── 3. API-Call ──────────────────────────────────────────────────────────</span>
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/habits'</span>, {
+      method: <span class="str">'POST'</span>,
+      headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+      <span class="cm">// FEATURE ENTRY POINT: auch color, icon, alle categories senden</span>
+      body: <span class="ty">JSON</span>.<span class="fn">stringify</span>({ title, category: categories[<span class="num">0</span>], frequenz }),
+    });
+    <span class="kw">if</span> (!res.<span class="prop">ok</span>) <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">'Failed to create habit'</span>);
+
+    <span class="cm">// ── 4. Erfolg: Server-Daten refreshen + Sheet schließen ──────────────────</span>
+    router.<span class="fn">refresh</span>(); <span class="cm">// ← sagt Next.js: Server Components neu rendern</span>
+    <span class="fn">onClose</span>();        <span class="cm">// ← kommt als Prop von der Parent-Komponente</span>
+
+  } <span class="kw">catch</span> (err) {
+    <span class="cm">// ── 5. Fehlerfall ────────────────────────────────────────────────────────</span>
+    <span class="fn">setModal</span>({
+      title: <span class="str">'Error'</span>,
+      message: err <span class="kw">instanceof</span> <span class="ty">Error</span> ? err.message : <span class="str">'Unknown error'</span>,
+    });
+  } <span class="kw">finally</span> {
+    <span class="cm">// ── 6. Immer: Ladestate aus ──────────────────────────────────────────────</span>
+    <span class="fn">setLoading</span>(<span class="kw">false</span>);
+  }
+};</pre>
+      <div class="col2" style="margin-top:16px">
+        <div class="callout callout-orange" style="font-size:13px">
+          <strong>try / catch / finally</strong> — wie ein Sicherheitsnetz:<br>
+          <code>try</code> = versuch das. <code>catch</code> = wenn's schiefgeht, mach das. <code>finally</code> = mach das immer, egal was passiert (perfekt für Ladestate aus).
+        </div>
+        <div class="callout callout-purple" style="font-size:13px">
+          <strong>await</strong> = warte auf das Ergebnis bevor du weitermachst. Ohne <code>await</code> würde der Code weiterlaufen bevor die API geantwortet hat — der Response wäre dann noch nicht da.
+        </div>
+      </div>
+    </div>
+
+    <!-- JSX conditional rendering -->
+    <div class="card">
+      <h3 style="margin-bottom:16px">④ Bedingtes Rendern — nur zeigen wenn...</h3>
+      <div class="col2">
+        <pre><span class="cm">// Wenn specificDays true ist, zeige das Grid</span>
+{specificDays &amp;&amp; (
+  &lt;<span class="tag">div</span> <span class="prop">className</span>=<span class="str">"grid grid-cols-7"</span>&gt;
+    {DAYS.<span class="fn">map</span>((day) => (
+      &lt;<span class="tag">button</span> <span class="prop">key</span>={day} ...&gt;
+        {DAY_SHORT[day]}
+      &lt;/<span class="tag">button</span>&gt;
+    ))}
+  &lt;/<span class="tag">div</span>&gt;
+)}
+
+<span class="cm">// Wenn loading, zeige anderen Button-Text</span>
+&lt;<span class="tag">button</span> <span class="prop">disabled</span>={loading}&gt;
+  {loading ? <span class="str">'Adding…'</span> : <span class="str">'Add Habit'</span>}
+&lt;/<span class="tag">button</span>&gt;</pre>
+        <div>
+          <p style="font-size:13px"><code>{condition && &lt;JSX/&gt;}</code> — der <code>&&</code> Operator in JSX: wenn die linke Seite <code>true</code> ist, wird die rechte Seite gerendert. Wenn <code>false</code> — gar nichts.</p>
+          <p style="font-size:13px"><code>condition ? 'A' : 'B'</code> — Ternär-Operator: wenn condition true → zeige A, sonst B. Kein <code>if</code>-Block nötig direkt im JSX.</p>
+          <div class="callout callout-teal" style="font-size:12.5px;margin-top:8px">
+            <strong>Fazit:</strong> In React gibt es kein separates Template-System. Alles — Schleifen, Bedingungen, Daten — passiert direkt in den <code>{}</code> im JSX mit normalem JavaScript.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
