@@ -68,22 +68,22 @@ export default function CreateHabit() {
   const days: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
   return (
-    <div className="min-h-screen bg-[var(--page-bg)] py-8 px-4">
+    <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">
-          <Link href="/" className="text-[var(--teal-700)] hover:text-[var(--teal-900)] mb-4 inline-block">
+          <Link href="/" className="text-(--teal-700) hover:text-(--teal-900) mb-4 inline-block">
             ← Back
           </Link>
-          <h1 className="text-3xl font-bold text-[var(--teal-900)]">Create New Habit</h1>
+          <h1 className="text-3xl font-bold text-(--teal-900)">Create New Habit</h1>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-8 border border-[var(--text)]"
+          className="bg-white p-8 border border-foreground"
           style={{ borderRadius: 'var(--radius-lg)' }}
         >
           <div className="mb-6">
-            <label className="block text-sm font-medium text-[var(--text-2)] mb-2">
+            <label className="block text-sm font-medium text-(--text-2) mb-2">
               Habit Name
             </label>
             <input
@@ -91,18 +91,18 @@ export default function CreateHabit() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Morning jog"
-              className="w-full px-4 py-2 border border-[var(--text)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-white text-[var(--text)]"
+              className="w-full px-4 py-2 border border-foreground rounded-full focus:outline-none focus:ring-2 focus:ring-(--focus) bg-white text-foreground"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-[var(--text-2)] mb-2">
+            <label className="block text-sm font-medium text-(--text-2) mb-2">
               Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as HabitCategory)}
-              className="w-full px-4 py-2 border border-[var(--text)] rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-white text-[var(--text)]"
+              className="w-full px-4 py-2 border border-foreground rounded-full focus:outline-none focus:ring-2 focus:ring-(--focus) bg-white text-foreground"
             >
               <option value="sport">Sport</option>
               <option value="health">Health</option>
@@ -112,7 +112,7 @@ export default function CreateHabit() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-[var(--text-2)] mb-3">
+            <label className="block text-sm font-medium text-(--text-2) mb-3">
               Select Days
             </label>
             <div className="grid grid-cols-7 gap-4 text-center">
@@ -121,10 +121,10 @@ export default function CreateHabit() {
                   key={day}
                   type="button"
                   onClick={() => toggleDay(day)}
-                  className={`py-2 px-1 rounded-full font-semibold transition text-sm capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)] transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
+                  className={`py-2 px-1 rounded-full font-semibold transition text-sm capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--focus) hover:-translate-y-0.5 active:translate-y-0 ${
                     frequenz[day]
-                      ? 'text-[var(--teal-700)] underline decoration-2 underline-offset-4'
-                      : 'text-[var(--text)] hover:text-[var(--teal-700)]'
+                      ? 'text-(--teal-700) underline decoration-2 underline-offset-4'
+                      : 'text-foreground hover:text-(--teal-700)'
                   }`}
                 >
                   {day.slice(0, 3)}
@@ -136,7 +136,7 @@ export default function CreateHabit() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full text-white font-semibold py-2 px-6 rounded-lg transition transition-transform hover:-translate-y-0.5 active:translate-y-0"
+            className="w-full text-white font-semibold py-2 px-6 rounded-lg transition hover:-translate-y-0.5 active:translate-y-0"
             style={{
               background: 'linear-gradient(135deg, var(--teal-500), var(--teal-700))',
               opacity: loading ? 0.7 : 1,
@@ -153,24 +153,24 @@ export default function CreateHabit() {
               onClick={() => setModal(null)}
             />
             <div
-              className="relative w-full max-w-md bg-white border border-[var(--text)] p-6"
+              className="relative w-full max-w-md bg-white border border-foreground p-6"
               style={{ borderRadius: 'var(--radius-lg)' }}
               role="dialog"
               aria-modal="true"
               aria-labelledby="create-modal-title"
               aria-describedby="create-modal-message"
             >
-              <h2 id="create-modal-title" className="text-lg font-bold text-[var(--text)]">
+              <h2 id="create-modal-title" className="text-lg font-bold text-foreground">
                 {modal.title}
               </h2>
-              <p id="create-modal-message" className="mt-2 text-[var(--text-2)]">
+              <p id="create-modal-message" className="mt-2 text-(--text-2)">
                 {modal.message}
               </p>
               <div className="mt-6 flex justify-end">
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="rounded-full px-4 py-2 text-sm font-semibold bg-[var(--teal-500)] text-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="rounded-full px-4 py-2 text-sm font-semibold bg-(--teal-500) text-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   OK
                 </button>

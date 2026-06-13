@@ -34,14 +34,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--page-bg)] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <p className="text-2xl font-extrabold tracking-[0.18em] text-[var(--teal-700)] uppercase">
+          <p className="text-2xl font-extrabold tracking-[0.18em] text-(--teal-700) uppercase">
             Habito
           </p>
-          <h2 className="text-2xl font-semibold text-[var(--teal-900)] mt-1">Create your account</h2>
-          <p className="text-[var(--text-2)] mt-1">Sign up to start tracking your habits.</p>
+          <h2 className="text-2xl font-semibold text-(--teal-900) mt-1">Create your account</h2>
+          <p className="text-(--text-2) mt-1">Sign up to start tracking your habits.</p>
         </div>
 
         <RegisterForm

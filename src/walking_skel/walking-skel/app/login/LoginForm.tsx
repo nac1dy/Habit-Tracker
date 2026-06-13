@@ -25,11 +25,11 @@ export default function LoginForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="bg-white p-8 border border-[var(--text)]"
+      className="bg-white p-8 border border-foreground"
       style={{ borderRadius: 'var(--radius-lg)' }}
     >
       <div className="mb-6">
-        <label className="block text-sm font-medium text-[var(--text-2)] mb-2">Email</label>
+        <label className="block text-sm font-medium text-(--text-2) mb-2">Email</label>
         <input
           type="email"
           value={email}
@@ -40,7 +40,7 @@ export default function LoginForm({
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-[var(--text-2)] mb-2">Password</label>
+        <label className="block text-sm font-medium text-(--text-2) mb-2">Password</label>
         <input
           type="password"
           value={password}
@@ -53,7 +53,7 @@ export default function LoginForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full text-white font-semibold py-2 px-6 transition transition-transform hover:-translate-y-0.5 active:translate-y-0"
+        className="w-full text-white font-semibold py-2 px-6 transition hover:-translate-y-0.5 active:translate-y-0"
         style={{
           background: 'linear-gradient(135deg, var(--teal-500), var(--teal-700))',
           opacity: loading ? 0.7 : 1,
@@ -62,9 +62,9 @@ export default function LoginForm({
         {loading ? 'Logging in...' : 'Log In'}
       </button>
 
-      <p className="mt-6 text-center text-sm text-[var(--text-2)]">
+      <p className="mt-6 text-center text-sm text-(--text-2)">
         Don&apos;t have an account?{' '}
-        <Link href="/register" className="text-[var(--teal-700)] font-semibold hover:text-[var(--teal-900)]">
+        <Link href="/register" className="text-(--teal-700) font-semibold hover:text-(--teal-900)">
           Sign up
         </Link>
       </p>

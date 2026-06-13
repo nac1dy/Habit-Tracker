@@ -29,11 +29,11 @@ export default function RegisterForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="bg-white p-8 border border-[var(--text)]"
+      className="bg-white p-8 border border-foreground"
       style={{ borderRadius: 'var(--radius-lg)' }}
     >
       <div className="mb-6">
-        <label className="block text-sm font-medium text-[var(--text-2)] mb-2">Email</label>
+        <label className="block text-sm font-medium text-(--text-2) mb-2">Email</label>
         <input
           type="email"
           value={email}
@@ -44,7 +44,7 @@ export default function RegisterForm({
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-[var(--text-2)] mb-2">Password</label>
+        <label className="block text-sm font-medium text-(--text-2) mb-2">Password</label>
         <input
           type="password"
           value={password}
@@ -55,7 +55,7 @@ export default function RegisterForm({
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-[var(--text-2)] mb-2">Confirm Password</label>
+        <label className="block text-sm font-medium text-(--text-2) mb-2">Confirm Password</label>
         <input
           type="password"
           value={confirmPassword}
@@ -68,7 +68,7 @@ export default function RegisterForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full text-white font-semibold py-2 px-6 transition transition-transform hover:-translate-y-0.5 active:translate-y-0"
+        className="w-full text-white font-semibold py-2 px-6 transition hover:-translate-y-0.5 active:translate-y-0"
         style={{
           background: 'linear-gradient(135deg, var(--teal-500), var(--teal-700))',
           opacity: loading ? 0.7 : 1,
@@ -77,9 +77,9 @@ export default function RegisterForm({
         {loading ? 'Creating account...' : 'Sign Up'}
       </button>
 
-      <p className="mt-6 text-center text-sm text-[var(--text-2)]">
+      <p className="mt-6 text-center text-sm text-(--text-2)">
         Already have an account?{' '}
-        <Link href="/login" className="text-[var(--teal-700)] font-semibold hover:text-[var(--teal-900)]">
+        <Link href="/login" className="text-(--teal-700) font-semibold hover:text-(--teal-900)">
           Log in
         </Link>
       </p>
