@@ -248,38 +248,51 @@ skinparam monochrome true
 skinparam defaultFontSize 12
 
 entity "nutzer" as user {
-  * userID : UUID <<PK>>
+  * userID : UID <<PK>>
   --
   * email : VARCHAR(255) <<UNIQUE>>
   * name : VARCHAR(100)
-  * age : INTEGER
 }
 
 entity "habit" as habit {
-  * habitID : HUID <<PK>>
+  * habitID : UID <<PK>>
+  * userID : UID <<FK>>
   --
   * name : VARCHAR(100)
   * Intervall : INTEGER
   * Category : VARCHAR(100)
+  * created_at : timestamp
 }
 
-entity "habitEintrag" as entry {
-  * entryID : EUID <<PK>>
-  * habitID : HUID <<FK>>
+entity "habitNote" as node {
+  * noteID : UID <<PK>>
+  * habitID : UID <<FK>>
+  * userID : UID <<FK>>
   --
+  * created_at : timestamp
   * content : VARCHAR(500)
 }
 
 entity "pet" as pet {
-  * petID : PUID <<PK>>
+  * petID : UID <<PK>>
+  * userID : UID <<FK>>
   --
   * xp : INTEGER
   * name : VARCHAR(100)
 }
 
+entity "entry" as entry {
+  * entryID : UID <<PK>>
+  * habitID : UID <<FK>>
+  * userID : UID <<FK>>
+  --
+  * date: timestamp
+}
+
 entity "statistics" as stats {
-  * statID : SUID <<PK>>
-  * habitID : HUID <<FK>>
+  * statID : UID <<PK>>
+  * habitID : UID <<FK>>
+  * userID : UID <<FK>>
   --
   * name : VARCHAR(100)
   * counter : INTEGER
@@ -291,8 +304,9 @@ entity "statistics" as stats {
 
 user ||--o{ habit : "erstellt"
 habit ||--o{ stats : "wird getracked durch"
+habit ||--o{ entry : "erstellt bei abhaken"
 user ||--o{ stats : "sieht"
-habit ||--o{ entry : "enthält"
+habit ||--o{ node : "enthält"
 habit ||--o{ pet : "beeinflusst"
 user ||--o{ pet : "kümmert sich um"
 
@@ -305,26 +319,41 @@ user ||--o{ pet : "kümmert sich um"
 |===
 | Tabelle | Spalte | Beschreibung & Besonderheiten
 
-.4+| nutzer
-| userID | UUID als Primärschlüssel; wird vom System generiert
+.3+| nutzer
+| userID | UID als Primärschlüssel; wird vom System generiert
 | email | Eindeutig; wird für Login und Benachrichtigungen verwendet
 | name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
-| age | Alter der Person
 
-.3+| habit
-| habitID | HUID als Primärschlüssel
+
+.4+| habit
+| habitID | UID als Primärschlüssel
+| userID | UID als Fremdschlüssel; wird vom System generiert
 | category | Kategorie, unter die das Habit fällt
 | intervall | Intervall, in welchem das Habit erledigt werden soll
 
 
-.7+| statistics
-| userID | UUID als Primärschlüssel; wird vom System generiert
-| habitID | HUID als Fremdschlüssel; wird vom System generiert
+.8+| statistics
+| statID | UID als Primärschlüssel; wird vom System generiert
+| userID | UID als Fremdschlüssel; wird vom System generiert
+| habitID | UID als Fremdschlüssel; wird vom System generiert
 | name | Name des Habits, zu dem die Stats gehören
 | counter | Streak Counter
 | category | Kategorie, unter die das Habit fällt
 | intervall |  Intervall, in welchem das Habit erledigt werden soll
 | momentum | Momentum-Score, den der Nutzer zum spezifischen Habit hat
+
+.4+| pet
+| petID | UID als Primärschlüssel; wird vom System generiert
+| userID | UID als Fremdschlüssel; wird vom System generiert
+| xp | Währung für das pet um Progress zu sehen
+| name | Pet Name
+
+.5+| habitNote
+| noteID |  UID als Primärschlüssel; wird vom System generiert
+| userID | UID als Fremdschlüssel; wird vom System generiert
+| habitID | UID als Fremdschlüssel; wird vom System generiert
+| created_at | Erstellt am 
+| content | Quicknote content
 |===
 
 === Datenbankmigrationen
