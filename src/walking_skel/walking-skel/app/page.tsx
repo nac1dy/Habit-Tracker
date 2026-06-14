@@ -45,6 +45,20 @@ export default function Home() {
         if (!res.ok) throw new Error('Failed to fetch habits');
         const rows = (await res.json()) as HabitApiRow[];
 
+        const checkedRes = await fetch('/api/check_habit');
+
+        let completedToday = new Set<string>();
+
+        if (checkedRes.ok) {
+          const entries = await checkedRes.json();
+
+          console.log('Entries:', entries);
+
+          completedToday = new Set(
+            entries.map((e: any) => e.habitid)
+          );
+        }
+
         // Map DB rows to the home view model. streakDays/doneToday are not in
         // the DB yet, so they start as placeholders.
         // API INTEGRATION POINT: real streak/check-in status go here.
@@ -53,7 +67,7 @@ export default function Home() {
           title: row.title,
           category: row.category,
           streakDays: MOCK_DEFAULT_STREAK,
-          doneToday: false,
+          doneToday: completedToday.has(row.habitid),
         }));
 
         // If the backend has no habits yet, show the mock list so the page
@@ -71,13 +85,49 @@ export default function Home() {
     fetchHabits();
   }, []);
 
-  // Toggle a habit's "done today" state.
-  // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
-  const toggleHabit = (habitid: string) => {
+
+  const toggleHabit = async (habitid: string) => {
+
+    const habitToToggle = habits.find((h) => h.habitid === habitid);
+    //if to be checked habit is not found, meaning not defined, return
+    if (!habitToToggle) return;
+    
+
+    const newDoneState = !habitToToggle.doneToday;
+
     setHabits((prev) =>
-      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !h.doneToday } : h)),
+      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: newDoneState } : h)),
     );
-  };
+
+
+    const today = new Date().toISOString().split('T')[0]; 
+    try {
+      const res = await fetch('/api/check_habit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          habitid: habitid, 
+          date: today, 
+          done: newDoneState 
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error('Backend Error:', errorData);
+        throw new Error('Failed to update habit status');
+      }
+    } catch (error) {
+      console.error(error);
+
+      setHabits((prev) =>
+        prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !newDoneState } : h)),
+      );
+    }
+};
+
 
   return (
     // Full-width column; the content is constrained to a phone width and
