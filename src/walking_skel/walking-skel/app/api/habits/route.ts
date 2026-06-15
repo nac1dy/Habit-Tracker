@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/app/backend/supabase';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/habits
  * Fetches all habits for the authenticated user (or all if public)

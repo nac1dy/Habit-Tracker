@@ -44,6 +44,11 @@ export default function Home() {
         const res = await fetch('/api/habits');
         if (!res.ok) throw new Error('Failed to fetch habits');
         const rows = (await res.json()) as HabitApiRow[];
+        //load checked habits
+        const res_check = await fetch('/api/check');
+        if (!res_check.ok) throw new Error('Failed to fetch checked habits');
+        const checked = (await res_check.json()) as { habitid: string }[];
+        const checkedIds = new Set(checked.map((c) => c.habitid));
 
         // Map DB rows to the home view model. streakDays/doneToday are not in
         // the DB yet, so they start as placeholders.
@@ -53,7 +58,7 @@ export default function Home() {
           title: row.title,
           category: row.category,
           streakDays: MOCK_DEFAULT_STREAK,
-          doneToday: false,
+          doneToday: checkedIds.has(row.habitid),
         }));
 
         // If the backend has no habits yet, show the mock list so the page
@@ -73,10 +78,35 @@ export default function Home() {
 
   // Toggle a habit's "done today" state.
   // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
-  const toggleHabit = (habitid: string) => {
+  const toggleHabit = async (habitid: string) => {
+
+    const habitToToggle = habits.find((h) => h.habitid === habitid);
+    if (!habitToToggle) return;
+
+    const newDoneState = !habitToToggle.doneToday;
+
     setHabits((prev) =>
-      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !h.doneToday } : h)),
+      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: newDoneState } : h)),
     );
+
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+
+    try{
+      const res = await fetch('/api/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ habitID: habitid, date: today, done: newDoneState }),
+      });
+
+      if (!res.ok) throw new Error('Failed to update habit check');
+
+    } catch(err) {
+      // If the API call fails, revert the local state change to keep UI consistent with backend.
+      console.error("Server Error:", err);
+      setHabits((prev) =>
+        prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !newDoneState } : h)),
+      );
+    }
   };
 
   return (
