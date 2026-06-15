@@ -44,7 +44,7 @@ export default function Home() {
         const res = await fetch('/api/habits');
         if (!res.ok) throw new Error('Failed to fetch habits');
         const rows = (await res.json()) as HabitApiRow[];
-
+/*
         const checkedRes = await fetch('/api/check_habit');
 
         let completedToday = new Set<string>();
@@ -58,7 +58,7 @@ export default function Home() {
             entries.map((e: any) => e.habitid)
           );
         }
-
+*/
         // Map DB rows to the home view model. streakDays/doneToday are not in
         // the DB yet, so they start as placeholders.
         // API INTEGRATION POINT: real streak/check-in status go here.
@@ -67,7 +67,8 @@ export default function Home() {
           title: row.title,
           category: row.category,
           streakDays: MOCK_DEFAULT_STREAK,
-          doneToday: completedToday.has(row.habitid),
+          doneToday: false, 
+          //doneToday: completedToday.has(row.habitid),
         }));
 
         // If the backend has no habits yet, show the mock list so the page
@@ -85,7 +86,15 @@ export default function Home() {
     fetchHabits();
   }, []);
 
+  // Toggle a habit's "done today" state.
+  // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
+  const toggleHabit = (habitid: string) => {
+    setHabits((prev) =>
+      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !h.doneToday } : h)),
+    );
+  };
 
+  /*
   const toggleHabit = async (habitid: string) => {
 
     const habitToToggle = habits.find((h) => h.habitid === habitid);
@@ -127,7 +136,7 @@ export default function Home() {
       );
     }
 };
-
+*/
 
   return (
     // Full-width column; the content is constrained to a phone width and

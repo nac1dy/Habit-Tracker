@@ -1,3 +1,4 @@
+/*
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/app/backend/supabase';
 
@@ -60,3 +61,4 @@ export async function GET() {
     );
   }
 }
+*/
