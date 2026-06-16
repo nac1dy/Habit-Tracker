@@ -213,21 +213,3 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | [Beschreibung]
 | [Technisch / Rechtlich / Organisatorisch / Zeitlich]
 |===
-
-
-== Versionsverlauf
-
-[cols="1,1,2", options="header"]
-|===
-| Version | Datum | Änderung
-
-| 1.0
-| 01.05.2026
-| Initiale Version nach Kick-off-Workshop
-
-|===
-
----
-
-_Dieses Dokument ist bewusst stabil gehalten. Änderungen sollten nur bei wesentlichen
-Richtungsentscheidungen vorgenommen werden und im Versionsverlauf dokumentiert sein._

@@ -4,3 +4,4 @@
 .DS_Store
 *~
 .vscode
+src/walking_skel/walking-skel/env.local
