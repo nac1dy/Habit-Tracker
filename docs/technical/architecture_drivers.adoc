@@ -24,8 +24,8 @@ In den Qualitätssstandards haben wir uns auf unter 2s Ladezeit und unter 2 min 
 == Authentifizierung mit E-Mail und Passwort
 Wir haben eine Anmeldung per E-Mail und Passwort vorgesehen. Die Architektur braucht daher einen klaren Authentifizierungs- und Sitzungsmechanismus sowie sichere Passwortspeicherung.
 
-== Unterstützung von Habit-Logik mit Streaks, Frequenzen und Mini-Habits
-Das Produkt soll mehrere fachliche Konzepte abbilden, darunter tägliches Tracking, flexible Häufigkeitsziele, Streaks und Fallback-Mini-Habits. Die Architektur muss dafür ein flexibles Domänenmodell haben.
+== Unterstützung von Habit-Logik mit Streaks, Frequenzen
+Das Produkt soll mehrere fachliche Konzepte abbilden, darunter tägliches Tracking, flexible Häufigkeitsziele, Streaks. Die Architektur muss dafür ein flexibles Domänenmodell haben.
 
 == Erinnerungen und konfigurierbare Benachrichtigungen
 Erinnerungsfunktionen mit Uhrzeit sind als Hauptfunktion geplant. Die Architektur muss dafür ein zuverlässiges Notification- oder Reminder-Konzept vorsehen, inklusive Nutzerzustimmung und Plattformgrenzen.
@@ -36,5 +36,4 @@ Die Architektur muss mit lokalem Zwischenspeicher, Synchronisation und einem rob
 == Zweisprachigkeit Deutsch und Englisch
 Die App soll in Deutsch und Englisch verfügbar sein. Das betrifft UI-Texte, Fehlermeldungen, Onboarding, Validierung und möglicherweise Inhalte der Statistiken.
 
-== Verfügbarkeit und Sicherung unter Hochschulinfrastruktur
-Das System soll, wenn möglich, auf Hochschulservern betrieben werden und eine Verfügbarkeit von 99 Prozent sowie tägliche Backups erreichen. Die Architektur muss also auf den vorgesehenen Betrieb, Ausfallsicherheit und Wiederherstellbarkeit ausgelegt sein.
+
