@@ -13,14 +13,14 @@ Wir haben festgestellt, dass z.B. Alkohol- und i.A. Suchtverhalten als kritische
 == Wie wird mit Notizen technisch umgegangen?
 Extern: Supabase PostgreSQL, intern: In-Memory-Cache mit Sync-Mechanismus. Es muss sichergestellt werden, dass die Daten konsistent bleiben und Datenschutzanforderungen erfüllt werden.
 
-== Wie sollen Erinnerungen technisch ausgeliefert werden?
-Browser-Push, In-App-Benachrichtigungen (Push API und Notification API), E-Mail (nur für login)?
+== Wie sollen Benachrichtigungen technisch ausgeliefert werden?
+Browser-Push oder als In-App-Benachrichtigungen (Push API und Notification API), E-Mail (nur für den Login)?
 
 == Muss die App für den ersten Gebrauch ohne Registrierung funktionieren?
 Nein, Registrierung ist Pflicht
 
 == Wie werden Löschung und Datenrechte konkret umgesetzt?
-Löschung in App mit Email Bestätigung. Datenrechte: Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht. Umsetzung: In-App Funktionen für Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit. Widerspruchsrecht: Möglichkeit zum Widerspruch gegen Verarbeitung in App oder über Support.
+Die Löschung soll in der App mit E-Mail-Bestätigung erfolgen. Datenrechte: Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruchsrecht. Umsetzung: In-App Funktionen für Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit. Widerspruchsrecht: Möglichkeit zum Widerspruch gegen Verarbeitung in App oder über Support.
 
 == Wie realistisch sind die Performance-Ziele mit dem geplanten Scope?
 Unter 2 Sekunden Ladezeit und 2 Minuten Onboarding sind ambitioniert, während gleichzeitig mehrere Fachfunktionen, Sprache, Offline-Fähigkeit und Datenschutz berücksichtigt werden müssen. Die Umsetzbarkeit sollten wir früh technisch validieren.

@@ -95,7 +95,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 
 | Notifications
 | Externes System
-| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden 
+| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden
 | Push API, Notification API der Betriebssysteme
 
 |===
@@ -193,7 +193,7 @@ Rel(backend, database, "Liest und schreibt Daten in", "SQL Protocol")
 | ADR-007
 
 | Benachrichtungen
-| Push API, Notifications API 
+| Push API, Notifications API
 | Ermöglicht das Senden von Notifications an den Nutzer (auch bei Umsetzung als PWA)
 | ADR-009
 
