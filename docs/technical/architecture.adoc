@@ -72,7 +72,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 
 | Supabase
 | Externes System
-| Authentifizierung und Back-End Management über die Supabase 
+| Authentifizierung und Back-End Management über die Supabase
 | Supabase Auth
 
 | Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
@@ -80,14 +80,14 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
 
-| PostgreSQL 
+| PostgreSQL
 | Externes System
-| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet 
+| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet
 | SQL
 
 | Notifications
 | Externes System
-| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden 
+| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden
 | Push API, Notification API der Betriebssysteme
 
 |===
@@ -114,7 +114,7 @@ Rel(personAlias, containerAlias, "Nutzt Website mit Lautfzeitumgebung")
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
-//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden.
 
 
 == Technologie-Stack
@@ -130,13 +130,13 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| Next.js, TailwindCSS, 
+| Next.js, TailwindCSS,
 | Modern & performant, viele Funktionen schon vorhanden, gut dokumentiert, große Community
 | [z. B. ADR-001]
 
 | Backend
 | Supabase
-| Supabase ist kompatibel mit PostgreSQL, somit können die Management-Daten über Supabase laufen 
+| Supabase ist kompatibel mit PostgreSQL, somit können die Management-Daten über Supabase laufen
 | [z. B. ADR-002]
 
 | Datenbank
@@ -146,11 +146,11 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 
 | Authentifizierung
 | Supabase Auth
-| Supabase ist kompatibel mit PostgreSQL, somit können die Daten von Management und Authentifizierung über Supabase laufen 
+| Supabase ist kompatibel mit PostgreSQL, somit können die Daten von Management und Authentifizierung über Supabase laufen
 | [z. B. ADR-004]
 
 | Benachrichtungen
-| Push API, Notifications API 
+| Push API, Notifications API
 | Ermöglicht das Senden von Notifications an den Nutzer (auch bei Umsetzung als PWA)
 | [z. B. ADR-005]
 
@@ -336,16 +336,6 @@ Punkte in Vergessenheit geraten._
 |===
 | Risiko | Auswirkung | Wahrscheinlichkeit | Maßnahme
 
-| [z. B. LDAP-Schnittstelle der Hochschule ist undokumentiert]
-| Hoch
-| Mittel
-| [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
-
-| [z. B. Performance bei > 200 gleichzeitigen Nutzern unbekannt]
-| Mittel
-| Niedrig
-| [z. B. Lasttest ab Sprint 4 eingeplant]
-
 | Supabase Free Tier: Limits bei 500 MB Datenbank und 50.000 Monthly Active Users können bei Wachstum überschritten werden
 | Hoch
 | Mittel
@@ -386,10 +376,6 @@ Punkte in Vergessenheit geraten._
 | Hoch
 | Internes Onboarding einplanen; Code-Reviews als Pflichtprozess einführen
 
-| [Weiteres Risiko]
-| [Hoch / Mittel / Niedrig]
-| [Hoch / Mittel / Niedrig]
-| [Maßnahme oder Akzeptanz]
 |===
 
 === Technische Schulden
