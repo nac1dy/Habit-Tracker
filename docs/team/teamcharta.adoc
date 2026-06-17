@@ -106,7 +106,10 @@ _Eine User Story ist bereit für die Entwicklung, wenn..._
 _Eine User Story gilt als fertig, wenn..._
 
 * [ ] Der Code implementiert und in den Hauptbranch gemerged wurde
+* [ ] Alle Akzeptanzkriterien der User Story erfüllt sind
 * [ ] Unit- und Integrationstests geschrieben wurden und grün sind
+* [ ] Die Rechtlichen Anforderungen (DSGVO) eingehalten wurden (xref:../product/DSGVO_requirements.adoc[Rechtliche Anforderungen])
+* [ ] Die Qualitätsanforderungen eingehalten wurden (xref:../product/quality_requirements.adoc[Qualitätsanforderungen])
 * [ ] Der Code von mindestens einer weiteren Person (am besten zwei) reviewed wurde
 * [ ] Dokumentation erweitert und aktualisiert wurde, wenn nötig
 * [ ] Der Product Owner die Story abgenommen hat
