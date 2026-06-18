@@ -21,10 +21,10 @@ Wie wir zusammenarbeiten (`docs/team`).
 == Technik
 Wie das Produkt entwickelt und betrieben wird (`docs/technical`).
 
-* link:technical/architecture.adoc[Architektur] enthält grundlegende Entscheidungen zur technischen Grundlage und Struktur des Systems. Hierbei sind auch die Dokumente link:technical/architecture_drivers.adoc[Architekturtreiber] und link:technical/uncertainties.adoc[Unsicherheiten] relevant.
+* link:technical/architecture.adoc[Architektur] enthält grundlegende Entscheidungen zur technischen Grundlage und Struktur des Systems.
 * link:technical/design.adoc[Softwaredesign] beschreibt den Aufbau der Codebasis, den Aufbau und Zusammenspiel zentraler Komponenten und Schnittstellen.
 * link:technical/deployment.adoc[Bereitstellung] enthält Informationen zur Betriebsumgebung, ihrer Konfiguration sowie Schritten zur Auslieferung (CI/CD).
 * link:technical/test_concept.adoc[Testkonzept] beschreibt das gewählte Testkonzept, Tools und die Einbindung in den Entwicklungsprozess.
 
----
+'''
 _Dieses Dokument wird kontinuierlich gepflegt. Zusätzliche Dokumente können in den drei Kategorien bei Bedarf ergänzt und auf dieser Seite verlinkt werden._
