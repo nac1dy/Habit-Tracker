@@ -11,9 +11,9 @@ aus welchen Komponenten das System besteht, wie diese zusammenarbeiten, und welc
 Designmuster eingesetzt werden. Der Fokus liegt auf dem *Wie* der Implementierung._
 
 _Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
-link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:domain_glossary.adoc[Domänenmodell] (`domain_glossary.adoc`) definiert._
+link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:../product/domain_glossary.adoc[Domänenmodell] (`domain_glossary.adoc`) definiert._
 
----
+'''
 
 == Systemübersicht & Schichtenarchitektur
 
@@ -156,7 +156,7 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 | [Schnittstellen]
 |===
 
----
+'''
 
 == Wichtige Interaktionsflüsse
 
@@ -197,7 +197,7 @@ ctrl --> user : 201 Created\n{habitid, details}
 @enduml
 ....
 
----
+'''
 
 === Fehlerfluss-Szenario: Habit existiert bereits
 
@@ -226,7 +226,7 @@ ctrl --> user : 409 Conflict\n{message, alternativen}
 NOTE: Flussnamen im Diagramm sollten identisch mit den Methodennamen im Code sein.
 Das macht es einfacher, vom Diagramm zum Code zu navigieren und umgekehrt.
 
----
+'''
 
 == Datenmodell
 
@@ -352,7 +352,7 @@ user ||--o{ pet : "kümmert sich um"
 | noteID |  UID als Primärschlüssel; wird vom System generiert
 | userID | UID als Fremdschlüssel; wird vom System generiert
 | habitID | UID als Fremdschlüssel; wird vom System generiert
-| created_at | Erstellt am 
+| created_at | Erstellt am
 | content | Quicknote content
 |===
 
@@ -418,7 +418,7 @@ Problem auf unterschiedliche Weise lösen._
 
 | Fachliche Fehler
 | Als eigene Exception-Klassen modellieren
-  (z. B. `RaumNichtVerfuegbarException`, `BuchungNichtGefundenException`)
+  (z. B. `HabitNotFoundException`)
 
 | HTTP-Fehlercodes
 | 400 für Validierungsfehler; 404 für nicht gefundene Ressourcen;
@@ -439,15 +439,15 @@ Problem auf unterschiedliche Weise lösen._
 |===
 | Aspekt | Konvention
 
-| URL-Struktur
-| Ressourcenorientiert im Plural: `/buchungen`, `/raeume`, `/nutzer`
+| URL-Struktur (REST)
+| Ressourcenorientiert: `/habits`, `/stats`, `/settings`
 
 | HTTP-Methoden
 | GET = lesen; POST = erstellen; PUT = ersetzen; PATCH = teilweise ändern;
   DELETE = löschen
 
 | Antwortformat
-| JSON in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
+| JSON in allen Fällen; Datumsformat ISO 8601: `2026-01-01T09:00:00Z`
 
 | Versionierung
 | [z. B. URL-Präfix `/api/v1/` - Version nur erhöhen bei Breaking Changes]

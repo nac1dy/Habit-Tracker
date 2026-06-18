@@ -8,13 +8,13 @@ include::../config.adoc[]
 _Dieses Dokument beschreibt, wer das Produkt nutzt und wie — aus der Perspektive der Nutzenden. Es ergänzt das Produktkonzept um Personas, Nutzungskontext und
 systemweite Interaktionsflüsse und dient als gemeinsame Referenz für Design- und Entwicklungsentscheidungen.
 
-_Individuelle Wireframes einzelner Features werden direkt in den zugehörigen User Stories im Product Backlog gepflegt (verlinkt oder kopiert aus Miro oder anderem Tool). Dieses Dokument enthält nur Artefakte, die mehrere Stories oder das gesamte Produkt betreffen._
+_Individuelle Wireframes einzelner Features werden direkt in den zugehörigen User Storys im Product Backlog gepflegt (verlinkt oder kopiert aus Miro oder anderem Tool). Dieses Dokument enthält nur Artefakte, die mehrere Storys oder das gesamte Produkt betreffen._
 
----
+'''
 
 == Personas
 
-_Personas sind fiktive, aber realitätsbasierte Beschreibungen typischer Nutzender.
+_Personas sind fiktive, aber realitätsbasierte Beschreibungen typischer Nutzer.
 Sie helfen dem Team, Entscheidungen konsequent aus Nutzerperspektive zu treffen.
 Personas sollten auf echten Nutzerinterviews oder Beobachtungen basieren — nicht
 auf Annahmen allein._
@@ -35,7 +35,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | _„Und ich bin Andreas und ich bin auch dabei"_
 
 | *Ziele*
-| Ich möchte mit Alkohol aufhören, weil meine Leber das nichtmehr mitmacht und damit erreichen das ich wieder 10km Joggen kann.
+| Ich möchte mit dem Alkoholkonsum aufhören, weil meine Leber das nicht mehr mitmacht und damit erreichen, dass ich wieder 10 km Joggen kann.
 
 | *Frustrationen*
 | Ungesunde Lebensweise, schlechte Gesundheit, soziale Isolation, finanzielle Belastung, negative Auswirkungen auf Studium und Karriere
@@ -52,7 +52,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 [cols="1,3"]
 |===
 | *Rolle*
-| Professional Doom-Scroller, Student, Social-Media-Süchtiger, Unproduktiver Mensch
+| Professional Doom-Scroller, Student, Social-Media-Süchtiger, unproduktiver Mensch
 
 | *Alter*
 | 20 Jahre
@@ -70,7 +70,7 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | Handy, Computer, technisch versiert, immer zuhause, will nicht zu viel Zeit mit der App verbringen
 
 | *Bezug zum Produkt*
-| Ohne Hürde und mit minimal Zeit das Gefühl von Fortschritt und Kontrolle über das eigene Leben gewinnen
+| Ohne Hürde und mit minimalem Zeitaufwand das Gefühl von Fortschritt und Kontrolle über das eigene Leben gewinnen
 |===
 
 === Persona 3: Petra Produktiv
@@ -215,7 +215,7 @@ stop
 | Zeigt direkt die wichtigste Funktion und Habits — keine unnötige Zwischenseite
 |===
 
----
+'''
 
 === Anlegen eines Habits
 

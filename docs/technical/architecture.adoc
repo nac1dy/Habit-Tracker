@@ -17,7 +17,7 @@ Konsequenzen, die sich daraus ergeben._
 _Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
 Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument](`design.adoc`) beschrieben._
 
----
+'''
 
 == Architektursichten
 
@@ -39,7 +39,7 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 
 LAYOUT_WITH_LEGEND()
 
-title System Context Diagram – [Systemname]
+title System Context Diagram
 
 Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
 Person(admin, "Administrator", "Verwaltet und konfiguriert das System")
@@ -80,12 +80,12 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 
 | Supabase
 | Externes System, Backend-as-a-Service
-| Authentifizierung und Back-End Management über die Supabase 
+| Authentifizierung und Back-End Management über die Supabase
 | Supabase Auth
 
-| PostgreSQL 
+| PostgreSQL
 | Externes System, Datenbank
-| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet 
+| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet
 | SQL
 
 | Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
@@ -131,7 +131,7 @@ SHOW_LEGEND()
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
-//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden.
 [plantuml, "{diagramsdir}/deployment-context", svg]
 ....
 @startuml
@@ -140,14 +140,14 @@ SHOW_LEGEND()
 LAYOUT_WITH_LEGEND()
 
 Deployment_Node(user_device, "Endgerät des Nutzers", "Smartphone, Tablet oder PC") {
-    Deployment_Node(browser, "Web Browser", "Übliche moderne Browser") {
+    Deployment_Node(browser, "Webbrowser", "Übliche moderne Browser") {
         Container(pwa, "Habito PWA", "Next.js / React", "Stellt UI und Offline-Fähigkeit bereit. Constraint: DSGVO (lokale Speicherung sensibler Daten).")
     }
 }
 
 Deployment_Node(vercel, "Vercel", "Cloud Platform") {
     Deployment_Node(vercel_node, "Serverless", "Node.js Runtime") {
-        Container(frontend_server, "Next.js SSR Server", "Node.js", "Liefert initiale Assets aus. Constraint: Performanceziel (Seitenladezeit < 2s).")
+        Container(frontend_server, "Next.js Serverless Functions", "Node.js", "Rendert Seite und liefert initiale Assets aus. Constraint: Performanceziel (Seitenladezeit < 2s).")
     }
 }
 
@@ -173,7 +173,7 @@ Rel(backend, database, "Liest und schreibt Daten in", "SQL Protocol")
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| Next.js, TailwindCSS, React 
+| Next.js, TailwindCSS, React
 | Modern, gut dokumentiert, einfaches Routing und gute Kompatibilität zu Backend und Deployment
 | ADR-001
 
@@ -187,6 +187,11 @@ Rel(backend, database, "Liest und schreibt Daten in", "SQL Protocol")
 | Supabase Datenbank basiert auf PostgreSQL, modern und gut gepflegt und relativ simple Syntax
 | ADR-003
 
+| Deployment
+| Vercel
+| Deployment über Vercel, da es schnell, modern und gut kompatibel für unser Produkt ist
+| ADR-004
+
 | Authentifizierung
 | Supabase Auth
 | Da Supabase schon als Backend eingesetzt wird, ist es sinnvoll auch die Authentifizierung über Supabase zu realisieren, da es schnell verfügbar ist und die Möglichkeit bietet, sich mit externen Konten einzuloggen
@@ -197,20 +202,47 @@ Rel(backend, database, "Liest und schreibt Daten in", "SQL Protocol")
 | Ermöglicht das Senden von Notifications an den Nutzer (auch bei Umsetzung als PWA)
 | ADR-009
 
-| Deployment
-| Vercel
-| Deployment über Vercel, da es schnell, modern und gut kompatibel für unser Produkt ist
-| ADR-004
-
 |===
 
-== Architekturrelevante Anforderungen
+
+== Architekturrelevante Anforderungen/Architekturtreiber
 
 // IMPORTANT: Qualitätsziele und Einschränkungen werden hier *nicht* neu definiert —
 //sie sind im link:../product/product_concept.adoc[Produktkonzept] als einziger Quelle festgelegt.
 //Dieser Abschnitt zeigt ausschließlich die technischen Konsequenzen, die sich aus
 //diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 
+NOTE: {ai-supported-note}
+
+=== DSGVO-konforme Datenverarbeitung
+Das System verarbeitet personenbezogene Daten und potenziell sensible Inhalte wie Gewohnheiten oder Notizen. Die Architektur muss Datensparsamkeit, transparente Speicherung, Löschung und sichere Übertragung unterstützen.
+
+=== Web-App statt native App
+Laut Anforderungen soll das Produkt als Web-App laufen und auf modernen Browsern funktionieren. Die Architektur muss daher browserbasiert, plattformunabhängig und ohne App-Store-Abhängigkeit gedacht werden.
+
+=== Responsive Nutzung auf Desktop, Tablet und Smartphone
+Die Zielgruppe nutzt die App in unterschiedlichen Kontexten, oft unterwegs und auf mobilen Geräten. Das UI und die technische Struktur müssen deshalb responsiv und auf kleine Bildschirme optimiert sein. Jedoch soll die Software auch auf Laptop-/PC-Bildschirmen gut aussehen.
+
+=== Sehr schneller Einstieg und kurze Ladezeiten
+In den Qualitätsstandards haben wir uns auf unter 2s Ladezeit und unter 2 min Onboarding-Dauer festgelegt. Die Architektur muss also auf schlanke Initialisierung, geringe Komplexität im Startpfad und performante Datenzugriffe ausgelegt werden.
+
+=== Authentifizierung mit E-Mail und Passwort
+Wir haben eine Anmeldung per E-Mail und Passwort vorgesehen. Die Architektur braucht daher einen klaren Authentifizierungs- und Sitzungsmechanismus sowie sichere Passwortspeicherung.
+
+=== Unterstützung von Habit-Logik mit Streaks, Frequenzen
+Das Produkt soll mehrere fachliche Konzepte abbilden, darunter tägliches Tracking, flexible Häufigkeitsziele, Streaks. Die Architektur muss dafür ein flexibles Domänenmodell haben.
+
+=== Erinnerungen und konfigurierbare Benachrichtigungen
+Erinnerungsfunktionen mit Uhrzeit sind als Hauptfunktion geplant. Die Architektur muss dafür ein zuverlässiges Notification- oder Reminder-Konzept vorsehen, inklusive Nutzerzustimmung und Plattformgrenzen.
+
+=== Offline-Fähigkeit als PWA
+Die Architektur muss mit lokalem Zwischenspeicher, Synchronisation und einem robusten Umgang mit Verbindungsabbrüchen planen, um auch offline funktionieren zu können.
+
+=== Zweisprachigkeit Deutsch und Englisch
+Die App soll in Deutsch und Englisch verfügbar sein. Das betrifft UI-Texte, Fehlermeldungen, Onboarding, Validierung und möglicherweise Inhalte der Statistiken.
+
+
+== Architekturentscheidungen (ADRs)
 
 [cols="2,3,2", options="header"]
 |===
@@ -218,28 +250,29 @@ Rel(backend, database, "Liest und schreibt Daten in", "SQL Protocol")
 
 | Performanceziel: Seitenladezeit < 2 s
 | Schnelle Auslieferung der Benutzeroberfläche und geringe Ladezeiten durch serverseitige Vorbereitung von Inhalten sowie optimierte Bereitstellung von Ressourcen.
-| ADR-004, ADR-001
+| ADR-001, ADR-004
 
-| Offline-Nutzung
-| Service Worker, lokaler Speicher und Caching-Strategie. 
-| ADR-007
+| Responsive Nutzung auf Desktop, Tablet und Smartphone
+| Frontend muss unterschiedliche Bildschirmgrößen unterstützen und eine responsive Benutzeroberfläche für Desktop, Tablet und Smartphone bereitstellen.
+| ADR-001, ADR-005
 
 | DSGVO-Konformität
 | Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
 Recht auf Löschung muss implementierbar sein; Nutzer-Einträge mit sensiblen Daten sollen nur lokal auf dem Gerät des Nutzers gespeichert werden
-| ADR-008, ADR-002
-
-| Anwendung auf unterschiedlichen Betriebssystemen nutzbar.
-| Plattformungebundene WebApp, optimiert für Desktop, Tablet und Smartphone
-| ADR-005
+| ADR-002, ADR-008
 
 | Wartbarkeit und Erweiterbarkeit
 | Klare Trennung fachlicher Verantwortlichkeiten und modulare Struktur der Anwendung erforderlich
 | ADR-006
 
-| Responsive Nutzung auf Desktop, Tablet und Smartphone
-| Frontend muss unterschiedliche Bildschirmgrößen unterstützen und eine responsive Benutzeroberfläche für Desktop, Tablet und Smartphone bereitstellen.
-| ADR-001, ADR-005
+| Anwendung auf unterschiedlichen Betriebssystemen nutzbar.
+| Plattformungebundene WebApp, optimiert für Desktop, Tablet und Smartphone
+| ADR-005
+
+| Offline-Nutzung
+| Service Worker, lokaler Speicher und Caching-Strategie.
+| ADR-007
+
 |===
 
 === ADR-001: Next.js als Frontend Framework
@@ -259,13 +292,13 @@ Recht auf Löschung muss implementierbar sein; Nutzer-Einträge mit sensiblen Da
 | Nutzen von Next.js als Frontend Framework
 
 | Alternativen
-| Remix für gutes Datenhandling, Astro für minimales Javascript coding, SvelteKit für compilation performance
+| Remix für gutes Datenhandling, Astro für minimales JavaScript-Coding, SvelteKit für Compilation Performance
 
 | Konsequenzen
 a|
 * (+) Gute integrationsmöglichkeiten von Deployment und Backend
-* (+) Routing mittels filessystem
-* (-) performance hängt bisschen durch bei development
+* (+) Routing mittels Dateisystem
+* (-) Performance hängt bisschen durch bei Development
 * (-) Speicherverbrauch steigt ziemlich bei größeren Projekten
 |===
 
@@ -289,12 +322,12 @@ a|
 | Firebase aufgrund der mobile development features, built in offline sync. Appwrite als self hostable Backend
 
 | Konsequenzen
-a| 
+a|
 * (+) Kompatibilität mit PostgreSQL
-* (+) Built in Authentification 
-* (+) Einfach zu nutzen 
-* (-) Daten sind nicht Local gespeichert 
-* (-) Daten müssen vorsichtig und sicher gehandhabt werden 
+* (+) Built in Authentification
+* (+) Einfach zu nutzen
+* (-) Daten sind nicht Local gespeichert
+* (-) Daten müssen vorsichtig und sicher gehandhabt werden
 * (-) Backup Limitation
 |===
 
@@ -312,16 +345,16 @@ a|
 | Daten müssen irgendwo gelagert werden
 
 | Entscheidung
-| Nutzen von PostgreSQL weil es die Datenbankbasis zu Supabase ist
+| Nutzen von PostgreSQL, weil es die Datenbankbasis zu Supabase ist
 
 | Alternativen
 | MongoDB für große Datenmengen und NoSQL, MySQL um strukturierte Daten zu speichern
 
 | Konsequenzen
-a| 
-* (+) Datenbankbasis von Supabase 
-* (+) Kostenlos 
-* (+) sehr striktes Datenhandling 
+a|
+* (+) Datenbankbasis von Supabase
+* (+) Kostenlos
+* (+) sehr striktes Datenhandling
 * (-) Komplexer für skalierung
 |===
 
@@ -336,21 +369,21 @@ a|
 | 15-06-2026
 
 | Kontext
-| Damit die Website zugänglich ist brauchen wir einen Host
+| Damit die Website zugänglich ist, brauchen wir einen Host
 
 | Entscheidung
-| Nutzen von Vercel aufgrund des Simplen deployments, kostenloser Nutzung und kompatibilität zu Supabase
+| Nutzung von Vercel aufgrund des simplen Deployments, der kostenlosen Nutzung und Kompatibilität zu Supabase
 
 | Alternativen
-| HTW Server, Netlify für static sites und single page applications, AWS Amplify
+| HTW Server, Netlify für Static Sites und Single Page Applications, AWS Amplify
 
 | Konsequenzen
-a| 
-* (+) Einfaches Deployment durch angabe des zu deployenden Repos 
-* (+) Kompatibilität zu Supabase 
-* (+) Kostenloses deployment 
-* (-) Keinen support für backend APIs oder Background workers 
-* (-) Limits bei laufzeit und speicher
+a|
+* (+) Einfaches Deployment durch angabe des zu deployenden Repos
+* (+) Kompatibilität zu Supabase
+* (+) Kostenloses deployment
+* (-) Keinen support für Backend-APIs oder Background workers
+* (-) Limits bei Laufzeit und speicher
 |===
 
 
@@ -374,8 +407,8 @@ a|
 | Plattformgebundene Codebasen: Mehrere separate Codebasen für unterschiedliche Betriebssysteme.
 
 | Konsequenzen
-a| 
-* (+) Nur eine Codebasis. 
+a|
+* (+) Nur eine Codebasis.
 * (-) Nicht alle im Team damit vertraut.
 |===
 
@@ -399,8 +432,8 @@ a|
 | Nicht definiert: Keine Alternativen im alten Format angegeben.
 
 | Konsequenzen
-a| 
-* (+) Saubere Trennung im Code. 
+a|
+* (+) Saubere Trennung im Code.
 * (-) Erhöht Planungsaufwand.
 |===
 
@@ -418,14 +451,14 @@ a|
 | Habits müssen an Orten ohne Internetempfang verwaltet werden können.
 
 | Entscheidung
-| Die WebApp wird als PWA installierbar und offline tauglich.
+| Die WebApp wird als PWA installierbar und offline-tauglich.
 
 | Alternativen
 | Reine Cloud-Speicherung: Daten rein in der Cloud speichern ohne Offline-Verfügbarkeit.
 
 | Konsequenzen
-a| 
-* (+) Volle Offline-Funktionalität. 
+a|
+* (+) Volle Offline-Funktionalität.
 * (-) Erhöhter Entwicklungsaufwand.
 |===
 
@@ -449,12 +482,12 @@ a|
 | Eigene Authentifizierung: Erstellung einer komplett eigenen Authentifizierungslösung.
 
 | Konsequenzen
-a| 
-* (+) Schnelle Verfügbarkeit. 
+a|
+* (+) Schnelle Verfügbarkeit.
 * (+) Login-Möglichkeit mit externen Konten.
 |===
 
-=== ADR-009: Benachrichtungen 
+=== ADR-009: Benachrichtungen
 
 [cols="1,3"]
 |===
@@ -468,16 +501,16 @@ a|
 | Nutzer sollen Benachrichtigungen über ihre Habits erhalten können, z.B. Erinnerungen.
 
 | Entscheidung
-| Benachrichtungen werden über die Push API und Notifications API der Betriebssysteme realisiert.
+| Benachrichtungen werden über die Push-API und Notifications API der Betriebssysteme realisiert.
 
 | Alternativen
-| Keine Benachrichtungen: Es werden keine Benachrichtungen implementiert, Nutzer müssen die App aktiv öffnen, um Informationen zu erhalten. 
+| Keine Benachrichtungen: Es werden keine Benachrichtungen implementiert, Nutzer müssen die App aktiv öffnen, um Informationen zu erhalten.
 
 | Konsequenzen
-a| 
-* (+) Nutzer erhält Benachrichtungen und wird an dringendes Erinnert. 
+a|
+* (+) Nutzer erhält Benachrichtungen und wird an dringendes Erinnert.
 * (+) Unterstützt die Motivation des Nutzers.
-* (-) Nutzer könnten schnell genervt sein durch die Benachrichtigungen.
+* (-) Nutzer könnten durch die Benachrichtigungen schnell genervt sein.
 |===
 
 == Risiken & technische Schulden
@@ -538,8 +571,8 @@ Punkte in Vergessenheit geraten._
 | Initialer Fokus auf Kernfunktionalität; Caching-Strategie für Offline-Nutzung geplant für spätere Iteration
 | Issue # 101
 
-| Aktuell keine Datenschutzbestimmungen 
-| MVP-Fokus; Bis jetzt keine Nutzerdaten gespeichert (angelegte Habits sind zurzeit nicht Nutzergebunden)
+| Aktuell keine Datenschutzbestimmungen
+| MVP-Fokus; bis jetzt sind keine Nutzerdaten gespeichert (angelegte Habits sind zurzeit nicht nutzergebunden)
 | TBD/WIP
 
 | Aktuell keine Supabase Auth
