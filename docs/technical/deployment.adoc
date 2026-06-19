@@ -4,19 +4,21 @@ include::../config.adoc[]
 {localdatetime}
 // Platzhalter für weitere Dokumenten-Attribute
 
-= 
+=
 [Projektname]
 :toc:
 :toc-title: Inhalt
 :toclevels: 3
 
-_Dieses Dokument beschreibt, wie das System gebaut, ausgeliefert und betrieben wird: 
+_Dieses Dokument beschreibt, wie das System gebaut, ausgeliefert und betrieben wird:
 lokal, in der CI/CD-Pipeline und in den verschiedenen Umgebungen. Es richtet sich
 primär an Entwickler:innen und deckt das ab, was nach dem Schreiben von Code passiert._
 
 _Technische Entscheidungen rund um Containerisierung und CI/CD (das *Warum*) sind
 als ADRs im link:architecture.adoc[Architekturdokument] (`architecture.adoc`) dokumentiert.
 Dieses Dokument beschreibt das *Wie* und *Was*._
+
+NOTE: {to-be-implemented-se2-note}
 
 ---
 
@@ -314,7 +316,7 @@ git push --tags
 # → GitHub → Actions → deploy.yml → "Run workflow" → Version bestätigen
 ----
 
-NOTE: Wir verwenden _Semantic Versioning_ mit dem Schema MAJOR.MINOR.PATCH: 
+NOTE: Wir verwenden _Semantic Versioning_ mit dem Schema MAJOR.MINOR.PATCH:
 MAJOR bei inkompatiblen Änderungen,
 MINOR bei neuen Features (abwärtskompatibel),
 PATCH bei Bugfixes.
