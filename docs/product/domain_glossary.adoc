@@ -27,9 +27,15 @@ Technische Implementierungsdetails gehören nicht hierher!
   Abzugrenzen vom normalen Nutzer, der ausschließlich eigene Habits verwaltet.
 | Admin; abzugrenzen von „Nutzer"
 
+| Belohnungssystem
+| Sammelbegriff für alle motivationsfördernden Mechanismen der App. Dazu zählen Streaks,
+  der Momentum-Score sowie das Pet. Das Belohnungssystem hat keinen Einfluss auf das eigentliche Habit-Tracking und ist vom Kernfeature klar abzugrenzen.
+| Punktesystem
+
+
 | Eintrag
-| Erfassen eines Fortschritts, in dem man das Habit trackt
-| Log, Tracking, Check-In
+| Dokumentation einer einzelnen Durchführung eines Habits, bei der der Nutzer seinen Fortschritt festhält. Ein Eintrag enthält einen Zeitstempel, optional einen Messwert sowie eine optionale Quick-Note.
+|
 
 | Erinnerung
 | Eine konfigurierbare Benachrichtigung, die einem Habit zugeordnet ist und den Nutzer
@@ -78,8 +84,13 @@ Technische Implementierungsdetails gehören nicht hierher!
   bei der nächsten Verbindung mit dem Server synchronisiert.
 | Offline-Funktionalität, Offline-Betrieb
 
+| Onboarding
+| Der initiale Einrichtungsprozess, den ein neuer Nutzer beim ersten Start der App durchläuft, bei dem grundlegende Funktionen dem Nutzer kurz erklärt werden.
+| Ersteinrichtung, Einführung, Tutorial
+
+
 | Pause
-| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreist, wenn man keine Einträge zum Habit macht. Die maximale Pausenzeit beträgt 4 Wochen.
+| Zeitspanne, welche bewusst angegeben wird vom Nutzer, wo die Streak nicht abreißt, wenn man keine Einträge zum Habit macht.
 |
 
 | Pet
@@ -243,7 +254,7 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Entität | Beschreibung
 
 | Nutzer
-| Die zentrale Person, die das System nutzt. Der Nutzer besitzt ein Profil, verwaltet seine persönlichen Habits und ist der "Besitzer" des Belohnungssystems sowie des Pets.
+| Die zentrale Person, die das System nutzt. Der Nutzer verwaltet seine persönlichen Habits und ist der "Besitzer" des Belohnungssystems sowie des Pets.
 
 | Habit
 | Die Definition einer regelmäßig auszuführenden Tätigkeit. Sie enthält fachliche Vorgaben wie die Frequenz und die Art und Weise, wie der Fortschritt gemessen wird (Tracking-Typ).
@@ -333,7 +344,6 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
-müssen hier nachgezogen werden, bevor sie in User Stories oder Code einfließen.
+müssen hier nachgezogen werden, bevor sie in User Stories oder Code einfließen._
 
-{ai-supported-note}
-_
+NOTE: {ai-supported-note}

@@ -95,18 +95,21 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 === Definition of Ready (DoR)
 _Eine User Story ist bereit für die Entwicklung, wenn..._
 
-// Hier können die Kriterien individuell angepasst werden, z. B.:
-* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben sind
-* [ ] Der Aufwand vom Team abgeschätzt wurde
+* [ ] Die Akzeptanzkriterien klar und vollständig beschrieben sind
 * [ ] Abhängigkeiten identifiziert und geklärt sind
-* [ ] Designs / Mockups vorhanden (falls relevant) sind
+* [ ] Designs / Mockups vorhanden, falls relevant, sind
+* [ ] Die User Story von allen im Team verstanden wurde
+* [ ] Der Aufwand abgeschätzt wurde und Umfang nicht zu groß ist, um in einem Sprint umgesetzt zu werden
+* [ ] Die Story einen nachvollziehbaren Nutzen hat
 
 === Definition of Done (DoD)
 _Eine User Story gilt als fertig, wenn..._
 
-// Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Der Code implementiert und in den Hauptbranch gemerged wurde
+* [ ] Alle Akzeptanzkriterien der User Story erfüllt sind
 * [ ] Unit- und Integrationstests geschrieben wurden und grün sind
+* [ ] Die Rechtlichen Anforderungen (DSGVO) eingehalten wurden (xref:../product/DSGVO_requirements.adoc[Rechtliche Anforderungen])
+* [ ] Die Qualitätsanforderungen eingehalten wurden (xref:../product/quality_requirements.adoc[Qualitätsanforderungen])
 * [ ] Der Code von mindestens einer weiteren Person (am besten zwei) reviewed wurde
 * [ ] Dokumentation erweitert und aktualisiert wurde, wenn nötig
 * [ ] Der Product Owner die Story abgenommen hat
@@ -143,7 +146,7 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 . jeder hilft, soweit er kann
 . alle Aufgaben - egal in welchem Status - müssen bis zwei Tage vor dem nächsten Meeting hochgeladen werden, damit sich die Teamkollegen damit befassen können
 . Abmeldungen bis 3h vor dem Meeting
-. Issues nicht in Kommentaren von Issues bearbeiten, sondern direkt in die Docs schreiben, damit keine doppelten Issues entstehen und bestehende eindeutig sind 
+. Issues nicht in Kommentaren von Issues bearbeiten, sondern direkt in die Docs schreiben, damit keine doppelten Issues entstehen und bestehende eindeutig sind
 
 
 _Diese Charta wird regelmäßig in der Retrospektive aktualisiert._

@@ -8,7 +8,7 @@ _Dieses Dokument beschreibt, wie die Qualität der Software sichergestellt wird.
 Es legt fest, welche Arten von Tests eingesetzt werden, welche Werkzeuge verwendet werden,
 und wie Tests in den Entwicklungsprozess integriert sind._
 
-NOTE: Dieses Dokument wird im Laufe der Sprints 4-6 bearbeitet und ausgefüllt. In Sprints 1-3 ist dieses Dokument noch nicht relevant, da noch mit keinen Tests gearbeitet wird.
+NOTE: {to-be-implemented-se2-note}
 
 ---
 

@@ -4,36 +4,135 @@ include::../config.adoc[]
 :toc-title: Inhaltsverzeichnis
 :sectnums:
 
+_Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] unter "Qualitätsziele" und "Einschränkungen" grob skizzierten Vorgaben zu messbaren, prüfbaren Anforderungen. Jede Anforderung beschreibt eine Bedingung (das *Was*) — nicht die technische Lösung (das *Wie*). Die gewählte Umsetzung ist im link:../technical/architecture.adoc[Architekturdokument] als ADR dokumentiert._
+
 == Performance
 
-* Das System muss beim initialen Laden in unter *2 Sekunden* vollständig dargestellt werden, damit Nutzer ohne Wartezeit starten können.
-* Das System muss bei bis zu *50 gleichzeitigen Nutzern* stabil und ohne Leistungseinbußen funktionieren.
-* Das Onboarding muss innerhalb von *2 Miuten* abgeschlossen sein, damit Nutzer schnell loslegen können. (Anmeldung, Onboarding-Fragen, erstes Habit anlegen)
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-01
+| Das System muss beim initialen Laden zügig vollständig dargestellt werden, damit Nutzer ohne Wartezeit starten können.
+| Ladezeit < 2 Sekunden bei normaler Netzwerkverbindung.
+
+| NFR-02
+| Das System muss bei mehreren gleichzeitigen Nutzern performant bleiben.
+| Antwortzeiten bleiben unter [Schwellwert, z. B. 1 s] bei bis zu 50 gleichzeitigen Nutzern (Lasttest).
+
+| NFR-03
+| Das Onboarding muss zügig abschließbar sein, damit Nutzer schnell loslegen können.
+| Anmeldung, Onboarding-Fragen und erstes Habit anlegen sind in unter 2 Minuten abschließbar.
+|===
 
 == Kompatibilität
 
-* Das System muss als *Web-App* bereitgestellt werden und darf nicht als native App im App Store verfügbar sein.
-* Das System muss auf *Desktop, Tablet und mobilem Browser* vollständig nutzbar sein.
-* Das System muss auf allen *modernen Browsern* (Chrome, Firefox, Safari, Edge) in der jeweils aktuellen Version funktionieren.
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-04
+| Das System muss ohne Installation aus einem App Store nutzbar sein.
+| Vollständige Nutzung ist allein über Aufruf einer URL im Browser möglich.
+
+| NFR-05
+| Das System muss auf Desktop, Tablet und mobilem Endgerät uneingeschränkt nutzbar sein.
+| Alle Hauptfunktionen sind ab einer Breite von [z. B. 360 px] ohne Funktionsverlust nutzbar (manueller Test je Gerätekategorie).
+
+| NFR-06
+| Das System muss auf den jeweils aktuellen Versionen gängiger Browser (Chrome, Firefox, Safari, Edge) funktionieren.
+| Manuelle Tests auf den genannten Browsern bestehen. *Ausnahme:* Offline-Funktionalität (PWA) ist auf iOS Safari eingeschränkt (siehe architecture.adoc, Technische Risiken) und von dieser Anforderung ausgenommen.
+|===
 
 == Sprache
 
-* Das System muss in *Deutsch und Englisch* verfügbar sein, damit Nutzer die Sprache nach Bedarf wählen können.
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-07
+| Das System muss Nutzern erlauben, zwischen Deutsch und Englisch zu wählen.
+| Alle UI-Texte, Fehlermeldungen und Onboarding-Inhalte liegen in beiden Sprachen vor und sind umschaltbar, ohne dass Inhalte fehlen.
+|===
 
 == Sicherheit & Authentifizierung
 
-* Das System muss eine Anmeldung per *E-Mail und Passwort* ermöglichen.
-* Das System muss alle Passwörter *gehasht* speichern, damit Nutzerdaten bei einem Datenbankzugriff geschützt sind.
-* Das System muss alle Verbindungen ausschließlich über *HTTPS* übertragen.
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-08
+| Das System muss den Zugriff auf personenbezogene Daten und Nutzerfunktionen durch eine Authentifizierung schützen.
+| Geschützte Funktionen sind ohne erfolgreichen Login nicht erreichbar (manueller/automatisierter Test).
+
+| NFR-09
+| Das System muss Passwörter so speichern, dass sie bei unbefugtem Zugriff auf die Datenbank nicht im Klartext kompromittiert werden können.
+| Stichprobenprüfung der Datenbank zeigt ausschließlich gehashte, keine Klartext-Passwörter.
+
+| NFR-10
+| Das System muss alle Datenübertragungen zwischen Client und Server vor Abhören und Manipulation schützen.
+| Unverschlüsselter Zugriff (HTTP) ist nicht möglich bzw. wird automatisch auf eine verschlüsselte Verbindung umgeleitet.
+|===
 
 == Datenschutz
 
-* Das System muss alle Nutzerdaten *DSGVO-konform* speichern und verarbeiten, da es sich um eine App für Nutzer in der EU handelt.
-* Das System muss Nutzern ermöglichen, ihre Daten *einzusehen und zu löschen*.
+NOTE: Detaillierte rechtliche Anforderungen sind in link:DSGVO_requirements.adoc[DSGVO_requirements.adoc] dokumentiert. Dieser Abschnitt nennt nur die daraus resultierenden, prüfbaren Qualitätsanforderungen — ohne sie zu duplizieren.
+
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-11
+| Das System muss personenbezogene Daten DSGVO-konform verarbeiten und speichern.
+| Alle Punkte der Checkliste "Definition of Done" in DSGVO_requirements.adoc sind erfüllt.
+
+| NFR-12
+| Nutzer müssen ihre eigenen Daten einsehen und löschen können.
+| Eine entsprechende Funktion ist im UI auffindbar und führt nachweislich zur Anzeige bzw. vollständigen Löschung der Daten.
+|===
 
 == Zuverlässigkeit
 
-* Das System muss eine *Verfügbarkeit von 99%* gewährleisten, was einem maximalen Ausfall von ~3,6 Tagen pro Jahr entspricht.
-* Das System muss täglich ein automatisches *Backup der Datenbank* erstellen, damit bei einem Serverausfall kein Datenverlust entsteht.= Nicht-funktionale Anforderungen – Habit-Tracker
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
 
-{ai-supported-note}
+| NFR-13
+| Das System muss während der vorgesehenen Betriebszeiten verlässlich erreichbar sein.
+| Verfügbarkeit ≥ 99 % (entspricht max. ~3,6 Tagen Ausfall pro Jahr), gemessen über Uptime-Monitoring.
+
+| NFR-14
+| Das System darf bei einem Serverausfall nur einen begrenzten Datenverlust zulassen.
+| Maximaler Datenverlust (RPO) von 24 Stunden, sichergestellt durch regelmäßige Backups.
+|===
+
+== Wartbarkeit
+
+[cols="1,3,2", options="header"]
+|===
+| ID | Anforderung | Prüfkriterium
+
+| NFR-15
+| Das System muss so strukturiert sein, dass neue fachliche Funktionen mit überschaubarem Aufwand ergänzt werden können, ohne bestehende Funktionalität zu gefährden.
+| Neue Module lassen sich ergänzen, ohne bestehende Module zu verändern (siehe architecture.adoc, ADR-006); Einhaltung wird im Code-Review geprüft.
+|===
+
+== Checkliste
+
+Übersicht aller Anforderungen zum Abhaken, sobald das jeweilige Prüfkriterium erfüllt und verifiziert wurde.
+
+* [ ] NFR-01 — Ladezeit < 2 s bei normaler Netzwerkverbindung
+* [ ] NFR-02 — Antwortzeiten unter Schwellwert bei 50 gleichzeitigen Nutzern
+* [ ] NFR-03 — Onboarding in unter 2 Minuten abschließbar
+* [ ] NFR-04 — Nutzung ohne App-Store-Installation möglich
+* [ ] NFR-05 — Uneingeschränkt nutzbar auf Desktop, Tablet, Mobile
+* [ ] NFR-06 — Funktioniert auf aktuellen Versionen von Chrome, Firefox, Safari, Edge
+* [ ] NFR-07 — Vollständige UI in Deutsch und Englisch verfügbar
+* [ ] NFR-08 — Geschützte Funktionen nur nach Login erreichbar
+* [ ] NFR-09 — Passwörter ausschließlich gehasht gespeichert
+* [ ] NFR-10 — Keine unverschlüsselte Datenübertragung möglich
+* [ ] NFR-11 — DSGVO-Anforderungen (siehe DSGVO_requirements.adoc) erfüllt
+* [ ] NFR-12 — Einsicht und Löschung eigener Daten im UI verfügbar
+* [ ] NFR-13 — Verfügbarkeit ≥ 99 % nachgewiesen
+* [ ] NFR-14 — Backup-Strategie mit RPO ≤ 24 h umgesetzt
+* [ ] NFR-15 — Modulare Struktur im Code-Review bestätigt

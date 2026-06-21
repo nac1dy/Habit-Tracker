@@ -26,5 +26,7 @@ ifndef::plantumlsdir[:plantumlsdir: plantuml]
 :main-document:
 
 // Sonstiges
-:ai-supported-note: Dieses Dokument wurde mithilfe von KI-Unterstützung (GitHub Copilot) verfasst. KI-Unterstützung bedeutet, dass aufgrund eines detaillierten, menschenverfassten Prompts ein Teil der Lösung oder eine Hilfe zur Lösungsfindung (durch den Bearbeiter) generiert wurde. Generierte Teillösungen wurden von Menschen überprüft und ggf. angepasst.
-:ai-generated-note: Dieses Dokument wurde vollständig von KI (GitHub Copilot) generiert. Das bedeutet, dass aufgrund eines detaillierten, menschenverfassten Prompts eine Lösung generiert wurde, die von Menschen überprüft und ggf. angepasst wurde.
+:ai-supported-note: Folgender Inhalt wurde mithilfe von KI-Unterstützung (GitHub Copilot) verfasst. KI-Unterstützung bedeutet, dass aufgrund eines detaillierten, menschenverfassten Prompts ein Teil der Lösung oder eine Hilfe zur Lösungsfindung (durch den Bearbeiter) generiert wurde. Generierte Teillösungen wurden von Menschen überprüft und ggf. angepasst.
+:ai-generated-note: Folgender Inhalt wurde vollständig von KI (GitHub Copilot) generiert. Das bedeutet, dass aufgrund eines detaillierten, menschenverfassten Prompts eine Lösung generiert wurde, die von Menschen überprüft und ggf. angepasst wurde.
+
+:to-be-implemented-se2-note: Dieses Dokument wird im Laufe der Sprints 4-6 bearbeitet und ausgefüllt. In Sprints 1-3 ist dieses Dokument noch nicht relevant, da noch mit keinen Tests gearbeitet wird.

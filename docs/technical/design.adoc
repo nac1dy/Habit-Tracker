@@ -4,16 +4,15 @@ include::../config.adoc[]
 {localdatetime}
 
 include::../_includes/default-attributes.inc.adoc[]
-// Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument beschreibt die interne Struktur des Systems, wie der Code organisiert ist,
 aus welchen Komponenten das System besteht, wie diese zusammenarbeiten, und welche
 Designmuster eingesetzt werden. Der Fokus liegt auf dem *Wie* der Implementierung._
 
 _Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
-link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:domain_glossary.adoc[Domänenmodell] (`domain_glossary.adoc`) definiert._
+link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:../product/domain_glossary.adoc[Domänenmodell] (`../product/domain_glossary.adoc`) definiert._
 
----
+'''
 
 == Systemübersicht & Schichtenarchitektur
 
@@ -30,17 +29,17 @@ skinparam monochrome true
 skinparam defaultFontSize 13
 skinparam rectangleBorderThickness 1
 
-rectangle "Präsentationsschicht\n(Frontend / API-Controller)" as presentation
-rectangle "Anwendungsschicht\n(Services / Use Cases)" as application
+rectangle "Präsentationsschicht\n(React/Next.js/TailwindCS)" as presentation
+rectangle "Anwendungsschicht\n(Supabase)" as application
 rectangle "Domänenschicht\n(Entitäten / Geschäftslogik)" as domain
-rectangle "Persistenzschicht\n(Repositories / Datenbank)" as persistence
+rectangle "Persistenzschicht\n(Supabase, PostgreSQL)" as persistence
 
 presentation -down-> application : ruft auf
 application -down-> domain : verwendet
 application -down-> persistence : liest / schreibt
-domain -[hidden]down- persistence
+domain -down-> persistence : liefert Basis für
 
-note right of presentation : HTTP-Anfragen,\nSerialisierung, Routing
+note right of presentation : Darstellung aller UI-Komponenten,\nHTTP-Anfragen
 note right of application : Koordination,\nTransaktionen
 note right of domain : Fachliche Regeln,\nValidierung
 note right of persistence : Datenbankzugriff,\nMapping
@@ -55,33 +54,26 @@ note right of persistence : Datenbankzugriff,\nMapping
 | Schicht | Verantwortung | Darf abhängen von
 
 | Präsentationsschicht
-| HTTP-Anfragen entgegennehmen und beantworten;
-  Eingaben validieren; Antworten serialisieren;
-  Routing und Fehlerbehandlung auf API-Ebene
+| Darstellung der UI; Verarbeitung von Nutzereingaben; Entgegennahme von HTTP/REST-Anfragen
 | Anwendungsschicht
 
 | Anwendungsschicht
-| Fachliche Abläufe koordinieren (Use Cases);
-  Transaktionen verwalten; externe Dienste aufrufen;
-  zwischen Schichten vermitteln
+| Verarbeitung und Koordination der Geschäftslogik und Datenbankzugriffe; Authentifizierung
 | Domänenschicht, Persistenzschicht
 
 | Domänenschicht
 | Fachliche Entitäten und Regeln kapseln;
-  Invarianten sicherstellen;
+  Invarianten sicherstellen (-> Value Objects);
   Kernlogik unabhängig von Infrastruktur halten
 | Keine äußeren Schichten
 
 | Persistenzschicht
-| Datenbankzugriff abstrahieren;
-  Entitäten auf Datenbankstrukturen mappen;
-  Abfragelogik kapseln
+| Konsistente und dauerhafte Speicherung und Verwaltung von Daten; Datenbankzugriffskapselung
 | Domänenschicht (Entitäten)
 |===
 
-NOTE: Die Domänenschicht darf *nicht* von Persistenz- oder Präsentationsschicht
-abhängen. Diese Regel ist der häufigste Architekturverstoss in Studentenprojekten
-und sollte in Code Reviews explizit geprüft werden.
+IMPORTANT: Die Domänenschicht darf *nicht* von Persistenz- oder Präsentationsschicht
+abhängen!
 
 == Komponentenübersicht
 
@@ -91,8 +83,6 @@ zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
 
 === Komponentendiagramm
 
-//Beipielhaftes Komponentendiagramm, das die Hauptkomponenten und ihre Schnittstellen zeigt
-//Die tatsächlichen Komponenten müssen auf das konkrete Projekt zugeschnitten sein
 [plantuml, component-diagram, svg]
 ....
 @startuml
@@ -106,7 +96,7 @@ LAYOUT_WITH_LEGEND()
 title Component Diagram – [Systemname]
 
 Container_Boundary(frontend, "Frontend") {
-  Component(habit_ui, "Habitkomponente", "React ", "Ermöglicht Nutzern das Erstellen und Verwalten von Habits")
+  Component(habit_ui, "Habit-Komponente", "React", "Ermöglicht Nutzern das Erstellen und Verwalten von Habits")
   Component(auth_ui, "Authentifizierungskomponente", "React", "Handhabt Login, Logout und Session-Management")
   Component(shared_ui, "Gemeinsame UI-Komponenten", "Next.js, TailwindCSS", "Wiederverwendbare UI-Elemente wie Buttons, Formulare, Navigation")
 }
@@ -115,7 +105,7 @@ Container_Boundary(backend, "Backend") {
   Component(habit_ctrl, "Habit-Controller", "Supabase", "Nimmt eingehende, neue Habits entgegen und delegiert an den Service")
   Component(habit_svc, "Habit-Service", "Supabase", "Verarbeitet die eingehenden Habits und gibt weiter an Persistenzschicht")
   Component(user_svc, "Nutzer-Service", "Supabase", "Verwaltung von Nutzerdaten und Authentifizierungslogik")
-  Component(notification_svc, "Benachrichtigungs-Service", "Notification API, Push API", "Erstellt und versendet Benachrichtigungen an Nutzer:innen")
+  Component(notification_svc, "Benachrichtigungs-Service", "Notification API, Push API", "Erstellt und versendet Benachrichtigungen an Nutzer")
 }
 
 Container_Boundary(persistence, "Persistenz") {
@@ -156,7 +146,7 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 | [Schnittstellen]
 |===
 
----
+'''
 
 == Wichtige Interaktionsflüsse
 
@@ -197,7 +187,7 @@ ctrl --> user : 201 Created\n{habitid, details}
 @enduml
 ....
 
----
+'''
 
 === Fehlerfluss-Szenario: Habit existiert bereits
 
@@ -226,7 +216,7 @@ ctrl --> user : 409 Conflict\n{message, alternativen}
 NOTE: Flussnamen im Diagramm sollten identisch mit den Methodennamen im Code sein.
 Das macht es einfacher, vom Diagramm zum Code zu navigieren und umgekehrt.
 
----
+'''
 
 == Datenmodell
 
@@ -352,7 +342,7 @@ user ||--o{ pet : "kümmert sich um"
 | noteID |  UID als Primärschlüssel; wird vom System generiert
 | userID | UID als Fremdschlüssel; wird vom System generiert
 | habitID | UID als Fremdschlüssel; wird vom System generiert
-| created_at | Erstellt am 
+| created_at | Erstellt am
 | content | Quicknote content
 |===
 
@@ -366,13 +356,13 @@ versioniert. So ist der Datenbankzustand jederzeit reproduzierbar._
 | Aspekt | Beschreibung
 
 | Werkzeug
-| [z. B. Flyway / Liquibase]
+| Supabase
 
 | Speicherort
-| [z. B. `src/main/resources/db/migration/`]
+| `supabase/migrations/`
 
 | Namenskonvention
-| [z. B. `V001__initiales_schema.sql`, `V002__buchung_status_spalte.sql`]
+| `V001_initiales_schema.sql`, `V002_habit_userid_spalte.sql`
 
 | Regel
 | Bestehende Migrationsskripte werden *nie* verändert — nur neue hinzugefügt
@@ -385,6 +375,8 @@ gesamten Codebase gelten. Das verhindert, dass verschiedene Teammitglieder dasse
 Problem auf unterschiedliche Weise lösen._
 
 === Designmuster
+
+NOTE: {to-be-implemented-se2-note}
 
 [cols="1,2,2", options="header"]
 |===
@@ -418,11 +410,11 @@ Problem auf unterschiedliche Weise lösen._
 
 | Fachliche Fehler
 | Als eigene Exception-Klassen modellieren
-  (z. B. `RaumNichtVerfuegbarException`, `BuchungNichtGefundenException`)
+  (z. B. `HabitNotFoundException`)
 
 | HTTP-Fehlercodes
-| 400 für Validierungsfehler; 404 für nicht gefundene Ressourcen;
-  409 für Konflikte; 500 nur für unerwartete Systemfehler
+| lt. offiziellem Web-Standard: 400 für Validierungsfehler; 404 für nicht gefundene Ressourcen;
+  409 für Konflikte; 500 nur für unerwartete Systemfehler; ...
 
 | Fehlermeldungen
 | Immer strukturiert zurückgeben:
@@ -440,17 +432,16 @@ Problem auf unterschiedliche Weise lösen._
 | Aspekt | Konvention
 
 | URL-Struktur
-| Ressourcenorientiert im Plural: `/buchungen`, `/raeume`, `/nutzer`
+| Ressourcenorientiert im Plural: `/habits`, `/stats`, `/settings`
 
 | HTTP-Methoden
-| GET = lesen; POST = erstellen; PUT = ersetzen; PATCH = teilweise ändern;
-  DELETE = löschen
+| GET = lesen; POST = erstellen; DELETE = löschen
 
 | Antwortformat
-| JSON in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
+| JSON in allen Fällen; Datumsformat ISO 8601: `2026-01-01T09:00:00Z`
 
 | Versionierung
-| [z. B. URL-Präfix `/api/v1/` - Version nur erhöhen bei Breaking Changes]
+| über URL-Präfix (z.B. `/habits/v1`); Version nur bei Breaking Changes erhöhen
 |===
 
 _Diagramme in diesem Dokument sollten den aktuellen Stand des Codes widerspiegeln.

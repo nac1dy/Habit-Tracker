@@ -84,3 +84,12 @@ Falls öffentlich zugänglich:
 - Datenschutzerklärung + Impressum bereitstellen
 - Datensparsamkeit beachten
 - Transparenz gegenüber Nutzern gewährleisten
+
+== Checkliste für Definition of Done
+
+- [ ] DSGVO-konforme Datenschutzerklärung vorhanden (siehe Punkt 2.1)
+- [ ] Hinweis zu sensiblen Daten in Notizen implementiert (siehe Punkt 2.4)
+- [ ] Seite über HTTPS erreichbar (siehe Punkt 2.6)
+- [ ] User-Logins implementiert (siehe Punkt 2.6)
+- [ ] Nutzerdaten können gelöscht werden (siehe Punkt 3)
+- [ ] Nutzer können ihre Daten einsehen und ändern (siehe Punkt 3)
