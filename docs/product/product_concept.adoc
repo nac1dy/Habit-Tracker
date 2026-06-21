@@ -164,7 +164,7 @@ Eigenschaften) und Einschränkungen (nicht verhandelbare Rahmenbedingungen)._
 _Qualitätsziele sind messbare oder zumindest überprüfbare Eigenschaften, die das
 Produkt erfüllen soll. Sie sollten spezifisch genug sein, um als Testkriterium zu dienen._
 
-NOTE: Dieses Dokument ist die einzige Quelle für Qualitätsziele und Einschränkungen.
+NOTE: Dieses Dokument definiert die Qualitätsziele und Einschränkungen auf hoher Ebene. Messbare, prüfbare Kriterien für jede Anforderung sind in link:quality_requirements.adoc[quality_requirements.adoc] dokumentiert.
 Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese Anforderungen und dokumentiert die technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederholen.
 
 [cols="1,3,2", options="header"]
