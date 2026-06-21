@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/app/backend/supabase';
-import { Habit } from '@/app/lib/types';
 
 /**
  * GET /api/habits
@@ -9,7 +8,7 @@ import { Habit } from '@/app/lib/types';
 export async function GET(request: NextRequest) {
   try {
     const { data, error } = await supabase
-      .from('habit')
+      .from('habit') 
       .select('*')
       .order('created_at', { ascending: false });
 
