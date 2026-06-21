@@ -116,3 +116,23 @@ NOTE: Detaillierte rechtliche Anforderungen sind in link:DSGVO_requirements.adoc
 | Das System muss so strukturiert sein, dass neue fachliche Funktionen mit überschaubarem Aufwand ergänzt werden können, ohne bestehende Funktionalität zu gefährden.
 | Neue Module lassen sich ergänzen, ohne bestehende Module zu verändern (siehe architecture.adoc, ADR-006); Einhaltung wird im Code-Review geprüft.
 |===
+
+== Checkliste
+
+Übersicht aller Anforderungen zum Abhaken, sobald das jeweilige Prüfkriterium erfüllt und verifiziert wurde.
+
+* [ ] NFR-01 — Ladezeit < 2 s bei normaler Netzwerkverbindung
+* [ ] NFR-02 — Antwortzeiten unter Schwellwert bei 50 gleichzeitigen Nutzern
+* [ ] NFR-03 — Onboarding in unter 2 Minuten abschließbar
+* [ ] NFR-04 — Nutzung ohne App-Store-Installation möglich
+* [ ] NFR-05 — Uneingeschränkt nutzbar auf Desktop, Tablet, Mobile
+* [ ] NFR-06 — Funktioniert auf aktuellen Versionen von Chrome, Firefox, Safari, Edge
+* [ ] NFR-07 — Vollständige UI in Deutsch und Englisch verfügbar
+* [ ] NFR-08 — Geschützte Funktionen nur nach Login erreichbar
+* [ ] NFR-09 — Passwörter ausschließlich gehasht gespeichert
+* [ ] NFR-10 — Keine unverschlüsselte Datenübertragung möglich
+* [ ] NFR-11 — DSGVO-Anforderungen (siehe DSGVO_requirements.adoc) erfüllt
+* [ ] NFR-12 — Einsicht und Löschung eigener Daten im UI verfügbar
+* [ ] NFR-13 — Verfügbarkeit ≥ 99 % nachgewiesen
+* [ ] NFR-14 — Backup-Strategie mit RPO ≤ 24 h umgesetzt
+* [ ] NFR-15 — Modulare Struktur im Code-Review bestätigt
