@@ -203,7 +203,7 @@ stop
 | Schritt | Beteiligte Persona | Anmerkung
 
 | App öffnen
-| Maria (Studentin)
+| Petra (Studentin)
 | Erster Einstiegspunkt; muss sich sofort orientieren können
 
 | Login / Registrierung
@@ -221,7 +221,7 @@ stop
 
 _Das Anlegen eines neuen Habits ist der zentrale Punkt/Flow der Software. Hier kann der Nutzer entweder im Schnelldurchlauf, also nur durch die Festlegung eines Namens, oder mit erweiterten Optionen, ein Habit erstellen._
 
-[plantuml, error-flow, svg]
+[plantuml, habit-anlegen-flow, svg]
 ....
 @startuml
 skinparam monochrome true
@@ -231,7 +231,8 @@ start
 :Namen des Habits eingeben;
 if (Erweiterte Optionen?) then (ja)
   :Auswahl der Streak-Art;
-  :Festlegen einer Kategorie;
+  :Festlegen der Kategorien;
+  :Festlegen der Tage;
 else (nein)
 :Übernehmen der Grundeinstellungen;
 endif
@@ -273,15 +274,15 @@ Wireframes und UI-Implementierungen._
 Teal und Orange sind komplementär und erzeugen positive Verstärkung ohne negativen Stress. Rot (`#F17777`) nur für Fehlerzustände, nie als Haupt-Akzent.
 
 | Typografie
-| Inter (Variable Font); Überschriften 24–48 px / weight 800–900 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
-Keine Schrift unter 14 px. Begründung: Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
+| Inter (Variable Font); Überschriften 24–48 px / weight 400–700 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
+Keine Schrift unter 14 px. Warum? Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
 
 | Ikonografie
-| Outline-Icons im Lucide-Stil (stroke-width 1.7 px, stroke-linecap round); konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Begründung: Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
+| Outline-Icons im Lucide-Stil, konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Warum? Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
 
 | Bildsprache
-| Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glassmorphism-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten) statt Bilder.
-Begründung: Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
+| Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glass-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten wie bei IOS) statt Bilder.
+Warum? Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
 
 |===
 
@@ -324,16 +325,16 @@ _Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung w
 | Mindestens WCAG 2.1 Level AA (Kontrast ≥ 4,5:1 für Fließtext)
 
 | Tastaturnavigation
-| Alle Kernfunktionen sind per Tastatur bedienbar
+| Alle Kernfunktionen sind per Tastatur bedienbar (in Desktop-Ansicht)
 
 | Screenreader
-| Alle interaktiven Elemente haben sinnvolle ARIA-Labels
+| Alle interaktiven Elemente haben sinnvolle ARIA-Labels (low Priority für MVP)
 
 | Schriftgröße
-| Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen
+| Keine Schrift unter 14px; Nutzer können Systemschriftgröße nutzen 
 
 | Touch-Zielgröße
-| Mindestens 44×44 px für alle interaktiven Elemente gemäß Apple HIG / Material Design
+| Mindestens 44×44 px für alle interaktiven Elemente so wie Apple HIG / Material Design 
 
 |===
 
