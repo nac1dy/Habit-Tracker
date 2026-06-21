@@ -35,3 +35,5 @@ include::../config.adoc[]
 
 * Das System muss eine *Verfügbarkeit von 99%* gewährleisten, was einem maximalen Ausfall von ~3,6 Tagen pro Jahr entspricht.
 * Das System muss täglich ein automatisches *Backup der Datenbank* erstellen, damit bei einem Serverausfall kein Datenverlust entsteht.= Nicht-funktionale Anforderungen – Habit-Tracker
+
+{ai-supported-note}

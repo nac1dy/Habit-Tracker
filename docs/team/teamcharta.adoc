@@ -5,10 +5,10 @@ include::../config.adoc[]
 
 {localdatetime}
 
-:version: 1.0
+:version: 2.0
 
 == Über uns
-NOTE: TODO
+Wir sind acht Studenten der HTW Dresden, die im Rahmen des Moduls _Software Engineering_ (I und II) an diesem Projekt arbeiten. Uns zeichnet ein starker Team-Geist sowie Begeisterung für gute, nützliche und ästhetische Software aus.
 
 == Zweck
 
@@ -31,7 +31,7 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 | Tech Lead
 | Noel Miersch
 
-| Entwickler:innen
+| Entwickler
 | Nathan Samuel Richter, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov, Paul Dietrich
 
 | Hauptansprechpartner
@@ -54,6 +54,12 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 | Dienstag nach SE1
 | 30min
 | Scrum Master
+
+| Sprint Review
+| Zum Abschluss jedes Sprints
+| 1h
+| Scrum Master / Tech Lead
+
 |===
 
 == Kommunikation
@@ -87,24 +93,23 @@ Wir bauen eine Habit-Tracker-Software. Diese soll auf der einen Seite einfach zu
 == Arbeitsweise
 
 === Definition of Ready (DoR)
-_Eine User Story ist bereit für die Entwicklung, wenn:_
+_Eine User Story ist bereit für die Entwicklung, wenn..._
 
 // Hier können die Kriterien individuell angepasst werden, z. B.:
-* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben
-* [ ] Der Aufwand wurde vom Team geschätzt
-* [ ] Abhängigkeiten sind identifiziert und geklärt
-* [ ] Designs / Mockups sind vorhanden (falls relevant)
+* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben sind
+* [ ] Der Aufwand vom Team abgeschätzt wurde
+* [ ] Abhängigkeiten identifiziert und geklärt sind
+* [ ] Designs / Mockups vorhanden (falls relevant) sind
 
 === Definition of Done (DoD)
-_Eine User Story gilt als fertig, wenn:_
+_Eine User Story gilt als fertig, wenn..._
 
 // Hier können die Kriterien individuell angepasst werden, z. B.:
-* [ ] Der Code wurde implementiert und in den Hauptbranch gemergt
-* [ ] Unit- und Integrationstests wurden geschrieben und sind grün
-* [ ] Der Code wurde von mindestens einer weiteren Person reviewt
-* [ ] Die Funktionalität wurde im Staging-System getestet
-* [ ] Dokumentation wurde aktualisiert (falls erforderlich)
-* [ ] Der Product Owner hat die Story abgenommen
+* [ ] Der Code implementiert und in den Hauptbranch gemerged wurde
+* [ ] Unit- und Integrationstests geschrieben wurden und grün sind
+* [ ] Der Code von mindestens einer weiteren Person (am besten zwei) reviewed wurde
+* [ ] Dokumentation erweitert und aktualisiert wurde, wenn nötig
+* [ ] Der Product Owner die Story abgenommen hat
 
 === Code & Versionierung
 
@@ -122,7 +127,7 @@ _Eine User Story gilt als fertig, wenn:_
 | jedes Teammitglied nach Approval
 
 | Commit-Konventionen
-| (ALWAYS PULL FIRST, THEN PUSH)Conventional Commits
+| (ALWAYS PULL FIRST, THEN PUSH), conventional Commits
 
 | Naming von Variablen
 | Klar und aussagekräftig, keine Abkürzungen, auf Englisch, ohne bindende Striche
@@ -135,10 +140,10 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
 . jeder ist eingeladen (und gebeten), ehrlich miteinander zu kommunizieren
 . größere Entscheidungen werden gemeinsam getroffen, jede Meinung und Idee zählt
-. jeder hilft so weit er kann
+. jeder hilft, soweit er kann
 . alle Aufgaben - egal in welchem Status - müssen bis zwei Tage vor dem nächsten Meeting hochgeladen werden, damit sich die Teamkollegen damit befassen können
 . Abmeldungen bis 3h vor dem Meeting
-. Issues nichtmehr in Kommentaren von Issues bearbeiten sondern direkt in die Docs schreiben damit keine doppel Issues entstehen 
+. Issues nicht in Kommentaren von Issues bearbeiten, sondern direkt in die Docs schreiben, damit keine doppelten Issues entstehen und bestehende eindeutig sind 
 
 
-_Nächste Überprüfung: [26.05.2026 / Sprint 2] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
+_Diese Charta wird regelmäßig in der Retrospektive aktualisiert._

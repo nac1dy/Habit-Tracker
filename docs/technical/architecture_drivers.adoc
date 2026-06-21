@@ -5,6 +5,8 @@ include::../config.adoc[]
 
 _Dieses Dokument beschreibt die wichtigsten Architekturtreiber für unser Produkt, die für die Entwicklung relevant sind._
 
+NOTE: {ai-supported-note}
+
 ---
 
 == DSGVO-konforme Datenverarbeitung

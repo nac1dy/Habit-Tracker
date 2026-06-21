@@ -333,4 +333,7 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
-müssen hier nachgezogen werden, bevor sie in User Stories oder Code einfließen._
+müssen hier nachgezogen werden, bevor sie in User Stories oder Code einfließen.
+
+{ai-supported-note}
+_
