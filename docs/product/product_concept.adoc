@@ -1,5 +1,5 @@
 include::../config.adoc[]
-= Produktkonzept: Habito
+= Produktkonzept: {project-name}
 
 {localdatetime}
 // Platzhalter für weitere Dokumenten-Attribute
