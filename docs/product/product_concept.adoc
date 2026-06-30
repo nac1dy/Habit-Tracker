@@ -210,10 +210,6 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 |===
 | Einschränkung | Beschreibung | Kategorie
 
-| Betrieb auf Hochschulinfrastruktur
-| Das System muss auf den vorhandenen Servern der Hochschule betrieben werden können.
-| Technisch
-
 | DSGVO-Konformität
 | Personenbezogene Daten dürfen nur gemäß DSGVO verarbeitet und gespeichert werden.
 | Rechtlich
