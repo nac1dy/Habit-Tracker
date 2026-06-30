@@ -153,6 +153,10 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 | Integriertes Belohnungssystem durch Pet
 | Hoch
 
+| Nutzer wollen benachrichtigt werden, wenn sie ihre Habits noch nicht erledigt haben.
+| Push-Benachrichtigungen
+| Mittel
+
 |===
 
 
