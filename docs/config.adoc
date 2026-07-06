@@ -1,5 +1,0 @@
-include::_includes/default-attributes.inc.adoc[]
-include::_includes/team-names.inc.adoc[]
-
-:project-id: C2
-:repo-url: https://github.com/nac1dy/Habit-Tracker

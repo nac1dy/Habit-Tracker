@@ -1,8 +1,11 @@
-include::../config.adoc[]
 = Nicht-funktionale Anforderungen – {project-name}
+Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; Paul Dietrich <paul.dietrich@stud.htw-dresden.de>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:
+// Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] unter "Qualitätsziele" und "Einschränkungen" grob skizzierten Vorgaben zu messbaren, prüfbaren Anforderungen. Jede Anforderung beschreibt eine Bedingung (das *Was*) — nicht die technische Lösung (das *Wie*). Die gewählte Umsetzung ist im link:../technical/architecture.adoc[Architekturdokument] als ADR dokumentiert._
 

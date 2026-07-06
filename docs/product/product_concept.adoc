@@ -1,27 +1,14 @@
-include::../config.adoc[]
-= Produktkonzept: Habito
-
+= Produktkonzept: {project-name}
+Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; Paul Dietrich <paul.dietrich@stud.htw-dresden.de>
 {localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
-
-
-_Dieses Dokument beschreibt das Produkt auf konzeptioneller Ebene — was gebaut wird, warum, für wen, und unter welchen Rahmenbedingungen. Es richtet sich an alle Projektbeteiligten:
-Stakeholder, Product Owner, Designer und Entwickler:innen._
-
-_Das Dokument ist so aufgebaut, dass es relativ stabil bleibt. Detaillierte UX-Artefakte wie Personas, Nutzerkontext,
-Interaktionsflüsse und Design-Entscheidungen sind im UX-Konzept beschrieben._
-
----
 
 == Motivation
 
 Es ist aktuell so leicht wie noch nie, sich vom Trubel des Alltags ablenken zu lassen und bequem zu werden, statt die Dinge abzuhaken, die zu tun sind. Man versinkt in Abhängigkeiten wie Social Media, Netflix oder Gaming, anstatt die eigenen Ziele zu verfolgen. Das führt zu Frustration, Stress und einem Gefühl der Unzufriedenheit. Es ist schwer, den inneren Schweinehund zu überwinden und gute Gewohnheiten aufzubauen, die das Leben verbessern.
 
 == Produktvision
-
-_Die Produktvision beschreibt in einem oder wenigen Sätzen den angestrebten Zielzustand.
-Sie ist inspirierend, prägnant und stabil — sie sollte sich über die gesamte Projektlaufzeit
-nicht wesentlich verändern._
 
 Habito ist der Helfer, wenn es darum geht, gesunde Gewohnheiten aufzubauen und schlechte abzubauen. Er unterstützt dich, ohne dich zu überfordern und reicht dir genau da die Hand, wo du stehst.
 
@@ -34,7 +21,6 @@ ____
 
 
 == Produktpositionierung
-_Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu bestehenden Alternativen?_
 
 === Zielgruppen
 
@@ -167,14 +153,7 @@ NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im R
 
 == Qualitätsziele & Einschränkungen
 
-_Dieser Abschnitt beschreibt, unter welchen Rahmenbedingungen das Produkt entwickelt
-und betrieben wird. Es wird unterschieden zwischen Qualitätszielen (angestrebte
-Eigenschaften) und Einschränkungen (nicht verhandelbare Rahmenbedingungen)._
-
 === Qualitätsziele
-
-_Qualitätsziele sind messbare oder zumindest überprüfbare Eigenschaften, die das
-Produkt erfüllen soll. Sie sollten spezifisch genug sein, um als Testkriterium zu dienen._
 
 NOTE: Dieses Dokument definiert die Qualitätsziele und Einschränkungen auf hoher Ebene. Messbare, prüfbare Kriterien für jede Anforderung sind in link:quality_requirements.adoc[quality_requirements.adoc] dokumentiert.
 Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese Anforderungen und dokumentiert die technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederholen.
@@ -202,9 +181,6 @@ Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese
 |===
 
 === Einschränkungen
-
-_Einschränkungen sind Rahmenbedingungen, die nicht verhandelbar sind — technische,
-organisatorische, rechtliche oder zeitliche Vorgaben._
 
 [cols="1,2,1", options="header"]
 |===
