@@ -1,14 +1,8 @@
-include::../config.adoc[]
 = Architekturdokument: {project-name}
-
+Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; Paul Dietrich <paul.dietrich@stud.htw-dresden.de>
 {localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
-
-
-_Dieses Dokument beschreibt die technische Architektur des Systems — welche Technologien
-eingesetzt werden, wie das System in seine Umgebung eingebettet ist, und welche
-Architekturentscheidungen getroffen wurden. Der Fokus liegt auf dem *Warum* hinter
-technischen Entscheidungen._
 
 _Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle definiert.
 Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
@@ -17,7 +11,7 @@ Konsequenzen, die sich daraus ergeben._
 _Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
 Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument](`design.adoc`) beschrieben._
 
-'''
+---
 
 == Architektursichten
 
@@ -521,10 +515,6 @@ a|
 |===
 
 == Risiken & technische Schulden
-
-_Dieser Abschnitt dokumentiert bekannte technische Risiken und bewusst eingegangene
-technische Kompromisse (Technical Debt). Transparenz hier verhindert, dass diese
-Punkte in Vergessenheit geraten._
 
 === Technische Risiken
 
