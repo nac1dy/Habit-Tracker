@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
-/* Habito palette tokens (from preview.html) */
+/* Habito palette tokens (aligned with docs/stylereference.html design system) */
 :root {
   --page-bg: #dff7f4;
   --app-bg: #f7fbfa;
+  /* Glassy card surface used across the app */
   --glass: rgba(255, 255, 255, 0.82);
   --glass-border: rgba(255, 255, 255, 0.90);
+  /* --card is referenced by the tab nav on every page; keep it defined */
+  --card: #ffffffcc;
   --border: rgba(18, 33, 31, 0.08);
   --border-mid: rgba(18, 33, 31, 0.14);
 
@@ -16,6 +19,8 @@
   --radius: 18px;
   --radius-lg: 24px;
 
+  /* Teal scale — kept flat at #35b8aa to match the wireframe (docs/preview.html).
+     (The stylereference uses a darker hierarchy, but the wireframe is the visual truth.) */
   --teal-900: #35b8aa;
   --teal-700: #35b8aa;
   --teal-500: #35b8aa;
@@ -32,6 +37,13 @@
   --danger: #f17777;
   --focus: #7dc8ff;
 
+  /* Habit category colors (maps to HabitCategory in app/lib/types.ts).
+     Used for the colored dot on habit list items. */
+  --cat-sport: #16a34a;
+  --cat-health: #dc2626;
+  --cat-mental: #9333ea;
+  --cat-personal: #2563eb;
+
   --shadow: 0 18px 45px rgba(30, 90, 84, 0.10);
 }
 
@@ -40,6 +52,11 @@
   --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
 
 body {
@@ -52,4 +69,40 @@ body {
   color: var(--text);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Dark mode — ThemeContext adds `.dark` to <html>. Token values mirror the
+   wireframe (docs/preview.html). Because the UI is built on these tokens,
+   overriding them here re-themes the whole app automatically. */
+.dark {
+  --page-bg: #111111;
+  --app-bg: #1c1c1c;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --card: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-mid: rgba(255, 255, 255, 0.16);
+
+  --text: #e8e8e8;
+  --text-2: #909090;
+  --text-3: #555555;
+
+  --teal-900: #dcf7f3;
+  --teal-700: #dcf7f3;
+  --teal-500: #d6f4ef;
+  --teal-300: rgba(223, 247, 244, 0.28);
+  --teal-100: rgba(214, 244, 239, 0.12);
+
+  --orange-100: rgba(245, 159, 91, 0.10);
+  --orange-700: #f59f5b;
+
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.60);
+}
+
+.dark body {
+  background: #111111;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(53, 184, 170, 0.03), transparent 40%),
+    radial-gradient(rgba(0, 0, 0, 0.35) 1px, transparent 1px);
+  background-size: auto, 24px 24px;
 }

@@ -1,12 +1,8 @@
-include::../config.adoc[]
 = Domänenmodell und Glossar: {project-name}
-
-
+Noel Miersch <noel.miersch@stud.htw-dresden.de>; Maximilian Voigt <maximilian.voigt@stud.htw-dresden.de>; Nico Heerwagen <nico.heerwagen@stud.htw-dresden.de>; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; Paul Dietrich <paul.dietrich@stud.htw-dresden.de>
 {localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
-
-_Dieses Dokument beschreibt die wesentlichen fachlichen Begriffe und ihre  Beziehungen untereinander. Es bildet die gemeinsame Sprache des Teams und aller Stakeholder — unabhängig von technischen Umsetzungsentscheidungen.
-Alle Begriffe in User Stories, Personas und Gesprächen mit Stakeholdern sollten hier definiert sein._
 
 ---
 
@@ -155,9 +151,6 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 
 == Domänenmodell
-
-_Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
-Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 
 === Diagramm
 
