@@ -119,16 +119,23 @@ Container(backend, "Supabase", "REST API, Auth", "Backend-as-a-Service")
 ContainerDb(database, "PostgreSQL", "Datenbank")
 System_Ext(notifications, "Push Service", "Push API / Browser Notifications")
 
-Rel(user, frontend, "Nutzt")
+Rel(user, frontend, )
+Rel(frontend, user, "HTTPS")
+
 Rel(frontend, backend, "REST API")
-Rel(backend, database, "SQL")
-Rel(frontend, notifications, "Registriert Push-Abonnement")
+Rel(backend, frontend, "JSON")
+
+Rel(backend, database, "")
+Rel(database, backend, "SQL")
+
+Rel(frontend, notifications, "Push-Abonnement")
 Rel(notifications, user, "Sendet Benachrichtigungen")
 
 SHOW_LEGEND()
 
 @enduml
 ....
+
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden.

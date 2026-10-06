@@ -153,6 +153,10 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 | Integriertes Belohnungssystem durch Pet
 | Hoch
 
+| Nutzer wollen benachrichtigt werden, wenn sie ihre Habits noch nicht erledigt haben.
+| Push-Benachrichtigungen
+| Mittel
+
 |===
 
 
@@ -205,10 +209,6 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 [cols="1,2,1", options="header"]
 |===
 | Einschränkung | Beschreibung | Kategorie
-
-| Betrieb auf Hochschulinfrastruktur
-| Das System muss auf den vorhandenen Servern der Hochschule betrieben werden können.
-| Technisch
 
 | DSGVO-Konformität
 | Personenbezogene Daten dürfen nur gemäß DSGVO verarbeitet und gespeichert werden.
