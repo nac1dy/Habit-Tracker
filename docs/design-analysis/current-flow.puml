@@ -1,18 +1,30 @@
-@startuml
+@startuml current-flow
 
 skinparam monochrome true
 skinparam defaultFontSize 12
 
 actor "User" as user
-participant "Home" as home
+participant "page.tsx" as home
 participant "HabitRouter" as svc
+participant "HabitController" as ctrl
 participant "HabitRepository" as repo
 
 user -> home : öffnet Habit-Tracker
 home -> svc : GET /api/habits
-svc -> repo : SELECT * from Habits
-repo -> svc : Return Habits
-svc --> home : Habit
-home --> user : 200 OK
+svc -> ctrl : getAllHabitsByDay(day)
+ctrl -> repo : SELECT * form Habits
+repo -> ctrl : Return Habits
+ctrl -> svc : returnAllHabitsByDay(day)
+svc -> home : Habits
+home -> user : showHabits()
+
+alt Kein Habit gefunden
+
+repo -> ctrl : Return Empty
+ctrl -> svc : returnNoHabitsFound()
+svc -> home : EmptyList
+home -> user : showMessageNoHabits()
+
+end
 
 @enduml
