@@ -1,0 +1,27 @@
+
+[plantuml, sequence-booking, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 12
+
+actor "Nutzer:in" as user
+participant "Visualizer" as ctrl
+participant "Habit-Manager" as svc
+participant "Datenbank" as repo
+participant "Benachrichtigungs-\nService" as notify
+
+user -> ctrl : GET /get-habit{habitids}
+ctrl -> ctrl : Eingabe validieren
+ctrl -> svc : createHabit(name, category, intervall, habitid)
+svc -> svc : checkForProblems(habitid)
+svc --> svc : true
+svc -> repo : saveHabit()
+repo --> svc : savedHabit
+svc -> notify : confirmCreation()
+notify --> svc : OK
+svc --> ctrl : Habit
+ctrl --> user : 201 Created\n{habitid, details}
+
+@enduml
+....
