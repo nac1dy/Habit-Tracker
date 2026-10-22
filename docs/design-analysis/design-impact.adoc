@@ -1,3 +1,32 @@
-# Habits nach Tag Filtern
+# Habits nach Tag filtern
 
 Habits nach aktuellem Tag laden 
+
+[cols="1,2,2", options="header"]
+|===
+| Gestaltungsaspekt | Beobachtung im aktuellen System | Auswirkung der Änderung
+
+| Zustand & Invarianten
+| Es werden alle Habits ungefiltert angezeigt, auch wenn sie nicht für den aktuellen Tag relevant sind.
+| Die default-Regel ist, dass Habits nur für den aktuellen Tag (bzw. für den aktuellen Tag relevante) angezeigt werden. Es muss überprüft werden, dass keine abgeschlossenen Habits angezeigt werden.
+
+| Verhalten & Verantwortlichkeit
+| Aktuell wird über das Routing (also über den HabitRouter) die GET-Request an die Datenbank übermittelt.
+| Auf der Startseite 'page.tsx' muss (z.B. über einen Filterbutton) eine UI-Möglichkeit gegeben sein, sodass der Nutzer die Habits nach Tag filtern kann. Der Router benötigt entsprechende Filterparameter bzw. einen "Handler", um die GET-Request mit den Filtern an die Datenbank zu übermitteln. Beim initialen Laden der Startseite soll (lt. default-Regel) auch der Filter angewendet werden.
+
+| Abhängigkeiten & Kopplung
+| Die Startseite ist von den über die Route übermittelten Daten (= den Habits) abhängig. Der Router ist über die Supabase-API abhängig von der Datenbank.
+| Zusätzlich benötigt der Router die Filterinformationen, die von der Startseite beim Request übermittelt werden.
+
+| Grenzen & Kohäsion
+| Abgetrennt sind Startseite (Frontend), Routing und das Backend (Supabase)
+| Die Grenzen bleiben unverändert bestehen.
+
+| Änderung & Variabilität
+| 
+| Im Frontend: Hinzufügen der Filtermöglichkeit, Auswertung der Filter im Router
+
+| Repräsentation & Verarbeitungsform
+| System unterstützt Datenbankabfrage anhand der übergebenen Request-Parameter, Abfrage gibt passende Daten/Habits zurück
+| Datenstruktur für Übergabe der ausgewählten Filter nötig
+|===

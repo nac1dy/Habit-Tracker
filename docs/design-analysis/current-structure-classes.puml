@@ -1,0 +1,43 @@
+@startuml
+
+title Klassendiagramm – Habit-Tracker
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "Frontend" {
+    class "Homepage (page.tsx)" as Homepage <<React>> {
+        - selectedDay: Date
+        - habits: Habit[]
+        --
+        + selectDay(day: Date): void
+        + loadHabits(day: Date): void
+        + displayHabits(): void
+    }
+}
+
+package "Backend" {
+    class HabitRouter <<Supabase>> {
+        --
+        + getHabitsByDay(day: Date): Habit[]
+    }
+
+    class SupabaseClient {
+        --
+        + fetchHabits(day: Date): Habit[]
+    }
+}
+
+package "Persistenz" {
+    class Habit <<Entity>> {
+        + id: UUID
+        + name: String
+        + day: Date
+    }
+}
+
+Homepage ..> HabitRouter : GET-Request
+HabitRouter --> SupabaseClient : verwendet
+SupabaseClient ..> Habit : liest aus PostgreSQL
+
+@enduml

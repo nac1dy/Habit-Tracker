@@ -1,0 +1,26 @@
+@startuml
+
+' source: https://github.com/plantuml-stdlib/C4-PlantUML
+' C4 Model
+!include <c4/C4_Component.puml>
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram – [Habit-Tracker]
+
+Container_Boundary(frontend, "Frontend") {
+  Component(habit_ui, "Homepage (page.tsx)", "React", "Startseite des Habit-Trackers; hier kann der Nutzer Habits nach Tag filtern")
+}
+
+Container_Boundary(backend, "Backend") {
+  Component(habit_ctrl, "Habit-Router", "Supabase", "Nimmt Filteranfrage entgegen und sendet GET-Request über Supabase-API an Datenbank")
+}
+
+Container_Boundary(persistence, "Persistenz") {
+  ContainerDb(db, "Datenbank", "PostgreSQL", "Persistente Datenhaltung für alle Entitäten")
+}
+
+Rel(habit_ui, habit_ctrl, "sendet GET-Request", "REST / HTTPS")
+Rel(habit_ctrl, db, "fragt an", "Supabase-API")
+
+@enduml
