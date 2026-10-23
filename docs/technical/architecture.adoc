@@ -42,29 +42,14 @@ LAYOUT_WITH_LEGEND()
 title System Context Diagram
 
 Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
-Person(admin, "Administrator", "Verwaltet und konfiguriert das System")
 
 System(system, "Habito", "Kernfunktionalität des Systems")
+System_Ext(db, "Datenbank", "Persistente Datenhaltung des Systems")
 
-SystemDb(db, "PostgreSQL", "Persistente Datenhaltung des Systems")
 
-System_Ext(ext0, "Next.js", "Visualisierung und Darstellung der Progressive Web App")
-System_Ext(ext1, "Supabase", "Authentifizierung und Identitätsverwaltung")
-System_Ext(ext2, "Notifications", "Sende Notifications an den Nutzer")
-System_Ext(ext3, "Vercel", "Website öffentlich zugänglich machen")
-
-Rel(user, system, "nutzt", "Web / Mobile")
-Rel(admin, system, "verwaltet")
-
-Rel(ext1, db, "liest / schreibt", "SQL")
-Rel(ext0, ext1, "sendet Daten an", "REST API")
-Rel(ext2, user, "sendet Benachrichtungen an")
-Rel(system, ext3, "Deployed durch", "Vercel")
-
-Rel(system, ext1, "authentifiziert über", "Supabase Auth")
-Rel(system, ext0, "wird dargestellt durch", "TypeScript, React, TailwindCSS")
-Rel(system, ext2, "sendet Benachrichtungen mittels", "Push API, Notifications")
-
+Rel(user, system, "Verwaltet/Erstellt Habits und Tracked seinen Fortschritt")
+Rel(system, db, "Speichert Habits, Nutzer und Statistiken")
+Rel(db, system, "Gibt Nutzerdaten zurück")
 
 @enduml
 ....
@@ -78,26 +63,15 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 |===
 | Schnittstelle | Typ | Beschreibung | Protokoll / Format
 
-| Supabase
+| Datenbank/Supabase
 | Externes System, Backend-as-a-Service
 | Authentifizierung und Back-End Management über die Supabase
 | Supabase Auth
-
-| PostgreSQL
-| Externes System, Datenbank
-| Daten von Nutzern werden in PostgreSQL-Datenbanken gespeichert und verwaltet
-| SQL
 
 | Nutzer via Browser (als PWA oder "klassisch" über Browser-Aufruf)
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
-
-| Notifications
-| Externes System
-| Benachrichtungen/Erinnerungen an den Nutzer per Benachrichtigungen senden
-| Push API, Notification API der Betriebssysteme
-
 |===
 
 === Laufzeitumgebungen (Container Diagramm)

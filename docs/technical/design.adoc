@@ -132,7 +132,7 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 | Datenmanagement, Authentifizierung, Funktionalitäts-Handler
 | Supabase
 
-| Visualizer
+| Visualizer (Should just be UI)
 | Darstellung von Habits, Statistics und anderen Features
 | Next.js, TailwindCSS
 
