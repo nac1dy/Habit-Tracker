@@ -126,10 +126,10 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 
 | Nutzer wollen ihren Fortschritt über Zeit verstehen.
 | Statistiken & Fortschrittsvisualisierung
-| Mittel
+| Niedrig
 
 | Nutzer wollen die App ohne Einarbeitung sofort nutzen.
-| Onboarding mit Habit-Vorlagen
+| Onboarding/Tutorial ohne Anmeldung, Bereitstellung von Habit-Vorlagen
 | Niedrig
 
 | Nutzer wollen ihren Fortschritt auch offline festhalten.
@@ -138,7 +138,7 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 
 | Nutzer wollen Motivation durch integrierte Gamification erhalten
 | Integriertes Belohnungssystem durch Pet
-| Hoch
+| Niedrig
 
 | Nutzer wollen benachrichtigt werden, wenn sie ihre Habits noch nicht erledigt haben.
 | Push-Benachrichtigungen
