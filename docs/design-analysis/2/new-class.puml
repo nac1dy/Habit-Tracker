@@ -1,0 +1,49 @@
+@startuml
+
+title Klassendiagramm – Habit-Tracker
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "Frontend" {
+    class "Homepage (page.tsx)" as Homepage <<React>> {
+        - habits: Habit[]
+        --
+        + loadHabits(): void
+        + displayHabits(): void
+        + showHabitsbyFilter(filter): void (nicht nach filter sortieren)
+    }
+}
+
+package "Backend" {
+    class HabitRouter <<Supabase>> {
+        --
+        + getHabits(): Habit[]
+    }
+
+    class SupabaseClient {
+        --
+        + fetchHabits(): Habit[]
+    }
+}
+
+package "Persistenz (Cloud)" {
+    class Habit <<Entity>> {
+        + id: UUID
+        + name: String
+        + day: Date
+    }
+}
+package "Notizen" {
+    class Notizen {
+        --
+        + Sortierfunktion für Liste zum anzeigen nach gegebenem Filter
+    }
+
+}
+
+Homepage ..> HabitRouter 
+HabitRouter --> SupabaseClient
+SupabaseClient ..> Habit 
+
+@enduml

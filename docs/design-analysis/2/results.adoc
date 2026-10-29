@@ -1,0 +1,21 @@
+Änderung: Habit filter nach aktuellem Tag
+Anforderung/Aktzeptanzkriterien: 
+- Filter auswahl
+- Ladegeschwindigkeit nicht beeinträchtigt wird durch das filtern
+
+Beobachtungen:
+- UI-Element nötig zum filtern
+- GET-Request muss überarbeitet werden mit einem Filter
+
+Entwurfsfrage:
+- Wie sollen die Habits im Frontend behandelt werden
+
+
+[cols="1,2", options="header"]
+|===
+| Variante| Entwurf
+| A | Habits der initialen GET Request werden zwischen gespeichert in Liste auf dem page.tsx, für das Anzeigen nur Sortiert
+| B | page.tsx (Homepage) sendet extra GET "/api/habits{filter}" und zeigt diese auf Homepage an
+|===
+
+

@@ -1,0 +1,30 @@
+@startuml current-flow
+
+skinparam monochrome true
+skinparam defaultFontSize 12
+
+actor "User" as user
+participant "page.tsx" as home
+participant "HabitRouter" as svc
+participant "SupabaseClient" as ctrl
+participant "Cloud-Speicher" as repo
+
+user -> home : öffnet Habit-Tracker
+home -> svc : GET /api/habits
+svc -> ctrl : getHabits()
+ctrl -> repo : SELECT * from Habits
+repo -> ctrl : Return Habits
+ctrl -> svc : returnAllHabits()
+svc -> home : Habits
+home -> home : Filter(filter) (Filter muss irgendwo herkommen)
+home -> user : showHabits()
+
+
+alt Kein aktuellen Habit gefunden
+
+home -> home : Filter(filter)
+home -> user : showMessageNoCurrentHabits()
+
+end
+
+@enduml
