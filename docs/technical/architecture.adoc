@@ -5,6 +5,12 @@ include::../_includes/names.inc.adoc[]
 {all-names}
 {localdatetime}
 
+
+_Dieses Dokument beschreibt die technische Architektur des Systems — welche Technologien
+eingesetzt werden, wie das System in seine Umgebung eingebettet ist, und welche
+Architekturentscheidungen getroffen wurden. Der Fokus liegt auf dem *Warum* hinter
+technischen Entscheidungen._
+
 _Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle definiert.
 Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
 Konsequenzen, die sich daraus ergeben._
@@ -12,7 +18,7 @@ Konsequenzen, die sich daraus ergeben._
 _Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
 Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument](`design.adoc`) beschrieben._
 
----
+'''
 
 == Architektursichten
 
@@ -516,6 +522,10 @@ a|
 |===
 
 == Risiken & technische Schulden
+
+_Dieser Abschnitt dokumentiert bekannte technische Risiken und bewusst eingegangene
+technische Kompromisse (Technical Debt). Transparenz hier verhindert, dass diese
+Punkte in Vergessenheit geraten._
 
 === Technische Risiken
 
