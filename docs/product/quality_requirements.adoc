@@ -8,6 +8,7 @@ include::../_includes/names.inc.adoc[]
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:
+// Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] unter "Qualitätsziele" und "Einschränkungen" grob skizzierten Vorgaben zu messbaren, prüfbaren Anforderungen. Jede Anforderung beschreibt eine Bedingung (das *Was*) — nicht die technische Lösung (das *Wie*). Die gewählte Umsetzung ist im link:../technical/architecture.adoc[Architekturdokument] als ADR dokumentiert._
 
