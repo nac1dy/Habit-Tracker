@@ -91,7 +91,7 @@ Container_Boundary(frontend, "Frontend") {
 
 Container_Boundary(backend, "Backend") {
   Component(habit_ctrl, "Habit-Controller", "Supabase", "Nimmt eingehende, neue Habits entgegen und delegiert an den Service")
-  Component(habit_svc, "Habit-Service", "Supabase", "Verarbeitet die eingehenden Habits und gibt weiter an Persistenzschicht")
+  Component(habit_svc, "Habit-API", "Supabase", "Verarbeitet die eingehenden Habits und gibt weiter an Persistenzschicht")
   Component(user_svc, "Nutzer-Service", "Supabase", "Verwaltung von Nutzerdaten und Authentifizierungslogik")
   Component(notification_svc, "Benachrichtigungs-Service", "Notification API, Push API", "Erstellt und versendet Benachrichtigungen an Nutzer")
 }
@@ -100,12 +100,12 @@ Container_Boundary(persistence, "Persistenz") {
   ContainerDb(db, "Datenbank", "PostgreSQL", "Persistente Datenhaltung für alle Entitäten")
 }
 
-Rel(habit_ui, habit_ctrl, "sendet Buchungsanfragen", "REST / HTTPS")
+Rel(habit_ui, habit_ctrl, "sendet Anfragen zum Erstellen und Verwalten", "REST / HTTPS")
 Rel(auth_ui, user_svc, "authentifiziert Nutzer:in", "REST / HTTPS")
-Rel(habit_ctrl, habit_svc, "delegiert an", "Java API")
-Rel(habit_svc, notification_svc, "löst Benachrichtigung aus", "Java API")
-Rel(user_svc, db, "persistiert Daten", "SQL")
-Rel(habit_svc, db, "persistiert Daten", "SQL")
+Rel(habit_ctrl, habit_svc, "delegiert an", "Supabase API")
+Rel(habit_svc, notification_svc, "löst Benachrichtigung aus", "Benachrichtigungs API")
+Rel(user_svc, db, "validiert und speichert Daten", "SQL")
+Rel(habit_svc, db, "validiert und speichert Daten", "SQL")
 
 @enduml
 ....
@@ -116,22 +116,23 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 |===
 | Komponente | Verantwortung | Schnittstellen
 
-| Habit-Manager
-| Datenmanagement, Authentifizierung, Funktionalitäts-Handler
-| Supabase
-
-| Visualizer (Should just be UI)
+| Homepage(page.tsx)
 | Darstellung von Habits, Statistics und anderen Features
 | Next.js, TailwindCSS
+
+| HabitRouter
+| Routing verschiedener Anfragen 
+| Next.js
+
+| HabitController
+| Datenmanagement, Authentifizierung, Funktionalitäts-Handler
+| Supabase
 
 | Datenbank
 | Buchungsdaten lesen und schreiben;
   Datenbankabfragen kapseln
 | PostgreSQL (SQL)
 
-| [Weitere Komponente]
-| [Verantwortung]
-| [Schnittstellen]
 |===
 
 '''
@@ -144,59 +145,63 @@ nicht jede einfache CRUD-Operation.
 
 === Habit erstellen
 
-_Der folgende Ablauf zeigt den zentralen Use Case "Habit erstellen". Dadurch, dass der Habit-Manager als Web-Service implementiert wird, laufen die meisten Interaktionen über HTTP-Requests ab._
+_Der folgende Ablauf zeigt den zentralen Use Case "Habit erstellen". Dadurch, dass der Habit-API als Web-Service implementiert wird, laufen die meisten Interaktionen über HTTP-Requests ab._
 
 _Dieser Interaktionsfluss ist sehr relevant, da er die zentrale Funktionalität des Systems darstellt._
 
 [plantuml, sequence-booking, svg]
 ....
-@startuml
+@startuml current-flow
+
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-actor "Nutzer:in" as user
-participant "Visualizer" as ctrl
-participant "Habit-Manager" as svc
-participant "Datenbank" as repo
-participant "Benachrichtigungs-\nService" as notify
+actor "User" as user
+participant "page.tsx" as home
+participant "HabitRouter" as svc
+participant "HabitController" as ctrl
+participant "HabitRepository" as repo
 
-user -> ctrl : Post /habit{name, category, intervall}
-ctrl -> ctrl : Eingabe validieren
-ctrl -> svc : createHabit(name, category, intervall, habitid)
-svc -> svc : checkForProblems(habitid)
-svc --> svc : true
-svc -> repo : saveHabit()
-repo --> svc : savedHabit
-svc -> notify : confirmCreation()
-notify --> svc : OK
-svc --> ctrl : Habit
-ctrl --> user : 201 Created\n{habitid, details}
+user -> home : öffnet Habit-Tracker
+home -> svc : GET /habits/create
+svc -> ctrl : handleSubmit()
+ctrl -> ctrl : Eingabe Validieren
+ctrl -> repo : Post /habit(name, category, intervall)
+repo -> svc : Ok
+svc -> home : 201 Created\n{habitid, details}
+home -> user : Habits
+
 
 @enduml
 ....
 
-'''
+
 
 === Fehlerfluss-Szenario: Habit existiert bereits
 
 _Falls ein Nutzer versucht, einen bereits existierenden Habit zu erstellen, soll eine Fehlermeldung angezeigt werden und der Erstellungsprozess abgebrochen werden._
 
-[plantuml, sequence-conflict, svg]
+[plantuml, sequence-booking, svg]
 ....
-@startuml
+@startuml current-flow
+
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-actor "Nutzer" as user
-participant "Habit-Manager" as ctrl
-participant "Datenbank" as repo
+actor "User" as user
+participant "page.tsx" as home
+participant "HabitRouter" as svc
+participant "HabitController" as ctrl
+participant "HabitRepository" as repo
 
-user -> ctrl : Post /habit{name, category, intervall}
-ctrl -> ctrl : createHabit(name, category, intervall, habitid)
-ctrl -> repo : checkForProblems(habitid)
-repo --> ctrl : false
-ctrl --> ctrl : HabitAlreadyExistsException
-ctrl --> user : 409 Conflict\n{message, alternativen}
+user -> home : öffnet Habit-Tracker
+home -> svc : GET /habits/create
+svc -> ctrl : handleSubmit()
+ctrl -> ctrl : Eingabe Validieren
+ctrl -> repo : Post /habit(name, category, intervall)
+repo -> svc : ERROR
+svc -> home : 401 Not Created\n{Habit already Exists}
+home -> user : Habits
 
 @enduml
 ....

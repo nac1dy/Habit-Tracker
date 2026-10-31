@@ -41,6 +41,9 @@ Person(user, "Nutzer", "Verwendet das System über Web oder Mobile")
 System(system, "Habito", "Kernfunktionalität des Systems")
 System_Ext(db, "Datenbank", "Persistente Datenhaltung des Systems")
 
+Rel(user,system,"Verwaltet/Erstellt Habits und Tracked seinen Fortschritt")
+Rel(system,db,"Speichert Habits, Nutzerdaten und Statistiken")
+Rel(db, system, "Gibt Nutzerdaten zurück")
 
 Rel(user, system, "Verwaltet/Erstellt Habits und Tracked seinen Fortschritt")
 Rel(system, db, "Speichert Habits, Nutzer und Statistiken")
@@ -67,6 +70,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 | Menschlicher Akteur
 | Zugriff über Web-Oberfläche
 | HTTPS / REST
+
 |===
 
 === Laufzeitumgebungen (Container Diagramm)
