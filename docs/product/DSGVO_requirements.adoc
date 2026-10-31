@@ -1,5 +1,10 @@
-include::../config.adoc[]
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
+
 = Rechtliche Anforderungen – {project-name}
+{all-names}
+{localdatetime}
+
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:

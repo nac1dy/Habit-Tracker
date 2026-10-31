@@ -1,14 +1,9 @@
-include::../config.adoc[]
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
+
 = Architekturdokument: {project-name}
-
+{all-names}
 {localdatetime}
-// Platzhalter für weitere Dokumenten-Attribute
-
-
-_Dieses Dokument beschreibt die technische Architektur des Systems — welche Technologien
-eingesetzt werden, wie das System in seine Umgebung eingebettet ist, und welche
-Architekturentscheidungen getroffen wurden. Der Fokus liegt auf dem *Warum* hinter
-technischen Entscheidungen._
 
 _Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle definiert.
 Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
@@ -17,7 +12,7 @@ Konsequenzen, die sich daraus ergeben._
 _Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
 Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument](`design.adoc`) beschrieben._
 
-'''
+---
 
 == Architektursichten
 
@@ -50,6 +45,9 @@ Rel(user,system,"Verwaltet/Erstellt Habits und Tracked seinen Fortschritt")
 Rel(system,db,"Speichert Habits, Nutzerdaten und Statistiken")
 Rel(db, system, "Gibt Nutzerdaten zurück")
 
+Rel(user, system, "Verwaltet/Erstellt Habits und Tracked seinen Fortschritt")
+Rel(system, db, "Speichert Habits, Nutzer und Statistiken")
+Rel(db, system, "Gibt Nutzerdaten zurück")
 
 @enduml
 ....
@@ -496,10 +494,6 @@ a|
 |===
 
 == Risiken & technische Schulden
-
-_Dieser Abschnitt dokumentiert bekannte technische Risiken und bewusst eingegangene
-technische Kompromisse (Technical Debt). Transparenz hier verhindert, dass diese
-Punkte in Vergessenheit geraten._
 
 === Technische Risiken
 

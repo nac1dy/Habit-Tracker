@@ -1,8 +1,14 @@
-include::../config.adoc[]
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
+
 = Nicht-funktionale Anforderungen – {project-name}
+{all-names}
+{localdatetime}
+
 :toc:
 :toc-title: Inhaltsverzeichnis
 :sectnums:
+// Platzhalter für weitere Dokumenten-Attribute
 
 _Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] unter "Qualitätsziele" und "Einschränkungen" grob skizzierten Vorgaben zu messbaren, prüfbaren Anforderungen. Jede Anforderung beschreibt eine Bedingung (das *Was*) — nicht die technische Lösung (das *Wie*). Die gewählte Umsetzung ist im link:../technical/architecture.adoc[Architekturdokument] als ADR dokumentiert._
 
@@ -18,7 +24,7 @@ _Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] 
 
 | NFR-02
 | Das System muss bei mehreren gleichzeitigen Nutzern performant bleiben.
-| Antwortzeiten bleiben unter [Schwellwert, z. B. 1 s] bei bis zu 50 gleichzeitigen Nutzern (Lasttest).
+| Antwortzeiten bleiben unter 1s.
 
 | NFR-03
 | Das Onboarding muss zügig abschließbar sein, damit Nutzer schnell loslegen können.
@@ -37,7 +43,7 @@ _Dieses Dokument konkretisiert die in link:product_concept.adoc[Produktkonzept] 
 
 | NFR-05
 | Das System muss auf Desktop, Tablet und mobilem Endgerät uneingeschränkt nutzbar sein.
-| Alle Hauptfunktionen sind ab einer Breite von [z. B. 360 px] ohne Funktionsverlust nutzbar (manueller Test je Gerätekategorie).
+| Alle Hauptfunktionen sind ab einer Breite von 480px ohne Funktionsverlust nutzbar (manueller Test je Gerätekategorie).
 
 | NFR-06
 | Das System muss auf den jeweils aktuellen Versionen gängiger Browser (Chrome, Firefox, Safari, Edge) funktionieren.

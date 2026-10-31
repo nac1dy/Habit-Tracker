@@ -1,21 +1,13 @@
-include::../config.adoc[]
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
+    
 = Testkonzept: {project-name}
-
+{all-names}
 {localdatetime}
-// Platzhalter für weitere Dokumenten-Attribute
-
-_Dieses Dokument beschreibt, wie die Qualität der Software sichergestellt wird.
-Es legt fest, welche Arten von Tests eingesetzt werden, welche Werkzeuge verwendet werden,
-und wie Tests in den Entwicklungsprozess integriert sind._
 
 NOTE: {to-be-implemented-se2-note}
 
----
-
 == Teststrategie
-
-_Beschreibe in wenigen Sätzen den grundsätzlichen Ansatz zur Qualitätssicherung im Projekt.
-Warum wurden diese Testarten gewählt? Welchen Stellenwert hat Testing im Team?_
 
 [Hier die übergeordnete Teststrategie beschreiben, z. B.:
 „Wir setzen auf eine Teststrategie mit einem starken Fokus auf Unit-Tests,
