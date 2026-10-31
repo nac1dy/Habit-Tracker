@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoginForm from './LoginForm';
 import InfoModal from '@/app/components/InfoModal';
+import { loginUser } from '../lib/authentification';
 
 // Login screen - UI only for now, auth wiring (Supabase signInWithPassword) follows later
 //
@@ -27,8 +28,8 @@ export default function LoginPage() {
     }
 
     setLoading(true);
+    loginUser(email.trim(), password.trim())
     router.push('/');
-    // TODO: Replace with Supabase auth.signInWithPassword({ email, password })
     setLoading(false);
   };
 

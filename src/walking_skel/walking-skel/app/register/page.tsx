@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import RegisterForm from './RegisterForm';
 import InfoModal from '@/app/components/InfoModal';
+import {registerUser, loginUser} from '@/app/lib/authentification';
 
 // Register screen - UI only for now, auth wiring (Supabase auth.signUp) follows later
 export default function RegisterPage() {
@@ -28,9 +29,9 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
-    // TODO: Replace with Supabase auth.signUp({ email, password })
+    registerUser(email.trim(),password.trim());
     router.push('/');
-    setLoading(false);
+    
   };
 
   return (
