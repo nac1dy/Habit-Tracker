@@ -1,13 +1,9 @@
-include::../config.adoc[]
-= Softwaredesign: {project-name}
-
-{localdatetime}
-
 include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
 
-_Dieses Dokument beschreibt die interne Struktur des Systems, wie der Code organisiert ist,
-aus welchen Komponenten das System besteht, wie diese zusammenarbeiten, und welche
-Designmuster eingesetzt werden. Der Fokus liegt auf dem *Wie* der Implementierung._
+= Softwaredesign: {project-name}
+{all-names}
+{localdatetime}
 
 _Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
 link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:../product/domain_glossary.adoc[Domänenmodell] (`../product/domain_glossary.adoc`) definiert._

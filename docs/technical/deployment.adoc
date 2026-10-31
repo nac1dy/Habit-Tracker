@@ -1,11 +1,10 @@
-include::../config.adoc[]
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
+
 = Deployment & Betrieb: {project-name}
-
+{all-names}
 {localdatetime}
-// Platzhalter für weitere Dokumenten-Attribute
 
-=
-[Projektname]
 :toc:
 :toc-title: Inhalt
 :toclevels: 3

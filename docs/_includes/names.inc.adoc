@@ -1,0 +1,6 @@
+:all-names: Noel Miersch <noel.miersch@stud.htw-dresden.de>; Nathan Samuel Richter <nathansamuel.richter@stud.htw-dresden.de>; Rico Mauksch <rico.mauksch@stud.htw-dresden.de>; Finjas Marc Anton <finjasmarc.anton@stud.htw-dresden.de>; Lisa Mindergasov <lisa.mindergasov@stud.htw-dresden.de>; Ahmad Ali Nabizada <ahmadali.nabizada@stud.htw-dresden.de>
+
+:product-owner: Nathan Samuel Richter
+:tech-lead: Noel Miersch
+:scrum-master: Ahmad Ali Nabizada
+:developers: Ahmad Ali Nabizada, Rico Mauksch, Finjas Marc Anton, Lisa Mindergasov

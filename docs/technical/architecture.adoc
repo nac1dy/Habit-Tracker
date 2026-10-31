@@ -1,8 +1,9 @@
-include::../config.adoc[]
-= Architekturdokument: {project-name}
+include::../_includes/default-attributes.inc.adoc[]
+include::../_includes/names.inc.adoc[]
 
+= Architekturdokument: {project-name}
+{all-names}
 {localdatetime}
-// Platzhalter für weitere Dokumenten-Attribute
 
 
 _Dieses Dokument beschreibt die technische Architektur des Systems — welche Technologien
