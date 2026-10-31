@@ -12,13 +12,6 @@ _Individuelle Wireframes einzelner Features werden direkt in den zugehörigen Us
 
 == Personas
 
-_Personas sind fiktive, aber realitätsbasierte Beschreibungen typischer Nutzer.
-Sie helfen dem Team, Entscheidungen konsequent aus Nutzerperspektive zu treffen.
-Personas sollten auf echten Nutzerinterviews oder Beobachtungen basieren — nicht
-auf Annahmen allein._
-
-_Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
-
 === Persona 1: Andreas Alki
 
 [cols="1,3"]
@@ -129,16 +122,12 @@ a|
 
 === Aktuelle Situation (ohne das Produkt)
 
-_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt verbessern soll — und macht den Mehrwert explizit._
-
 Heute verwenden Nutzende papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
 aus den Augen. Hannes hat bereits zwei Habit-Apps ausprobiert und beide nach kurzer Zeit aufgegeben, weil sie zu komplex waren oder zu viel Zeit kosteten. Petra trackt Gewohnheiten in
 Notion und ihrem Kalender, verliert aber den Überblick, sobald mehrere Habits gleichzeitig laufen. Allen gemeinsam fehlt ein konsistentes Feedback über längere Zeiträume — der
 Motivationsverlust setzt typischerweise nach zwei bis drei Wochen ein.
 
 === Nutzungshürden & Risiken
-
-_Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 
 [cols="2,2", options="header"]
 |===
@@ -165,10 +154,6 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 |===
 
 == Systemweite Interaktionsflüsse
-
-_Dieser Abschnitt beschreibt Abläufe, die mehrere Features oder Bereiche des Produkts
-umfassen. Einzelne Feature-Wireframes werden in den jeweiligen User Stories gepflegt.
-Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiagrammen._
 
 === Onboarding-Flow
 
@@ -256,10 +241,6 @@ stop
 |===
 
 == Designsystem & Interaktionsprinzipien
-
-_Dieser Abschnitt dokumentiert systemweite Design- und Interaktionsentscheidungen,
-die konsistent über alle Features hinweg gelten. Sie bilden die Basis für alle
-Wireframes und UI-Implementierungen._
 
 === Visuelle Sprache
 

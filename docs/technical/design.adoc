@@ -8,13 +8,9 @@ include::../_includes/names.inc.adoc[]
 _Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
 link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:../product/domain_glossary.adoc[Domänenmodell] (`../product/domain_glossary.adoc`) definiert._
 
-'''
+---
 
 == Systemübersicht & Schichtenarchitektur
-
-_Dieser Abschnitt beschreibt, in welche Schichten oder Bereiche das System aufgeteilt ist
-und welche Verantwortung jede Schicht trägt. Eine klare Schichtentrennung verhindert,
-dass Geschäftslogik, Datenzugriff und Präsentation unkontrolliert vermischt werden._
 
 === Schichtendiagramm
 
@@ -73,10 +69,6 @@ abhängen!
 
 == Komponentenübersicht
 
-_Dieser Abschnitt beschreibt die wichtigsten Komponenten des Systems — Module,
-Pakete oder Services — und ihre Verantwortlichkeiten. Eine Komponente ist eine
-zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
-
 === Komponentendiagramm
 
 [plantuml, component-diagram, svg]
@@ -128,7 +120,7 @@ Rel(habit_svc, db, "persistiert Daten", "SQL")
 | Datenmanagement, Authentifizierung, Funktionalitäts-Handler
 | Supabase
 
-| Visualizer
+| Visualizer (Should just be UI)
 | Darstellung von Habits, Statistics und anderen Features
 | Next.js, TailwindCSS
 
@@ -215,9 +207,6 @@ Das macht es einfacher, vom Diagramm zum Code zu navigieren und umgekehrt.
 '''
 
 == Datenmodell
-
-_Dieser Abschnitt beschreibt die technische Datenbankstruktur: Tabellen, Spalten,
-Datentypen und Beziehungen. Er beantwortet die Frage: Wie werden die Daten gespeichert?_
 
 NOTE: Die *fachliche* Bedeutung der Entitäten — was sie repräsentieren und wie sie sich zueinander verhalten — ist im Domänenmodell (`domain_glossary.adoc`) beschrieben.
 Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
@@ -365,10 +354,6 @@ versioniert. So ist der Datenbankzustand jederzeit reproduzierbar._
 |===
 
 == Eingesetzte Muster & Konventionen
-
-_Dieser Abschnitt dokumentiert übergreifende Designmuster und Konventionen, die im
-gesamten Codebase gelten. Das verhindert, dass verschiedene Teammitglieder dasselbe
-Problem auf unterschiedliche Weise lösen._
 
 === Designmuster
 
