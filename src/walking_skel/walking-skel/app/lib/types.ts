@@ -22,6 +22,7 @@ export interface HomeHabit {
     habitid: string;
     title: string;
     category: HabitCategory;
+    frequenz: Record<DayOfWeek, boolean>;
     // streakDays + doneToday are NOT in the DB yet -> currently mock/local.
     // See API INTEGRATION POINT in app/lib/mockHome.ts.
     streakDays: number;
