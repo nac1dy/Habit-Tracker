@@ -4,14 +4,21 @@ import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { DayOfWeek, Habit } from '@/app/lib/types';
+import { BottomNav } from '@/app/components/BottomNav';
 
-// Habit detail page - shows individual habit and delete option
+// Habit-Page mit Details (Kathegorie + Wochentage + Änderungen + Delete)
 interface DetailPageProps {
   params: Promise<{
     id: string;
   }>;
 }
-
+//Parameter wird angehangen, Abhängig davon, welche Änderung vorgenommen wird
+const EDIT_ITEMS = [
+  { label: 'Kategorie ändern', field: 'category' },
+  { label: 'Namen ändern', field: 'name' },
+  { label: 'Häufigkeit ändern', field: 'frequency' },
+  { label: 'Tracking-Methode ändern', field: 'tracking' },
+];
 export default function HabitDetail({ params }: DetailPageProps) {
   const router = useRouter();
   const { id } = use(params); // Unwrap the Promise
@@ -22,6 +29,7 @@ export default function HabitDetail({ params }: DetailPageProps) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [modal, setModal] = useState<{ title: string; message: string } | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); //Menue für das Bearbeiten von Habits
 
   useEffect(() => {
     const fetchHabit = async () => {
@@ -59,28 +67,20 @@ export default function HabitDetail({ params }: DetailPageProps) {
   };
 
   // Loading / Error states
-  if (loading) {
+ if (loading || error || !habit) {
     return (
-      <div className="min-h-screen bg-background py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          <Link href="/" className="text-(--teal-700) mb-4 inline-block">
+      <div className="flex min-h-full flex-1 flex-col">
+        <main className="mx-auto w-full max-w-md flex-1 px-4 pt-4">
+          <Link href="/" className="mb-4 inline-block text-[var(--teal-700)]">
             ← Back
           </Link>
-          <p className="text-(--text-2)">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !habit) {
-    return (
-      <div className="min-h-screen bg-background py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          <Link href="/" className="text-(--teal-700) mb-4 inline-block">
-            ← Back
-          </Link>
-          <p className="text-(--text-2) text-lg">{error || 'Habit not found.'}</p>
-        </div>
+          {loading ? (
+            <p className="py-6 text-center text-[var(--text-2)]">Loading…</p>
+          ) : (
+            <p className="py-6 text-center text-[var(--danger)]">{error || 'Habit not found.'}</p>
+          )}
+        </main>
+        <BottomNav />
       </div>
     );
   }
@@ -97,36 +97,92 @@ export default function HabitDetail({ params }: DetailPageProps) {
   };
   const hasSelectedDays = days.some((day) => habit.frequenz[day]);
 
-  return (
-    <div className="min-h-screen bg-background py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-8">
-          <Link href="/" className="text-(--teal-700) hover:text-(--teal-900) mb-4 inline-block">
-            ← Back
-          </Link>
-          <h1 className="text-3xl font-bold text-(--teal-900)">{habit.title}</h1>
-        </div>
+  const cardClass =
+    'rounded-[var(--radius)] border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-[12px]';
 
-        <div
-          className="bg-white p-8 border border-foreground mb-6"
-          style={{ borderRadius: 'var(--radius-lg)' }}
-        >
-          <div className="mb-6">
-            <p className="text-sm text-(--text-2) mb-1">Category</p>
-            <p className="text-lg font-semibold text-foreground capitalize">{habit.category}</p>
+  return (
+    <div className="flex min-h-full flex-1 flex-col">
+      {/* Header: Habit-Name links, Hamburger-Menü rechts */}
+      <div
+        className="sticky top-0 z-30 w-full bg-[var(--app-bg)]"
+        style={{ borderBottom: '1px solid var(--border)' }}
+      >
+        <div className="mx-auto flex w-full max-w-md items-center justify-between px-4 py-2">
+          <div className="flex min-w-0 items-center gap-2">
+            <Link href="/" aria-label="Back" className="text-xl text-[var(--teal-700)]">
+              ←
+            </Link>
+            <h1 className="truncate text-[20px] font-extrabold tracking-tight text-[var(--teal-900)]">
+              {habit.title}
+            </h1>
           </div>
 
-          <div className="mb-6">
-            <p className="text-sm text-(--text-2) mb-3">Selected Days</p>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Edit menu"
+              aria-expanded={menuOpen}
+              className="rounded-full p-2 text-[var(--text-2)] transition hover:bg-[var(--card)] active:scale-90"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+
+            {menuOpen && (
+              <>
+                {/* Unsichtbare Fläche: Klick daneben schließt das Menü */}
+                <button
+                  type="button"
+                  aria-label="Close menu"
+                  onClick={() => setMenuOpen(false)}
+                  className="fixed inset-0 z-40 cursor-default"
+                />
+                <div
+                  className="absolute right-0 top-12 z-50 w-60 rounded-2xl border border-[var(--border)] bg-[var(--glass)] p-1.5 backdrop-blur-[22px]"
+                  style={{ boxShadow: 'var(--shadow)' }}
+                  role="menu"
+                >
+                  {EDIT_ITEMS.map((item) => (
+                    <Link
+                      key={item.field}
+                      href={`/habits/${id}/edit?field=${item.field}`}
+                      role="menuitem"
+                      className="block rounded-lg px-3 py-2.5 text-sm text-[var(--text)] transition hover:bg-[var(--card)]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pt-4">
+        <div className={`${cardClass} p-5`} style={{ boxShadow: 'var(--shadow)' }}>
+          <div className="mb-5">
+            <p className="mb-1 text-xs text-[var(--text-2)]">Category</p>
+            <p className="text-base font-semibold capitalize text-[var(--text)]">{habit.category}</p>
+          </div>
+
+          <div className="mb-5">
+            <p className="mb-2 text-xs text-[var(--text-2)]">Selected Days</p>
             {hasSelectedDays ? (
-              <div className="grid grid-cols-7 gap-4 text-center">
+              <div className="grid grid-cols-7 gap-1.5 text-center">
                 {days.map((day) => {
                   const isSelected = habit.frequenz[day];
                   return (
                     <span
                       key={day}
-                      className={`text-sm font-semibold ${
-                        isSelected ? 'text-foreground' : 'text-(--text-3)'
+                      className={`rounded-lg py-1.5 text-xs font-semibold ${
+                        isSelected
+                          ? 'bg-[#35b8aa] text-white'
+                          : 'text-[var(--text-3)]'
                       }`}
                     >
                       {dayLabels[day]}
@@ -135,51 +191,53 @@ export default function HabitDetail({ params }: DetailPageProps) {
                 })}
               </div>
             ) : (
-              <p className="text-(--text-3)">No days selected</p>
+              <p className="text-[var(--text-3)]">No days selected</p>
             )}
           </div>
 
           <div className="mb-6">
-            <p className="text-sm text-(--text-2) mb-1">Created</p>
-            <p className="text-foreground">{new Date(habit.created_at).toLocaleDateString()}</p>
+            <p className="mb-1 text-xs text-[var(--text-2)]">Created</p>
+            <p className="text-[var(--text)]">{new Date(habit.created_at).toLocaleDateString()}</p>
           </div>
 
           <button
             type="button"
             onClick={() => setConfirmOpen(true)}
-            className="w-full text-white font-semibold py-2 px-4 rounded-lg transition-transform hover:-translate-y-0.5 active:translate-y-0"
-            style={{ background: 'linear-gradient(135deg, var(--danger), #e56565)' }}
+            className="w-full rounded-lg px-4 py-2.5 font-semibold text-white transition active:scale-[0.98]"
+            style={{ background: 'linear-gradient(135deg, #35b8aa, #1e8f84)' }}
           >
             Delete Habit
           </button>
         </div>
-      </div>
+      </main>
+
+      <BottomNav />
 
       {confirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
             onClick={() => setConfirmOpen(false)}
           />
           <div
-            className="relative w-full max-w-md bg-white border border-foreground p-6"
+            className="relative w-full max-w-md border border-[var(--border-mid)] bg-[var(--app-bg)] p-6"
             style={{ borderRadius: 'var(--radius-lg)' }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="confirm-title"
             aria-describedby="confirm-message"
           >
-            <h2 id="confirm-title" className="text-lg font-bold text-foreground">
+            <h2 id="confirm-title" className="text-lg font-bold text-[var(--text)]">
               Delete habit?
             </h2>
-            <p id="confirm-message" className="mt-2 text-(--text-2)">
+            <p id="confirm-message" className="mt-2 text-[var(--text-2)]">
               This action cannot be undone.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3 justify-end">
+            <div className="mt-6 flex flex-wrap justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setConfirmOpen(false)}
-                className="rounded-full px-4 py-2 text-sm font-semibold border border-foreground text-foreground bg-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                className="rounded-full border border-[var(--border-mid)] px-4 py-2 text-sm font-semibold text-[var(--text)] transition active:scale-95"
               >
                 Cancel
               </button>
@@ -187,9 +245,9 @@ export default function HabitDetail({ params }: DetailPageProps) {
                 type="button"
                 onClick={handleDelete}
                 disabled={deleting}
-                className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                className="rounded-full px-4 py-2 text-sm font-semibold text-white transition active:scale-95"
                 style={{
-                  background: 'linear-gradient(135deg, var(--danger), #e56565)',
+                  background: 'linear-gradient(135deg, #35b8aa, #1e8f84)',
                   opacity: deleting ? 0.7 : 1,
                 }}
               >
@@ -203,28 +261,28 @@ export default function HabitDetail({ params }: DetailPageProps) {
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
             onClick={() => setModal(null)}
           />
           <div
-            className="relative w-full max-w-md bg-white border border-foreground p-6"
+            className="relative w-full max-w-md border border-[var(--border-mid)] bg-[var(--app-bg)] p-6"
             style={{ borderRadius: 'var(--radius-lg)' }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="detail-modal-title"
             aria-describedby="detail-modal-message"
           >
-            <h2 id="detail-modal-title" className="text-lg font-bold text-foreground">
+            <h2 id="detail-modal-title" className="text-lg font-bold text-[var(--text)]">
               {modal.title}
             </h2>
-            <p id="detail-modal-message" className="mt-2 text-(--text-2)">
+            <p id="detail-modal-message" className="mt-2 text-[var(--text-2)]">
               {modal.message}
             </p>
             <div className="mt-6 flex justify-end">
               <button
                 type="button"
                 onClick={() => setModal(null)}
-                className="rounded-full px-4 py-2 text-sm font-semibold bg-(--teal-500) text-white transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                className="rounded-full bg-[var(--teal-500)] px-4 py-2 text-sm font-semibold text-white transition active:scale-95"
               >
                 OK
               </button>
