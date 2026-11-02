@@ -1,0 +1,42 @@
+@startuml login-layers
+' Schichten des Logins: wer kennt wen.
+' Pfeile zeigen nur nach unten, keine Schicht kennt die darüber.
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam rectangleBorderThickness 1
+skinparam packageStyle rectangle
+
+title Login: Schichten und Abhängigkeiten
+
+package "Browser" {
+  rectangle "login/page.tsx\nregister/page.tsx\n<i>'use client'</i>\n\nFormularzustand, InfoModal,\nNavigation (router.push)" as page
+}
+
+package "Server (Next.js)" {
+  rectangle "auth/actions.ts\n<i>'use server', öffentlich</i>\n\nEingaben prüfen (unknown zu string),\nE-Mail trimmen" as actions
+  rectangle "auth/authService.ts\n<i>intern</i>\n\nsignIn, signUp, signOut,\nPasswortregel, Fehlercodes zu Nutzertexten" as service
+  rectangle "supabase/server.ts\n<i>Infrastruktur</i>\n\nClient pro Anfrage,\nCookies lesen und schreiben" as client
+  rectangle "supabase/env.ts\n\nURL und Publishable Key aus .env" as env
+  rectangle "proxy.ts\nAPI-Routes\n<i>(folgt)</i>" as later
+}
+
+package "Supabase" {
+  rectangle "Auth\n(auth.users)" as auth
+  rectangle "Datenbank\n(RLS, auth.uid())" as db
+}
+
+page -down-> actions : loginAction()\nregisterAction()\n<i>POST-Request</i>
+actions -down-> service : ruft auf
+later .down.> service : nutzt direkt
+service -down-> client : createSupabaseServerClient()
+client -down-> env : getSupabaseEnv()
+client -down-> auth : HTTPS
+client -down-> db : HTTPS
+
+note right of actions
+  Sicherheitsgrenze:
+  jede exportierte Funktion
+  ist von außen aufrufbar
+end note
+
+@enduml
