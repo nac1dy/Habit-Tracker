@@ -268,14 +268,13 @@ Teal und Orange sind komplementär und erzeugen positive Verstärkung ohne negat
 
 | Typografie
 | Inter (Variable Font); Überschriften 24–48 px / weight 400–700 / negatives Letter-Spacing für kompaktes, natives Gefühl; Fließtext 14–17 px / line-height 1.45–1.65 / weight 400–500.
-Keine Schrift unter 14 px. Warum? Hohe Lesbarkeit auf kleinen Displays, systemnahes Erscheinungsbild.
+Keine Schrift unter 14 px, damit Hohe Lesbarkeit auf kleinen Displays sowie ein systemnahes Erscheinungsbild erreicht werden.
 
 | Ikonografie
-| Outline-Icons im Lucide-Stil, konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext. Warum? Erkennbarkeit auf kleinen Flächen, konsistente visuelle Sprache.
+| Outline-Icons im Lucide-Stil, konsistentes 22×22 px Icon-Set in Teal-700 (`#1B6F68`). Icons erscheinen immer mit eindeutigem Kontext, damit auch auf kleinen Flächen alles erkannt werden kann und die visuelle Sprache konsistent ist.
 
 | Bildsprache
-| Keine Stock-Fotos. App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glass-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten wie bei IOS) statt Bilder.
-Warum? Ruhige, inhaltsgetriebene Oberfläche; kein visuelles Rauschen.
+| Keine Stock-Fotos; App-Icon im expressiven Flat-Illustration-Stil. UI-Elemente nutzen Glass-Cards (weißes Glas, subtiler Blur, teal-getönter Schatten wie bei IOS) statt Bilder. Somit wird visuelle Überladung vermieden.
 
 |===
 
@@ -288,23 +287,22 @@ _Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung w
 | Prinzip | Beschreibung & Begründung
 
 | Destruktive Aktionen werden immer bestätigt.
-| Lösch- oder Stornieraktionen erfordern eine explizite Bestätigung durch die Nutzenden.
+| Lösch- oder Stornieraktionen erfordern eine explizite Bestätigung durch die Nutzer.
   Verhindert unbeabsichtigte Datenverluste.
 
 | Leerzustände erklären sich und schlagen eine Aktion vor.
 | Wenn eine Liste leer ist, zeigen wir eine kurze Erklärung und einen Call-to-Action —
-  nicht nur eine leere Fläche. Reduziert Orientierungslosigkeit.
+  nicht nur eine leere Fläche. Somit vermeidet man Orientierungslosigkeit des Nutzers und verbessert den Aktionsfluss.
 
 | Fehlermeldungen sind verständlich und handlungsorientiert.
 | Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
-  nächsten Schritt vor. Kein technischer Jargon für Endnutzer.
+  nächsten Schritt vor. Technische Fehlermeldungen dringen nicht bis zum Nutzer vor.
 
 | Kernfunktionen sind mit einer Hand erreichbar.
-| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
-  Optimiert für einhändige Smartphone-Nutzung.
+| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone), optimiert für einhändige Smartphone-Nutzung.
 
 | Feedback ist sofort und eindeutig.
-| Jede Interaktion (Habit abhaken, Habit anlegen) gibt unmittelbares visuelles Feedback — Animation, Farbwechsel oder Bestätigungsmeldung. Keine stille Verarbeitung ohne Rückmeldung.
+| Jede Interaktion (Habit abhaken, Habit anlegen) gibt unmittelbares visuelles Feedback — Animation, Farbwechsel oder Bestätigungsmeldung. Somit wird es vermieden, dass Prozesse im Hintergrund abgearbeitet (und ggf. vollendet) werden, ohne dass der Nutzer es mitbekommt.
 
 |===
 
@@ -331,9 +329,5 @@ _Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung w
 
 |===
 
-
-_Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,
-Usability-Tests oder wesentlichen Designentscheidungen. Individuelle Feature-Wireframes
-werden nicht hier, sondern direkt in den User Stories im Product Backlog gepflegt._
 
 _Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben._
