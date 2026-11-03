@@ -108,30 +108,28 @@ Bedingungen das Produkt genutzt wird._
 | Aspekt | Beschreibung
 
 | Benutzer
-| Studierende im Alter von 18–28 Jahren mit unterschiedlicher digitaler Affinität (von kaum technikversiert bis sehr versiert). Alle nutzen Smartphones täglich intensiv. Motivation ist
-intrinsisch: eigene Gesundheit, Produktivität oder Wohlbefinden verbessern. Ausführliche Beschreibungen → siehe Personas.
+| Studierende im Alter von 18–30 Jahren mit unterschiedlicher digitaler Affinität (von kaum technikversiert bis sehr versiert). Alle nutzen Smartphones täglich intensiv. Motivation ist
+intrinsisch: eigene Gesundheit, Produktivität oder Wohlbefinden verbessern.
 
 | Ziele & Aufgaben
 | Nutzende möchten schlechte Gewohnheiten abbauen oder neue aufbauen und ihren Fortschritt über Zeit sehen. Konkrete Aufgaben: Habits täglich abhaken, Streak aufrechterhalten, neues Habit anlegen, Fortschritt im Wochenverlauf einsehen, ggf. Habits pausieren oder löschen.
 
 | Ressourcen
-| Primär Smartphone (Webapp) und Desktop/Laptop (Browser). Stabile Internetverbindung meistens vorhanden; auf dem Campus oder in der Bahn gelegentlich eingeschränkt.
+| Primär Smartphone (Web-App) und Desktop/Laptop (Browser). Stabile Internetverbindung meistens vorhanden; auf dem Campus oder in der Bahn gelegentlich eingeschränkt.
 
 | Umgebung
 a|
 *Technisch:* Mobile-Web PWA; Betriebssystem unabhängig; gelegentlicher Offline-Betrieb muss bedacht werden.
 
-*Physisch:* Nutzung unterwegs, zuhause oder an der Hochschule — meist in kurzen Momenten unter 2 Minuten. Wechselnde Lichtverhältnisse und Ablenkungen.
+*Physisch:* Nutzung unterwegs, zuhause oder an der Hochschule, meist in kurzen Momenten unter 2 Minuten. Es bestehen wechselnde Lichtverhältnisse und externe Ablenkungsfaktoren.
 
-*Sozial & organisatorisch:* Eigenverantwortliche Nutzung ohne externe Verpflichtung. Keine regulatorischen Rahmenbedingungen außer DSGVO.
+*Sozial & organisatorisch:* Eigenverantwortliche Nutzung ohne externe Verpflichtung. An regulatorischen Rahmenbedingungen besteht lediglich die DSGVO.
 
 |===
 
 === Aktuelle Situation (ohne das Produkt)
 
-_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt verbessern soll — und macht den Mehrwert explizit._
-
-Heute verwenden Nutzende papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
+Heute verwenden Nutzer papierbasierte Listen, generische Kalender-Apps oder gar kein System. Andreas schreibt sich manche Tage handschriftliche Ziele auf, verliert diese aber schnell
 aus den Augen. Hannes hat bereits zwei Habit-Apps ausprobiert und beide nach kurzer Zeit aufgegeben, weil sie zu komplex waren oder zu viel Zeit kosteten. Petra trackt Gewohnheiten in
 Notion und ihrem Kalender, verliert aber den Überblick, sobald mehrere Habits gleichzeitig laufen. Allen gemeinsam fehlt ein konsistentes Feedback über längere Zeiträume — der
 Motivationsverlust setzt typischerweise nach zwei bis drei Wochen ein.
@@ -148,19 +146,16 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 | Quick-Start-Option mit minimalen Angaben (z. B. nur E-Mail) und überspringbares Onboarding
 
 | App wird nach kurzer Zeit nicht mehr genutzt (Drop-off)
-| Streak-Mechanismus und Momentum-Score als tägliches Retention-Signal; Push-Erinnerungen und Low Effort-Check-ins
+| Streak-Mechanismus und Momentum-Score als tägliches Retention-Signal; Push-Erinnerungen und Check-Ins mit geringem Aufwand
 
 | Negativgefühl bei verpassten Habits
-| Sanfte Formulierungen (Visualisierung) statt hartem Fehler-Feedback; Pause-Funktion für schwierige Phasen
+| Tipps zur Verbesserung der Einhaltung; Pause-Funktion für schwierige Phasen
 
 | Zu viele Habits auf einmal, Überforderung
 | Übersichtliches Interface durch One-Click (sehr übersichtlich bis etwa 8 Habits)
 
 | Datenschutzbedenken bei sensiblen Habits (z. B. Sucht)
 | Verschlüsselung sensibler Daten, transparente Datenschutzerklärung und keine Social-Features wie Freunde/Sharing
-
-  | [Weitere Hürde / Risiko]
-  | [Mögliche Reaktion im Design]
 
 |===
 

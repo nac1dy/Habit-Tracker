@@ -104,7 +104,7 @@ NOTE: Detaillierte rechtliche Anforderungen sind in link:DSGVO_requirements.adoc
 
 | NFR-13
 | Das System muss während der vorgesehenen Betriebszeiten verlässlich erreichbar sein.
-| Verfügbarkeit ≥ 99 % (entspricht max. ~3,6 Tagen Ausfall pro Jahr), gemessen über Uptime-Monitoring.
+| Verfügbarkeit ≥ 99 % (entspricht max. ~3,6 Tagen Ausfall pro Jahr), gemessen über Uptime-Monitoring (einsehbar beim Persistenz-Provider).
 
 | NFR-14
 | Das System darf bei einem Serverausfall nur einen begrenzten Datenverlust zulassen.
