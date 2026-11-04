@@ -11,7 +11,7 @@ export async function createSupabaseServerClient() {
 
   return createServerClient(url, publishableKey, {
     cookies: {
-      // Session comes in with the request cookies -> auth.uid() works in the DB
+      // Session comes in with the request cookies, so auth.uid() works in the DB
       getAll() {
         return cookieStore.getAll();
       },
