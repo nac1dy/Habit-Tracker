@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import RegisterForm from './RegisterForm';
 import InfoModal from '@/app/components/InfoModal';
-import {registerUser, loginUser} from '@/app/lib/authentification';
+import { registerAction } from '@/app/backend/auth/actions';
 
-// Register screen - UI only for now, auth wiring (Supabase auth.signUp) follows later
+// Register screen. The account is created on the server via registerAction,
+// this page only handles form state, popups and navigation.
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
@@ -29,9 +30,25 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
-    registerUser(email.trim(),password.trim());
+    const result = await registerAction(email, password);
+    setLoading(false);
+
+    if (!result.ok) {
+      setModal({ title: 'Sign up failed', message: result.message });
+      return;
+    }
+
+    // With "Confirm email" on there is no session yet, so the user stays here
+    if (result.needsEmailConfirmation) {
+      setModal({
+        title: 'Check your email',
+        message: 'We sent you a link to confirm your account. After confirming you can log in.',
+      });
+      return;
+    }
+
     router.push('/');
-    
+    router.refresh();
   };
 
   return (
