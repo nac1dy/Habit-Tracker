@@ -1,6 +1,5 @@
 @startuml
-
-title Klassendiagramm – Habit-Tracker
+title Klassendiagramm - Habit-Tracker
 
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
@@ -44,6 +43,5 @@ package "Notizen" {
 
 Homepage ..> HabitRouter 
 HabitRouter --> SupabaseClient
-SupabaseClient ..> Habit 
-
-@enduml
+SupabaseClient ..> Habit
+@enduml 

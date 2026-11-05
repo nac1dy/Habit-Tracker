@@ -1,21 +1,51 @@
-Änderung: Habit filter nach aktuellem Tag
+Änderung: Filtern der Habits nach aktuellem Tag
 Anforderung/Aktzeptanzkriterien: 
-- Filter auswahl
-- Ladegeschwindigkeit nicht beeinträchtigt wird durch das filtern
+- Filterauswahl
+- Ladegeschwindigkeit nicht beeinträchtigt wird durch das Filtern
 
 Beobachtungen:
-- UI-Element nötig zum filtern
-- GET-Request muss überarbeitet werden mit einem Filter
+- UI-Element nötig zum Filtern
+- `GET`-Request muss überarbeitet werden mit einem Filter
 
 Entwurfsfrage:
-- Wie sollen die Habits im Frontend behandelt werden
+- Wie sollen die Habits im Frontend behandelt werden?
 
 
 [cols="1,2", options="header"]
 |===
 | Variante| Entwurf
-| A | Habits der initialen GET Request werden zwischen gespeichert in Liste auf dem page.tsx, für das Anzeigen nur Sortiert
-| B | page.tsx (Homepage) sendet extra GET "/api/habits{filter}" und zeigt diese auf Homepage an
+| A | Habits der initialen `GET`-Request werden zwischengespeichert in Liste auf dem `page.tsx`, für das Anzeigen nur in der Homepage gefiltert & sortiert.
+| B | `page.tsx` (Homepage) sendet extra `GET /api/habits{filter}` und zeigt diese auf der Homepage an.
 |===
 
 
+== Entwurfsvarianten bewerten (2.2 Aufgabe 6)
+
+[cols="1,2,2", options="header"]
+|===
+| Gestaltungsaspekt | Variante A | Variante B
+
+| Zustand & Invarianten
+| Der neue Zustand ist: _Filter wurden ausgewählt._ Nur (für den aktuellen Tag) relevante Habits sollen initial angezeigt werden. Bei selektierten Filtern sollen alle unpassenden Habits ausgeblendet werden.
+| Zustand analog zu A; es dürfen nur die Habits zurückgegeben werden, die den Filterkriterien entsprechen.
+
+| Verhalten & Verantwortlichkeit
+| `page.tsx` muss zustätzlich ein Filterkriterium erhalten und hat die Verantwortlichkeit, die erhaltenen Daten zu filtern und zu sortieren.
+| Das Filterkriterium muss in der Request bis zur Datenbank durchgereicht werden und die Datenbank muss die Funktionalität haben, die Daten entsprechend der Filter zu filtern.
+
+| Abhängigkeiten & Kopplung
+| Die Homepage ist abhängig von den Filterkriterien.
+| Das Backend benötigt zusätzlich zwingend bei der Request die vom Nutzer gewählten Filter. 
+
+| Grenzen & Kohäsion
+| Die Filterung und Sortierung benötigt eine eigene Funktion, die Bestandteil der Homepage ist.
+| Router und Client müssen die Request mit Filter unterstützen; die Persistenz muss die Daten filtern und gefiltert zurückgeben können.
+
+| Änderung & Variabilität
+| Eventuell könnte man die Filter- und Sortiermöglichkeiten speichern, um den Zugriff zu verschnellern.
+| analog zu A
+
+| Repräsentation & Verarbeitungsform
+| Datenstruktur für Filter in Homepage nötig
+| Datenstruktur für Übergabe der Filter in Request nötig
+|===
