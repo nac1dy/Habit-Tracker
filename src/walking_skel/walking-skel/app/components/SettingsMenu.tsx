@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '@/app/lib/ThemeContext';
+import { logoutAction } from '@/app/backend/auth/actions';
 
 /**
  * SettingsMenu — reusable burger button + settings dropdown.
@@ -37,6 +39,7 @@ function MenuRow({
 }
 
 export function SettingsMenu() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
@@ -120,7 +123,13 @@ export function SettingsMenu() {
             {/* FEATURE ENTRY POINT: auth log out */}
             <MenuRow
               label="Log out"
-              onClick={() => setOpen(false)}
+              onClick={async () => {const result = await logoutAction();if (!result.ok) {console.error(result.message);
+                  return;
+                }
+                setOpen(false);
+                router.push('/login');
+                router.refresh();
+              }}
               icon={
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
