@@ -1,0 +1,62 @@
+@startuml login-sequence
+' Ablauf eines Logins vom Absenden des Formulars bis zur Startseite.
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam sequenceMessageAlign center
+
+title Login: Ablauf
+
+actor Nutzer
+box "Browser"
+  participant "login/page.tsx" as page
+end box
+box "Server (Next.js)"
+  participant "auth/actions.ts" as actions
+  participant "auth/authService.ts" as service
+  participant "supabase/server.ts" as client
+end box
+box "Supabase"
+  participant "Auth" as auth
+end box
+
+Nutzer -> page : E-Mail und Passwort absenden
+activate page
+page -> actions : loginAction(email, password)\n<i>POST-Request</i>
+activate actions
+actions -> actions : Eingaben prüfen,\nE-Mail trimmen
+actions -> service : signIn(email, password)
+activate service
+service -> client : createSupabaseServerClient()
+activate client
+client --> service : Client mit Cookies der Anfrage
+deactivate client
+service -> auth : signInWithPassword()
+
+alt Zugangsdaten korrekt
+  auth --> service : Session (Tokens)
+  service -> client : setAll()
+  activate client
+  client -> client : Cookies sb-... setzen
+  deactivate client
+  service --> actions : { ok: true }
+  actions --> page : { ok: true }\n+ Set-Cookie
+  page -> page : router.push('/')\nrouter.refresh()
+  page --> Nutzer : Startseite
+else falsches Passwort oder unbekannte E-Mail
+  auth --> service : Fehler invalid_credentials
+  service -> service : toUserMessage()
+  service --> actions : { ok: false, message }
+  actions --> page : { ok: false, message }
+  page --> Nutzer : InfoModal\n"Email or password is incorrect."
+end
+
+deactivate service
+deactivate actions
+deactivate page
+
+note over page, auth
+  Danach schickt der Browser das Cookie bei jeder Anfrage mit.
+  server.ts liest es mit getAll(), die Datenbank kennt den Nutzer über auth.uid().
+end note
+
+@enduml
