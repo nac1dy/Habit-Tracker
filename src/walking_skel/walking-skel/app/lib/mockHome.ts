@@ -31,10 +31,22 @@ export const MOCK_MOMENTUM: MomentumData = {
  * (e.g. no .env.local with Supabase keys). Lets the page work as a demo.
  */
 export const MOCK_HABITS: HomeHabit[] = [
-  { habitid: 'mock-run', title: 'Morning Run', category: 'sport', streakDays: 8, doneToday: false },
-  { habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', streakDays: 15, doneToday: false },
-  { habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', streakDays: 22, doneToday: false },
-  { habitid: 'mock-meditate', title: 'Meditate', category: 'mental', streakDays: 5, doneToday: false },
+  {
+    habitid: 'mock-run', title: 'Morning Run', category: 'sport', streakDays: 8, doneToday: false,
+    frequenz: {'monday': true, 'tuesday': true, 'wednesday': true, 'thursday': true,'friday': true, 'saturday': true, 'sunday': true}
+  },
+  {
+    habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', streakDays: 15, doneToday: false,
+    frequenz: {'monday': true, 'tuesday': false, 'wednesday': true, 'thursday': true,'friday': true, 'saturday': false, 'sunday': true}
+  },
+  {
+    habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', streakDays: 22, doneToday: false,
+    frequenz: {'monday': true, 'tuesday': true, 'wednesday':  false, 'thursday': true,'friday': true, 'saturday': false, 'sunday': true}
+  },
+  {
+    habitid: 'mock-meditate', title: 'Meditate', category: 'mental', streakDays: 5, doneToday: false,
+    frequenz: {'monday': false, 'tuesday': true, 'wednesday': false, 'thursday': true,'friday': false, 'saturday': false, 'sunday': true}
+  },
 ];
 
 // API INTEGRATION POINT: per-habit streak -> later a real field on the habit.
