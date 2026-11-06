@@ -6,22 +6,22 @@ skinparam defaultFontSize 12
 actor "User" as user
 participant "page.tsx" as home
 participant "HabitRouter" as svc
-participant "HabitController" as ctrl
-participant "HabitRepository" as repo
+participant "HabitRepository" as ctrl
+participant "Cloud-Speicher" as repo
 
 user -> home : öffnet Habit-Tracker
 home -> svc : GET /api/habits
-svc -> ctrl : getAllHabitsByDay(day)
-ctrl -> repo : SELECT * form Habits
+svc -> ctrl : getHabits()
+ctrl -> repo : SELECT * from Habits WHERE userid
 repo -> ctrl : Return Habits
-ctrl -> svc : returnAllHabitsByDay(day)
+ctrl -> svc : returnHabits
 svc -> home : Habits
 home -> user : showHabits()
 
 alt Kein Habit gefunden
 
 repo -> ctrl : Return Empty
-ctrl -> svc : returnNoHabitsFound()
+ctrl -> svc : returnNoHabitsFound
 svc -> home : EmptyList
 home -> user : showMessageNoHabits()
 

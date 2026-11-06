@@ -22,7 +22,7 @@ package "Backend" {
         + getHabitsByDay(day: Date): Habit[]
     }
 
-    class SupabaseClient {
+    class HabitRepository <<Repository>> {
         --
         + fetchHabits(day: Date): Habit[]
     }
@@ -36,8 +36,8 @@ package "Persistenz" {
     }
 }
 
-Homepage ..> HabitRouter : GET-Request
-HabitRouter --> SupabaseClient : verwendet
-SupabaseClient ..> Habit : liest aus PostgreSQL
+Homepage ..> HabitRouter
+HabitRouter --> HabitRepository
+HabitRepository ..> Habit
 
 @enduml

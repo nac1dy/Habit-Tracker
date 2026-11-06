@@ -20,7 +20,7 @@ package "Backend" {
         + getHabits(): Habit[]
     }
 
-    class SupabaseClient {
+    class HabitRepository <<Repository>> {
         --
         + fetchHabits(): Habit[]
     }
@@ -34,7 +34,7 @@ package "Persistenz (Cloud)" {
     }
 }
 package "Notizen" {
-    class Notizen {
+    annotation Notizen {
         --
         + Sortierfunktion für Liste zum anzeigen nach gegebenem Filter
     }
@@ -42,6 +42,6 @@ package "Notizen" {
 }
 
 Homepage ..> HabitRouter 
-HabitRouter --> SupabaseClient
-SupabaseClient ..> Habit
+HabitRouter --> HabitRepository
+HabitRepository ..> Habit
 @enduml 
