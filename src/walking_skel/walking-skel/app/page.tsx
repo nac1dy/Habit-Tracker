@@ -31,6 +31,36 @@ type HabitApiRow = {
   category: HabitCategory;
 };
 
+// Local storage key for today's habit check-ins. The key is date-specific so
+// that each day has its own set of check-ins.
+function getTodayCheckInsStorageKey() {
+  const today = new Date();
+  const date = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, '0'),
+    String(today.getDate()).padStart(2, '0'),
+  ].join('-');
+
+  return `habit-check-ins:${date}`;
+}
+// Load the set of habit IDs that have been checked today from local storage.
+function loadCompletedHabitIds(): Set<string> {
+  try {
+    const stored = localStorage.getItem(getTodayCheckInsStorageKey());
+    if (!stored) return new Set();
+
+    const parsed: unknown = JSON.parse(stored);
+    if (!Array.isArray(parsed) || !parsed.every((id) => typeof id === 'string')) {
+      throw new Error('Saved habit check-ins have an invalid format');
+    }
+
+    return new Set(parsed);
+  } catch (cause) {
+    console.error('Could not load saved habit check-ins', cause);
+    return new Set();
+  }
+}
+
 export default function Home() {
   const [habits, setHabits] = useState<HomeHabit[]>([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +69,9 @@ export default function Home() {
 
   // Load habits once on mount.
   useEffect(() => {
-    const fetchHabits = async () => {
+    const fetchHabits = async () => {         
+      const completedHabitIds = loadCompletedHabitIds(); 
+
       try {
         const res = await fetch('/api/habits');
         if (!res.ok) throw new Error('Failed to fetch habits');
@@ -53,15 +85,28 @@ export default function Home() {
           title: row.title,
           category: row.category,
           streakDays: MOCK_DEFAULT_STREAK,
-          doneToday: false,
+          doneToday: completedHabitIds.has(row.habitid),
         }));
 
         // If the backend has no habits yet, show the mock list so the page
         // still demonstrates the layout.
-        setHabits(mapped.length > 0 ? mapped : MOCK_HABITS);
+        setHabits( 
+          mapped.length > 0
+            ? mapped
+            : MOCK_HABITS.map((habit) => ({
+                ...habit,
+                doneToday: completedHabitIds.has(habit.habitid),
+              })),
+        );
       } catch {
         // No backend / no .env.local: fall back to mock data so the demo works.
-        setHabits(MOCK_HABITS);
+        // API INTEGRATION POINT: real streak/check-in status go here.
+        setHabits( 
+          MOCK_HABITS.map((habit) => ({ 
+            ...habit,
+            doneToday: completedHabitIds.has(habit.habitid), 
+          })),
+        );
         setError(null);
       } finally {
         setLoading(false);
@@ -74,10 +119,20 @@ export default function Home() {
   // Toggle a habit's "done today" state.
   // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
   const toggleHabit = (habitid: string) => {
-    setHabits((prev) =>
-      prev.map((h) => (h.habitid === habitid ? { ...h, doneToday: !h.doneToday } : h)),
+    const updatedHabits = habits.map((habit) =>
+      habit.habitid === habitid ? { ...habit, doneToday: !habit.doneToday } : habit,
     );
+    const completedHabitIds = updatedHabits
+      .filter((habit) => habit.doneToday)
+      .map((habit) => habit.habitid);
+
+    localStorage.setItem(getTodayCheckInsStorageKey(), JSON.stringify(completedHabitIds));
+    setHabits(updatedHabits);
   };
+
+  const sortedHabits = [...habits].sort(
+    (a, b) => Number(a.doneToday) - Number(b.doneToday),
+  );
 
   return (
     // Full-width column; the content is constrained to a phone width and
@@ -98,7 +153,7 @@ export default function Home() {
         <MomentumCard />
 
         <TodayHabitList
-          habits={habits}
+          habits={sortedHabits}
           loading={loading}
           error={error}
           onToggle={toggleHabit}
