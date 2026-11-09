@@ -1,0 +1,46 @@
+= Kurzprotokoll für ein Sprint-Review
+
+// Kurzer Kontext zur Einordnung des Reviews.
+Team:: 
+Sprint:: 
+Datum:: 
+
+// Das Sprint-Ziel soll in einem Satz benannt werden.
+// Es beschreibt, was im Sprint erreicht oder validiert werden sollte.
+
+== Sprint-Ziel
+* Ziel:
+* Status: Erreicht / Teilweise erreicht / Nicht erreicht
+
+// Hier nur die wichtigsten Ergebnisse des Reviews festhalten.
+// "Artefakte" können z. B. ein Produktinkrement, Wireframes, Architekturentwürfe, Modelle, Produktvision 
+// oder andere überprüfte Ergebnisse sein.
+== Gezeigte Ergebnisse
+* Gezeigte Artefakte:
+* Links zu Nachweisen:
+
+// Feedback möglichst knapp und konkret dokumentieren.
+// Positiv = was überzeugt hat
+// Bedenken = was problematisch, unklar oder riskant erschien
+// Offene Fragen = was noch geklärt werden muss
+== Feedback
+* Positiv:
+* Bedenken:
+* Offene Fragen:
+
+// Nur die wichtigsten Entscheidungen und Zielkonflikte aufnehmen.
+// Beispiele für Trade-off: schnellere Umsetzung vs. saubere Architektur oder besonders ausgefallene Features vs. solide Umsetzung von Basisfunktionen
+== Entscheidungen
+* Zentrale Entscheidung(en):
+* Wichtige Trade-offs:
+
+// Konkrete nächste Schritte notieren.
+// Fokus = worauf sich das Team im nächsten Sprint besonders konzentrieren will
+== Nächste Schritte
+* Folgeaktionen:
+* Fokus für den nächsten Sprint:
+
+// Was haben wir gelernt? 
+== Reflexion
+- Wichtigste Erkenntnis:  
+- Größte Überraschung:
