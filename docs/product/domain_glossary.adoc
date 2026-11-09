@@ -5,9 +5,6 @@ include::../_includes/names.inc.adoc[]
 {all-names}
 {localdatetime}
 
-_Dieses Dokument beschreibt die wesentlichen fachlichen Begriffe und ihre  Beziehungen untereinander. Es bildet die gemeinsame Sprache des Teams und aller Stakeholder — unabhängig von technischen Umsetzungsentscheidungen.
-Alle Begriffe in User Stories, Personas und Gesprächen mit Stakeholdern sollten hier definiert sein._
-
 ---
 
 == Glossar
@@ -155,9 +152,6 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 
 == Domänenmodell
-
-_Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
-Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 
 === Diagramm
 

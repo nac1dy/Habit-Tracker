@@ -1,0 +1,123 @@
+= Sprint-3-Report: Erstes Produktinkrement und agile Arbeitsweise
+Team:: C2
+Projektname:: Habit-Tracker
+Datum:: 06.07.2026
+Repository-Link:: https://github.com/nac1dy/Habit-Tracker
+
+== 1. Sprintziel und nützlicher MVP-Ausschnitt
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Sprintziel
+| Unser Ziel für den 3. Sprint war es, unser Produktinkrement um wesentliche Funktionalität zu erweitern, die den Kern des Habit-Trackers bilden. Dazu haben wir Kerninteraktionen wie das Abhaken von Gewohnheiten auf dem Dashboard umgesetzt. Das Inkrement sollte zudem lokal ausführbar sein.
+
+| Ausgewählter MVP-Ausschnitt / Nutzerfluss
+| Schneller Zugriff auf das 1-Klick-Dashboard und die Funktionalität, eine Gewohnheit als erledigt zu markieren. 
+
+| Zentrale Annahme oder Umsetzungsfrage
+| Wie lassen sich die Nutzerflüsse so weit optimieren, dass Nutzer im User Flow nicht gehemmt werden?
+|===
+
+== 2. Erwartete Praktiken in Sprint 3
+[cols="1,2,2,2", options="header"]
+|===
+| Praktik
+| Konkrete Anwendung in unserem Sprint
+| Nachweis / Artefakt
+| Nutzen, Erkenntnis oder Anpassung
+
+| nützliche Funktionalität für Sprint 3 auswählen
+| Wir haben zusammenhängende User Stories ausgewählt, die das Sprint-Ziel unterstützen. Der Fokus lag hierbei primär auf dem Dashboard und dem Abhaken.
+| https://github.com/users/nac1dy/projects/3
+| Die Fokussierung auf den wirklichen Kernnutzen sicherte die Lauffähigkeit des Inkrementes anstelle eines visuell ansprechenden, aber funktionslosen Produkts.
+
+| Code Reviews durchführen und Review-Ergebnisse einarbeiten
+| Innerhalb unserer eigenen Arbeitsgruppen wurden für alle relevanten Aufgaben Reviews durchgeführt. Die Reviews wurden von mehreren Beteiligten durchgeführt, um den Kontext zu erhalten und spezifische Expertisen besser auszunutzen.
+| https://github.com/nac1dy/Habit-Tracker/pulls?q=is%3Apr+is%3Aclosed
+| Wir haben gelernt, dass synchrone Reviews zu einer hohen Codequalität führen und das Einbringen von Feedback deutlich erleichtern.
+
+| Verhalten anhand von Akzeptanzkriterien verifizieren
+| Wir sind die Akzeptanzkriterien der ausgewählten User Storys systematisch durchgegangen und haben das Dashboard-Verhalten dies bezüglich kontrolliert.
+| https://github.com/users/nac1dy/projects/3?pane=issue&itemId=178380445&issue=nac1dy%7CHabit-Tracker%7C8
+| Durch das verifizieren der Akzeptanzkriterien haben wir einen direkten Nachweis, dass das Inkrement exakt den Erwartungen entspricht und die geforderte Qualität eingehalten wird.
+|===
+
+== 3. Wichtigste Lernergebnisse aus Sprint 3
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| asynchrone Entwicklung
+| Wir haben bei der Umsetzung festgestellt, dass eine getrennte Entwicklung von Frontend und Backend zu schlecht ausgearbeiteten Schnittstellen führt. Ein nützliches Inkrement lässt sich deutlich einfacher integrieren, wenn Features vertikal und durchgängig abgearbeitet werden.
+
+| lokale Speicherung
+| Unsere Annahme, Inhalte rein lokal speichernzukönnen, hat sich als problematisch erwiesen. Da Nutzer eine geräteübergreifende Verfügbarkeit bevorzugen und das Risiko eines Datenverlusts minimiert werden muss, erfordert unser Produkt eine serverseitige Alternative.
+
+| Qualität durch Gruppenarbeit
+| Da zeitversetzte Code-Reviews von unbeteiligten Teammitgliedern meist Kontextprobleme verursachten, haben wir unsere Arbeitsweise angepasst. Eine gemeinsame Bearbeitung von Aufgaben mit anschließendem Review innerhalb der Gruppe führten zu einem tieferen technischen Verständnis und fundierterem Feedback.
+|===
+
+== 4. Änderungen am Inkrement, Backlog oder an Projektdokumentation
+[cols="2,2,2", options="header"]
+|===
+| Ursprüngliche Annahme / geplanter Stand | Neue Erkenntnisse | Anpassung am Inkrement, Backlog, Code oder an der Dokumentation
+
+| Isolierte Entwicklung von Frontend- und Backend-Komponenten
+| Eine getrennte Entwicklung erhöht das Risiko fehlerhafter Schnittstellen und erschwert die weitere Implementierung.
+| **Anpassung am Backlog:** Relevante User Stories wurden sowohl auf das Front- als auch auf das Backend ausgeweitet, um Funktionalitäten durchgängig implementieren zu können und keine losen Anschlüsse zu hinterlassen.
+
+| Lokale Speicherung der Inhalte
+| Eine rein lokale Verwaltung von Nutzerdaten verhindert eine geräteübergreifende Synchronisation und birgt gleichzeitig ein hohes Risiko für Datenverlust.
+| **Anpassung an der Dokumentation:** Aktualisierung der betroffenen Spezifikation (docs/technical/architecture.adoc) und Planung einer serverseitigen Alternative.
+
+| Code-Reviews durch beliebige Teammitglieder
+| Den Teammitgliedern fehlte oft der fachliche Kontext, was zu oberflächlichem Feedback und mangelhaften Ergebnissen führte.
+| **Anpassung an der Dokumentation/Code:** Wir etablierten synchrone Gruppen-Reviews. Sie halfen uns dabei, durch bereits vorhandenes Verständnis innerhalb der Gruppe, in kürzerer Zeit deutlich bessere Ergebnisse zu erzielen.
+|===
+
+== 5. Produktinkrement, Verifikation und Umsetzungsqualität
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Umgesetzter End-to-End-Nutzerfluss
+| Das Produktinkrement ist lokal ausführbar und erfüllt ein zentrales Nutzerziel. Nutzer können das Dashboard öffnen, Gewohnheiten anlegen und mit einem einzigen Klick abhaken.
+
+| Akzeptanzkriterien und Definition of Done
+| Wir haben bei jedem Ticket unsere festgelegten Akzeptanzkriterien praktisch getestet. Vor dem Schließen eines Issues haben wir geprüft, ob unsere Definition of Done komplett erfüllt ist, beispielsweise ob der Code von der Gruppe abgenommen wurde und fehlerfrei läuft.
+
+| Akzeptanzorientierte Verifikation
+| Wir haben die erwarteten Normalfälle für unsere Kernfunktionen durchgespielt, wie etwa das erfolgreiche Speichern und Abhaken von Gewohnheiten.
+
+| Code Review, Integration und main branch
+| Jede neue Funktion wurde erst über einen Pull Request in unsere gemeinsame Code-Basis integriert, nachdem sie von verantwortlichen Teammitgliedern überprüft wurde. Durch diese Code-Reviews stellen wir sicher, dass unser Haupt-Branch jederzeit stabil und lauffähig bleibt.
+
+| Wartbarkeitsverbesserung / Refactoring
+| Weil wir am Anfang Frontend und Backend zu stark getrennt entwickelt haben, sind ungenutzte Schnittstellen entstanden. Diese losen Anschlüsse haben wir durch gezieltes Refactoring entfernt und doppelten Code zusammengefasst. Dies erleichtert uns die Wartung der Anwendung und vermeidet unklare Strukturen im Code.
+
+| User-Flow- oder Usability-Check
+| Wir haben unsere App aus Nutzersicht getestet und geprüft, ob das Abhaken von Gewohnheiten wirklich so schnell geht, wie wir es in unserem UX-Konzept geplant haben. Wir kamen unter anderem zu dem Ergebnis, dass unsere Web-Application flüssig reagiert und den Nutzer nicht durch unnötig ausbremst.
+|===
+
+== 6. Nächste MVP-Schritte und Anpassung der Arbeitsweise
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Beibehalten
+| Unsere aktuelle Art der Teamkoordination hat sich sehr gut bewährt. Besonders die gemeinsame Bearbeitung von Aufgaben hat zu einem deutlich besseren Verständnis im gesamten Team geführt und die Produktivität gesteigert.
+
+| Ändern / verbessern
+| Wir haben gemerkt, dass zu viele offene Aufgaben unsere finale Integration stark verzögern. Zukünftig werden wir uns darauf konzentrieren, einzelne Tasks erst komplett fertigzustellen und zu verifizieren, bevor wir mit neuen Aufgaben beginnen.
+
+| Nächster MVP-Schritt
+| Für den nächsten Schritt priorisieren wir folgende Kernfunktionen:
+1. Implementieren der Logik für das automatische und tägliche Zurücksetzen der Habits
+2. Grundfeatures wie das Anlegen, Bearbeiten und Löschen von Gewohnheiten fertigstellen
+3. Die Authentifizierung für Nutzer einbauen und Sicherheitsmaßnahmen wie eine End-to-End-Verschlüsselung aktivieren
+
+| Offene Fragen / Risiken für die weitere Projektarbeit
+| 1. Rechtliches Risiko: wir müssen die finalen DSGVO-Richtlinien und die rechtlich korrekte Nutzereinwilligung für die serverseitige Speicherung der Notizen klären
+2. Technisches Risiko: wir müssen prüfen, wie zuverlässig die Benachrichtigungs-Schnittstellen auf verschiedenen Betriebssystemen funktionieren, besonders was präzise Timings und das Senden im Hintergrund angeht
+|===
