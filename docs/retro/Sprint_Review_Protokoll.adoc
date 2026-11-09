@@ -9,14 +9,14 @@ Datum:: 09.11.2026
 // Es beschreibt, was im Sprint erreicht oder validiert werden sollte.
 
 == Sprint-Ziel
-* Ziel: Implementierung der Nutzerauthentifizierung und design-impcat-analyse
+* Ziel: Implementierung der Nutzerauthentifizierung und Design-Impact-Analyse
 * Status: Erreicht
 
 // Hier nur die wichtigsten Ergebnisse des Reviews festhalten.
 // "Artefakte" können z. B. ein Produktinkrement, Wireframes, Architekturentwürfe, Modelle, Produktvision 
 // oder andere überprüfte Ergebnisse sein.
 == Gezeigte Ergebnisse
-* Gezeigte Artefakte:   Nutzerauthentifizierung, Gruppierung von Habits nach erdigt und nicht erledigt
+* Gezeigte Artefakte:   Nutzerauthentifizierung, Gruppierung von Habits (erledigt/nicht erledigt)
 * Links zu Nachweisen:  "https://github.com/nac1dy/Habit-Tracker/tree/feature/auth-login", https://github.com/nac1dy/Habit-Tracker/tree/feature/ali
 
 // Feedback möglichst knapp und konkret dokumentieren.
@@ -31,16 +31,16 @@ Datum:: 09.11.2026
 // Nur die wichtigsten Entscheidungen und Zielkonflikte aufnehmen.
 // Beispiele für Trade-off: schnellere Umsetzung vs. saubere Architektur oder besonders ausgefallene Features vs. solide Umsetzung von Basisfunktionen
 == Entscheidungen
-* Zentrale Entscheidung(en): Refactoring der Codebase, Fassade pattern umsetzen
-* Wichtige Trade-offs: Habits werden local gefiltert, damit mehr nutzer besser gehandelt werden. Allerdings muss die Filterung selbst implementiert werden, was mehr Aufwand bedeutet. Refactoring bedeutet mehr Aufwand, aber bessere Codebase-Struktur und Wartbarkeit. Login-feature über Supabase ist einfacher und schneller zu implementieren, aber wenn supabase sein Service einstellt, muss das Login-feature neu implementiert werden.
+* Zentrale Entscheidung(en): Refactoring der Codebase, Fassadenpattern umsetzen
+* Wichtige Trade-offs: Habits werden lokal gefiltert, damit höheres Nutzeraufkommen besser gehandelt wird. Allerdings muss die Filterung selbst implementiert werden, was mehr Aufwand bedeutet. Refactoring bedeutet mehr Aufwand, aber bessere Codebase-Struktur und Wartbarkeit. Das Login-Feature über Supabase zu implementieren, ist einfacher und schneller, aber abhängig vom spezifischen Provider und daher unflexibel.
 
 // Konkrete nächste Schritte notieren.
 // Fokus = worauf sich das Team im nächsten Sprint besonders konzentrieren will
 == Nächste Schritte
-* Folgeaktionen: Login finalisieren, Habbits auf Nutzer mappen 
+* Folgeaktionen: Login finalisieren, Habits auf Nutzer mappen 
 * Fokus für den nächsten Sprint: Refactoring, Test
 
 // Was haben wir gelernt? 
 == Reflexion
-- Wichtigste Erkenntnis:  Kommunikation ist Wichtig
+- Wichtigste Erkenntnis:  Kommunikation ist wichtig
 - Größte Überraschung:    -
