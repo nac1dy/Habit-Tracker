@@ -92,9 +92,9 @@ Wer hat Einfluss auf das Produkt oder ein Interesse an dessen Erfolg? Stakeholde
 | Einhaltung von Web-Standards (PWA-Manifest, Service Worker, HTTPS); kein missbräuchliches Verhalten (z. B. Spam-Benachrichtigungen)
 | Mittel
 
-| existierende Habit Tracker Apps (Disciplined, Loop Habit Tracker, HabitNow, Habitica)
-| Hauptkonkurrenz und Interesse am Misserfolg unseres Produktes
-| Neue Ideen, die sie von uns übernehmen können, hoffen auf wenig Nutzermigration von Disciplined zu uns
+| Existierende Habit Tracker Apps (Disciplined, Loop Habit Tracker, HabitNow, Habitica)
+| Hauptkonkurrenz
+| Neue Ideen, die sie von uns übernehmen können; hoffen auf wenig Nutzermigration von ihren Diensten zu uns
 | Mittel
 |===
 
@@ -124,6 +124,10 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 | Erinnerungsfunktion mit konfigurierbarer Uhrzeit
 | Hoch
 
+| Nutzer wollen benachrichtigt werden, wenn sie ihre Habits noch nicht erledigt haben.
+| Push-Benachrichtigungen
+| Mittel
+
 | Nutzer wollen ihren Fortschritt über Zeit verstehen.
 | Statistiken & Fortschrittsvisualisierung
 | Niedrig
@@ -140,17 +144,8 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 | Integriertes Belohnungssystem durch Pet
 | Niedrig
 
-| Nutzer wollen benachrichtigt werden, wenn sie ihre Habits noch nicht erledigt haben.
-| Push-Benachrichtigungen
-| Mittel
-
 |===
 
-
-
-
-
-NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen der Backlog-Priorisierung verfeinert.
 
 == Qualitätsziele & Einschränkungen
 
@@ -164,8 +159,8 @@ Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese
 | Qualitätsziel | Beschreibung | Messkriterium
 
 | Benutzbarkeit
-| Das Produkt ist ohne Einarbeitung nutzbar.
-| Neue Nutzer:innen finden die Kernfunktion innerhalb von 2 Minuten ohne Hilfe.
+| Das Produkt ist ohne Einarbeitung nutzbar. Falls nötig oder vom Nutzer gewünscht, besteht die Möglichkeit eines Onboardings.
+| Neue Nutzer finden die Kernfunktion innerhalb von 2 Minuten ohne Hilfe. In der App kann der Nutzer bei Erstgebrauch und in einem Menü ein Tutorial durchlaufen werden. 
 
 | Performance
 | Das Produkt reagiert schnell auf Nutzerinteraktionen.
@@ -186,6 +181,10 @@ Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese
 [cols="1,2,1", options="header"]
 |===
 | Einschränkung | Beschreibung | Kategorie
+
+| Datenhaltung durch externe Provider
+| Die Persistenz muss von einem externen Provider bereitgestellt werden.
+| Technisch
 
 | DSGVO-Konformität
 | Personenbezogene Daten dürfen nur gemäß DSGVO verarbeitet und gespeichert werden.

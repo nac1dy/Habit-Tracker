@@ -1,0 +1,46 @@
+= Kurzprotokoll für ein Sprint-Review
+
+// Kurzer Kontext zur Einordnung des Reviews.
+Team:: C2
+Sprint:: 4
+Datum:: 09.11.2026
+
+// Das Sprint-Ziel soll in einem Satz benannt werden.
+// Es beschreibt, was im Sprint erreicht oder validiert werden sollte.
+
+== Sprint-Ziel
+* Ziel: Implementierung der Nutzerauthentifizierung und Design-Impact-Analyse
+* Status: Erreicht
+
+// Hier nur die wichtigsten Ergebnisse des Reviews festhalten.
+// "Artefakte" können z. B. ein Produktinkrement, Wireframes, Architekturentwürfe, Modelle, Produktvision 
+// oder andere überprüfte Ergebnisse sein.
+== Gezeigte Ergebnisse
+* Gezeigte Artefakte:   Nutzerauthentifizierung, Gruppierung von Habits (erledigt/nicht erledigt)
+* Links zu Nachweisen:  "https://github.com/nac1dy/Habit-Tracker/tree/feature/auth-login", https://github.com/nac1dy/Habit-Tracker/tree/feature/ali
+
+// Feedback möglichst knapp und konkret dokumentieren.
+// Positiv = was überzeugt hat
+// Bedenken = was problematisch, unklar oder riskant erschien
+// Offene Fragen = was noch geklärt werden muss
+== Feedback
+* Positiv: bessere Effektivität der Meetings, Aufgabenverteilung, gute Umsetzung der Features
+* Bedenken: Pünktlichkeit, Absprache (Zuverlässigkeit)
+* Offene Fragen: Refactoring (Codebase-Struktur)
+
+// Nur die wichtigsten Entscheidungen und Zielkonflikte aufnehmen.
+// Beispiele für Trade-off: schnellere Umsetzung vs. saubere Architektur oder besonders ausgefallene Features vs. solide Umsetzung von Basisfunktionen
+== Entscheidungen
+* Zentrale Entscheidung(en): Refactoring der Codebase, Fassadenpattern umsetzen
+* Wichtige Trade-offs: Habits werden lokal gefiltert, damit höheres Nutzeraufkommen besser gehandelt wird. Allerdings muss die Filterung selbst implementiert werden, was mehr Aufwand bedeutet. Refactoring bedeutet mehr Aufwand, aber bessere Codebase-Struktur und Wartbarkeit. Das Login-Feature über Supabase zu implementieren, ist einfacher und schneller, aber abhängig vom spezifischen Provider und daher unflexibel.
+
+// Konkrete nächste Schritte notieren.
+// Fokus = worauf sich das Team im nächsten Sprint besonders konzentrieren will
+== Nächste Schritte
+* Folgeaktionen: Login finalisieren, Habits auf Nutzer mappen 
+* Fokus für den nächsten Sprint: Refactoring, Test
+
+// Was haben wir gelernt? 
+== Reflexion
+- Wichtigste Erkenntnis:  Kommunikation ist wichtig
+- Größte Überraschung:    -
