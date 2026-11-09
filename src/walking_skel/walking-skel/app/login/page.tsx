@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoginForm from './LoginForm';
 import InfoModal from '@/app/components/InfoModal';
+import { loginAction } from '@/app/backend/auth/actions';
 
-// Login screen - UI only for now, auth wiring (Supabase signInWithPassword) follows later
+// Login screen. The actual sign in happens on the server via loginAction,
+// this page only handles form state, error popup and navigation.
 //
 // Split into smaller files so each one fits on a screen (~60 lines):
 // - LoginForm.tsx: the email/password form
@@ -18,7 +20,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -27,9 +29,17 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-    router.push('/');
-    // TODO: Replace with Supabase auth.signInWithPassword({ email, password })
+    const result = await loginAction(email, password);
     setLoading(false);
+
+    if (!result.ok) {
+      setModal({ title: 'Login failed', message: result.message });
+      return;
+    }
+
+    // Session cookies are set now, refresh so server code sees the user
+    router.push('/');
+    router.refresh();
   };
 
   return (
