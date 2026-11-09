@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { HomeHabit, HabitCategory } from './lib/types';
+import { HomeHabit, HabitCategory, DayOfWeek } from './lib/types';
 import { MOCK_HABITS, MOCK_DEFAULT_STREAK } from './lib/mockHome';
 import { HomeHeader } from './components/home/HomeHeader';
 import { TodayStatsRow } from './components/home/TodayStatsRow';
@@ -29,7 +29,14 @@ type HabitApiRow = {
   habitid: string;
   title: string;
   category: HabitCategory;
+  frequenz: Record<DayOfWeek, boolean>;
 };
+
+// Returns the current day of week as a DayOfWeek string.
+function getToday(): DayOfWeek {
+  const days: DayOfWeek[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  return days[new Date().getDay()];
+}
 
 export default function Home() {
   const [habits, setHabits] = useState<HomeHabit[]>([]);
@@ -57,13 +64,18 @@ export default function Home() {
           habitid: row.habitid,
           title: row.title,
           category: row.category,
+          frequenz: row.frequenz,
           streakDays: MOCK_DEFAULT_STREAK,
           doneToday: checkedIds.has(row.habitid),
         }));
 
+        const today = getToday();
+        const todaysHabits = mapped.filter(
+          (habit) => habit.frequenz[today],
+        );
         // If the backend has no habits yet, show the mock list so the page
         // still demonstrates the layout.
-        setHabits(mapped.length > 0 ? mapped : MOCK_HABITS);
+        setHabits(mapped.length > 0 ? todaysHabits : MOCK_HABITS);
       } catch {
         // No backend / no .env.local: fall back to mock data so the demo works.
         setHabits(MOCK_HABITS);
