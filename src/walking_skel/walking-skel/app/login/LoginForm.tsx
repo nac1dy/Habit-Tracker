@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const inputClass =
-  'w-full px-4 py-2 border border-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-white text-[var(--text)]';
+  'w-full px-4 py-2 border border-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--focus)] bg-(--card) text-(--text)';
 
 type LoginFormProps = {
   email: string;
@@ -25,11 +25,11 @@ export default function LoginForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="bg-white p-8 border border-foreground"
+      className="bg-(--card) text-(--text) p-8 border border-foreground"
       style={{ borderRadius: 'var(--radius-lg)' }}
     >
       <div className="mb-6">
-        <label className="block text-sm font-medium text-(--text-2) mb-2">Email</label>
+        <label className="block text-sm font-medium text-(--text) mb-2">Email</label>
         <input
           type="email"
           value={email}
@@ -40,7 +40,7 @@ export default function LoginForm({
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-(--text-2) mb-2">Password</label>
+        <label className="block text-sm font-medium text-(--text) mb-2">Password</label>
         <input
           type="password"
           value={password}
@@ -55,14 +55,14 @@ export default function LoginForm({
         disabled={loading}
         className="w-full text-white font-semibold py-2 px-6 transition hover:-translate-y-0.5 active:translate-y-0"
         style={{
-          background: 'linear-gradient(135deg, var(--teal-500), var(--teal-700))',
+          background: 'linear-gradient(135deg, #35b8aa, #1b6f68)',
           opacity: loading ? 0.7 : 1,
         }}
       >
         {loading ? 'Logging in...' : 'Log In'}
       </button>
 
-      <p className="mt-6 text-center text-sm text-(--text-2)">
+      <p className="mt-6 text-center text-sm text-(--text)">
         Don&apos;t have an account?{' '}
         <Link href="/register" className="text-(--teal-700) font-semibold hover:text-(--teal-900)">
           Sign up
