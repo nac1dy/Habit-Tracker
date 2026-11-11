@@ -1,0 +1,63 @@
+@startuml register-sequence
+
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam sequenceMessageAlign center
+
+title Registrieren: Ablauf
+
+actor Nutzer
+box "Browser"
+  participant "login/page.tsx" as loginpage
+  participant "register/page.tsx" as registerpage
+end box
+
+box "Server (Next.js)"
+  participant "auth/actions.ts" as actions
+  participant "auth/authService.ts" as service
+  participant "supabase/server.ts" as client
+end box
+
+box "Supabase"
+  participant "Auth" as auth
+  participant "Datenbank" as db
+end box
+
+Nutzer -> loginpage : Öffnet Habito
+activate loginpage
+loginpage -> loginpage : Kein registrierter Nutzer, klickt auf Sign Up
+loginpage -> registerpage : route.push(/register)
+registerpage -> actions : registerAction(email, password)\n<i>POST-Request</i>
+activate actions
+actions -> actions : Eingaben prüfen,\nE-Mail trimmen
+actions -> service : signUp(email, password)
+activate service
+service -> client : createSupabaseServerClient()
+activate client
+client --> service : Client
+deactivate client
+service -> auth : signUpWithPassword()
+auth -> db : legt unbestätigen Nutzer an
+service -> actions : { ok: true, needsEmailConfirmation: !data.session }
+actions -> registerpage : { ok: true, needsEmailConfirmation: !data.session }
+auth -> Nutzer : Sendet Bestätigungs Email
+
+alt Nutzer bestätigt
+  Nutzer --> auth : Bestätigt Email
+  auth -> db : Unbestätigter Nutzer wird bestätigt in DB 
+  registerpage -> registerpage : klickt Sign In
+  registerpage -> loginpage : router.push('/login')
+  loginpage --> Nutzer : Login möglich
+else Nutzer bestätigt nicht
+  Nutzer --> auth : Bestätigt Email nicht
+  auth -> db : Unbestätigter Nutzer bleibt bestehen
+  registerpage -> registerpage : klickt Sign In
+  registerpage -> loginpage : router.push('/login')
+  loginpage --> Nutzer : Login nicht möglich
+end
+
+deactivate service
+deactivate actions
+deactivate loginpage
+
+@enduml
