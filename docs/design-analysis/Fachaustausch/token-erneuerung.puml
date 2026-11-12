@@ -1,0 +1,50 @@
+@startuml token-erneuerung
+' Jede weitere Anfrage nach dem Login: Sitzung prüfen und bei Bedarf erneuern.
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam sequenceMessageAlign center
+
+title Jede weitere Anfrage: Sitzung prüfen und Token erneuern
+
+actor Browser
+participant "proxy.ts" as proxy
+participant "session.ts\n<i>updateSession()</i>" as session
+participant "Supabase-Bibliothek\n<i>Server-Client</i>" as lib
+participant "Supabase Auth" as auth
+
+Browser -> proxy : GET /habits\n+ Cookie sb-...-auth-token
+proxy -> session : updateSession(request)
+session -> lib : getClaims()
+lib -> lib : Tokens aus dem Cookie\nlesen (getAll)
+
+alt Access Token noch gültig
+  lib -> lib : Signatur und exp prüfen
+  lib --> session : Claims (sub, exp, ...)
+else Access Token abgelaufen
+  lib -> auth : Refresh Token schicken
+  alt Refresh Token gültig
+    auth --> lib : neues Access Token\nund neues Refresh Token
+    lib -> session : setAll(neue Cookies)
+    session -> session : Cookies in Anfrage\nund Antwort schreiben
+    lib --> session : Claims
+  else Refresh Token ungültig
+    auth --> lib : Fehler
+    lib --> session : keine Claims
+  end
+end
+
+session --> proxy : { response, isLoggedIn }
+
+alt eingeloggt
+  proxy --> Browser : Seite\n+ Set-Cookie, falls erneuert
+else nicht eingeloggt
+  proxy --> Browser : 307 Umleitung auf /login
+end
+
+note over lib, auth
+  Das Access Token gilt eine Stunde.
+  Das Refresh Token wird bei jeder Nutzung
+  durch ein neues ersetzt (Rotation).
+end note
+
+@enduml
