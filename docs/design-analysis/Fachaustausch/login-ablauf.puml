@@ -3,30 +3,31 @@
 skinparam monochrome true
 skinparam defaultFontSize 13
 skinparam sequenceMessageAlign center
+hide footbox
 
 title Login: Ablauf
 
 actor Nutzer
 participant "login/page.tsx" as page
 participant "actions.ts" as actions
-participant "authService.ts\n<i>Fassade</i>" as service
-participant "server.ts\n<i>Server-Client</i>" as client
+participant "authService.ts" as service
+participant "server.ts" as client
 participant "Supabase Auth" as auth
 
 Nutzer -> page : E-Mail und Passwort
-page -> actions : loginAction()\n<i>POST</i>
-actions -> actions : Eingaben prüfen,\nE-Mail trimmen
+page -> actions : loginAction() <i>POST</i>
+actions -> actions : Eingaben prüfen
 actions -> service : signIn()
 service -> client : signInWithPassword()
 client -> auth : E-Mail und Passwort
-auth -> auth : mit bcrypt-Hash\nvergleichen
+auth -> auth : mit bcrypt-Hash vergleichen
 
 alt korrekt
-  auth --> client : Access Token\nund Refresh Token
-  client -> client : setAll()\nCookie sb-...-auth-token
+  auth --> client : Access und Refresh Token
+  client -> client : setAll(): Cookie setzen
   client --> service : kein Fehler
   service --> actions : { ok: true }
-  actions --> page : { ok: true }\n+ Set-Cookie
+  actions --> page : { ok: true } + Set-Cookie
   page --> Nutzer : Startseite
 else falsch oder nicht bestätigt
   auth --> client : Fehlercode
@@ -36,12 +37,5 @@ else falsch oder nicht bestätigt
   actions --> page : { ok: false, message }
   page --> Nutzer : Fehlermeldung
 end
-
-note over service
-  invalid_credentials:
-  "Email or password is incorrect."
-  email_not_confirmed:
-  "Please confirm your email first."
-end note
 
 @enduml
