@@ -1,17 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/app/backend/supabase';
+import { getCurrentUser } from '@/app/backend/auth/currentUser';
 
 export const dynamic = 'force-dynamic';
 
 /**
  * GET /api/habits
- * Fetches all habits for the authenticated user (or all if public)
+ * Fetches all habits of the logged in user
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const { data, error } = await supabase
-      .from('habit') 
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
+
+    const { data, error } = await user.supabase
+      .from('habit')
       .select('*')
+      .eq('userid', user.userId)
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -32,10 +38,15 @@ export async function GET(request: NextRequest) {
 
 /**
  * POST /api/habits
- * Creates a new habit
+ * Creates a new habit owned by the logged in user
  */
 export async function POST(request: NextRequest) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
+
     const body = await request.json();
     const { title, category, frequenz } = body;
 
@@ -47,8 +58,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Insert into Supabase
-    const { data, error } = await supabase
+    // The owner is set by the database through default auth.uid()
+    const { data, error } = await user.supabase
       .from('habit')
       .insert([
         {
