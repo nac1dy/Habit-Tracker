@@ -73,9 +73,8 @@ export default function Home() {
         const todaysHabits = mapped.filter(
           (habit) => habit.frequenz[today],
         );
-        // If the backend has no habits yet, show the mock list so the page
-        // still demonstrates the layout.
-        setHabits(mapped.length > 0 ? todaysHabits : MOCK_HABITS);
+        // A new user has no habits yet and gets an empty list, never example data.
+        setHabits(todaysHabits);
       } catch {
         // No backend / no .env.local: fall back to mock data so the demo works.
         setHabits(MOCK_HABITS);
