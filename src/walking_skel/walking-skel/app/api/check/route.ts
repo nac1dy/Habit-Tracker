@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/app/backend/supabase';
+import { getCurrentUser } from '@/app/backend/auth/currentUser';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const { data, error } = await supabase
-      .from('entry') 
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
+
+    const { data, error } = await user.supabase
+      .from('entry')
       .select('*')
+      .eq('userid', user.userId)
       .order('date', { ascending: false });
 
     if (error) {
@@ -27,9 +33,13 @@ export async function GET(request: NextRequest) {
 }
 
 
-const userID = '6cd9dc1f-abba-44d1-abb7-724380f5f8a7';
 export async function POST(request: NextRequest) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
+
     const {habitID, date, done} = await request.json();
 
     // Validation
@@ -39,18 +49,32 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // An entry must never point to a habit of another user
+    const { data: habit, error: habitError } = await user.supabase
+      .from('habit')
+      .select('habitid')
+      .eq('habitid', habitID)
+      .eq('userid', user.userId)
+      .maybeSingle();
+
+    if (habitError) throw habitError;
+    if (!habit) {
+      return NextResponse.json({ error: 'Habit not found' }, { status: 404 });
+    }
+
     if(done){
-        const { error } = await supabase
+        const { error } = await user.supabase
         .from('entry')
-        .insert({ habitid: habitID, userid: userID, date })
+        .insert({ habitid: habitID, userid: user.userId, date })
         .select();
 
         if(error) throw error;
     }else{
-        const { error } = await supabase
+        const { error } = await user.supabase
         .from('entry')
         .delete()
-        .match({ habitid: habitID, userid: userID, date })
+        .match({ habitid: habitID, userid: user.userId, date })
         if(error) throw error;
     }
     return NextResponse.json({ success: true }, { status: 200 });
