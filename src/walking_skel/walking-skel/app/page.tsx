@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { HomeHabit, HabitCategory, DayOfWeek } from './lib/types';
-import { MOCK_HABITS, MOCK_DEFAULT_STREAK } from './lib/mockHome';
+import { MOCK_DEFAULT_STREAK } from './lib/mockHome';
 import { HomeHeader } from './components/home/HomeHeader';
 import { TodayStatsRow } from './components/home/TodayStatsRow';
 import { MomentumCard } from './components/home/MomentumCard';
@@ -16,7 +17,8 @@ import { HabitForm } from './habits/create/HabitForm';
  *
  * This file mainly COMPOSES and LAYOUTS the home screen. The actual UI blocks
  * live in app/components/home/*. Data responsibilities kept here:
- *  - load real habits from /api/habits (falls back to mock if unavailable)
+ *  - load real habits from /api/habits (error message if unavailable,
+ *    back to /login if the session has expired)
  *  - track which habits are checked today (local only for now)
  *
  * Mock vs. real: the habit list is real (Supabase via /api/habits). Streaks,
@@ -43,16 +45,20 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showCreate, setShowCreate] = useState(false);
+  const router = useRouter();
 
   // Load habits once on mount.
   useEffect(() => {
     const fetchHabits = async () => {
       try {
         const res = await fetch('/api/habits');
+        // 401 means the session has expired, so the user has to log in again
+        if (res.status === 401) return router.replace('/login');
         if (!res.ok) throw new Error('Failed to fetch habits');
         const rows = (await res.json()) as HabitApiRow[];
         //load checked habits
         const res_check = await fetch('/api/check');
+        if (res_check.status === 401) return router.replace('/login');
         if (!res_check.ok) throw new Error('Failed to fetch checked habits');
         const checked = (await res_check.json()) as { habitid: string }[];
         const checkedIds = new Set(checked.map((c) => c.habitid));
@@ -76,16 +82,15 @@ export default function Home() {
         // A new user has no habits yet and gets an empty list, never example data.
         setHabits(todaysHabits);
       } catch {
-        // No backend / no .env.local: fall back to mock data so the demo works.
-        setHabits(MOCK_HABITS);
-        setError(null);
+        // Show the problem instead of example data, so nobody mistakes it for real habits.
+        setError('Could not load your habits. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
     fetchHabits();
-  }, []);
+  }, [router]);
 
   // Toggle a habit's "done today" state.
   // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
@@ -109,6 +114,10 @@ export default function Home() {
         body: JSON.stringify({ habitID: habitid, date: today, done: newDoneState }),
       });
 
+      if (res.status === 401) {
+        router.replace('/login');
+        return;
+      }
       if (!res.ok) throw new Error('Failed to update habit check');
 
     } catch(err) {
