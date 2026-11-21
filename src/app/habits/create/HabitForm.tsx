@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { HabitCategory, DayOfWeek } from '@/app/lib/types';
+import { createHabit } from '@/app/backend/utils/habitservice';
 
 // ─── Category config ─────────────────────────────────────────────────────────
 // FEATURE ENTRY POINT: fetch custom categories from GET /api/categories and merge.
@@ -35,8 +35,7 @@ function freqFromCount(n: number): Record<DayOfWeek, boolean> {
   return Object.fromEntries(DAYS.map((d, i) => [d, i < n])) as Record<DayOfWeek, boolean>;
 }
 
-export function HabitForm({ onClose }: { onClose: () => void }) {
-  const router = useRouter();
+export function HabitForm({onClose , onCreated,}: { onClose: () => void; onCreated?: () => void | Promise<void>; }) {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState<{ title: string; message: string } | null>(null);
   const [expanded, setExpanded] = useState(false);
@@ -87,7 +86,8 @@ export function HabitForm({ onClose }: { onClose: () => void }) {
       return;
     }
     setLoading(true);
-    try {
+    try { // TODO refactor
+      /*
       const res = await fetch('/api/habits', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,8 +95,10 @@ export function HabitForm({ onClose }: { onClose: () => void }) {
         // once backend schema is extended.
         body: JSON.stringify({ title, category: categories[0], frequenz }),
       });
+      */
+      const res = await createHabit(title, categories[0], frequenz)
       if (!res.ok) throw new Error('Failed to create habit');
-      router.refresh();   // refresh habits list behind the sheet
+      await onCreated?.();
       onClose();
     } catch (err) {
       setModal({ title: 'Error', message: err instanceof Error ? err.message : 'Unknown error' });
