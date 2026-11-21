@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { HomeHabit, HabitCategory, DayOfWeek } from './lib/types';
@@ -11,6 +11,7 @@ import { MomentumCard } from './components/home/MomentumCard';
 import { TodayHabitList } from './components/home/TodayHabitList';
 import { BottomNav } from './components/BottomNav';
 import { HabitForm } from './habits/create/HabitForm';
+import { checkHabit, createHabit, getCheckedHabits, getHabits, deleteHabit} from './backend/utils/habitservice'
 
 /**
  * Mainpage / Home.
@@ -47,19 +48,23 @@ export default function Home() {
   const [showCreate, setShowCreate] = useState(false);
   const router = useRouter();
 
-  // Load habits once on mount.
-  useEffect(() => {
-    const fetchHabits = async () => {
-      try {
+  const fetchHabits = useCallback(async () => {
+    try {
+        /*
         const res = await fetch('/api/habits');
         // 401 means the session has expired, so the user has to log in again
-        if (res.status === 401) return router.replace('/login');
+        if (res.status === 401) return router.replace('/login'); 
         if (!res.ok) throw new Error('Failed to fetch habits');
+        */
+        const res =  await getHabits(router);
         const rows = (await res.json()) as HabitApiRow[];
         //load checked habits
-        const res_check = await fetch('/api/check');
+        /*
+        const res_check = await fetch('/api/check'); // TODO refactor
         if (res_check.status === 401) return router.replace('/login');
         if (!res_check.ok) throw new Error('Failed to fetch checked habits');
+        */
+        const res_check = await getCheckedHabits(router);
         const checked = (await res_check.json()) as { habitid: string }[];
         const checkedIds = new Set(checked.map((c) => c.habitid));
 
@@ -81,16 +86,18 @@ export default function Home() {
         );
         // A new user has no habits yet and gets an empty list, never example data.
         setHabits(todaysHabits);
-      } catch {
-        // Show the problem instead of example data, so nobody mistakes it for real habits.
-        setError('Could not load your habits. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHabits();
+    } catch {
+      // Show the problem instead of example data, so nobody mistakes it for real habits.
+      setError('Could not load your habits. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
   }, [router]);
+
+  // Load habits once on mount.
+  useEffect(() => {
+    fetchHabits();
+  }, [fetchHabits]);
 
   // Toggle a habit's "done today" state.
   // FEATURE ENTRY POINT: currently local-only; later this POSTs a check-in.
@@ -107,12 +114,15 @@ export default function Home() {
 
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
-    try{
+    try{ // TODO refactor
+      /*
       const res = await fetch('/api/check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ habitID: habitid, date: today, done: newDoneState }),
       });
+      */
+      const res = await checkHabit(habitid, today, newDoneState)
 
       if (res.status === 401) {
         router.replace('/login');
@@ -186,7 +196,10 @@ export default function Home() {
             className="relative z-10 mx-auto w-full max-w-md overflow-y-auto rounded-t-[28px] px-5 pb-10"
             style={{ background: 'var(--app-bg)', maxHeight: '88svh', animation: 'sheet-up 0.34s cubic-bezier(0.32,0.72,0,1) both' }}
           >
-            <HabitForm onClose={() => setShowCreate(false)} />
+            <HabitForm
+              onClose={() => setShowCreate(false)}
+              onCreated={fetchHabits}
+            />
           </div>
         </div>
       )}

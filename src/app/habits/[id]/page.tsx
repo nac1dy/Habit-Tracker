@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { DayOfWeek, Habit } from '@/app/lib/types';
 import { BottomNav } from '@/app/components/BottomNav';
+import { deleteHabit } from '@/app/backend/utils/habitservice';
 
 // Habit-Page mit Details (Kathegorie + Wochentage + Änderungen + Delete)
 interface DetailPageProps {
@@ -34,7 +35,7 @@ export default function HabitDetail({ params }: DetailPageProps) {
   useEffect(() => {
     const fetchHabit = async () => {
       try {
-        const response = await fetch(`/api/habits/${id}`);
+        const response = await fetch(`/api/habits/${id}`); // TODO refactor
         if (!response.ok) throw new Error('Failed to fetch habit');
         const data = await response.json();
         setHabit(data);
@@ -51,9 +52,10 @@ export default function HabitDetail({ params }: DetailPageProps) {
   // Delete handler
   const handleDelete = async () => {
     setDeleting(true);
-    try {
-      const response = await fetch(`/api/habits/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Failed to delete habit');
+    try {// TODO refactor
+      
+      const res = await deleteHabit(id)
+      if (!res.ok) throw new Error('Failed to delete habit');
       router.push('/');
     } catch (err) {
       setModal({
