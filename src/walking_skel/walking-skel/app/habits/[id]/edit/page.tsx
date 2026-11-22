@@ -4,6 +4,7 @@ import { Suspense, use, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { DayOfWeek, Habit } from '@/app/lib/types';
+import { CATEGORY_COLOR } from '@/app/lib/categoryColors';
 import { BottomNav } from '@/app/components/BottomNav';
 
 const DAYS: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -12,8 +13,9 @@ const DAY_LABELS: Record<DayOfWeek, string> = {
   friday: 'Fri', saturday: 'Sat', sunday: 'Sun',
 };
 
-// placeholder, Kathegorien müssten noch durch die echten Werte ersetzt werden
-const CATEGORIES = ['health', 'fitness', 'learning', 'mindfulness'];
+// Echte Kategorien: die Schlüssel aus categoryColors.ts
+const CATEGORIES = Object.keys(CATEGORY_COLOR);
+// Placeholder, Tracking-Methode gibt es im Backend noch nicht, Namen der Tracking Methoden müssen geändert werden
 const TRACKING_METHODS = ['checkbox', 'counter', 'timer'];
 
 // Überschrift je nach gewählter Änderung
@@ -36,7 +38,10 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
   const show = (f: string) => !field || field === f;
 
   const [habit, setHabit] = useState<Habit | null>(null);
-  const [tracking, setTracking] = useState(TRACKING_METHODS[0]); // nur UI-State
+  const [tracking, setTracking] = useState(TRACKING_METHODS[0]); // nur UI-State, wird nicht gespeichert
+
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/habits/${id}`)
@@ -44,10 +49,32 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
       .then(setHabit);
   }, [id]);
 
-  //Speichern funktioniert noch nicht, reine UI 
-  const save = () => {
-    console.log('Würde speichern:', { ...habit, tracking });
-    router.push(`/habits/${id}`);
+  // Speichert die Änderungen per PATCH im Backend
+  const save = async () => {
+    if (!habit) return;
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const res = await fetch(`/api/habits/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: habit.title,
+          category: habit.category,
+          frequenz: habit.frequenz,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || 'Failed to save habit');
+      }
+      router.push(`/habits/${id}`);
+      router.refresh();
+    } catch (err) {
+      setSaveError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (!habit) {
@@ -141,7 +168,7 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
             </div>
           )}
 
-          {/* Tracking-Methode */}
+          {/* Tracking-Methode (noch nicht im Backend, wird nicht gespeichert) */}
           {show('tracking') && (
             <div>
               <label className="mb-1 block text-xs text-[var(--text-2)]">Tracking method</label>
@@ -157,13 +184,19 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
             </div>
           )}
 
+          {saveError && <p className="text-sm text-[var(--danger)]">{saveError}</p>}
+
           <button
             type="button"
             onClick={save}
+            disabled={saving}
             className="w-full rounded-lg px-4 py-2.5 font-semibold text-white transition active:scale-[0.98]"
-            style={{ background: 'linear-gradient(135deg, #35b8aa, #1e8f84)' }}
+            style={{
+              background: 'linear-gradient(135deg, #35b8aa, #1e8f84)',
+              opacity: saving ? 0.7 : 1,
+            }}
           >
-            Save
+            {saving ? 'Saving...' : 'Save'}
           </button>
         </div>
       </main>
