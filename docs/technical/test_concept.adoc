@@ -5,15 +5,11 @@ include::../_includes/names.inc.adoc[]
 {all-names}
 {localdatetime}
 
-NOTE: {to-be-implemented-se2-note}
-
 == Teststrategie
 
-[Hier die übergeordnete Teststrategie beschreiben, z. B.:
-„Wir setzen auf eine Teststrategie mit einem starken Fokus auf Unit-Tests,
-ergänzt durch Integrationstests für kritische Schnittstellen und manuelle Tests für die wichtigsten Nutzerinteraktionen."]
+Unsere Teststrategie basiert auf der Entscheidung, dass wir die Qualität der wichtigsten Komponenten der Anwendung sicherstellen wollen. Deswegen liegt der Fokus auf Unit-Tests, die die Geschäftslogik isoliert prüfen. Allerdings werden wir auch Integrationstests für kritische Schnittstellen und Datenbankzugriffe eingesetzen.
 
-== Testarten
+== Teststufen
 
 === Unit-Tests
 
@@ -30,16 +26,16 @@ Unit-Tests prüfen einzelne Klassen oder Funktionen isoliert voneinander.
 | Alle Service- und Domänenklassen; Fokus auf Geschäftslogik
 
 | Werkzeug
-| [z. B. JUnit 5, Pytest, Jest]
+| Ideen: Vitest
 
 | Mocking (Faken / Simulieren)
-| [z. B. Mockito, unittest.mock — externe Abhängigkeiten werden gemockt]
+| Ideen: vi.mock(Vitest)
 
 | Abdeckungsziel
-| [z. B. mind. 80 % Zeilenabdeckung auf der Service-Schicht]
+| Mindestens 70 % Zeilenabdeckung auf der zentralen Geschäftslogik
 
 | Ausführung
-| Lokal bei jedem Build; automatisch in der CI-Pipeline bei jedem Push
+| Lokal während der Entwicklung und automatisiert über GitHub Actions bei jedem Push in das Repository
 |===
 
 === Integrationstests
@@ -54,19 +50,20 @@ Integrationstests prüfen das Zusammenspiel mehrerer Komponenten, z. B. Service 
 | Sicherstellung der korrekten Kommunikation zwischen Komponenten und mit externen Systemen
 
 | Umfang
-| [z. B. REST-Endpunkte, Datenbankzugriffe, externe API-Aufrufe]
+| Prüfen der Datenbankzugriffe und API-Endpunkte, die mehrere Komponenten involvieren
 
 | Werkzeug
-| [z. B. Spring Boot Test, Testcontainers, Supertest]
+| Vitest (Integrationstest), Supabase JavaScript Client für Datenbankzugriffe
 
 | Testdaten
-| [z. B. dedizierte Testdatenbank, In-Memory-Datenbank, Fixtures]
+| Separate Supabase-Testdantenbank?
 
 | Ausführung
-| Automatisch in der CI-Pipeline; nicht zwingend bei jedem lokalen Build
+| Optional Lokal und automatisiert über GitHub Actions bei jedem Push in das Repository
 |===
 
 === Optional: End-to-End-Tests (E2E)
+NOTE: Noch nicht Bearbeitet -> Besprechen
 
 E2E-Tests simulieren echte Nutzerinteraktionen durch die gesamte Anwendung.
 
@@ -90,6 +87,7 @@ E2E-Tests simulieren echte Nutzerinteraktionen durch die gesamte Anwendung.
 |===
 
 === Manuelle Tests
+NOTE: Noch nicht Bearbeitet -> Besprechen
 
 Hier werden alle Tests aufgeführt, die nicht automatisiert werden können.
 
@@ -111,6 +109,7 @@ Hier werden alle Tests aufgeführt, die nicht automatisiert werden können.
 |===
 
 == Nicht getestet
+NOTE: Noch nicht Bearbeitet -> Besprechen
 
 Es ist genauso wichtig zu dokumentieren, was bewusst NICHT getestet wird — und warum. Das verhindert Missverständnisse und zeigt, dass die Entscheidung bewusst getroffen wurde.
 
@@ -133,6 +132,10 @@ Es ist genauso wichtig zu dokumentieren, was bewusst NICHT getestet wird — und
 [cols="1,2,2", options="header"]
 |===
 | Werkzeug | Zweck | Dokumentation
+
+| Vitest
+| Unit- und Integrationstests (Front- und Backend)
+| https://vitest.dev/
 
 | [z. B. JUnit 5]
 | Unit- und Integrationstests (Backend)
@@ -164,25 +167,26 @@ _Definiert die angestrebten Mindestwerte für die Testabdeckung._
 | Schicht | Zielwert | Bemerkung
 
 | Service-Schicht
-| [z. B. ≥ 80 %]
-| Geschäftslogik hat höchste Priorität
+| ≥ 70 %
+| Fokus auf Geschäftslogik (höchste Priorität)
 
 | Persistenz-Schicht
-| [z. B. ≥ 60 %]
-| Grundlegende CRUD-Operationen abgedeckt
+| ≥ 50 %
+| Grundlegende CRUD-Operationen und Datenbankzugriffe durch Integrationstests abgedeckt
 
 | Controller / API
-| [z. B. ≥ 70 %]
-| Wichtigste Endpunkte per Integrationstest abgedeckt
+| ≥ 60 %
+| Zentrale API-Funktionen, sowie Fehlerbehandlung überprüft
 
 | Frontend-Komponenten
-| [z. B. ≥ 50 %]
-| Fokus auf wiederverwendbare Kernkomponenten
+| ≥ 50 %
+| Fokus auf wichtigste React-Komponenten und deren Interaktionen
 |===
 
 NOTE: Abdeckung ist kein Selbstzweck. 80 % sinnlose Tests sind schlechter als 60 % gut durchdachte Tests. Qualität der Tests ist wichtiger als der Prozentwert.
 
 == Integration in den Entwicklungsprozess
+NOTE: Noch nicht Bearbeitet -> Besprechen
 
 === Ausführung der Tests
 ==== Lokale Entwicklung
@@ -211,19 +215,20 @@ Folgende Testkriterien sind Teil unserer Definition of Done:
 * [ ] Keine bekannten kritischen Fehler sind offen
 
 == Fehlerbehandlung & Bugtracking
+NOTE: Noch nicht Bearbeitet -> Besprechen
 
 [cols="1,3", options="header"]
 |===
 | Aspekt | Beschreibung
 
 | Wo werden Bugs erfasst?
-| [z. B. Als Issue mit Label "Bug" in GitHub Issues]
+| Als Issue mit Label "Bug" in GitHub Issues mit Angabe der betroffenen Komponente und Reproduktionsschritten
 
 | Priorisierung
-| [z. B. kritische Bugs werden sofort im laufenden Sprint behoben; andere ins Backlog]
+| kritische Bugs (Bugs die, die Kernfunktionen beeinträchtigen oder Nutzerdaten beinhalten) werden sofort im laufenden Sprint behoben; andere ins Backlog
 
 | Reproduzierbarkeit
-| [z. B. Jeder Bug-Report enthält Schritte zur Reproduktion, erwartetes und tatsächliches Verhalten]
+| Jeder Bug-Report enthält Schritte zur Reproduktion, erwartetes und tatsächliches Verhalten und Beschreibung (In welchem Branch)
 |===
 
 _Dieses Testkonzept wird bei Bedarf aktualisiert — insbesondere wenn neue Testarten eingeführt,
