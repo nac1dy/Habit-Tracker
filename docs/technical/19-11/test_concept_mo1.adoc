@@ -1,0 +1,56 @@
+include:../_includes/default-attributes.inc.adoc[]
+include:../_includes/names.inc.adoc[]
+    
+= Testkonzept: {project-name}
+{all-names}
+{localdatetime}
+
+NOTE: {to-be-implemented-se2-note}
+
+== Teststrategie
+
+== Produktrisiken und Testschwerpunkte
+[cols="3,2,1,1,1,3",options="header"]
+|===
+|Produktrisiko |Betroffen |Wahrscheinlichkeit |Auswirkung |Risikostufe |Begründung und
+Annahmen
+|Wenn ..., kann ... auftreten, mit ... für ...
+|User Story, Qualitätsmerkmal
+|mittel
+|hoch
+|hoch
+|...
+|===
+
+
+== Produktrisiken und Testschwerpunkte
+[cols="3,2,1,1,1,3",options="header"]
+|===
+|Produktrisiko |Betroffen |Wahrscheinlichkeit |Auswirkung |Risikostufe |Begründung und
+Annahmen
+|Wenn ein Nutzer einen Habit mit einem Namen anlegt, der im eigenen Konto schon vorhanden ist, kann der doppelte Habit ohne Warnung gespeichert werden, mit Verwirrung und getrennten Fortschrittsdaten für den Nutzer.
+|User Stories zur Habit-Verwaltung und zum täglichen Abhaken; Qualitätsmerkmale Benutzbarkeit und Zuverlässigkeit
+|mittel
+|mittel
+|mittel
+|Wir nehmen an, dass doppelte Namen innerhalb eines Kontos erkannt und gemeldet werden sollen. Reguläre Tests prüfen, dass ein Hinweis erscheint und kein unbemerkter doppelter Eintrag entsteht.
+|Wenn bei der Registrierung eine bereits verwendete E-Mail-Adresse eingegeben wird, kann die App keinen klaren Hinweis auf das bestehende Konto anzeigen, mit Verwirrung beim Anmelden für die betroffene Person.
+|User Story zur Registrierung; Qualitätsmerkmal Benutzbarkeit
+|mittel
+|hoch
+|hoch
+|Der Authentifizierungsdienst kann eine bereits verwendete Adresse ablehnen, aber die App muss den Fehler verständlich anzeigen. Reguläre Tests prüfen die Meldung bei erneuter Registrierung mit derselben Adresse.
+
+|Die Darstellung kann je nach Browser leicht abweichen. Wir nehmen an, dass dadurch keine wichtige Funktion verloren geht.
+|===
+=== Risiko <Name>
+Testbedingung:: ...
+Teststufe:: ...
+Nachweis:: ...
+== Nicht getestet
+[cols="2,3",options="header"]
+|===
+|Bereich |Begründung
+|...
+|...
+|===
