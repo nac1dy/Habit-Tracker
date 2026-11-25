@@ -19,6 +19,10 @@ interface TodayHabitListProps {
 
 export function TodayHabitList({ habits, loading, error, onToggle }: TodayHabitListProps) {
   const remaining = habits.filter((h) => !h.doneToday).length;
+  const sortedHabits = [
+    ...habits.filter((habit) => !habit.doneToday),
+    ...habits.filter((habit) => habit.doneToday),
+  ];
 
   return (
     <section>
@@ -41,7 +45,7 @@ export function TodayHabitList({ habits, loading, error, onToggle }: TodayHabitL
           <p className="text-sm text-[var(--text-3)]">Create your first habit to get started.</p>
         </div>
       ) : (
-        habits.map((habit) => <HabitListItem key={habit.habitid} habit={habit} onToggle={onToggle} />)
+        sortedHabits.map((habit) => <HabitListItem key={habit.habitid} habit={habit} onToggle={onToggle} />)
       )}
     </section>
   );
