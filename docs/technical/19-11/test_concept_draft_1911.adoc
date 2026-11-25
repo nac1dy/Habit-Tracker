@@ -1,0 +1,40 @@
+== Produktrisiken und Testschwerpunkte
+[cols="3,2,1,1,1,3",options="header"]
+|===
+|Produktrisiko |Betroffen |Wahrscheinlichkeit |Auswirkung |Risikostufe |Begründung und
+Annahmen
+| Wenn Habits bearbeitet werden, kann die Bearbeitung nicht gespeichert werden, wodurch änderungen verfallen nutzer sauer, wir bekommen schlechte bewertung
+| Habits verwalten
+| mittel 
+| niedrig
+| niedrig
+| Da die bearbeitung über Requests läuft, könnte durch einen fehlschlag die änderung nicht gespeichert werden, angenommen wird das die Request fehlschlagen kann.
+
+| Wenn ein Habit erstellt wird, kann es passieren das dass Habit nicht in die Datenbank übernommen wird, wodurch das Habit nicht erstellt wird nutzer sauer, wir bekommen schlechte bewertung
+| Habits verwalten
+| niedrig
+| hoch
+| mittel
+| Da der Habit-Tracker darauf basiert Habits zu erstellen ist es wichtig das diese auch erstellt werden, angenommen wird das die Request fehlschlagen kann.
+
+| (*KEIN TESTKONZEPT UND NICHT WICHTIG WEIL FEATURE NICHT VORHANDEN*)Wenn eine Nutzer über mehrere Geräte eingeloggt ist, könnten veraltete Zustände entstehen mit folge das mit veralteten Daten gearbeitet wird
+| /
+| mittel
+| hoch
+| hoch
+| Da der Habit-Tracker auf mehreren Geräten nutzbar ist, könnte eine änderung auf einem Gerät nicht auf dem anderen direkt übernommen werden wodurch veraltete Daten entstehen.
+|===
+
+
+
+=== Risiko <Name>
+Testbedingung:: ...
+Teststufe:: ...
+Nachweis:: ...
+== Nicht getestet
+[cols="2,3",options="header"]
+|===
+|Bereich |Begründung
+|...
+|...
+|===
