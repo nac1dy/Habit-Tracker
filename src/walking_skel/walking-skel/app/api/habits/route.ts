@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser } from '@/app/backend/auth/currentUser';
+import { isTrackingMethod } from '@/app/lib/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,12 +49,19 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { title, category, frequenz } = body;
+    const { title, category, frequenz, tracking_method } = body;
 
     // Validation
     if (!title || !category || !frequenz) {
       return NextResponse.json(
         { error: 'Missing required fields: title, category, frequenz' },
+        { status: 400 }
+      );
+    }
+
+    if (!isTrackingMethod(tracking_method)) {
+      return NextResponse.json(
+        { error: 'Invalid tracking_method. Expected yesno, count, or duration' },
         { status: 400 }
       );
     }
@@ -67,6 +75,7 @@ export async function POST(request: NextRequest) {
           category,
           frequenz,
           created_at: new Date().toISOString(),
+          tracking_method,
         },
       ])
       .select();

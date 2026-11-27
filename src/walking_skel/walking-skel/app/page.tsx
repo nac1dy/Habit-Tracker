@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { HomeHabit, HabitCategory, DayOfWeek } from './lib/types';
+import { HomeHabit, HabitCategory, DayOfWeek, TrackingMethod } from './lib/types';
 import { MOCK_DEFAULT_STREAK } from './lib/mockHome';
 import { HomeHeader } from './components/home/HomeHeader';
 import { TodayStatsRow } from './components/home/TodayStatsRow';
@@ -32,6 +32,7 @@ type HabitApiRow = {
   title: string;
   category: HabitCategory;
   frequenz: Record<DayOfWeek, boolean>;
+  tracking_method: TrackingMethod;
 };
 
 // Returns the current day of week as a DayOfWeek string.
@@ -71,6 +72,7 @@ export default function Home() {
           title: row.title,
           category: row.category,
           frequenz: row.frequenz,
+          tracking_method: row.tracking_method,
           streakDays: MOCK_DEFAULT_STREAK,
           doneToday: checkedIds.has(row.habitid),
         }));

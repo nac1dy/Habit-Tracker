@@ -32,19 +32,19 @@ export const MOCK_MOMENTUM: MomentumData = {
  */
 export const MOCK_HABITS: HomeHabit[] = [
   {
-    habitid: 'mock-run', title: 'Morning Run', category: 'sport', streakDays: 8, doneToday: false,
+    habitid: 'mock-run', title: 'Morning Run', category: 'sport', tracking_method: 'yesno', streakDays: 8, doneToday: false,
     frequenz: {'monday': true, 'tuesday': true, 'wednesday': true, 'thursday': true,'friday': true, 'saturday': true, 'sunday': true}
   },
   {
-    habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', streakDays: 15, doneToday: false,
+    habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', tracking_method: 'yesno', streakDays: 15, doneToday: false,
     frequenz: {'monday': true, 'tuesday': false, 'wednesday': true, 'thursday': true,'friday': true, 'saturday': false, 'sunday': true}
   },
   {
-    habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', streakDays: 22, doneToday: false,
+    habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', tracking_method: 'yesno', streakDays: 22, doneToday: false,
     frequenz: {'monday': true, 'tuesday': true, 'wednesday':  false, 'thursday': true,'friday': true, 'saturday': false, 'sunday': true}
   },
   {
-    habitid: 'mock-meditate', title: 'Meditate', category: 'mental', streakDays: 5, doneToday: false,
+    habitid: 'mock-meditate', title: 'Meditate', category: 'mental', tracking_method: 'yesno', streakDays: 5, doneToday: false,
     frequenz: {'monday': false, 'tuesday': true, 'wednesday': false, 'thursday': true,'friday': false, 'saturday': false, 'sunday': true}
   },
 ];
@@ -58,9 +58,9 @@ export const MOCK_DEFAULT_STREAK = 0;
  * real API is unavailable (e.g. no .env.local). Lets the screen render as a demo.
  */
 export const MOCK_MANAGED_HABITS: ManagedHabit[] = [
-  { habitid: 'mock-run', title: 'Morning Run', category: 'sport', freqLabel: 'Daily' },
-  { habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', freqLabel: 'Daily' },
-  { habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', freqLabel: 'Daily' },
-  { habitid: 'mock-meditate', title: 'Meditate', category: 'mental', freqLabel: 'Daily' },
-  { habitid: 'mock-plants', title: 'Water Plants', category: 'personal', freqLabel: '2× week' },
+  { habitid: 'mock-run', title: 'Morning Run', category: 'sport', freqLabel: 'Daily', tracking_method: 'yesno' },
+  { habitid: 'mock-read', title: 'Read 20 Pages', category: 'personal', freqLabel: 'Daily', tracking_method: 'yesno' },
+  { habitid: 'mock-alcohol', title: 'No Alcohol', category: 'health', freqLabel: 'Daily', tracking_method: 'yesno' },
+  { habitid: 'mock-meditate', title: 'Meditate', category: 'mental', freqLabel: 'Daily', tracking_method: 'yesno' },
+  { habitid: 'mock-plants', title: 'Water Plants', category: 'personal', freqLabel: '2× week', tracking_method: 'yesno' },
 ];

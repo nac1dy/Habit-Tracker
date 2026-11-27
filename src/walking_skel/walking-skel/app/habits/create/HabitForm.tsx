@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { HabitCategory, DayOfWeek } from '@/app/lib/types';
+import { HabitCategory, DayOfWeek, TrackingMethod, TRACKING_METHODS, TRACKING_METHOD_LABELS } from '@/app/lib/types';
 
 // ─── Category config ─────────────────────────────────────────────────────────
 // FEATURE ENTRY POINT: fetch custom categories from GET /api/categories and merge.
@@ -52,9 +52,9 @@ export function HabitForm({ onClose }: { onClose: () => void }) {
   // specific days: off by default (slider auto-picks days); on = show day grid
   const [specificDays, setSpecificDays] = useState(false);
 
+  const [tracking_method, setTrackingMethod] = useState<TrackingMethod>('yesno');
+
   // ── Placeholder fields ──────────────────────────────────────────────────
-  // FEATURE ENTRY POINT: trackType → backend field `track_type: 'yesno'|'count'|'duration'`
-  const [trackType, setTrackType] = useState<'yesno' | 'count' | 'duration'>('yesno');
   // FEATURE ENTRY POINT: selectedColor → backend field `color: string | null`
   const [selectedColor] = useState<string | null>(null);
   // FEATURE ENTRY POINT: selectedIcon  → backend field `icon: string | null`
@@ -91,9 +91,9 @@ export function HabitForm({ onClose }: { onClose: () => void }) {
       const res = await fetch('/api/habits', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // FEATURE ENTRY POINT: also send `color`, `icon`, `track_type`, all categories
+        // FEATURE ENTRY POINT: also send `color`, `icon`, and all categories
         // once backend schema is extended.
-        body: JSON.stringify({ title, category: categories[0], frequenz }),
+        body: JSON.stringify({ title, category: categories[0], frequenz, tracking_method }),
       });
       if (!res.ok) throw new Error('Failed to create habit');
       router.refresh();   // refresh habits list behind the sheet
@@ -179,25 +179,25 @@ export function HabitForm({ onClose }: { onClose: () => void }) {
         {/*
           FEATURE ENTRY POINT: controls check-in sheet UI.
           Yes/No → done/not-done tap. Count → number + unit. Duration → minutes.
-          Backend field: `track_type` (not yet in schema).
+          Backend field: `tracking_method`.
         */}
         <label className="mt-5 mb-2 block text-[11px] font-semibold uppercase tracking-wide text-[var(--text-2)]">
           Track type
         </label>
         <div className="flex rounded-[10px] p-[3px]" style={{ background: 'rgba(0,0,0,0.06)' }}>
-          {(['yesno', 'count', 'duration'] as const).map((t) => (
+          {TRACKING_METHODS.map((method) => (
             <button
-              key={t}
+              key={method}
               type="button"
-              onClick={() => setTrackType(t)}
+              onClick={() => setTrackingMethod(method)}
               className="flex-1 rounded-[8px] py-2 text-[13px] transition"
               style={
-                trackType === t
+                tracking_method === method
                   ? { background: 'var(--app-bg)', color: '#35b8aa', fontWeight: 700, boxShadow: '0 2px 8px rgba(30,90,84,0.12)' }
                   : { color: 'var(--text-2)', fontWeight: 500 }
               }
             >
-              {t === 'yesno' ? 'Yes / No' : t.charAt(0).toUpperCase() + t.slice(1)}
+              {TRACKING_METHOD_LABELS[method]}
             </button>
           ))}
         </div>

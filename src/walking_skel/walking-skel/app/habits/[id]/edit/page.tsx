@@ -3,7 +3,7 @@
 import { Suspense, use, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { DayOfWeek, Habit } from '@/app/lib/types';
+import { DayOfWeek, Habit, TRACKING_METHODS, TRACKING_METHOD_LABELS, TrackingMethod } from '@/app/lib/types';
 import { BottomNav } from '@/app/components/BottomNav';
 
 const DAYS: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -14,8 +14,6 @@ const DAY_LABELS: Record<DayOfWeek, string> = {
 
 // placeholder, Kathegorien müssten noch durch die echten Werte ersetzt werden
 const CATEGORIES = ['health', 'fitness', 'learning', 'mindfulness'];
-const TRACKING_METHODS = ['checkbox', 'counter', 'timer'];
-
 // Überschrift je nach gewählter Änderung
 const TITLES: Record<string, string> = {
   name: 'Change name',
@@ -36,17 +34,20 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
   const show = (f: string) => !field || field === f;
 
   const [habit, setHabit] = useState<Habit | null>(null);
-  const [tracking, setTracking] = useState(TRACKING_METHODS[0]); // nur UI-State
+  const [tracking, setTracking] = useState<TrackingMethod>('yesno'); // local draft only
 
   useEffect(() => {
     fetch(`/api/habits/${id}`)
       .then((r) => r.json())
-      .then(setHabit);
+      .then((data: Habit) => {
+        setHabit(data);
+        setTracking(data.tracking_method);
+      });
   }, [id]);
 
   //Speichern funktioniert noch nicht, reine UI 
   const save = () => {
-    console.log('Würde speichern:', { ...habit, tracking });
+    console.log('Draft only, not persisted:', { ...habit, tracking_method: tracking });
     router.push(`/habits/${id}`);
   };
 
@@ -147,11 +148,11 @@ function EditHabitForm({ params }: { params: Promise<{ id: string }> }) {
               <label className="mb-1 block text-xs text-[var(--text-2)]">Tracking method</label>
               <select
                 value={tracking}
-                onChange={(e) => setTracking(e.target.value)}
+                onChange={(e) => setTracking(e.target.value as TrackingMethod)}
                 className={`${inputClass} bg-[var(--app-bg)] capitalize`}
               >
-                {TRACKING_METHODS.map((t) => (
-                  <option key={t} value={t}>{t}</option>
+                {TRACKING_METHODS.map((method) => (
+                  <option key={method} value={method}>{TRACKING_METHOD_LABELS[method]}</option>
                 ))}
               </select>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { HomeHabit } from '@/app/lib/types';
+import { HomeHabit, TRACKING_METHOD_LABELS } from '@/app/lib/types';
 import { CATEGORY_COLOR } from '@/app/lib/categoryColors';
 
 /**
@@ -20,7 +20,7 @@ interface HabitListItemProps {
 }
 
 export function HabitListItem({ habit, onToggle }: HabitListItemProps) {
-  const { habitid, title, category, streakDays, doneToday } = habit;
+  const { habitid, title, category, streakDays, doneToday, tracking_method } = habit;
 
   return (
     <div
@@ -46,7 +46,7 @@ export function HabitListItem({ habit, onToggle }: HabitListItemProps) {
         </div>
         <div className="mt-0.5 text-xs capitalize text-[var(--text-2)]">
           {streakDays > 0 ? `${streakDays} days · ` : ''}
-          {category}
+          {category} · {TRACKING_METHOD_LABELS[tracking_method]}
         </div>
       </Link>
 

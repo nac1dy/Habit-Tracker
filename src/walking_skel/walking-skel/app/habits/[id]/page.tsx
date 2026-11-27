@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { DayOfWeek, Habit } from '@/app/lib/types';
+import { DayOfWeek, Habit, TRACKING_METHOD_LABELS } from '@/app/lib/types';
 import { BottomNav } from '@/app/components/BottomNav';
 
 // Habit-Page mit Details (Kathegorie + Wochentage + Änderungen + Delete)
@@ -168,6 +168,13 @@ export default function HabitDetail({ params }: DetailPageProps) {
           <div className="mb-5">
             <p className="mb-1 text-xs text-[var(--text-2)]">Category</p>
             <p className="text-base font-semibold capitalize text-[var(--text)]">{habit.category}</p>
+          </div>
+
+          <div className="mb-5">
+            <p className="mb-1 text-xs text-[var(--text-2)]">Tracking method</p>
+            <p className="text-base font-semibold text-[var(--text)]">
+              {TRACKING_METHOD_LABELS[habit.tracking_method]}
+            </p>
           </div>
 
           <div className="mb-5">

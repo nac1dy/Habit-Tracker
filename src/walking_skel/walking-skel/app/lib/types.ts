@@ -4,6 +4,19 @@ export type HabitCategory = 'sport' | 'health' | 'mental' | 'personal';
 // Days of week for habit scheduling
 export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
+export const TRACKING_METHODS = ['yesno', 'count', 'duration'] as const;
+export type TrackingMethod = typeof TRACKING_METHODS[number];
+
+export const TRACKING_METHOD_LABELS: Record<TrackingMethod, string> = {
+    yesno: 'Yes / No',
+    count: 'Count',
+    duration: 'Duration',
+};
+
+export function isTrackingMethod(value: unknown): value is TrackingMethod {
+    return TRACKING_METHODS.some((method) => method === value);
+}
+
 // Main Habit interface - will be extended with backend fields (userId, checkmarks, etc.)
 export interface Habit {
     habitid: string; // UUID from Supabase
@@ -11,6 +24,7 @@ export interface Habit {
     category: HabitCategory;
     frequenz: Record<DayOfWeek, boolean>;
     created_at: string; // ISO timestamp from Supabase
+    tracking_method: TrackingMethod;
 }
 
 // --- Home view models -------------------------------------------------------
@@ -23,6 +37,7 @@ export interface HomeHabit {
     title: string;
     category: HabitCategory;
     frequenz: Record<DayOfWeek, boolean>;
+    tracking_method: TrackingMethod;
     // streakDays + doneToday are NOT in the DB yet -> currently mock/local.
     // See API INTEGRATION POINT in app/lib/mockHome.ts.
     streakDays: number;
@@ -50,5 +65,6 @@ export interface ManagedHabit {
     // Human-readable frequency, e.g. "Daily" or "3× week".
     // Derived from the habit's `frequenz` field (see /habits page).
     freqLabel: string;
+    tracking_method: TrackingMethod;
 }
 
